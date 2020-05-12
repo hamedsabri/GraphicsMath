@@ -61,13 +61,13 @@ public:
 {% endfor %}
 
     /// Get the string representation.  For debugging purposes.
-    std::string ToString()
+    std::string GetString()
     {
         std::stringstream ss;
         ss << "{{ context.className }}( ";
 {%- for index in range(context.elementSize) -%}
 {%- if context.elements[ index ].type.isVector or context.elements[ index ].type.isComposite %}
-        ss << m_{{ context.elements[ index ].name }}.ToString();
+        ss << m_{{ context.elements[ index ].name }}.GetString();
 {%- elif context.elements[ index ].type.isScalar %}
         ss << m_{{ context.elements[ index ].name }};
 {%- endif %}

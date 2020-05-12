@@ -1,4 +1,4 @@
-set(CATEGORY_NAME "platform")
+set(CATEGORY_NAME "type")
 
 file(GLOB HEADERS *.h)
 file(

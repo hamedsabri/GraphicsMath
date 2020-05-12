@@ -192,7 +192,7 @@ public:
     }
 
     /// Get the string representation.  For debugging purposes.
-    inline std::string ToString() const
+    inline std::string GetString() const
     {
         std::stringstream ss;
         ss << "Vec4i( ";

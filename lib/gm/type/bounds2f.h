@@ -52,13 +52,13 @@ public:
     }
 
     /// Get the string representation.  For debugging purposes.
-    std::string ToString()
+    std::string GetString()
     {
         std::stringstream ss;
         ss << "Bounds2f( ";
-        ss << m_min.ToString();
+        ss << m_min.GetString();
         ss << ", ";
-        ss << m_max.ToString();
+        ss << m_max.GetString();
         ss << " )";
         return ss.str();
     }
