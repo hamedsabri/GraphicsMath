@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file {{ context.headerFileName }}
+
 #include <cmath>
 #include <cstring>
 #include <sstream>

@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file vec4iArray.h
+
 #include <vector>
 
 #include <gm/type/vec4i.h>

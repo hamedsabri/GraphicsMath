@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file {{ context.headerFileName }}
+
 #include <vector>
 
 {% if context.elementType.isVector %}

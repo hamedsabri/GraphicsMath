@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file vec3f.h
+
 #include <cmath>
 #include <cstring>
 #include <sstream>

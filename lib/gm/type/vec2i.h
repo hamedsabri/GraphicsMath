@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file vec2i.h
+
 #include <cmath>
 #include <cstring>
 #include <sstream>

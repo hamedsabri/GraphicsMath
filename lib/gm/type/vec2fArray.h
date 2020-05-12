@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file vec2fArray.h
+
 #include <vector>
 
 #include <gm/type/vec2f.h>

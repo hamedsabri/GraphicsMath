@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file mat3f.h
+
 #include <cmath>
 #include <cstring>
 #include <sstream>

@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file {{ context.headerFileName }}
+
 #include <sstream>
 
 #include <gm/api.h>

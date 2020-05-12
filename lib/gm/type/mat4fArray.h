@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file mat4fArray.h
+
 #include <vector>
 
 #include <gm/type/mat4f.h>

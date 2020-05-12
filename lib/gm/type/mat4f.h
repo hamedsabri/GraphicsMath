@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file mat4f.h
+
 #include <cmath>
 #include <cstring>
 #include <sstream>

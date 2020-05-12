@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file intArray.h
+
 #include <vector>
 
 GM_NAMESPACE_BEGIN

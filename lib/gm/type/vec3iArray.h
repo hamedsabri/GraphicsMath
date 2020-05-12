@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file vec3iArray.h
+
 #include <vector>
 
 #include <gm/type/vec3i.h>

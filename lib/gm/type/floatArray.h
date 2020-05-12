@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file floatArray.h
+
 #include <vector>
 
 GM_NAMESPACE_BEGIN

@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file bounds3i.h
+
 #include <sstream>
 
 #include <gm/api.h>
