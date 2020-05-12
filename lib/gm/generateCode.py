@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Code generation for C++ classes.
+C++ Code generation.
 """
 
 import os
@@ -99,20 +99,11 @@ def GenerateCode(context, templatePath):
         return code
 
 
-class AggregateIncludesCpp:
-    """
-    Code generation for aggregating includes in a single CPP.
-    """
-
-    def __init__(self, includePaths):
-        self.includePaths = includePaths
-
-
 #
 # Types
 #
 
-class DataType:
+class ValueType:
     """
     Abstract base class for all data types.
     """
@@ -142,7 +133,7 @@ class DataType:
         return False
 
 
-class PODType(DataType):
+class PODType(ValueType):
     """
     POD (Plain old data) type, used in code-gen contexts.
     """
@@ -171,7 +162,7 @@ POD_TYPES = [
 
 
 
-class VectorType(DataType):
+class VectorType(ValueType):
     """
     Code generation for an C++ vector type.
     """
@@ -217,13 +208,13 @@ class VectorType(DataType):
         return True
 
 
-class ArrayType(DataType):
+class ArrayType(ValueType):
     """
     Code generation for an C++ array type.
     """
 
     def __init__(self, elementType):
-        assert(isinstance(elementType, DataType))
+        assert(isinstance(elementType, ValueType))
         self.elementType = elementType
 
     @property
@@ -265,7 +256,7 @@ Args:
 CompositeElement = collections.namedtuple("CompositeElement", ["name", "type", "defaultValue"])
 
 
-class CompositeType(DataType):
+class CompositeType(ValueType):
     """
     Code generation for an C++ composite data type.
     A composite type is a structure composed of one or more elements.
@@ -279,7 +270,7 @@ class CompositeType(DataType):
 
     def __init__(self, name, elements, extraIncludes=None):
         for element in elements:
-            assert(isinstance(element.type, DataType))
+            assert(isinstance(element.type, ValueType))
         self._name = name
         self.elements = elements
         self.elementSize = len(self.elements)

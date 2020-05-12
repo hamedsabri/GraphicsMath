@@ -1,8 +1,10 @@
 #pragma once
 
-#include <gm/platform/os.h>
-
+/// \file export.h
+///
 /// Cross-platform export directives.
+
+#include <gm/platform/os.h>
 
 #if defined( GM_WINDOWS )
 /// Windows platform requires explicit directive for external linkage.
