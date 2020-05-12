@@ -1,0 +1,14 @@
+<map id="/code/GraphicsMath/src/gm/functions/dotProduct.h" name="/code/GraphicsMath/src/gm/functions/dotProduct.h">
+<area shape="rect" id="node2" href="$faceForward_8h.html" title="Normal vector face forward. " alt="" coords="172,95,383,136"/>
+<area shape="rect" id="node3" href="$lengthSquared_8h.html" title="Compute the length squared of a vector, defined as the sum of the squares of each vector element..." alt="" coords="407,95,628,136"/>
+<area shape="rect" id="node13" href="$raySphereIntersection_8h.html" title="Ray sphere intersection test. " alt="" coords="792,273,979,329"/>
+<area shape="rect" id="node4" href="$hasScale_8h.html" title="Check if a matrix has a scaling transformation. " alt="" coords="215,184,407,225"/>
+<area shape="rect" id="node5" href="$length_8h.html" title="Compute the length, or magnitude, of a vector. " alt="" coords="431,184,604,225"/>
+<area shape="rect" id="node6" href="$coordinateSystem_8h.html" title="Construct a local coordinate system from a single input vector. " alt="" coords="5,377,192,433"/>
+<area shape="rect" id="node7" href="$distance_8h.html" title="Compute the distance between two points. " alt="" coords="136,281,323,322"/>
+<area shape="rect" id="node8" href="$normalize_8h.html" title="Vector normalization. " alt="" coords="347,281,541,322"/>
+<area shape="rect" id="node11" href="$rayPosition_8h.html" title="Position along a ray. " alt="" coords="565,281,768,322"/>
+<area shape="rect" id="node9" href="$lookAt_8h.html" title="Look&#45;at transformation, for a left&#45;handed coordinate system. " alt="" coords="217,385,391,426"/>
+<area shape="rect" id="node10" href="$setRotate_8h.html" title="Set a rotation for an specified axis on a transformation matrix, with respect to the left hand rule..." alt="" coords="416,385,611,426"/>
+<area shape="rect" id="node12" href="$rayAABBIntersection_8h.html" title="Ray axis&#45;aligned bounding box (AABB) intersection test. " alt="" coords="635,385,895,426"/>
+</map>

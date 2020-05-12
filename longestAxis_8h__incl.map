@@ -1,0 +1,19 @@
+<map id="/code/GraphicsMath/src/gm/functions/longestAxis.h" name="/code/GraphicsMath/src/gm/functions/longestAxis.h">
+<area shape="rect" id="node2" href="$gm_8h.html" title="GraphicsMath: C++ header&#45;only computer graphics math library. " alt="" coords="904,319,977,345"/>
+<area shape="rect" id="node4" href="$diagnostic_8h.html" title="Diagnostic utilities. " alt="" coords="570,244,717,271"/>
+<area shape="rect" id="node8" href="$vec2fRange_8h.html" title="gm/types/vec2fRange.h" alt="" coords="1301,95,1463,121"/>
+<area shape="rect" id="node15" href="$vec2iRange_8h.html" title="gm/types/vec2iRange.h" alt="" coords="931,95,1091,121"/>
+<area shape="rect" id="node17" href="$vec3fRange_8h.html" title="gm/types/vec3fRange.h" alt="" coords="561,95,723,121"/>
+<area shape="rect" id="node19" href="$vec3iRange_8h.html" title="gm/types/vec3iRange.h" alt="" coords="747,95,907,121"/>
+<area shape="rect" id="node21" href="$vec4fRange_8h.html" title="gm/types/vec4fRange.h" alt="" coords="1116,95,1277,121"/>
+<area shape="rect" id="node23" href="$vec4iRange_8h.html" title="gm/types/vec4iRange.h" alt="" coords="1487,95,1647,121"/>
+<area shape="rect" id="node3" href="$hostDevice_8h.html" title="gm/base/hostDevice.h" alt="" coords="864,393,1017,420"/>
+<area shape="rect" id="node5" href="$log_8h.html" title="Logging utility functions. " alt="" coords="646,319,750,345"/>
+<area shape="rect" id="node9" href="$vec2f_8h.html" title="gm/types/vec2f.h" alt="" coords="1182,169,1305,196"/>
+<area shape="rect" id="node13" href="$almost_8h.html" title="gm/base/almost.h" alt="" coords="1608,244,1735,271"/>
+<area shape="rect" id="node16" href="$vec2i_8h.html" title="gm/types/vec2i.h" alt="" coords="518,169,641,196"/>
+<area shape="rect" id="node18" href="$vec3f_8h.html" title="gm/types/vec3f.h" alt="" coords="811,169,934,196"/>
+<area shape="rect" id="node20" href="$vec3i_8h.html" title="gm/types/vec3i.h" alt="" coords="371,169,494,196"/>
+<area shape="rect" id="node22" href="$vec4f_8h.html" title="gm/types/vec4f.h" alt="" coords="1035,169,1158,196"/>
+<area shape="rect" id="node24" href="$vec4i_8h.html" title="gm/types/vec4i.h" alt="" coords="665,169,787,196"/>
+</map>

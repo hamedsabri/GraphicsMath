@@ -1,0 +1,15 @@
+<map id="/code/GraphicsMath/src/gm/functions/coordinateSystem.h" name="/code/GraphicsMath/src/gm/functions/coordinateSystem.h">
+<area shape="rect" id="node2" href="$gm_8h.html" title="GraphicsMath: C++ header&#45;only computer graphics math library. " alt="" coords="706,557,780,584"/>
+<area shape="rect" id="node4" href="$vec3f_8h.html" title="gm/types/vec3f.h" alt="" coords="588,408,711,435"/>
+<area shape="rect" id="node13" href="$crossProduct_8h.html" title="Vector cross product. " alt="" coords="995,333,1184,360"/>
+<area shape="rect" id="node14" href="$length_8h.html" title="Compute the length, or magnitude, of a vector. " alt="" coords="556,184,703,211"/>
+<area shape="rect" id="node19" href="$normalize_8h.html" title="Vector normalization. " alt="" coords="167,109,335,136"/>
+<area shape="rect" id="node3" href="$hostDevice_8h.html" title="gm/base/hostDevice.h" alt="" coords="666,632,820,659"/>
+<area shape="rect" id="node8" href="$almost_8h.html" title="gm/base/almost.h" alt="" coords="266,483,393,509"/>
+<area shape="rect" id="node9" href="$diagnostic_8h.html" title="Diagnostic utilities. " alt="" coords="44,483,191,509"/>
+<area shape="rect" id="node10" href="$log_8h.html" title="Logging utility functions. " alt="" coords="120,557,224,584"/>
+<area shape="rect" id="node15" href="$vec2f_8h.html" title="gm/types/vec2f.h" alt="" coords="254,408,376,435"/>
+<area shape="rect" id="node16" href="$vec4f_8h.html" title="gm/types/vec4f.h" alt="" coords="400,408,523,435"/>
+<area shape="rect" id="node17" href="$lengthSquared_8h.html" title="Compute the length squared of a vector, defined as the sum of the squares of each vector element..." alt="" coords="532,259,727,285"/>
+<area shape="rect" id="node18" href="$dotProduct_8h.html" title="Dot product, or inner product between two equal&#45;length vectors. " alt="" coords="542,333,717,360"/>
+</map>

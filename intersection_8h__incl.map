@@ -1,0 +1,25 @@
+<map id="/code/GraphicsMath/src/gm/functions/intersection.h" name="/code/GraphicsMath/src/gm/functions/intersection.h">
+<area shape="rect" id="node2" href="$gm_8h.html" title="GraphicsMath: C++ header&#45;only computer graphics math library. " alt="" coords="1229,319,1302,345"/>
+<area shape="rect" id="node4" href="$floatRange_8h.html" title="gm/types/floatRange.h" alt="" coords="2544,95,2699,121"/>
+<area shape="rect" id="node9" href="$intRange_8h.html" title="gm/types/intRange.h" alt="" coords="2724,95,2866,121"/>
+<area shape="rect" id="node10" href="$vec2fRange_8h.html" title="gm/types/vec2fRange.h" alt="" coords="1618,95,1780,121"/>
+<area shape="rect" id="node17" href="$vec2iRange_8h.html" title="gm/types/vec2iRange.h" alt="" coords="1434,95,1594,121"/>
+<area shape="rect" id="node19" href="$vec3fRange_8h.html" title="gm/types/vec3fRange.h" alt="" coords="1804,95,1965,121"/>
+<area shape="rect" id="node21" href="$vec3iRange_8h.html" title="gm/types/vec3iRange.h" alt="" coords="1990,95,2150,121"/>
+<area shape="rect" id="node23" href="$vec4fRange_8h.html" title="gm/types/vec4fRange.h" alt="" coords="2174,95,2336,121"/>
+<area shape="rect" id="node25" href="$vec4iRange_8h.html" title="gm/types/vec4iRange.h" alt="" coords="2360,95,2520,121"/>
+<area shape="rect" id="node27" href="$max_8h.html" title="Find the maximum of two input values. " alt="" coords="712,95,849,121"/>
+<area shape="rect" id="node31" href="$min_8h.html" title="Find the minimum of two input values. " alt="" coords="554,95,687,121"/>
+<area shape="rect" id="node3" href="$hostDevice_8h.html" title="gm/base/hostDevice.h" alt="" coords="1189,393,1342,420"/>
+<area shape="rect" id="node5" href="$almost_8h.html" title="gm/base/almost.h" alt="" coords="1554,244,1681,271"/>
+<area shape="rect" id="node11" href="$vec2f_8h.html" title="gm/types/vec2f.h" alt="" coords="911,169,1034,196"/>
+<area shape="rect" id="node13" href="$diagnostic_8h.html" title="Diagnostic utilities. " alt="" coords="660,244,807,271"/>
+<area shape="rect" id="node14" href="$log_8h.html" title="Logging utility functions. " alt="" coords="736,319,840,345"/>
+<area shape="rect" id="node18" href="$vec2i_8h.html" title="gm/types/vec2i.h" alt="" coords="122,169,244,196"/>
+<area shape="rect" id="node20" href="$vec3f_8h.html" title="gm/types/vec3f.h" alt="" coords="1058,169,1180,196"/>
+<area shape="rect" id="node22" href="$vec3i_8h.html" title="gm/types/vec3i.h" alt="" coords="268,169,391,196"/>
+<area shape="rect" id="node24" href="$vec4f_8h.html" title="gm/types/vec4f.h" alt="" coords="1204,169,1327,196"/>
+<area shape="rect" id="node26" href="$vec4i_8h.html" title="gm/types/vec4i.h" alt="" coords="564,169,687,196"/>
+<area shape="rect" id="node28" href="$mat3f_8h.html" title="gm/types/mat3f.h" alt="" coords="712,169,836,196"/>
+<area shape="rect" id="node29" href="$mat4f_8h.html" title="gm/types/mat4f.h" alt="" coords="416,169,540,196"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="/code/GraphicsMath/src/gm/functions/radians.h" name="/code/GraphicsMath/src/gm/functions/radians.h">
+<area shape="rect" id="node2" href="$setRotate_8h.html" title="Set a rotation for an specified axis on a transformation matrix, with respect to the left hand rule..." alt="" coords="5,95,200,136"/>
+<area shape="rect" id="node3" href="$setRotateX_8h.html" title="Set a X&#45;axis rotation on a transformation matrix, with respect to the left hand rule. " alt="" coords="225,95,429,136"/>
+<area shape="rect" id="node4" href="$setRotateY_8h.html" title="Set a Y&#45;axis rotation on a transformation matrix, with respect to the left hand rule. " alt="" coords="453,95,657,136"/>
+<area shape="rect" id="node5" href="$setRotateZ_8h.html" title="Set a Z&#45;axis rotation on a transformation matrix, with respect to the left hand rule. " alt="" coords="681,95,884,136"/>
+</map>

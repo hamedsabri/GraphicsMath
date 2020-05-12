@@ -1,0 +1,17 @@
+<map id="/code/GraphicsMath/src/gm/functions/setRotate.h" name="/code/GraphicsMath/src/gm/functions/setRotate.h">
+<area shape="rect" id="node2" href="$gm_8h.html" title="GraphicsMath: C++ header&#45;only computer graphics math library. " alt="" coords="802,543,875,569"/>
+<area shape="rect" id="node4" href="$mat4f_8h.html" title="gm/types/mat4f.h" alt="" coords="677,393,801,420"/>
+<area shape="rect" id="node13" href="$vec3f_8h.html" title="gm/types/vec3f.h" alt="" coords="236,393,359,420"/>
+<area shape="rect" id="node14" href="$normalize_8h.html" title="Vector normalization. " alt="" coords="539,95,707,121"/>
+<area shape="rect" id="node20" href="$radians_8h.html" title="Unit conversion from an angle encoded as degrees into radians. " alt="" coords="1028,393,1183,420"/>
+<area shape="rect" id="node3" href="$hostDevice_8h.html" title="gm/base/hostDevice.h" alt="" coords="762,617,915,644"/>
+<area shape="rect" id="node8" href="$almost_8h.html" title="gm/base/almost.h" alt="" coords="394,468,521,495"/>
+<area shape="rect" id="node9" href="$diagnostic_8h.html" title="Diagnostic utilities. " alt="" coords="39,468,185,495"/>
+<area shape="rect" id="node10" href="$log_8h.html" title="Logging utility functions. " alt="" coords="5,543,109,569"/>
+<area shape="rect" id="node15" href="$vec2f_8h.html" title="gm/types/vec2f.h" alt="" coords="529,393,652,420"/>
+<area shape="rect" id="node16" href="$vec4f_8h.html" title="gm/types/vec4f.h" alt="" coords="383,393,505,420"/>
+<area shape="rect" id="node17" href="$length_8h.html" title="Compute the length, or magnitude, of a vector. " alt="" coords="549,169,696,196"/>
+<area shape="rect" id="node18" href="$lengthSquared_8h.html" title="Compute the length squared of a vector, defined as the sum of the squares of each vector element..." alt="" coords="525,244,720,271"/>
+<area shape="rect" id="node19" href="$dotProduct_8h.html" title="Dot product, or inner product between two equal&#45;length vectors. " alt="" coords="535,319,710,345"/>
+<area shape="rect" id="node21" href="$constants_8h.html" title="Numerical constants. " alt="" coords="1079,468,1223,495"/>
+</map>

@@ -1,0 +1,51 @@
+<map id="/code/GraphicsMath/src/gm/base/diagnostic.h" name="/code/GraphicsMath/src/gm/base/diagnostic.h">
+<area shape="rect" id="node2" href="$mat3f_8h.html" title="/code/GraphicsMath\l/src/gm/types/mat3f.h" alt="" coords="4580,95,4730,136"/>
+<area shape="rect" id="node19" href="$rayAABBIntersection_8h.html" title="Ray axis&#45;aligned bounding box (AABB) intersection test. " alt="" coords="901,295,1161,337"/>
+<area shape="rect" id="node22" href="$inverse_8h.html" title="Matrix inverse. " alt="" coords="7041,295,7221,337"/>
+<area shape="rect" id="node23" href="$lookAt_8h.html" title="Look&#45;at transformation, for a left&#45;handed coordinate system. " alt="" coords="7044,399,7218,441"/>
+<area shape="rect" id="node28" href="$mat4f_8h.html" title="/code/GraphicsMath\l/src/gm/types/mat4f.h" alt="" coords="5898,95,6049,136"/>
+<area shape="rect" id="node35" href="$vec2f_8h.html" title="/code/GraphicsMath\l/src/gm/types/vec2f.h" alt="" coords="2079,95,2228,136"/>
+<area shape="rect" id="node38" href="$longestAxis_8h.html" title="Longest axis of a range. " alt="" coords="7397,295,7604,337"/>
+<area shape="rect" id="node42" href="$raySphereIntersection_8h.html" title="Ray sphere intersection test. " alt="" coords="2335,288,2522,344"/>
+<area shape="rect" id="node43" href="$normalize_8h.html" title="Vector normalization. " alt="" coords="2552,191,2747,233"/>
+<area shape="rect" id="node44" href="$quadraticRoots_8h.html" title="Solve for the roots of a quadratic equation of the form . " alt="" coords="2348,184,2528,240"/>
+<area shape="rect" id="node45" href="$vec2i_8h.html" title="/code/GraphicsMath\l/src/gm/types/vec2i.h" alt="" coords="381,95,529,136"/>
+<area shape="rect" id="node46" href="$vec3f_8h.html" title="/code/GraphicsMath\l/src/gm/types/vec3f.h" alt="" coords="3478,95,3627,136"/>
+<area shape="rect" id="node47" href="$vec3i_8h.html" title="/code/GraphicsMath\l/src/gm/types/vec3i.h" alt="" coords="553,95,701,136"/>
+<area shape="rect" id="node48" href="$vec4f_8h.html" title="/code/GraphicsMath\l/src/gm/types/vec4f.h" alt="" coords="1016,95,1166,136"/>
+<area shape="rect" id="node49" href="$vec4i_8h.html" title="/code/GraphicsMath\l/src/gm/types/vec4i.h" alt="" coords="725,95,873,136"/>
+<area shape="rect" id="node50" href="$randomNumber_8h.html" title="Thread&#45;safe random number generation. " alt="" coords="7880,95,8107,136"/>
+<area shape="rect" id="node3" href="$mat3fArray_8h.html" title="/code/GraphicsMath\l/src/gm/types/mat3fArray.h" alt="" coords="5327,191,5508,233"/>
+<area shape="rect" id="node4" href="$abs_8h.html" title="Find the absolute value of two input values, defined as the magnitude of a real number without its si..." alt="" coords="3894,191,4053,233"/>
+<area shape="rect" id="node5" href="$bilinearInterpolation_8h.html" title="Bilinear interpolation. " alt="" coords="3546,392,3714,448"/>
+<area shape="rect" id="node6" href="$trilinearInterpolation_8h.html" title="Trilinear interpolation. " alt="" coords="3545,496,3714,552"/>
+<area shape="rect" id="node7" href="$ceil_8h.html" title="Round the input upwards to the nearest integral value greater than the input. " alt="" coords="4077,191,4236,233"/>
+<area shape="rect" id="node8" href="$clamp_8h.html" title="Value clamp. " alt="" coords="1154,191,1327,233"/>
+<area shape="rect" id="node9" href="$floor_8h.html" title="Round the input downwards to the nearest integral value less than the input. " alt="" coords="2982,191,3144,233"/>
+<area shape="rect" id="node10" href="$hasScale_8h.html" title="Check if a matrix has a scaling transformation. " alt="" coords="5198,295,5390,337"/>
+<area shape="rect" id="node11" href="$isIdentity_8h.html" title="Check if the input matrix is the identity matrix. " alt="" coords="5533,191,5724,233"/>
+<area shape="rect" id="node12" href="$linearInterpolation_8h.html" title="Linear interpolation. " alt="" coords="3376,295,3616,337"/>
+<area shape="rect" id="node13" href="$linearMap_8h.html" title="Linear mapping. " alt="" coords="3320,191,3515,233"/>
+<area shape="rect" id="node14" href="$matrixProduct_8h.html" title="Matrix multiplication. " alt="" coords="5748,191,5967,233"/>
+<area shape="rect" id="node15" href="$max_8h.html" title="Find the maximum of two input values. " alt="" coords="714,191,876,233"/>
+<area shape="rect" id="node20" href="$min_8h.html" title="Find the minimum of two input values. " alt="" coords="530,191,689,233"/>
+<area shape="rect" id="node21" href="$setIdentity_8h.html" title="Set the identity matrix , defined as the neutral element with respect to matrix multiplication: &#160;&#160;..." alt="" coords="5992,191,6190,233"/>
+<area shape="rect" id="node24" href="$setScale_8h.html" title="Set a scaling transform on a transformation matrix. " alt="" coords="4495,191,4684,233"/>
+<area shape="rect" id="node25" href="$setTranslate_8h.html" title="Set a translation on a transformation matrix. " alt="" coords="4260,191,4471,233"/>
+<area shape="rect" id="node26" href="$transformVector_8h.html" title="Vector transformation. " alt="" coords="4760,184,4942,240"/>
+<area shape="rect" id="node27" href="$transpose_8h.html" title="Matrix transpose. " alt="" coords="6215,191,6410,233"/>
+<area shape="rect" id="node16" href="$contains_8h.html" title="Check if a container, such as a range or array, contains a specified element or range of elements..." alt="" coords="486,295,672,337"/>
+<area shape="rect" id="node17" href="$expand_8h.html" title="Range expansion. " alt="" coords="697,295,877,337"/>
+<area shape="rect" id="node18" href="$transformAABB_8h.html" title="Axis&#45;aligned bounding box (AABB) transformation. " alt="" coords="5069,392,5252,448"/>
+<area shape="rect" id="node29" href="$mat4fArray_8h.html" title="/code/GraphicsMath\l/src/gm/types/mat4fArray.h" alt="" coords="6738,191,6919,233"/>
+<area shape="rect" id="node30" href="$setRotate_8h.html" title="Set a rotation for an specified axis on a transformation matrix, with respect to the left hand rule..." alt="" coords="3792,295,3987,337"/>
+<area shape="rect" id="node31" href="$setRotateX_8h.html" title="Set a X&#45;axis rotation on a transformation matrix, with respect to the left hand rule. " alt="" coords="6944,191,7148,233"/>
+<area shape="rect" id="node32" href="$setRotateY_8h.html" title="Set a Y&#45;axis rotation on a transformation matrix, with respect to the left hand rule. " alt="" coords="7172,191,7376,233"/>
+<area shape="rect" id="node33" href="$setRotateZ_8h.html" title="Set a Z&#45;axis rotation on a transformation matrix, with respect to the left hand rule. " alt="" coords="7400,191,7603,233"/>
+<area shape="rect" id="node34" href="$transformPoint_8h.html" title="Point transformation. " alt="" coords="5069,184,5252,240"/>
+<area shape="rect" id="node36" href="$vec2fArray_8h.html" title="/code/GraphicsMath\l/src/gm/types/vec2fArray.h" alt="" coords="1504,191,1684,233"/>
+<area shape="rect" id="node37" href="$vec2fRange_8h.html" title="/code/GraphicsMath\l/src/gm/types/vec2fRange.h" alt="" coords="1810,191,1996,233"/>
+<area shape="rect" id="node39" href="$distance_8h.html" title="Compute the distance between two points. " alt="" coords="2771,191,2958,233"/>
+<area shape="rect" id="node40" href="$dotProduct_8h.html" title="Dot product, or inner product between two equal&#45;length vectors. " alt="" coords="2122,191,2324,233"/>
+<area shape="rect" id="node41" href="$faceForward_8h.html" title="Normal vector face forward. " alt="" coords="2082,295,2292,337"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="/code/GraphicsMath/src/gm/functions/setRotateY.h" name="/code/GraphicsMath/src/gm/functions/setRotateY.h">
+<area shape="rect" id="node2" href="$gm_8h.html" title="GraphicsMath: C++ header&#45;only computer graphics math library. " alt="" coords="148,244,221,271"/>
+<area shape="rect" id="node4" href="$mat4f_8h.html" title="gm/types/mat4f.h" alt="" coords="440,95,564,121"/>
+<area shape="rect" id="node13" href="$radians_8h.html" title="Unit conversion from an angle encoded as degrees into radians. " alt="" coords="30,95,185,121"/>
+<area shape="rect" id="node3" href="$hostDevice_8h.html" title="gm/base/hostDevice.h" alt="" coords="108,319,261,345"/>
+<area shape="rect" id="node8" href="$almost_8h.html" title="gm/base/almost.h" alt="" coords="277,169,404,196"/>
+<area shape="rect" id="node9" href="$diagnostic_8h.html" title="Diagnostic utilities. " alt="" coords="429,169,575,196"/>
+<area shape="rect" id="node10" href="$log_8h.html" title="Logging utility functions. " alt="" coords="394,244,498,271"/>
+<area shape="rect" id="node14" href="$constants_8h.html" title="Numerical constants. " alt="" coords="58,169,202,196"/>
+</map>

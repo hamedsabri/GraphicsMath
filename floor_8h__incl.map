@@ -1,0 +1,12 @@
+<map id="/code/GraphicsMath/src/gm/functions/floor.h" name="/code/GraphicsMath/src/gm/functions/floor.h">
+<area shape="rect" id="node2" href="$gm_8h.html" title="GraphicsMath: C++ header&#45;only computer graphics math library. " alt="" coords="331,244,404,271"/>
+<area shape="rect" id="node4" href="$mat3f_8h.html" title="gm/types/mat3f.h" alt="" coords="328,95,452,121"/>
+<area shape="rect" id="node13" href="$mat4f_8h.html" title="gm/types/mat4f.h" alt="" coords="476,95,600,121"/>
+<area shape="rect" id="node14" href="$vec2f_8h.html" title="gm/types/vec2f.h" alt="" coords="625,95,748,121"/>
+<area shape="rect" id="node15" href="$vec3f_8h.html" title="gm/types/vec3f.h" alt="" coords="34,95,157,121"/>
+<area shape="rect" id="node16" href="$vec4f_8h.html" title="gm/types/vec4f.h" alt="" coords="181,95,304,121"/>
+<area shape="rect" id="node3" href="$hostDevice_8h.html" title="gm/base/hostDevice.h" alt="" coords="291,319,444,345"/>
+<area shape="rect" id="node8" href="$almost_8h.html" title="gm/base/almost.h" alt="" coords="342,169,468,196"/>
+<area shape="rect" id="node9" href="$diagnostic_8h.html" title="Diagnostic utilities. " alt="" coords="493,169,640,196"/>
+<area shape="rect" id="node10" href="$log_8h.html" title="Logging utility functions. " alt="" coords="550,244,654,271"/>
+</map>

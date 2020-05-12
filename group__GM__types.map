@@ -1,0 +1,6 @@
+<map id="Types" name="Types">
+<area shape="rect" id="node1" href="$group__gm__types__array.html" title="Dynamic length containers of elemental value types. " alt="" coords="128,5,217,32"/>
+<area shape="rect" id="node2" href="$group__gm__types__composite.html" title="Named element compositions of array, vector, scalar, or other composite value types. " alt="" coords="112,56,233,83"/>
+<area shape="rect" id="node3" href="$group__gm__types__range.html" title="Minimum, maximum range of elemental value types. " alt="" coords="125,107,221,133"/>
+<area shape="rect" id="node4" href="$group__gm__types__vector.html" title="Fixed length containers of elemental value types. " alt="" coords="125,157,221,184"/>
+</map>
