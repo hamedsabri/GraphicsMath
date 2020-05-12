@@ -84,6 +84,7 @@ public:
     // Arithmetic Operator Overloading.
     //
 
+    /// Vector addition.
     inline Mat3f operator+( const Mat3f& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
@@ -98,7 +99,7 @@ public:
                       m_elements[ 8 ] + i_vector.m_elements[ 8 ] );
     }
 
-    /// Addition assignment.
+    /// Vector addition assignment.
     inline Mat3f& operator+=( const Mat3f& i_vector )
     {
         GM_ASSERT( !HasNans() );
@@ -114,7 +115,7 @@ public:
         return *this;
     }
 
-    /// Subtraction.
+    /// Vector subtraction.
     inline Mat3f operator-( const Mat3f& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
@@ -129,21 +130,7 @@ public:
                       m_elements[ 8 ] - i_vector.m_elements[ 8 ] );
     }
 
-    /// Unary negation.
-    inline Mat3f operator-() const
-    {
-        GM_ASSERT( !HasNans() );
-        return Mat3f( -m_elements[ 0 ],
-                      -m_elements[ 1 ],
-                      -m_elements[ 2 ],
-                      -m_elements[ 3 ],
-                      -m_elements[ 4 ],
-                      -m_elements[ 5 ],
-                      -m_elements[ 6 ],
-                      -m_elements[ 7 ],
-                      -m_elements[ 8 ] );
-    }
-
+    /// Vector subtraction assignment.
     inline Mat3f& operator-=( const Mat3f& i_vector )
     {
         GM_ASSERT( !HasNans() );
@@ -174,6 +161,7 @@ public:
         return *this;
     }
 
+    /// Scalar division.
     inline Mat3f operator/( const float& i_scalar ) const
     {
         GM_ASSERT( !HasNans() );
@@ -189,15 +177,8 @@ public:
                       m_elements[ 7 ] * reciprocal,
                       m_elements[ 8 ] * reciprocal );
     }
-    inline const float& operator()( size_t i_row, size_t i_column ) const
-    {
-        return m_elements[ i_row * 3 + i_column ];
-    }
-    inline float& operator()( size_t i_row, size_t i_column )
-    {
-        return m_elements[ i_row * 3 + i_column ];
-    }
 
+    /// Scalar division assignment.
     inline Mat3f& operator/=( const float& i_scalar )
     {
         GM_ASSERT( !HasNans() );
@@ -213,6 +194,29 @@ public:
         m_elements[ 7 ] *= reciprocal;
         m_elements[ 8 ] *= reciprocal;
         return *this;
+    }
+
+    /// Unary negation.
+    inline Mat3f operator-() const
+    {
+        GM_ASSERT( !HasNans() );
+        return Mat3f( -m_elements[ 0 ],
+                      -m_elements[ 1 ],
+                      -m_elements[ 2 ],
+                      -m_elements[ 3 ],
+                      -m_elements[ 4 ],
+                      -m_elements[ 5 ],
+                      -m_elements[ 6 ],
+                      -m_elements[ 7 ],
+                      -m_elements[ 8 ] );
+    } /// Matrix element read-access.
+    inline const float& operator()( size_t i_row, size_t i_column ) const
+    {
+        return m_elements[ i_row * 3 + i_column ];
+    } /// Matrix element write-access.
+    inline float& operator()( size_t i_row, size_t i_column )
+    {
+        return m_elements[ i_row * 3 + i_column ];
     }
 
     /// Comparison operator

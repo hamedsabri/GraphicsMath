@@ -67,6 +67,7 @@ public:
     // Arithmetic Operator Overloading.
     //
 
+    /// Vector addition.
     inline Vec4i operator+( const Vec4i& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
@@ -76,7 +77,7 @@ public:
                       m_elements[ 3 ] + i_vector.m_elements[ 3 ] );
     }
 
-    /// Addition assignment.
+    /// Vector addition assignment.
     inline Vec4i& operator+=( const Vec4i& i_vector )
     {
         GM_ASSERT( !HasNans() );
@@ -87,7 +88,7 @@ public:
         return *this;
     }
 
-    /// Subtraction.
+    /// Vector subtraction.
     inline Vec4i operator-( const Vec4i& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
@@ -97,13 +98,7 @@ public:
                       m_elements[ 3 ] - i_vector.m_elements[ 3 ] );
     }
 
-    /// Unary negation.
-    inline Vec4i operator-() const
-    {
-        GM_ASSERT( !HasNans() );
-        return Vec4i( -m_elements[ 0 ], -m_elements[ 1 ], -m_elements[ 2 ], -m_elements[ 3 ] );
-    }
-
+    /// Vector subtraction assignment.
     inline Vec4i& operator-=( const Vec4i& i_vector )
     {
         GM_ASSERT( !HasNans() );
@@ -124,6 +119,7 @@ public:
         return *this;
     }
 
+    /// Scalar division.
     inline Vec4i operator/( const int& i_scalar ) const
     {
         GM_ASSERT( !HasNans() );
@@ -135,6 +131,7 @@ public:
                       m_elements[ 3 ] * reciprocal );
     }
 
+    /// Scalar division assignment.
     inline Vec4i& operator/=( const int& i_scalar )
     {
         GM_ASSERT( !HasNans() );
@@ -145,6 +142,13 @@ public:
         m_elements[ 2 ] *= reciprocal;
         m_elements[ 3 ] *= reciprocal;
         return *this;
+    }
+
+    /// Unary negation.
+    inline Vec4i operator-() const
+    {
+        GM_ASSERT( !HasNans() );
+        return Vec4i( -m_elements[ 0 ], -m_elements[ 1 ], -m_elements[ 2 ], -m_elements[ 3 ] );
     }
     inline int X() const
     {

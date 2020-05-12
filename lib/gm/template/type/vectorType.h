@@ -84,6 +84,7 @@ public:
     // Arithmetic Operator Overloading.
     //
 
+    /// Vector addition.
     inline {{ context.className }} operator+( const {{ context.className }}& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
@@ -97,7 +98,7 @@ public:
         );
     }
 
-    /// Addition assignment.
+    /// Vector addition assignment.
     inline {{ context.className }}& operator+=( const {{ context.className }}& i_vector )
     {
         GM_ASSERT( !HasNans() );
@@ -107,7 +108,7 @@ public:
         return *this;
     }
 
-    /// Subtraction.
+    /// Vector subtraction.
     inline {{ context.className }} operator-( const {{ context.className }}& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
@@ -121,20 +122,7 @@ public:
         );
     }
 
-    /// Unary negation.
-    inline {{ context.className }} operator-() const
-    {
-        GM_ASSERT( !HasNans() );
-        return {{ context.className }}(
-{% for index in range(context.elementSize) -%}
-        -m_elements[ {{ index }} ]
-{%- if index + 1 < context.elementSize -%}
-        ,
-{%- endif %}
-{%- endfor %}
-        );
-    }
-
+    /// Vector subtraction assignment.
     inline {{ context.className }}& operator-=( const {{ context.className }}& i_vector )
     {
         GM_ASSERT( !HasNans() );
@@ -153,6 +141,7 @@ public:
         return *this;
     }
 
+    /// Scalar division.
     inline {{ context.className }} operator/( const {{ context.elementType.className }}& i_scalar ) const
     {
         GM_ASSERT( !HasNans() );
@@ -168,21 +157,7 @@ public:
         );
     }
 
-{%- if context.dims|length == 2 -%}
-    inline const {{ context.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
-    {
-        return m_elements[ i_row * {{ context.dims[ 0 ] }} + i_column ];
-    }
-{%- endif %}
-
-
-{%- if context.dims|length == 2 -%}
-    inline {{ context.elementType.className }}& operator()( size_t i_row, size_t i_column )
-    {
-        return m_elements[ i_row * {{ context.dims[ 0 ] }} + i_column ];
-    }
-{%- endif %}
-
+    /// Scalar division assignment.
     inline {{ context.className }}& operator/=( const {{ context.elementType.className }}& i_scalar )
     {
         GM_ASSERT( !HasNans() );
@@ -193,6 +168,37 @@ public:
 {%- endfor %}
         return *this;
     }
+
+    /// Unary negation.
+    inline {{ context.className }} operator-() const
+    {
+        GM_ASSERT( !HasNans() );
+        return {{ context.className }}(
+{% for index in range(context.elementSize) -%}
+        -m_elements[ {{ index }} ]
+{%- if index + 1 < context.elementSize -%}
+        ,
+{%- endif %}
+{%- endfor %}
+        );
+    }
+
+{%- if context.dims|length == 2 -%}
+    /// Matrix element read-access.
+    inline const {{ context.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
+    {
+        return m_elements[ i_row * {{ context.dims[ 0 ] }} + i_column ];
+    }
+{%- endif %}
+
+
+{%- if context.dims|length == 2 -%}
+    /// Matrix element write-access.
+    inline {{ context.elementType.className }}& operator()( size_t i_row, size_t i_column )
+    {
+        return m_elements[ i_row * {{ context.dims[ 0 ] }} + i_column ];
+    }
+{%- endif %}
 
 {%- if context.dims|length == 1 and context.elementSize <= 4 -%}
     inline {{ context.elementType.className }} X() const
