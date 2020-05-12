@@ -100,6 +100,7 @@ public:
         return *this;
     }
 
+    /// Scalar multiplication assignment.
     inline Vec2f& operator*=( const float& i_scalar )
     {
         GM_ASSERT( !HasNans() );
@@ -134,6 +135,7 @@ public:
         GM_ASSERT( !HasNans() );
         return Vec2f( -m_elements[ 0 ], -m_elements[ 1 ] );
     }
+
     inline float X() const
     {
         GM_ASSERT( !HasNans() );

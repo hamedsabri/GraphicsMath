@@ -132,6 +132,7 @@ public:
         return *this;
     }
 
+    /// Scalar multiplication assignment.
     inline {{ context.className }}& operator*=( const {{ context.elementType.className }}& i_scalar )
     {
         GM_ASSERT( !HasNans() );
@@ -183,7 +184,7 @@ public:
         );
     }
 
-{%- if context.dims|length == 2 -%}
+{% if context.dims|length == 2 -%}
     /// Matrix element read-access.
     inline const {{ context.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
     {
@@ -192,7 +193,7 @@ public:
 {%- endif %}
 
 
-{%- if context.dims|length == 2 -%}
+{% if context.dims|length == 2 -%}
     /// Matrix element write-access.
     inline {{ context.elementType.className }}& operator()( size_t i_row, size_t i_column )
     {

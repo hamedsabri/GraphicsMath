@@ -188,6 +188,7 @@ public:
         return *this;
     }
 
+    /// Scalar multiplication assignment.
     inline Mat4f& operator*=( const float& i_scalar )
     {
         GM_ASSERT( !HasNans() );
@@ -279,11 +280,15 @@ public:
                       -m_elements[ 13 ],
                       -m_elements[ 14 ],
                       -m_elements[ 15 ] );
-    } /// Matrix element read-access.
+    }
+
+    /// Matrix element read-access.
     inline const float& operator()( size_t i_row, size_t i_column ) const
     {
         return m_elements[ i_row * 4 + i_column ];
-    } /// Matrix element write-access.
+    }
+
+    /// Matrix element write-access.
     inline float& operator()( size_t i_row, size_t i_column )
     {
         return m_elements[ i_row * 4 + i_column ];
