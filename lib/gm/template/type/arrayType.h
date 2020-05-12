@@ -3,7 +3,7 @@
 #include <vector>
 
 {% if context.elementType.isVector %}
-#include <pbr/type/{{ context.elementType.headerFileName }}>
+#include <gm/type/{{ context.elementType.headerFileName }}>
 {%- endif %}
 
 GM_NAMESPACE_BEGIN

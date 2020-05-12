@@ -4,10 +4,10 @@
 #include <cstring>
 #include <sstream>
 
-#include <pbr/api.h>
-#include <pbr/tool/assert.h>
+#include <gm/api.h>
+#include <gm/tool/assert.h>
 {% if context.elementType.className != "int" -%}
-#include <pbr/tool/almost.h>
+#include <gm/tool/almost.h>
 {%- endif %}
 
 GM_NAMESPACE_BEGIN

@@ -2,9 +2,9 @@
 
 #include <sstream>
 
-#include <pbr/api.h>
+#include <gm/api.h>
 
-#include <pbr/type/vec3f.h>
+#include <gm/type/vec3f.h>
 
 #include <limits>
 

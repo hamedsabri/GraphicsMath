@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.17)
 
 # Project Name
 project(
-  CMakeTemplate
+  GM
   VERSION 0.0
   DESCRIPTION "Basic template for starting out a new CMake-based project."
   LANGUAGES CXX
@@ -25,7 +25,4 @@ endif()
 
 # Build targets.
 add_subdirectory(thirdparty)
-add_subdirectory(examples)
-
-# Install exported targets.
-export_project(${CMAKE_SOURCE_DIR}/cmake/Config.cmake.in)
+add_subdirectory(lib)

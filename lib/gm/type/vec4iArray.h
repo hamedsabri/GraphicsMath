@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include <pbr/type/vec4i.h>
+#include <gm/type/vec4i.h>
 
 GM_NAMESPACE_BEGIN
 

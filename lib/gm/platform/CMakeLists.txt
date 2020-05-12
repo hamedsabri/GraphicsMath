@@ -1,2 +1,13 @@
-set(PACKAGE_NAME "platform")
+set(CATEGORY_NAME "platform")
+
 file(GLOB HEADERS *.h)
+file(
+    COPY ${HEADERS}
+    DESTINATION ${CMAKE_BINARY_DIR}/include/${LIBRARY_NAME}/${CATEGORY_NAME}
+)
+
+install(
+    FILES ${HEADERS}
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${LIBRARY_NAME}/${CATEGORY_NAME}
+)
+

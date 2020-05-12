@@ -1,8 +1,8 @@
 #pragma once
 
-#include <pbr/api.h>
-#include <pbr/type/bounds2i.h>
-#include <pbr/type/vec2i.h>
+#include <gm/api.h>
+#include <gm/type/bounds2i.h>
+#include <gm/type/vec2i.h>
 
 GM_NAMESPACE_BEGIN
 
@@ -12,8 +12,8 @@ GM_NAMESPACE_BEGIN
 /// The iterator does not visit components equal to those of \ref i_end.
 ///
 /// Usage:
-/// pbr::Bounds2i bounds( pbr::Vec2i( 0, 0 ), pbr::Vec2i( 10, 10 ) );
-/// for ( const pbr::Vec2i& point : bounds )
+/// gm::Bounds2i bounds( gm::Vec2i( 0, 0 ), gm::Vec2i( 10, 10 ) );
+/// for ( const gm::Vec2i& point : bounds )
 /// {
 ///     ...do something with point...
 /// }

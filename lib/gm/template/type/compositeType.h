@@ -2,11 +2,11 @@
 
 #include <sstream>
 
-#include <pbr/api.h>
+#include <gm/api.h>
 
 {% for element in context.elements -%}
 {% if element.type.isVector or element.type.isComposite -%}
-#include <pbr/type/{{ element.type.headerFileName }}>
+#include <gm/type/{{ element.type.headerFileName }}>
 {%- endif %}
 {% endfor %}
 

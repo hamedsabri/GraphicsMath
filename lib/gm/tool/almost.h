@@ -1,6 +1,6 @@
 #pragma once
 
-#include <pbr/api.h>
+#include <gm/api.h>
 
 GM_NAMESPACE_BEGIN
 

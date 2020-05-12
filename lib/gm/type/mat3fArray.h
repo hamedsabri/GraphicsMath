@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include <pbr/type/mat3f.h>
+#include <gm/type/mat3f.h>
 
 GM_NAMESPACE_BEGIN
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <pbr/platform/os.h>
+#include <gm/platform/os.h>
 
 /// Cross-platform export directives.
 

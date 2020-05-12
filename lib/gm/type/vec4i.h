@@ -4,8 +4,8 @@
 #include <cstring>
 #include <sstream>
 
-#include <pbr/api.h>
-#include <pbr/tool/assert.h>
+#include <gm/api.h>
+#include <gm/tool/assert.h>
 
 GM_NAMESPACE_BEGIN
 

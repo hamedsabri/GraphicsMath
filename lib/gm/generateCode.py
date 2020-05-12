@@ -14,7 +14,7 @@ from jinja2 import Template
 
 
 # Name of the project directory.
-PROJECT_DIR = "pbr"
+PROJECT_DIR = "gm"
 
 # Name of the codeGenTemplates directory.
 TEMPLATE_DIR = "template"

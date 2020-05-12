@@ -1,17 +1,13 @@
-set(PACKAGE_NAME "tool")
-file(GLOB CPPFILES *.cpp)
+set(CATEGORY_NAME "tool")
+
 file(GLOB HEADERS *.h)
-pbr_library(${PACKAGE_NAME}
-    CPPFILES
-        ${CPPFILES}
-    HEADERS
-        ${HEADERS}
-    LIBRARIES
-        pbr_platform
-        dl
-        dw
+file(
+    COPY ${HEADERS}
+    DESTINATION ${CMAKE_BINARY_DIR}/include/${LIBRARY_NAME}/${CATEGORY_NAME}
 )
 
-if(BUILD_TESTING)
-    add_subdirectory(tests)
-endif()
+install(
+    FILES ${HEADERS}
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${LIBRARY_NAME}/${CATEGORY_NAME}
+)
+
