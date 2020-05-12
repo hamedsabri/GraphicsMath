@@ -23,6 +23,22 @@ if(BUILD_TESTING)
     list(APPEND CMAKE_CTEST_ARGUMENTS "--output-on-failure")
 endif()
 
+if(BUILD_DOCUMENTATION)
+
+    file(
+        COPY ${CMAKE_SOURCE_DIR}/README.md
+        DESTINATION ${CMAKE_BINARY_DIR}
+    )
+
+    doxygen_documentation(
+        doxygen_docs
+        GENERATE_TAGFILE TRUE
+        DOXYFILE ${CMAKE_SOURCE_DIR}/Doxyfile.in
+        INPUTS
+            ${CMAKE_CURRENT_SOURCE_DIR}/lib
+    )
+endif()
+
 # Build targets.
 add_subdirectory(thirdparty)
 add_subdirectory(lib)

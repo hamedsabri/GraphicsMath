@@ -1,5 +1,7 @@
 #pragma once
 
+/// \file os.h
+///
 /// Operating system variant definitions.
 
 #if defined( _WIN32 ) || defined( _WIN64 )
