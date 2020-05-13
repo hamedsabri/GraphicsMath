@@ -10,3 +10,13 @@ TEST_CASE( "Vec2f_ElementReadAccess" )
     CHECK( vector[ 0 ] == 0 );
     CHECK( vector[ 1 ] == 2 );
 }
+
+TEST_CASE( "Vec2f_ElementWriteAccess" )
+{
+    gm::Vec2f vector;
+    vector[ 0 ] = 0;
+    vector[ 1 ] = 5;
+
+    CHECK( vector[ 0 ] == 0 );
+    CHECK( vector[ 1 ] == 5 );
+}

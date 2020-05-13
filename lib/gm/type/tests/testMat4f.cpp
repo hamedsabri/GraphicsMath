@@ -24,3 +24,41 @@ TEST_CASE( "Mat4f_ElementReadAccess" )
     CHECK( vector[ 14 ] == 28 );
     CHECK( vector[ 15 ] == 30 );
 }
+
+TEST_CASE( "Mat4f_ElementWriteAccess" )
+{
+    gm::Mat4f vector;
+    vector[ 0 ]  = 0;
+    vector[ 1 ]  = 5;
+    vector[ 2 ]  = 10;
+    vector[ 3 ]  = 15;
+    vector[ 4 ]  = 20;
+    vector[ 5 ]  = 25;
+    vector[ 6 ]  = 30;
+    vector[ 7 ]  = 35;
+    vector[ 8 ]  = 40;
+    vector[ 9 ]  = 45;
+    vector[ 10 ] = 50;
+    vector[ 11 ] = 55;
+    vector[ 12 ] = 60;
+    vector[ 13 ] = 65;
+    vector[ 14 ] = 70;
+    vector[ 15 ] = 75;
+
+    CHECK( vector[ 0 ] == 0 );
+    CHECK( vector[ 1 ] == 5 );
+    CHECK( vector[ 2 ] == 10 );
+    CHECK( vector[ 3 ] == 15 );
+    CHECK( vector[ 4 ] == 20 );
+    CHECK( vector[ 5 ] == 25 );
+    CHECK( vector[ 6 ] == 30 );
+    CHECK( vector[ 7 ] == 35 );
+    CHECK( vector[ 8 ] == 40 );
+    CHECK( vector[ 9 ] == 45 );
+    CHECK( vector[ 10 ] == 50 );
+    CHECK( vector[ 11 ] == 55 );
+    CHECK( vector[ 12 ] == 60 );
+    CHECK( vector[ 13 ] == 65 );
+    CHECK( vector[ 14 ] == 70 );
+    CHECK( vector[ 15 ] == 75 );
+}

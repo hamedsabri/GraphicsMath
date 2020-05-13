@@ -18,3 +18,15 @@ TEST_CASE( "{{ context.className }}_ElementReadAccess" )
     CHECK( vector[ {{ index }} ] == {{ index * 2 }} );
 {%- endfor %}
 }
+
+TEST_CASE( "{{ context.className }}_ElementWriteAccess" )
+{
+    gm::{{ context.className }} vector;
+{% for index in range(context.elementSize) -%}
+    vector[ {{ index }} ] = {{ index * 5 }};
+{%- endfor %}
+
+{% for index in range(context.elementSize) -%}
+    CHECK( vector[ {{ index }} ] == {{ index * 5 }} );
+{%- endfor %}
+}
