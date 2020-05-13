@@ -1,7 +1,7 @@
 #pragma once
 
 /// Pre-processor definitions for namespaces.
-#define GM_NAMESPACE gm
-#define GM_NAMESPACE_USING using namespace GM_NAMESPACE;
-#define GM_NAMESPACE_BEGIN namespace GM_NAMESPACE {
-#define GM_NAMESPACE_END }
+#define GM_NS gm
+#define GM_NS_USING using namespace GM_NS;
+#define GM_NS_BEGIN namespace GM_NS {
+#define GM_NS_END }

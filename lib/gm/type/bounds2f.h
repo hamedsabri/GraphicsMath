@@ -10,10 +10,10 @@
 
 #include <limits>
 
-GM_NAMESPACE_BEGIN
+GM_NS_BEGIN
 
 /// \class Bounds2f
-class GM_API Bounds2f final
+class Bounds2f final
 {
 public:
     /// Default constructor.
@@ -71,4 +71,4 @@ private:
     Vec2f m_max = Vec2f( std::numeric_limits< float >::min(), std::numeric_limits< float >::min() );
 };
 
-GM_NAMESPACE_END
+GM_NS_END

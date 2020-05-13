@@ -10,10 +10,10 @@
 #include <gm/tool/almost.h>
 #include <gm/tool/assert.h>
 
-GM_NAMESPACE_BEGIN
+GM_NS_BEGIN
 
 /// \class Vec2f
-class GM_API Vec2f final
+class Vec2f final
 {
 public:
     using ElementType = float;
@@ -200,4 +200,4 @@ inline Vec2f operator*( const float& i_scalar, const Vec2f& i_vector )
     return Vec2f( i_vector[ 0 ] * i_scalar, i_vector[ 1 ] * i_scalar );
 }
 
-GM_NAMESPACE_END
+GM_NS_END

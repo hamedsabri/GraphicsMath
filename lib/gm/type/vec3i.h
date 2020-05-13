@@ -9,10 +9,10 @@
 #include <gm/api.h>
 #include <gm/tool/assert.h>
 
-GM_NAMESPACE_BEGIN
+GM_NS_BEGIN
 
 /// \class Vec3i
-class GM_API Vec3i final
+class Vec3i final
 {
 public:
     using ElementType = int;
@@ -214,4 +214,4 @@ inline Vec3i operator*( const int& i_scalar, const Vec3i& i_vector )
     return Vec3i( i_vector[ 0 ] * i_scalar, i_vector[ 1 ] * i_scalar, i_vector[ 2 ] * i_scalar );
 }
 
-GM_NAMESPACE_END
+GM_NS_END

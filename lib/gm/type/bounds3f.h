@@ -10,10 +10,10 @@
 
 #include <limits>
 
-GM_NAMESPACE_BEGIN
+GM_NS_BEGIN
 
 /// \class Bounds3f
-class GM_API Bounds3f final
+class Bounds3f final
 {
 public:
     /// Default constructor.
@@ -75,4 +75,4 @@ private:
                          std::numeric_limits< float >::min() );
 };
 
-GM_NAMESPACE_END
+GM_NS_END

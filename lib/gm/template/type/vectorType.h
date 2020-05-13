@@ -12,10 +12,10 @@
 #include <gm/tool/almost.h>
 {%- endif %}
 
-GM_NAMESPACE_BEGIN
+GM_NS_BEGIN
 
 /// \class {{ context.className }}
-class GM_API {{ context.className }} final
+class {{ context.className }} final
 {
 public:
     using ElementType = {{ context.elementType.className }};
@@ -327,4 +327,4 @@ inline {{ context.className }} operator*( const {{ context.elementType.className
     );
 }
 
-GM_NAMESPACE_END
+GM_NS_END

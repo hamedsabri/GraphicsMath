@@ -22,6 +22,9 @@ TEMPLATE_DIR = "template"
 # Name of the subdirectory where all types reside.
 TYPE_DIR = "type"
 
+# Name of the subdirectory where all tests reside.
+TESTS_DIR = "tests"
+
 # Prefix for the class names of types.
 TYPES_CLASS_PREFIX = ""
 
@@ -437,13 +440,22 @@ def GenerateVectorTypes():
     """
     # Generate vector class headers.
     filePaths = []
-    headerFileNames = []
     for vectorType in VECTOR_TYPES:
         code = GenerateCode(vectorType, GetTemplateFile(os.path.join(TYPE_DIR, "vectorType.h")))
         filePath = os.path.join(os.path.abspath(TYPE_DIR), vectorType.headerFileName)
         WriteFile(filePath, code)
         filePaths.append(filePath)
-        headerFileNames.append(vectorType.headerFileName)
+
+    # Tests
+    for vectorType in VECTOR_TYPES:
+        code = GenerateCode(vectorType, GetTemplateFile(os.path.join(TYPE_DIR, "testVectorType.cpp")))
+        filePath = os.path.join(
+            os.path.abspath(TYPE_DIR),
+            TESTS_DIR,
+            "test{className}.cpp".format(className=vectorType.className)
+        )
+        WriteFile(filePath, code)
+        filePaths.append(filePath)
 
     return filePaths
 

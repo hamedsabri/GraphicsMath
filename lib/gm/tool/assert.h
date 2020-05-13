@@ -12,12 +12,12 @@
 #define GM_ASSERT( expr )                                                                                              \
     if ( !( expr ) )                                                                                                   \
     {                                                                                                                  \
-        GM_NAMESPACE::Assert( #expr );                                                                                 \
+        GM_NS::Assert( #expr );                                                                                 \
     }
 #define GM_ASSERT_MSG( expr, format, ... )                                                                             \
     if ( !( expr ) )                                                                                                   \
     {                                                                                                                  \
-        GM_NAMESPACE::Assert( #expr, format, ##__VA_ARGS__ );                                                          \
+        GM_NS::Assert( #expr, format, ##__VA_ARGS__ );                                                          \
     }
 #else
 #define GM_ASSERT( expr, ... ) void()

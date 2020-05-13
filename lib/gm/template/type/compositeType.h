@@ -16,10 +16,10 @@
 #include {{ include }}
 {% endfor %}
 
-GM_NAMESPACE_BEGIN
+GM_NS_BEGIN
 
 /// \class {{ context.className }}
-class GM_API {{ context.className }} final
+class {{ context.className }} final
 {
 public:
     /// Default constructor.
@@ -92,4 +92,4 @@ private:
 {%- endfor %}
 };
 
-GM_NAMESPACE_END
+GM_NS_END

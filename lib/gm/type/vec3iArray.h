@@ -6,8 +6,8 @@
 
 #include <gm/type/vec3i.h>
 
-GM_NAMESPACE_BEGIN
+GM_NS_BEGIN
 
 using Vec3iArray = std::vector< Vec3i >;
 
-GM_NAMESPACE_END
+GM_NS_END

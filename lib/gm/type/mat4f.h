@@ -10,10 +10,10 @@
 #include <gm/tool/almost.h>
 #include <gm/tool/assert.h>
 
-GM_NAMESPACE_BEGIN
+GM_NS_BEGIN
 
 /// \class Mat4f
-class GM_API Mat4f final
+class Mat4f final
 {
 public:
     using ElementType = float;
@@ -424,4 +424,4 @@ inline Mat4f operator*( const float& i_scalar, const Mat4f& i_vector )
                   i_vector[ 15 ] * i_scalar );
 }
 
-GM_NAMESPACE_END
+GM_NS_END

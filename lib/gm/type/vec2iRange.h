@@ -4,7 +4,7 @@
 #include <gm/type/bounds2i.h>
 #include <gm/type/vec2i.h>
 
-GM_NAMESPACE_BEGIN
+GM_NS_BEGIN
 
 /// \class Vec2iRange
 ///
@@ -18,7 +18,7 @@ GM_NAMESPACE_BEGIN
 ///     ...do something with point...
 /// }
 ///
-class GM_API Vec2iRange final
+class Vec2iRange final
 {
 public:
     /// Range constructor.
@@ -28,7 +28,7 @@ public:
     {
     }
 
-    class GM_API iterator final
+    class iterator final
     {
     public:
         /// Iterator ctor.
@@ -87,4 +87,4 @@ private:
     Vec2i m_end;
 };
 
-GM_NAMESPACE_END
+GM_NS_END
