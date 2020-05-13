@@ -1,6 +1,6 @@
 # GraphicsMath
 
-Header-only computer graphics math library - serving as as one of the basis for other projects.
+C++ header-only computer graphics math library.
 
 ## Usage
 
