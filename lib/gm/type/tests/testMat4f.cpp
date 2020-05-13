@@ -5,7 +5,7 @@
 
 TEST_CASE( "Mat4f_ElementReadAccess" )
 {
-    GM_NS::Mat4f vector( 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 );
+    gm::Mat4f vector( 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 );
 
     CHECK( vector[ 0 ] == 0 );
     CHECK( vector[ 1 ] == 2 );

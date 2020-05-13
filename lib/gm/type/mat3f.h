@@ -6,7 +6,7 @@
 #include <cstring>
 #include <sstream>
 
-#include <gm/api.h>
+#include <gm/gm.h>
 #include <gm/tool/almost.h>
 #include <gm/tool/assert.h>
 

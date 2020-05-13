@@ -1,6 +1,6 @@
 #pragma once
 
-#include <gm/api.h>
+#include <gm/gm.h>
 
 GM_NS_BEGIN
 

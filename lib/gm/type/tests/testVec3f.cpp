@@ -5,7 +5,7 @@
 
 TEST_CASE( "Vec3f_ElementReadAccess" )
 {
-    GM_NS::Vec3f vector( 0, 2, 4 );
+    gm::Vec3f vector( 0, 2, 4 );
 
     CHECK( vector[ 0 ] == 0 );
     CHECK( vector[ 1 ] == 2 );

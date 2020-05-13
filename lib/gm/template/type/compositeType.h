@@ -4,7 +4,7 @@
 
 #include <sstream>
 
-#include <gm/api.h>
+#include <gm/gm.h>
 
 {% for element in context.elements -%}
 {% if element.type.isVector or element.type.isComposite -%}

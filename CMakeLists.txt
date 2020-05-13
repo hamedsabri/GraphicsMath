@@ -2,15 +2,15 @@ cmake_minimum_required(VERSION 3.17)
 
 # Project Name
 project(
-  GM
-  VERSION 0.0
-  DESCRIPTION "Basic template for starting out a new CMake-based project."
-  LANGUAGES CXX
+    GraphicsMath
+    VERSION 0.0
+    DESCRIPTION "Header-only computer graphics math library."
+    LANGUAGES CXX
 )
 
 # Cross-platform compatibility.
 if(UNIX AND NOT APPLE)
-  set(LINUX TRUE)
+    set(LINUX TRUE)
 endif()
 
 # Discover macros.
@@ -24,7 +24,6 @@ if(BUILD_TESTING)
 endif()
 
 if(BUILD_DOCUMENTATION)
-
     file(
         COPY ${CMAKE_SOURCE_DIR}/README.md
         DESTINATION ${CMAKE_BINARY_DIR}

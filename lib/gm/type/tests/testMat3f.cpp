@@ -5,7 +5,7 @@
 
 TEST_CASE( "Mat3f_ElementReadAccess" )
 {
-    GM_NS::Mat3f vector( 0, 2, 4, 6, 8, 10, 12, 14, 16 );
+    gm::Mat3f vector( 0, 2, 4, 6, 8, 10, 12, 14, 16 );
 
     CHECK( vector[ 0 ] == 0 );
     CHECK( vector[ 1 ] == 2 );

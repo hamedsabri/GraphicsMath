@@ -5,7 +5,7 @@
 
 TEST_CASE( "{{ context.className }}_ElementReadAccess" )
 {
-    GM_NS::{{ context.className }} vector(
+    gm::{{ context.className }} vector(
 {% for index in range(context.elementSize) -%}
     {{ index * 2 }}
 {%- if index + 1 < context.elementSize -%}

@@ -4,7 +4,7 @@
 
 #include <sstream>
 
-#include <gm/api.h>
+#include <gm/gm.h>
 
 #include <gm/type/vec3f.h>
 

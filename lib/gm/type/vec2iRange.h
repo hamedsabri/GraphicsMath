@@ -1,6 +1,6 @@
 #pragma once
 
-#include <gm/api.h>
+#include <gm/gm.h>
 #include <gm/type/bounds2i.h>
 #include <gm/type/vec2i.h>
 
