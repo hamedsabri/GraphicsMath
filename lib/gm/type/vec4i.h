@@ -152,21 +152,28 @@ public:
         return Vec4i( -m_elements[ 0 ], -m_elements[ 1 ], -m_elements[ 2 ], -m_elements[ 3 ] );
     }
 
+    /// X component accessor for the first element.
     inline int X() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
     }
+
+    /// Y component accessor for the second element.
     inline int Y() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 1 ];
     }
+
+    /// Z component accessor for the third element.
     inline int Z() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 2 ];
     }
+
+    /// W component accessor for the fourth element.
     inline int W() const
     {
         GM_ASSERT( !HasNans() );
@@ -219,6 +226,7 @@ private:
     int m_elements[ 4 ] = {0, 0, 0, 0};
 };
 
+/// Vector-scalar multiplication.
 inline Vec4i operator*( const Vec4i& i_vector, const int& i_scalar )
 {
     GM_ASSERT( !i_vector.HasNans() );
@@ -228,6 +236,7 @@ inline Vec4i operator*( const Vec4i& i_vector, const int& i_scalar )
                   i_vector[ 3 ] * i_scalar );
 }
 
+/// Scalar-vector multiplication.
 inline Vec4i operator*( const int& i_scalar, const Vec4i& i_vector )
 {
     GM_ASSERT( !i_vector.HasNans() );

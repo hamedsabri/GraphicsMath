@@ -135,11 +135,14 @@ public:
         return Vec2i( -m_elements[ 0 ], -m_elements[ 1 ] );
     }
 
+    /// X component accessor for the first element.
     inline int X() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
     }
+
+    /// Y component accessor for the second element.
     inline int Y() const
     {
         GM_ASSERT( !HasNans() );
@@ -186,12 +189,14 @@ private:
     int m_elements[ 2 ] = {0, 0};
 };
 
+/// Vector-scalar multiplication.
 inline Vec2i operator*( const Vec2i& i_vector, const int& i_scalar )
 {
     GM_ASSERT( !i_vector.HasNans() );
     return Vec2i( i_vector[ 0 ] * i_scalar, i_vector[ 1 ] * i_scalar );
 }
 
+/// Scalar-vector multiplication.
 inline Vec2i operator*( const int& i_scalar, const Vec2i& i_vector )
 {
     GM_ASSERT( !i_vector.HasNans() );

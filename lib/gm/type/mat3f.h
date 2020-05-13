@@ -288,6 +288,7 @@ private:
     float m_elements[ 9 ] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 };
 
+/// Vector-scalar multiplication.
 inline Mat3f operator*( const Mat3f& i_vector, const float& i_scalar )
 {
     GM_ASSERT( !i_vector.HasNans() );
@@ -302,6 +303,7 @@ inline Mat3f operator*( const Mat3f& i_vector, const float& i_scalar )
                   i_vector[ 8 ] * i_scalar );
 }
 
+/// Scalar-vector multiplication.
 inline Mat3f operator*( const float& i_scalar, const Mat3f& i_vector )
 {
     GM_ASSERT( !i_vector.HasNans() );

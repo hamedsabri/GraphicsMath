@@ -143,16 +143,21 @@ public:
         return Vec3i( -m_elements[ 0 ], -m_elements[ 1 ], -m_elements[ 2 ] );
     }
 
+    /// X component accessor for the first element.
     inline int X() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
     }
+
+    /// Y component accessor for the second element.
     inline int Y() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 1 ];
     }
+
+    /// Z component accessor for the third element.
     inline int Z() const
     {
         GM_ASSERT( !HasNans() );
@@ -202,12 +207,14 @@ private:
     int m_elements[ 3 ] = {0, 0, 0};
 };
 
+/// Vector-scalar multiplication.
 inline Vec3i operator*( const Vec3i& i_vector, const int& i_scalar )
 {
     GM_ASSERT( !i_vector.HasNans() );
     return Vec3i( i_vector[ 0 ] * i_scalar, i_vector[ 1 ] * i_scalar, i_vector[ 2 ] * i_scalar );
 }
 
+/// Scalar-vector multiplication.
 inline Vec3i operator*( const int& i_scalar, const Vec3i& i_vector )
 {
     GM_ASSERT( !i_vector.HasNans() );

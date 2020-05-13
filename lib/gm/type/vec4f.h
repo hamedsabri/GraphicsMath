@@ -153,21 +153,28 @@ public:
         return Vec4f( -m_elements[ 0 ], -m_elements[ 1 ], -m_elements[ 2 ], -m_elements[ 3 ] );
     }
 
+    /// X component accessor for the first element.
     inline float X() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
     }
+
+    /// Y component accessor for the second element.
     inline float Y() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 1 ];
     }
+
+    /// Z component accessor for the third element.
     inline float Z() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 2 ];
     }
+
+    /// W component accessor for the fourth element.
     inline float W() const
     {
         GM_ASSERT( !HasNans() );
@@ -222,6 +229,7 @@ private:
     float m_elements[ 4 ] = {0, 0, 0, 0};
 };
 
+/// Vector-scalar multiplication.
 inline Vec4f operator*( const Vec4f& i_vector, const float& i_scalar )
 {
     GM_ASSERT( !i_vector.HasNans() );
@@ -231,6 +239,7 @@ inline Vec4f operator*( const Vec4f& i_vector, const float& i_scalar )
                   i_vector[ 3 ] * i_scalar );
 }
 
+/// Scalar-vector multiplication.
 inline Vec4f operator*( const float& i_scalar, const Vec4f& i_vector )
 {
     GM_ASSERT( !i_vector.HasNans() );

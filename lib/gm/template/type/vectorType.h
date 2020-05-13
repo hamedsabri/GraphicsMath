@@ -201,7 +201,8 @@ public:
     }
 {%- endif %}
 
-{%- if context.dims|length == 1 and context.elementSize <= 4 -%}
+{% if context.dims|length == 1 and context.elementSize <= 4 -%}
+    /// X component accessor for the first element.
     inline {{ context.elementType.className }} X() const
     {
         GM_ASSERT( !HasNans() );
@@ -209,7 +210,8 @@ public:
     }
 {%- endif %}
 
-{%- if context.dims|length == 1 and context.elementSize >= 2 and context.elementSize <= 4 -%}
+{% if context.dims|length == 1 and context.elementSize >= 2 and context.elementSize <= 4 -%}
+    /// Y component accessor for the second element.
     inline {{ context.elementType.className }} Y() const
     {
         GM_ASSERT( !HasNans() );
@@ -217,7 +219,8 @@ public:
     }
 {%- endif %}
 
-{%- if context.dims|length == 1 and context.elementSize >= 3 and context.elementSize <= 4 -%}
+{% if context.dims|length == 1 and context.elementSize >= 3 and context.elementSize <= 4 -%}
+    /// Z component accessor for the third element.
     inline {{ context.elementType.className }} Z() const
     {
         GM_ASSERT( !HasNans() );
@@ -225,7 +228,8 @@ public:
     }
 {%- endif %}
 
-{%- if context.dims|length == 1 and context.elementSize == 4 %}
+{% if context.dims|length == 1 and context.elementSize == 4 %}
+    /// W component accessor for the fourth element.
     inline {{ context.elementType.className }} W() const
     {
         GM_ASSERT( !HasNans() );
@@ -301,6 +305,7 @@ private:
     };
 };
 
+/// Vector-scalar multiplication.
 inline {{ context.className }} operator*( const {{ context.className }}& i_vector, const {{ context.elementType.className }}& i_scalar )
 {
     GM_ASSERT( !i_vector.HasNans() );
@@ -314,6 +319,7 @@ inline {{ context.className }} operator*( const {{ context.className }}& i_vecto
     );
 }
 
+/// Scalar-vector multiplication.
 inline {{ context.className }} operator*( const {{ context.elementType.className }}& i_scalar, const {{ context.className }}& i_vector )
 {
     GM_ASSERT( !i_vector.HasNans() );

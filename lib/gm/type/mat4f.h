@@ -382,6 +382,7 @@ private:
     float m_elements[ 16 ] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 };
 
+/// Vector-scalar multiplication.
 inline Mat4f operator*( const Mat4f& i_vector, const float& i_scalar )
 {
     GM_ASSERT( !i_vector.HasNans() );
@@ -403,6 +404,7 @@ inline Mat4f operator*( const Mat4f& i_vector, const float& i_scalar )
                   i_vector[ 15 ] * i_scalar );
 }
 
+/// Scalar-vector multiplication.
 inline Mat4f operator*( const float& i_scalar, const Mat4f& i_vector )
 {
     GM_ASSERT( !i_vector.HasNans() );
