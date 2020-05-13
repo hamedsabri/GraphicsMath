@@ -1,8 +1,10 @@
 #pragma once
 
-#include <stdio.h>
+/// \file tool/log.h
+///
+/// Logging utility functions.
 
-/// \briief Logging utilities
+#include <stdio.h>
 
 #define GM_LOG_INFO( format, ... ) printf( format, ##__VA_ARGS__ );
 #define GM_LOG_WARN( format, ... ) printf( format, ##__VA_ARGS__ );
