@@ -332,7 +332,7 @@ function(
 
     # Install built executable.
     install(
-        TARGETS ${PROGRAM_NAME}
+        TARGETS ${TEST_NAME}
         DESTINATION ${CMAKE_INSTALL_PREFIX}/tests
     )
 
