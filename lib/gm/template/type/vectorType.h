@@ -146,8 +146,9 @@ public:
     inline {{ context.className }} operator/( const {{ context.elementType.className }}& i_scalar ) const
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_scalar != 0.0 );
-        {{ context.elementType.className }} reciprocal = 1.0 / i_scalar;
+        GM_ASSERT( i_scalar != {{ GetCppNumber(0, context.elementType) }} );
+{% if context.elementType == "float" or context.elementType == "double" -%}
+        {{ context.elementType.className }} reciprocal = {{ GetCppNumber(1, context.elementType) }} / i_scalar;
         return {{ context.className }}(
 {% for index in range(context.elementSize) -%}
         m_elements[ {{ index }} ] * reciprocal
@@ -155,6 +156,15 @@ public:
         ,
 {%- endif %}
 {%- endfor %}
+{%- else -%}
+        return {{ context.className }}(
+{% for index in range(context.elementSize) -%}
+        m_elements[ {{ index }} ] / i_scalar
+{%- if index + 1 < context.elementSize -%}
+        ,
+{%- endif %}
+{%- endfor %}
+{%- endif %}
         );
     }
 
@@ -162,11 +172,17 @@ public:
     inline {{ context.className }}& operator/=( const {{ context.elementType.className }}& i_scalar )
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_scalar != 0.0 );
-        {{ context.elementType.className }} reciprocal = 1.0 / i_scalar;
+        GM_ASSERT( i_scalar != {{ GetCppNumber(0, context.elementType) }} );
+{% if context.elementType == "float" or context.elementType == "double" -%}
+        {{ context.elementType.className }} reciprocal = {{ GetCppNumber(1, context.elementType) }} / i_scalar;
 {% for index in range(context.elementSize) -%}
         m_elements[ {{ index }} ] *= reciprocal;
 {%- endfor %}
+{%- else -%}
+{% for index in range(context.elementSize) -%}
+        m_elements[ {{ index }} ] /= i_scalar;
+{%- endfor %}
+{%- endif %}
         return *this;
     }
 
@@ -297,7 +313,7 @@ public:
 private:
     {{ context.elementType.className }} m_elements[ {{ context.elementSize }} ] = {
 {%- for index in range(context.elementSize) -%}
-        0
+        {{ GetCppNumber(0, context.elementType) }}
 {%- if index + 1 < context.elementSize -%}
         ,
 {%- endif %}

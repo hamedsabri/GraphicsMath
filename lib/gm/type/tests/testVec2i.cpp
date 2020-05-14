@@ -39,11 +39,70 @@ TEST_CASE( "Vec2i_ElementWriteAccess" )
     CHECK( vector[ 1 ] == 5 );
 }
 
-TEST_CASE( "Vec2i_AdditionOperator" )
+TEST_CASE( "Vec2i_Addition" )
 {
     gm::Vec2i vectorA( 0, 2 );
     gm::Vec2i vectorB( 0, 5 );
     gm::Vec2i vectorC = vectorA + vectorB;
-    CHECK( vectorC[ 0 ] == 0 );
-    CHECK( vectorC[ 1 ] == 7 );
+    CHECK( vectorC == gm::Vec2i( 0, 7 ) );
+}
+
+TEST_CASE( "Vec2i_AdditionAssignment" )
+{
+    gm::Vec2i vectorA( 0, 2 );
+    gm::Vec2i vectorB( 0, 5 );
+    vectorB += vectorA;
+    CHECK( vectorB == gm::Vec2i( 0, 7 ) );
+}
+
+TEST_CASE( "Vec2i_Subtraction" )
+{
+    gm::Vec2i vectorA( 0, 7 );
+    gm::Vec2i vectorB( 0, 5 );
+    gm::Vec2i vectorC = vectorA - vectorB;
+    CHECK( vectorC == gm::Vec2i( 0, 2 ) );
+}
+
+TEST_CASE( "Vec2i_SubtractionAssignment" )
+{
+    gm::Vec2i vectorA( 0, 5 );
+    gm::Vec2i vectorB( 0, 7 );
+    vectorB -= vectorA;
+    CHECK( vectorB == gm::Vec2i( 0, 2 ) );
+}
+
+TEST_CASE( "Vec2i_ScalarVectorMultiplication" )
+{
+    gm::Vec2i vectorA( 0, 2 );
+
+    gm::Vec2i vectorB = 5 * vectorA;
+    CHECK( vectorB == gm::Vec2i( 0, 10 ) );
+}
+
+TEST_CASE( "Vec2i_VectorScalarMultiplication" )
+{
+    gm::Vec2i vectorA( 0, 2 );
+    gm::Vec2i vectorB = vectorA * 5;
+    CHECK( vectorB == gm::Vec2i( 0, 10 ) );
+}
+
+TEST_CASE( "Vec2i_ScalarMultiplicationAssignment" )
+{
+    gm::Vec2i vectorA( 0, 2 );
+    vectorA *= 5;
+    CHECK( vectorA == gm::Vec2i( 0, 10 ) );
+}
+
+TEST_CASE( "Vec2i_VectorScalarDivision" )
+{
+    gm::Vec2i vectorA( 0, 10 );
+    gm::Vec2i vectorB = vectorA / 5;
+    CHECK( vectorB == gm::Vec2i( 0, 2 ) );
+}
+
+TEST_CASE( "Vec2i_ScalarDivisionAssignment" )
+{
+    gm::Vec2i vectorA( 0, 10 );
+    vectorA /= 5;
+    CHECK( vectorA == gm::Vec2i( 0, 2 ) );
 }

@@ -81,25 +81,70 @@ TEST_CASE( "Mat4f_ElementWriteAccess" )
     CHECK( matrix[ 15 ] == 75 );
 }
 
-TEST_CASE( "Mat4f_AdditionOperator" )
+TEST_CASE( "Mat4f_Addition" )
 {
     gm::Mat4f matrixA( 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 );
     gm::Mat4f matrixB( 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75 );
     gm::Mat4f matrixC = matrixA + matrixB;
-    CHECK( matrixC[ 0 ] == 0 );
-    CHECK( matrixC[ 1 ] == 7 );
-    CHECK( matrixC[ 2 ] == 14 );
-    CHECK( matrixC[ 3 ] == 21 );
-    CHECK( matrixC[ 4 ] == 28 );
-    CHECK( matrixC[ 5 ] == 35 );
-    CHECK( matrixC[ 6 ] == 42 );
-    CHECK( matrixC[ 7 ] == 49 );
-    CHECK( matrixC[ 8 ] == 56 );
-    CHECK( matrixC[ 9 ] == 63 );
-    CHECK( matrixC[ 10 ] == 70 );
-    CHECK( matrixC[ 11 ] == 77 );
-    CHECK( matrixC[ 12 ] == 84 );
-    CHECK( matrixC[ 13 ] == 91 );
-    CHECK( matrixC[ 14 ] == 98 );
-    CHECK( matrixC[ 15 ] == 105 );
+    CHECK( matrixC == gm::Mat4f( 0, 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, 105 ) );
+}
+
+TEST_CASE( "Mat4f_AdditionAssignment" )
+{
+    gm::Mat4f matrixA( 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 );
+    gm::Mat4f matrixB( 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75 );
+    matrixB += matrixA;
+    CHECK( matrixB == gm::Mat4f( 0, 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, 105 ) );
+}
+
+TEST_CASE( "Mat4f_Subtraction" )
+{
+    gm::Mat4f matrixA( 0, 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, 105 );
+    gm::Mat4f matrixB( 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75 );
+    gm::Mat4f matrixC = matrixA - matrixB;
+    CHECK( matrixC == gm::Mat4f( 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 ) );
+}
+
+TEST_CASE( "Mat4f_SubtractionAssignment" )
+{
+    gm::Mat4f matrixA( 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75 );
+    gm::Mat4f matrixB( 0, 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, 105 );
+    matrixB -= matrixA;
+    CHECK( matrixB == gm::Mat4f( 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 ) );
+}
+
+TEST_CASE( "Mat4f_ScalarVectorMultiplication" )
+{
+    gm::Mat4f matrixA( 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 );
+
+    gm::Mat4f matrixB = 5 * matrixA;
+    CHECK( matrixB == gm::Mat4f( 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150 ) );
+}
+
+TEST_CASE( "Mat4f_VectorScalarMultiplication" )
+{
+    gm::Mat4f matrixA( 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 );
+    gm::Mat4f matrixB = matrixA * 5;
+    CHECK( matrixB == gm::Mat4f( 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150 ) );
+}
+
+TEST_CASE( "Mat4f_ScalarMultiplicationAssignment" )
+{
+    gm::Mat4f matrixA( 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 );
+    matrixA *= 5;
+    CHECK( matrixA == gm::Mat4f( 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150 ) );
+}
+
+TEST_CASE( "Mat4f_VectorScalarDivision" )
+{
+    gm::Mat4f matrixA( 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150 );
+    gm::Mat4f matrixB = matrixA / 5;
+    CHECK( matrixB == gm::Mat4f( 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 ) );
+}
+
+TEST_CASE( "Mat4f_ScalarDivisionAssignment" )
+{
+    gm::Mat4f matrixA( 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150 );
+    matrixA /= 5;
+    CHECK( matrixA == gm::Mat4f( 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 ) );
 }

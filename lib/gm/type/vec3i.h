@@ -119,20 +119,18 @@ public:
     inline Vec3i operator/( const int& i_scalar ) const
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_scalar != 0.0 );
-        int reciprocal = 1.0 / i_scalar;
-        return Vec3i( m_elements[ 0 ] * reciprocal, m_elements[ 1 ] * reciprocal, m_elements[ 2 ] * reciprocal );
+        GM_ASSERT( i_scalar != 0 );
+        return Vec3i( m_elements[ 0 ] / i_scalar, m_elements[ 1 ] / i_scalar, m_elements[ 2 ] / i_scalar );
     }
 
     /// Scalar division assignment.
     inline Vec3i& operator/=( const int& i_scalar )
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_scalar != 0.0 );
-        int reciprocal = 1.0 / i_scalar;
-        m_elements[ 0 ] *= reciprocal;
-        m_elements[ 1 ] *= reciprocal;
-        m_elements[ 2 ] *= reciprocal;
+        GM_ASSERT( i_scalar != 0 );
+        m_elements[ 0 ] /= i_scalar;
+        m_elements[ 1 ] /= i_scalar;
+        m_elements[ 2 ] /= i_scalar;
         return *this;
     }
 

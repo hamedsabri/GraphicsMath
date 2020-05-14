@@ -42,12 +42,70 @@ TEST_CASE( "Vec3f_ElementWriteAccess" )
     CHECK( vector[ 2 ] == 10 );
 }
 
-TEST_CASE( "Vec3f_AdditionOperator" )
+TEST_CASE( "Vec3f_Addition" )
 {
     gm::Vec3f vectorA( 0, 2, 4 );
     gm::Vec3f vectorB( 0, 5, 10 );
     gm::Vec3f vectorC = vectorA + vectorB;
-    CHECK( vectorC[ 0 ] == 0 );
-    CHECK( vectorC[ 1 ] == 7 );
-    CHECK( vectorC[ 2 ] == 14 );
+    CHECK( vectorC == gm::Vec3f( 0, 7, 14 ) );
+}
+
+TEST_CASE( "Vec3f_AdditionAssignment" )
+{
+    gm::Vec3f vectorA( 0, 2, 4 );
+    gm::Vec3f vectorB( 0, 5, 10 );
+    vectorB += vectorA;
+    CHECK( vectorB == gm::Vec3f( 0, 7, 14 ) );
+}
+
+TEST_CASE( "Vec3f_Subtraction" )
+{
+    gm::Vec3f vectorA( 0, 7, 14 );
+    gm::Vec3f vectorB( 0, 5, 10 );
+    gm::Vec3f vectorC = vectorA - vectorB;
+    CHECK( vectorC == gm::Vec3f( 0, 2, 4 ) );
+}
+
+TEST_CASE( "Vec3f_SubtractionAssignment" )
+{
+    gm::Vec3f vectorA( 0, 5, 10 );
+    gm::Vec3f vectorB( 0, 7, 14 );
+    vectorB -= vectorA;
+    CHECK( vectorB == gm::Vec3f( 0, 2, 4 ) );
+}
+
+TEST_CASE( "Vec3f_ScalarVectorMultiplication" )
+{
+    gm::Vec3f vectorA( 0, 2, 4 );
+
+    gm::Vec3f vectorB = 5 * vectorA;
+    CHECK( vectorB == gm::Vec3f( 0, 10, 20 ) );
+}
+
+TEST_CASE( "Vec3f_VectorScalarMultiplication" )
+{
+    gm::Vec3f vectorA( 0, 2, 4 );
+    gm::Vec3f vectorB = vectorA * 5;
+    CHECK( vectorB == gm::Vec3f( 0, 10, 20 ) );
+}
+
+TEST_CASE( "Vec3f_ScalarMultiplicationAssignment" )
+{
+    gm::Vec3f vectorA( 0, 2, 4 );
+    vectorA *= 5;
+    CHECK( vectorA == gm::Vec3f( 0, 10, 20 ) );
+}
+
+TEST_CASE( "Vec3f_VectorScalarDivision" )
+{
+    gm::Vec3f vectorA( 0, 10, 20 );
+    gm::Vec3f vectorB = vectorA / 5;
+    CHECK( vectorB == gm::Vec3f( 0, 2, 4 ) );
+}
+
+TEST_CASE( "Vec3f_ScalarDivisionAssignment" )
+{
+    gm::Vec3f vectorA( 0, 10, 20 );
+    vectorA /= 5;
+    CHECK( vectorA == gm::Vec3f( 0, 2, 4 ) );
 }

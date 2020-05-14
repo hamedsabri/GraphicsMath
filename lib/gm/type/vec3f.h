@@ -120,20 +120,18 @@ public:
     inline Vec3f operator/( const float& i_scalar ) const
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_scalar != 0.0 );
-        float reciprocal = 1.0 / i_scalar;
-        return Vec3f( m_elements[ 0 ] * reciprocal, m_elements[ 1 ] * reciprocal, m_elements[ 2 ] * reciprocal );
+        GM_ASSERT( i_scalar != 0.0f );
+        return Vec3f( m_elements[ 0 ] / i_scalar, m_elements[ 1 ] / i_scalar, m_elements[ 2 ] / i_scalar );
     }
 
     /// Scalar division assignment.
     inline Vec3f& operator/=( const float& i_scalar )
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_scalar != 0.0 );
-        float reciprocal = 1.0 / i_scalar;
-        m_elements[ 0 ] *= reciprocal;
-        m_elements[ 1 ] *= reciprocal;
-        m_elements[ 2 ] *= reciprocal;
+        GM_ASSERT( i_scalar != 0.0f );
+        m_elements[ 0 ] /= i_scalar;
+        m_elements[ 1 ] /= i_scalar;
+        m_elements[ 2 ] /= i_scalar;
         return *this;
     }
 
@@ -206,7 +204,7 @@ public:
     }
 
 private:
-    float m_elements[ 3 ] = {0, 0, 0};
+    float m_elements[ 3 ] = {0.0f, 0.0f, 0.0f};
 };
 
 /// Vector-scalar multiplication.

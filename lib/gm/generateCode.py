@@ -30,6 +30,7 @@ TYPES_CLASS_PREFIX = ""
 
 # POD types we are interested in generating code for.  Double is omitted for the time being.
 FLOAT = "float"
+DOUBLE = "double"
 INT = "int"
 
 # TYPES is a dict of type name (str) -> type object (CompositeType).
@@ -84,6 +85,18 @@ def GetTemplateFile(templateName):
     return os.path.abspath(os.path.join(TEMPLATE_DIR, templateName))
 
 
+def GetCppNumber(value, valueType):
+    """
+    Convert a numeric value ``value`` to the corresponding C++ compliant value as a string.
+    """
+    if valueType.className == INT:
+        return str(int(value))
+    elif valueType.className == FLOAT:
+        return str(float(value)) + "f"
+    elif valueType.className == DOUBLE:
+        return str(float(value))
+
+
 def GenerateCode(context, templatePath):
     """
     Generate a single source file with a template and code-gen context.
@@ -98,7 +111,7 @@ def GenerateCode(context, templatePath):
     with open(templatePath, 'r') as f:
         templateStr = f.read()
         template = Template(templateStr)
-        code = template.render(context=context)
+        code = template.render(context=context, GetCppNumber=GetCppNumber)
         return code
 
 

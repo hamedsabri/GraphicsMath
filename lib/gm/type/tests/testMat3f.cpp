@@ -60,18 +60,70 @@ TEST_CASE( "Mat3f_ElementWriteAccess" )
     CHECK( matrix[ 8 ] == 40 );
 }
 
-TEST_CASE( "Mat3f_AdditionOperator" )
+TEST_CASE( "Mat3f_Addition" )
 {
     gm::Mat3f matrixA( 0, 2, 4, 6, 8, 10, 12, 14, 16 );
     gm::Mat3f matrixB( 0, 5, 10, 15, 20, 25, 30, 35, 40 );
     gm::Mat3f matrixC = matrixA + matrixB;
-    CHECK( matrixC[ 0 ] == 0 );
-    CHECK( matrixC[ 1 ] == 7 );
-    CHECK( matrixC[ 2 ] == 14 );
-    CHECK( matrixC[ 3 ] == 21 );
-    CHECK( matrixC[ 4 ] == 28 );
-    CHECK( matrixC[ 5 ] == 35 );
-    CHECK( matrixC[ 6 ] == 42 );
-    CHECK( matrixC[ 7 ] == 49 );
-    CHECK( matrixC[ 8 ] == 56 );
+    CHECK( matrixC == gm::Mat3f( 0, 7, 14, 21, 28, 35, 42, 49, 56 ) );
+}
+
+TEST_CASE( "Mat3f_AdditionAssignment" )
+{
+    gm::Mat3f matrixA( 0, 2, 4, 6, 8, 10, 12, 14, 16 );
+    gm::Mat3f matrixB( 0, 5, 10, 15, 20, 25, 30, 35, 40 );
+    matrixB += matrixA;
+    CHECK( matrixB == gm::Mat3f( 0, 7, 14, 21, 28, 35, 42, 49, 56 ) );
+}
+
+TEST_CASE( "Mat3f_Subtraction" )
+{
+    gm::Mat3f matrixA( 0, 7, 14, 21, 28, 35, 42, 49, 56 );
+    gm::Mat3f matrixB( 0, 5, 10, 15, 20, 25, 30, 35, 40 );
+    gm::Mat3f matrixC = matrixA - matrixB;
+    CHECK( matrixC == gm::Mat3f( 0, 2, 4, 6, 8, 10, 12, 14, 16 ) );
+}
+
+TEST_CASE( "Mat3f_SubtractionAssignment" )
+{
+    gm::Mat3f matrixA( 0, 5, 10, 15, 20, 25, 30, 35, 40 );
+    gm::Mat3f matrixB( 0, 7, 14, 21, 28, 35, 42, 49, 56 );
+    matrixB -= matrixA;
+    CHECK( matrixB == gm::Mat3f( 0, 2, 4, 6, 8, 10, 12, 14, 16 ) );
+}
+
+TEST_CASE( "Mat3f_ScalarVectorMultiplication" )
+{
+    gm::Mat3f matrixA( 0, 2, 4, 6, 8, 10, 12, 14, 16 );
+
+    gm::Mat3f matrixB = 5 * matrixA;
+    CHECK( matrixB == gm::Mat3f( 0, 10, 20, 30, 40, 50, 60, 70, 80 ) );
+}
+
+TEST_CASE( "Mat3f_VectorScalarMultiplication" )
+{
+    gm::Mat3f matrixA( 0, 2, 4, 6, 8, 10, 12, 14, 16 );
+    gm::Mat3f matrixB = matrixA * 5;
+    CHECK( matrixB == gm::Mat3f( 0, 10, 20, 30, 40, 50, 60, 70, 80 ) );
+}
+
+TEST_CASE( "Mat3f_ScalarMultiplicationAssignment" )
+{
+    gm::Mat3f matrixA( 0, 2, 4, 6, 8, 10, 12, 14, 16 );
+    matrixA *= 5;
+    CHECK( matrixA == gm::Mat3f( 0, 10, 20, 30, 40, 50, 60, 70, 80 ) );
+}
+
+TEST_CASE( "Mat3f_VectorScalarDivision" )
+{
+    gm::Mat3f matrixA( 0, 10, 20, 30, 40, 50, 60, 70, 80 );
+    gm::Mat3f matrixB = matrixA / 5;
+    CHECK( matrixB == gm::Mat3f( 0, 2, 4, 6, 8, 10, 12, 14, 16 ) );
+}
+
+TEST_CASE( "Mat3f_ScalarDivisionAssignment" )
+{
+    gm::Mat3f matrixA( 0, 10, 20, 30, 40, 50, 60, 70, 80 );
+    matrixA /= 5;
+    CHECK( matrixA == gm::Mat3f( 0, 2, 4, 6, 8, 10, 12, 14, 16 ) );
 }
