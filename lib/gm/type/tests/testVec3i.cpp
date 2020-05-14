@@ -113,6 +113,5 @@ TEST_CASE( "Vec3i_ScalarDivisionAssignment" )
 TEST_CASE( "Vec3i_Negation" )
 {
     gm::Vec3i vector( 0, 2, 4 );
-
     CHECK( -vector == gm::Vec3i( -0, -2, -4 ) );
 }

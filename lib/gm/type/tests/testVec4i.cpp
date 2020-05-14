@@ -116,6 +116,5 @@ TEST_CASE( "Vec4i_ScalarDivisionAssignment" )
 TEST_CASE( "Vec4i_Negation" )
 {
     gm::Vec4i vector( 0, 2, 4, 6 );
-
     CHECK( -vector == gm::Vec4i( -0, -2, -4, -6 ) );
 }

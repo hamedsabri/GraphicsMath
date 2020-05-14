@@ -116,6 +116,5 @@ TEST_CASE( "Vec4f_ScalarDivisionAssignment" )
 TEST_CASE( "Vec4f_Negation" )
 {
     gm::Vec4f vector( 0.0f, 2.0f, 4.0f, 6.0f );
-
     CHECK( -vector == gm::Vec4f( -0.0f, -2.0f, -4.0f, -6.0f ) );
 }

@@ -131,6 +131,5 @@ TEST_CASE( "Mat3f_ScalarDivisionAssignment" )
 TEST_CASE( "Mat3f_Negation" )
 {
     gm::Mat3f matrix( 0.0f, 2.0f, 4.0f, 6.0f, 8.0f, 10.0f, 12.0f, 14.0f, 16.0f );
-
     CHECK( -matrix == gm::Mat3f( -0.0f, -2.0f, -4.0f, -6.0f, -8.0f, -10.0f, -12.0f, -14.0f, -16.0f ) );
 }

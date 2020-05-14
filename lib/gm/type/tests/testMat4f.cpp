@@ -544,7 +544,6 @@ TEST_CASE( "Mat4f_Negation" )
                       26.0f,
                       28.0f,
                       30.0f );
-
     CHECK( -matrix == gm::Mat4f( -0.0f,
                                  -2.0f,
                                  -4.0f,

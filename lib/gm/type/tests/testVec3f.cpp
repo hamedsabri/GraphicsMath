@@ -113,6 +113,5 @@ TEST_CASE( "Vec3f_ScalarDivisionAssignment" )
 TEST_CASE( "Vec3f_Negation" )
 {
     gm::Vec3f vector( 0.0f, 2.0f, 4.0f );
-
     CHECK( -vector == gm::Vec3f( -0.0f, -2.0f, -4.0f ) );
 }
