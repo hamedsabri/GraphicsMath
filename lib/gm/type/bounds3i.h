@@ -30,25 +30,25 @@ public:
     }
 
     /// Const accessor for "min".
-    const Vec3i& Min() const
+    GM_HOST_DEVICE const Vec3i& Min() const
     {
         return m_min;
     }
 
     /// Mutable accessor for "min".
-    Vec3i& Min()
+    GM_HOST_DEVICE Vec3i& Min()
     {
         return m_min;
     }
 
     /// Const accessor for "max".
-    const Vec3i& Max() const
+    GM_HOST_DEVICE const Vec3i& Max() const
     {
         return m_max;
     }
 
     /// Mutable accessor for "max".
-    Vec3i& Max()
+    GM_HOST_DEVICE Vec3i& Max()
     {
         return m_max;
     }
