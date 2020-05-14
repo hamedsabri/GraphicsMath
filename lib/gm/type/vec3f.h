@@ -49,7 +49,7 @@ public:
 #endif
 
     /// Element-wise index read accessor.
-    inline float& operator[]( size_t i_index )
+    GM_HOST_DEVICE inline float& operator[]( size_t i_index )
     {
         GM_ASSERT( !HasNans() );
         GM_ASSERT( i_index < 3 );
@@ -57,7 +57,7 @@ public:
     }
 
     /// Element-wise index write accessor.
-    inline const float& operator[]( size_t i_index ) const
+    GM_HOST_DEVICE inline const float& operator[]( size_t i_index ) const
     {
         GM_ASSERT( !HasNans() );
         GM_ASSERT( i_index < 3 );
@@ -69,7 +69,7 @@ public:
     //
 
     /// Vector addition.
-    inline Vec3f operator+( const Vec3f& i_vector ) const
+    GM_HOST_DEVICE inline Vec3f operator+( const Vec3f& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
         return Vec3f( m_elements[ 0 ] + i_vector.m_elements[ 0 ],
@@ -78,7 +78,7 @@ public:
     }
 
     /// Vector addition assignment.
-    inline Vec3f& operator+=( const Vec3f& i_vector )
+    GM_HOST_DEVICE inline Vec3f& operator+=( const Vec3f& i_vector )
     {
         GM_ASSERT( !HasNans() );
         m_elements[ 0 ] += i_vector.m_elements[ 0 ];
@@ -88,7 +88,7 @@ public:
     }
 
     /// Vector subtraction.
-    inline Vec3f operator-( const Vec3f& i_vector ) const
+    GM_HOST_DEVICE inline Vec3f operator-( const Vec3f& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
         return Vec3f( m_elements[ 0 ] - i_vector.m_elements[ 0 ],
@@ -97,7 +97,7 @@ public:
     }
 
     /// Vector subtraction assignment.
-    inline Vec3f& operator-=( const Vec3f& i_vector )
+    GM_HOST_DEVICE inline Vec3f& operator-=( const Vec3f& i_vector )
     {
         GM_ASSERT( !HasNans() );
         m_elements[ 0 ] -= i_vector.m_elements[ 0 ];
@@ -107,7 +107,7 @@ public:
     }
 
     /// Scalar multiplication assignment.
-    inline Vec3f& operator*=( const float& i_scalar )
+    GM_HOST_DEVICE inline Vec3f& operator*=( const float& i_scalar )
     {
         GM_ASSERT( !HasNans() );
         m_elements[ 0 ] *= i_scalar;
@@ -117,7 +117,7 @@ public:
     }
 
     /// Scalar division.
-    inline Vec3f operator/( const float& i_scalar ) const
+    GM_HOST_DEVICE inline Vec3f operator/( const float& i_scalar ) const
     {
         GM_ASSERT( !HasNans() );
         GM_ASSERT( i_scalar != 0.0f );
@@ -125,7 +125,7 @@ public:
     }
 
     /// Scalar division assignment.
-    inline Vec3f& operator/=( const float& i_scalar )
+    GM_HOST_DEVICE inline Vec3f& operator/=( const float& i_scalar )
     {
         GM_ASSERT( !HasNans() );
         GM_ASSERT( i_scalar != 0.0f );
@@ -136,35 +136,35 @@ public:
     }
 
     /// Unary negation.
-    inline Vec3f operator-() const
+    GM_HOST_DEVICE inline Vec3f operator-() const
     {
         GM_ASSERT( !HasNans() );
         return Vec3f( -m_elements[ 0 ], -m_elements[ 1 ], -m_elements[ 2 ] );
     }
 
     /// X component accessor for the first element.
-    inline float X() const
+    GM_HOST_DEVICE inline float X() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
     }
 
     /// Y component accessor for the second element.
-    inline float Y() const
+    GM_HOST_DEVICE inline float Y() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 1 ];
     }
 
     /// Z component accessor for the third element.
-    inline float Z() const
+    GM_HOST_DEVICE inline float Z() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 2 ];
     }
 
     /// Comparison operator
-    inline bool operator==( const Vec3f& i_vector ) const
+    GM_HOST_DEVICE inline bool operator==( const Vec3f& i_vector ) const
     {
         return AlmostEqual( m_elements[ 0 ], i_vector.m_elements[ 0 ] ) &&
                AlmostEqual( m_elements[ 1 ], i_vector.m_elements[ 1 ] ) &&
@@ -172,19 +172,19 @@ public:
     }
 
     /// Not equal operator
-    inline bool operator!=( const Vec3f& i_vector ) const
+    GM_HOST_DEVICE inline bool operator!=( const Vec3f& i_vector ) const
     {
         return !( ( *this ) == i_vector );
     }
 
     /// Get the number of elements in this vector.
-    inline static size_t GetElementSize()
+    GM_HOST_DEVICE inline static size_t GetElementSize()
     {
         return 3;
     }
 
     /// Are any of the element values NaNs?
-    inline bool HasNans() const
+    GM_HOST_DEVICE inline bool HasNans() const
     {
         return std::isnan( m_elements[ 0 ] ) || std::isnan( m_elements[ 1 ] ) || std::isnan( m_elements[ 2 ] );
     }
@@ -208,14 +208,14 @@ private:
 };
 
 /// Vector-scalar multiplication.
-inline Vec3f operator*( const Vec3f& i_vector, const float& i_scalar )
+GM_HOST_DEVICE inline Vec3f operator*( const Vec3f& i_vector, const float& i_scalar )
 {
     GM_ASSERT( !i_vector.HasNans() );
     return Vec3f( i_vector[ 0 ] * i_scalar, i_vector[ 1 ] * i_scalar, i_vector[ 2 ] * i_scalar );
 }
 
 /// Scalar-vector multiplication.
-inline Vec3f operator*( const float& i_scalar, const Vec3f& i_vector )
+GM_HOST_DEVICE inline Vec3f operator*( const float& i_scalar, const Vec3f& i_vector )
 {
     GM_ASSERT( !i_vector.HasNans() );
     return Vec3f( i_vector[ 0 ] * i_scalar, i_vector[ 1 ] * i_scalar, i_vector[ 2 ] * i_scalar );

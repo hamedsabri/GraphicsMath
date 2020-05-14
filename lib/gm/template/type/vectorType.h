@@ -65,7 +65,7 @@ public:
 #endif
 
     /// Element-wise index read accessor.
-    inline {{ context.elementType.className }}& operator[]( size_t i_index )
+    GM_HOST_DEVICE inline {{ context.elementType.className }}& operator[]( size_t i_index )
     {
         GM_ASSERT( !HasNans() );
         GM_ASSERT( i_index < {{ context.elementSize }} );
@@ -73,7 +73,7 @@ public:
     }
 
     /// Element-wise index write accessor.
-    inline const {{ context.elementType.className }}& operator[]( size_t i_index ) const
+    GM_HOST_DEVICE inline const {{ context.elementType.className }}& operator[]( size_t i_index ) const
     {
         GM_ASSERT( !HasNans() );
         GM_ASSERT( i_index < {{ context.elementSize }} );
@@ -85,7 +85,7 @@ public:
     //
 
     /// Vector addition.
-    inline {{ context.className }} operator+( const {{ context.className }}& i_vector ) const
+    GM_HOST_DEVICE inline {{ context.className }} operator+( const {{ context.className }}& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
         return {{ context.className }}(
@@ -99,7 +99,7 @@ public:
     }
 
     /// Vector addition assignment.
-    inline {{ context.className }}& operator+=( const {{ context.className }}& i_vector )
+    GM_HOST_DEVICE inline {{ context.className }}& operator+=( const {{ context.className }}& i_vector )
     {
         GM_ASSERT( !HasNans() );
 {% for index in range(context.elementSize) -%}
@@ -109,7 +109,7 @@ public:
     }
 
     /// Vector subtraction.
-    inline {{ context.className }} operator-( const {{ context.className }}& i_vector ) const
+    GM_HOST_DEVICE inline {{ context.className }} operator-( const {{ context.className }}& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
         return {{ context.className }}(
@@ -123,7 +123,7 @@ public:
     }
 
     /// Vector subtraction assignment.
-    inline {{ context.className }}& operator-=( const {{ context.className }}& i_vector )
+    GM_HOST_DEVICE inline {{ context.className }}& operator-=( const {{ context.className }}& i_vector )
     {
         GM_ASSERT( !HasNans() );
 {% for index in range(context.elementSize) -%}
@@ -133,7 +133,7 @@ public:
     }
 
     /// Scalar multiplication assignment.
-    inline {{ context.className }}& operator*=( const {{ context.elementType.className }}& i_scalar )
+    GM_HOST_DEVICE inline {{ context.className }}& operator*=( const {{ context.elementType.className }}& i_scalar )
     {
         GM_ASSERT( !HasNans() );
 {% for index in range(context.elementSize) -%}
@@ -143,7 +143,7 @@ public:
     }
 
     /// Scalar division.
-    inline {{ context.className }} operator/( const {{ context.elementType.className }}& i_scalar ) const
+    GM_HOST_DEVICE inline {{ context.className }} operator/( const {{ context.elementType.className }}& i_scalar ) const
     {
         GM_ASSERT( !HasNans() );
         GM_ASSERT( i_scalar != {{ context.GetCppNumber(0) }} );
@@ -169,7 +169,7 @@ public:
     }
 
     /// Scalar division assignment.
-    inline {{ context.className }}& operator/=( const {{ context.elementType.className }}& i_scalar )
+    GM_HOST_DEVICE inline {{ context.className }}& operator/=( const {{ context.elementType.className }}& i_scalar )
     {
         GM_ASSERT( !HasNans() );
         GM_ASSERT( i_scalar != {{ context.GetCppNumber(0) }} );
@@ -187,7 +187,7 @@ public:
     }
 
     /// Unary negation.
-    inline {{ context.className }} operator-() const
+    GM_HOST_DEVICE inline {{ context.className }} operator-() const
     {
         GM_ASSERT( !HasNans() );
         return {{ context.className }}(
@@ -202,7 +202,7 @@ public:
 
 {% if context.dims|length == 2 -%}
     /// Matrix element read-access.
-    inline const {{ context.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
+    GM_HOST_DEVICE inline const {{ context.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
     {
         return m_elements[ i_row * {{ context.dims[ 0 ] }} + i_column ];
     }
@@ -211,7 +211,7 @@ public:
 
 {% if context.dims|length == 2 -%}
     /// Matrix element write-access.
-    inline {{ context.elementType.className }}& operator()( size_t i_row, size_t i_column )
+    GM_HOST_DEVICE inline {{ context.elementType.className }}& operator()( size_t i_row, size_t i_column )
     {
         return m_elements[ i_row * {{ context.dims[ 0 ] }} + i_column ];
     }
@@ -219,7 +219,7 @@ public:
 
 {% if context.dims|length == 1 and context.elementSize <= 4 -%}
     /// X component accessor for the first element.
-    inline {{ context.elementType.className }} X() const
+    GM_HOST_DEVICE inline {{ context.elementType.className }} X() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
@@ -228,7 +228,7 @@ public:
 
 {% if context.dims|length == 1 and context.elementSize >= 2 and context.elementSize <= 4 -%}
     /// Y component accessor for the second element.
-    inline {{ context.elementType.className }} Y() const
+    GM_HOST_DEVICE inline {{ context.elementType.className }} Y() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 1 ];
@@ -237,7 +237,7 @@ public:
 
 {% if context.dims|length == 1 and context.elementSize >= 3 and context.elementSize <= 4 -%}
     /// Z component accessor for the third element.
-    inline {{ context.elementType.className }} Z() const
+    GM_HOST_DEVICE inline {{ context.elementType.className }} Z() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 2 ];
@@ -246,7 +246,7 @@ public:
 
 {% if context.dims|length == 1 and context.elementSize == 4 %}
     /// W component accessor for the fourth element.
-    inline {{ context.elementType.className }} W() const
+    GM_HOST_DEVICE inline {{ context.elementType.className }} W() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 3 ];
@@ -254,7 +254,7 @@ public:
 {%- endif %}
 
     /// Comparison operator
-    inline bool operator==( const {{context.className}}& i_vector ) const
+    GM_HOST_DEVICE inline bool operator==( const {{context.className}}& i_vector ) const
     {
         return
 {% for index in range(context.elementSize) -%}
@@ -271,19 +271,19 @@ public:
     }
 
     /// Not equal operator
-    inline bool operator!=( const {{context.className}}& i_vector ) const
+    GM_HOST_DEVICE inline bool operator!=( const {{context.className}}& i_vector ) const
     {
         return !( (*this) == i_vector );
     }
 
     /// Get the number of elements in this vector.
-    inline static size_t GetElementSize()
+    GM_HOST_DEVICE inline static size_t GetElementSize()
     {
         return {{ context.elementSize }};
     }
 
     /// Are any of the element values NaNs?
-    inline bool HasNans() const
+    GM_HOST_DEVICE inline bool HasNans() const
     {
         return
 {% for index in range(context.elementSize) -%}
@@ -322,7 +322,7 @@ private:
 };
 
 /// Vector-scalar multiplication.
-inline {{ context.className }} operator*( const {{ context.className }}& i_vector, const {{ context.elementType.className }}& i_scalar )
+GM_HOST_DEVICE inline {{ context.className }} operator*( const {{ context.className }}& i_vector, const {{ context.elementType.className }}& i_scalar )
 {
     GM_ASSERT( !i_vector.HasNans() );
     return {{ context.className }}(
@@ -336,7 +336,7 @@ inline {{ context.className }} operator*( const {{ context.className }}& i_vecto
 }
 
 /// Scalar-vector multiplication.
-inline {{ context.className }} operator*( const {{ context.elementType.className }}& i_scalar, const {{ context.className }}& i_vector )
+GM_HOST_DEVICE inline {{ context.className }} operator*( const {{ context.elementType.className }}& i_scalar, const {{ context.className }}& i_vector )
 {
     GM_ASSERT( !i_vector.HasNans() );
     return {{ context.className }}(

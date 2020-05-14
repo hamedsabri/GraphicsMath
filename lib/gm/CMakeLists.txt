@@ -22,7 +22,7 @@ target_include_directories(${LIBRARY_NAME}
         ${CMAKE_BINARY_DIR}/include/
 )
 
-add_subdirectory(platform)
+add_subdirectory(base)
 add_subdirectory(tool)
 add_subdirectory(type)
 

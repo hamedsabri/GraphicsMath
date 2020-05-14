@@ -48,7 +48,7 @@ public:
 #endif
 
     /// Element-wise index read accessor.
-    inline int& operator[]( size_t i_index )
+    GM_HOST_DEVICE inline int& operator[]( size_t i_index )
     {
         GM_ASSERT( !HasNans() );
         GM_ASSERT( i_index < 2 );
@@ -56,7 +56,7 @@ public:
     }
 
     /// Element-wise index write accessor.
-    inline const int& operator[]( size_t i_index ) const
+    GM_HOST_DEVICE inline const int& operator[]( size_t i_index ) const
     {
         GM_ASSERT( !HasNans() );
         GM_ASSERT( i_index < 2 );
@@ -68,14 +68,14 @@ public:
     //
 
     /// Vector addition.
-    inline Vec2i operator+( const Vec2i& i_vector ) const
+    GM_HOST_DEVICE inline Vec2i operator+( const Vec2i& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
         return Vec2i( m_elements[ 0 ] + i_vector.m_elements[ 0 ], m_elements[ 1 ] + i_vector.m_elements[ 1 ] );
     }
 
     /// Vector addition assignment.
-    inline Vec2i& operator+=( const Vec2i& i_vector )
+    GM_HOST_DEVICE inline Vec2i& operator+=( const Vec2i& i_vector )
     {
         GM_ASSERT( !HasNans() );
         m_elements[ 0 ] += i_vector.m_elements[ 0 ];
@@ -84,14 +84,14 @@ public:
     }
 
     /// Vector subtraction.
-    inline Vec2i operator-( const Vec2i& i_vector ) const
+    GM_HOST_DEVICE inline Vec2i operator-( const Vec2i& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
         return Vec2i( m_elements[ 0 ] - i_vector.m_elements[ 0 ], m_elements[ 1 ] - i_vector.m_elements[ 1 ] );
     }
 
     /// Vector subtraction assignment.
-    inline Vec2i& operator-=( const Vec2i& i_vector )
+    GM_HOST_DEVICE inline Vec2i& operator-=( const Vec2i& i_vector )
     {
         GM_ASSERT( !HasNans() );
         m_elements[ 0 ] -= i_vector.m_elements[ 0 ];
@@ -100,7 +100,7 @@ public:
     }
 
     /// Scalar multiplication assignment.
-    inline Vec2i& operator*=( const int& i_scalar )
+    GM_HOST_DEVICE inline Vec2i& operator*=( const int& i_scalar )
     {
         GM_ASSERT( !HasNans() );
         m_elements[ 0 ] *= i_scalar;
@@ -109,7 +109,7 @@ public:
     }
 
     /// Scalar division.
-    inline Vec2i operator/( const int& i_scalar ) const
+    GM_HOST_DEVICE inline Vec2i operator/( const int& i_scalar ) const
     {
         GM_ASSERT( !HasNans() );
         GM_ASSERT( i_scalar != 0 );
@@ -117,7 +117,7 @@ public:
     }
 
     /// Scalar division assignment.
-    inline Vec2i& operator/=( const int& i_scalar )
+    GM_HOST_DEVICE inline Vec2i& operator/=( const int& i_scalar )
     {
         GM_ASSERT( !HasNans() );
         GM_ASSERT( i_scalar != 0 );
@@ -127,46 +127,46 @@ public:
     }
 
     /// Unary negation.
-    inline Vec2i operator-() const
+    GM_HOST_DEVICE inline Vec2i operator-() const
     {
         GM_ASSERT( !HasNans() );
         return Vec2i( -m_elements[ 0 ], -m_elements[ 1 ] );
     }
 
     /// X component accessor for the first element.
-    inline int X() const
+    GM_HOST_DEVICE inline int X() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
     }
 
     /// Y component accessor for the second element.
-    inline int Y() const
+    GM_HOST_DEVICE inline int Y() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 1 ];
     }
 
     /// Comparison operator
-    inline bool operator==( const Vec2i& i_vector ) const
+    GM_HOST_DEVICE inline bool operator==( const Vec2i& i_vector ) const
     {
         return m_elements[ 0 ] == i_vector.m_elements[ 0 ] && m_elements[ 1 ] == i_vector.m_elements[ 1 ];
     }
 
     /// Not equal operator
-    inline bool operator!=( const Vec2i& i_vector ) const
+    GM_HOST_DEVICE inline bool operator!=( const Vec2i& i_vector ) const
     {
         return !( ( *this ) == i_vector );
     }
 
     /// Get the number of elements in this vector.
-    inline static size_t GetElementSize()
+    GM_HOST_DEVICE inline static size_t GetElementSize()
     {
         return 2;
     }
 
     /// Are any of the element values NaNs?
-    inline bool HasNans() const
+    GM_HOST_DEVICE inline bool HasNans() const
     {
         return std::isnan( m_elements[ 0 ] ) || std::isnan( m_elements[ 1 ] );
     }
@@ -188,14 +188,14 @@ private:
 };
 
 /// Vector-scalar multiplication.
-inline Vec2i operator*( const Vec2i& i_vector, const int& i_scalar )
+GM_HOST_DEVICE inline Vec2i operator*( const Vec2i& i_vector, const int& i_scalar )
 {
     GM_ASSERT( !i_vector.HasNans() );
     return Vec2i( i_vector[ 0 ] * i_scalar, i_vector[ 1 ] * i_scalar );
 }
 
 /// Scalar-vector multiplication.
-inline Vec2i operator*( const int& i_scalar, const Vec2i& i_vector )
+GM_HOST_DEVICE inline Vec2i operator*( const int& i_scalar, const Vec2i& i_vector )
 {
     GM_ASSERT( !i_vector.HasNans() );
     return Vec2i( i_vector[ 0 ] * i_scalar, i_vector[ 1 ] * i_scalar );

@@ -4,7 +4,7 @@
 ///
 /// GraphicsMath: C++ header-only computer graphics math library.
 
-#include <gm/hostdevice.h>
+#include <gm/base/hostdevice.h>
 
 /// Pre-processor definitions for namespaces.
 #define GM_NS gm
