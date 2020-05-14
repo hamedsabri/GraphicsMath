@@ -181,6 +181,17 @@ class VectorType(ValueType):
         return functools.reduce(lambda x, y: x * y, self.dims)
 
     @property
+    def variablePrefix(self):
+        """
+        Returns:
+            str: a meaningful prefix for naming variables of this type.
+        """
+        if len(self.dims) == 2:
+            return "matrix"
+        else:
+            return "vector"
+
+    @property
     def className(self):
         if len(self.dims) == 2:
             prefix = TYPES_CLASS_PREFIX + "Mat"
