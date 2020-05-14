@@ -109,3 +109,10 @@ TEST_CASE( "Vec3i_ScalarDivisionAssignment" )
     vectorA /= 5;
     CHECK( vectorA == gm::Vec3i( 0, 2, 4 ) );
 }
+
+TEST_CASE( "Vec3i_Negation" )
+{
+    gm::Vec3i vector( 0, 2, 4 );
+
+    CHECK( -vector == gm::Vec3i( -0, -2, -4 ) );
+}

@@ -85,18 +85,6 @@ def GetTemplateFile(templateName):
     return os.path.abspath(os.path.join(TEMPLATE_DIR, templateName))
 
 
-def GetCppNumber(value, valueType):
-    """
-    Convert a numeric value ``value`` to the corresponding C++ compliant value as a string.
-    """
-    if valueType.className == INT:
-        return str(int(value))
-    elif valueType.className == FLOAT:
-        return str(float(value)) + "f"
-    elif valueType.className == DOUBLE:
-        return str(float(value))
-
-
 def GenerateCode(context, templatePath):
     """
     Generate a single source file with a template and code-gen context.
@@ -111,7 +99,7 @@ def GenerateCode(context, templatePath):
     with open(templatePath, 'r') as f:
         templateStr = f.read()
         template = Template(templateStr)
-        code = template.render(context=context, GetCppNumber=GetCppNumber)
+        code = template.render(context=context)
         return code
 
 
@@ -233,6 +221,17 @@ class VectorType(ValueType):
     @property
     def isVector(self):
         return True
+
+    def GetCppNumber(self, value):
+        """
+        Convert a numeric value ``value`` to the corresponding C++ compliant value as a string.
+        """
+        if self.elementType.className == INT:
+            return str(int(value))
+        elif self.elementType.className == FLOAT:
+            return str(float(value)) + "f"
+        elif self.elementType.className == DOUBLE:
+            return str(float(value))
 
 
 class ArrayType(ValueType):

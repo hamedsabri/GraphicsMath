@@ -146,9 +146,9 @@ public:
     inline {{ context.className }} operator/( const {{ context.elementType.className }}& i_scalar ) const
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_scalar != {{ GetCppNumber(0, context.elementType) }} );
+        GM_ASSERT( i_scalar != {{ context.GetCppNumber(0) }} );
 {% if context.elementType == "float" or context.elementType == "double" -%}
-        {{ context.elementType.className }} reciprocal = {{ GetCppNumber(1, context.elementType) }} / i_scalar;
+        {{ context.elementType.className }} reciprocal = {{ context.GetCppNumber(1) }} / i_scalar;
         return {{ context.className }}(
 {% for index in range(context.elementSize) -%}
         m_elements[ {{ index }} ] * reciprocal
@@ -172,9 +172,9 @@ public:
     inline {{ context.className }}& operator/=( const {{ context.elementType.className }}& i_scalar )
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_scalar != {{ GetCppNumber(0, context.elementType) }} );
+        GM_ASSERT( i_scalar != {{ context.GetCppNumber(0) }} );
 {% if context.elementType == "float" or context.elementType == "double" -%}
-        {{ context.elementType.className }} reciprocal = {{ GetCppNumber(1, context.elementType) }} / i_scalar;
+        {{ context.elementType.className }} reciprocal = {{ context.GetCppNumber(1) }} / i_scalar;
 {% for index in range(context.elementSize) -%}
         m_elements[ {{ index }} ] *= reciprocal;
 {%- endfor %}
@@ -313,7 +313,7 @@ public:
 private:
     {{ context.elementType.className }} m_elements[ {{ context.elementSize }} ] = {
 {%- for index in range(context.elementSize) -%}
-        {{ GetCppNumber(0, context.elementType) }}
+        {{ context.GetCppNumber(0) }}
 {%- if index + 1 < context.elementSize -%}
         ,
 {%- endif %}
