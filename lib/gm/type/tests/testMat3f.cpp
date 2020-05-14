@@ -124,7 +124,7 @@ TEST_CASE( "Mat3f_VectorScalarDivision" )
 TEST_CASE( "Mat3f_ScalarDivisionAssignment" )
 {
     gm::Mat3f matrixA( 0.0f, 10.0f, 20.0f, 30.0f, 40.0f, 50.0f, 60.0f, 70.0f, 80.0f );
-    matrixA /= 5;
+    matrixA /= 5.0f;
     CHECK( matrixA == gm::Mat3f( 0.0f, 2.0f, 4.0f, 6.0f, 8.0f, 10.0f, 12.0f, 14.0f, 16.0f ) );
 }
 

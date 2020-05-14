@@ -103,7 +103,7 @@ TEST_CASE( "Vec2f_VectorScalarDivision" )
 TEST_CASE( "Vec2f_ScalarDivisionAssignment" )
 {
     gm::Vec2f vectorA( 0.0f, 10.0f );
-    vectorA /= 5;
+    vectorA /= 5.0f;
     CHECK( vectorA == gm::Vec2f( 0.0f, 2.0f ) );
 }
 

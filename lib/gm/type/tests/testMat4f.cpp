@@ -507,7 +507,7 @@ TEST_CASE( "Mat4f_ScalarDivisionAssignment" )
                        130.0f,
                        140.0f,
                        150.0f );
-    matrixA /= 5;
+    matrixA /= 5.0f;
     CHECK( matrixA == gm::Mat4f( 0.0f,
                                  2.0f,
                                  4.0f,

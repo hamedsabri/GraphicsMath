@@ -287,7 +287,7 @@ TEST_CASE( "{{ context.className }}_ScalarDivisionAssignment" )
 {%- endif -%}
 {%- endfor %}
     );
-    {{ context.variablePrefix }}A /= 5;
+    {{ context.variablePrefix }}A /= {{ context.GetCppNumber(5) }};
     CHECK( {{ context.variablePrefix }}A == gm::{{ context.className }}(
 {% for index in range(context.elementSize) -%}
     {{ context.GetCppNumber(index * 2) }}

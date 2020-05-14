@@ -109,7 +109,7 @@ TEST_CASE( "Vec4f_VectorScalarDivision" )
 TEST_CASE( "Vec4f_ScalarDivisionAssignment" )
 {
     gm::Vec4f vectorA( 0.0f, 10.0f, 20.0f, 30.0f );
-    vectorA /= 5;
+    vectorA /= 5.0f;
     CHECK( vectorA == gm::Vec4f( 0.0f, 2.0f, 4.0f, 6.0f ) );
 }
 

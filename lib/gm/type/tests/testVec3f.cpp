@@ -106,7 +106,7 @@ TEST_CASE( "Vec3f_VectorScalarDivision" )
 TEST_CASE( "Vec3f_ScalarDivisionAssignment" )
 {
     gm::Vec3f vectorA( 0.0f, 10.0f, 20.0f );
-    vectorA /= 5;
+    vectorA /= 5.0f;
     CHECK( vectorA == gm::Vec3f( 0.0f, 2.0f, 4.0f ) );
 }
 
