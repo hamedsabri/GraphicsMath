@@ -24,5 +24,5 @@ target_include_directories(${LIBRARY_NAME}
 
 add_subdirectory(base)
 add_subdirectory(tool)
-add_subdirectory(type)
+add_subdirectory(types)
 
