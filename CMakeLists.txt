@@ -40,14 +40,14 @@ if(BUILD_DOCUMENTATION)
         GENERATE_TAGFILE TRUE
         DOXYFILE ${CMAKE_SOURCE_DIR}/Doxyfile.in
         INPUTS
-            ${CMAKE_CURRENT_SOURCE_DIR}/lib/gm
-            ${CMAKE_CURRENT_SOURCE_DIR}/lib/gm/tool
-            ${CMAKE_CURRENT_SOURCE_DIR}/lib/gm/base
-            ${CMAKE_CURRENT_SOURCE_DIR}/lib/gm/types
-            ${CMAKE_CURRENT_SOURCE_DIR}/lib/gm/functions
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/gm
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/gm/tool
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/gm/base
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/gm/types
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/gm/functions
     )
 endif()
 
 # Build targets.
 add_subdirectory(thirdparty)
-add_subdirectory(lib)
+add_subdirectory(src)
