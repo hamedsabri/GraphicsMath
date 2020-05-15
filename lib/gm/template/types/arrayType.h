@@ -8,9 +8,9 @@
 #include <gm/types/{{ context.elementType.headerFileName }}>
 {%- endif %}
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 using {{ context.className }} = std::vector< {{ context.elementType.className }} >;
 
-GM_NS_END
+GM_NS_CLOSE
 

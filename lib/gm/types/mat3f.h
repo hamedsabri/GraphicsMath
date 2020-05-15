@@ -10,7 +10,7 @@
 #include <gm/tool/almost.h>
 #include <gm/tool/assert.h>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 /// \class Mat3f
 class Mat3f final
@@ -316,4 +316,4 @@ GM_HOST_DEVICE inline Mat3f operator*( const float& i_scalar, const Mat3f& i_vec
                   i_vector[ 8 ] * i_scalar );
 }
 
-GM_NS_END
+GM_NS_CLOSE

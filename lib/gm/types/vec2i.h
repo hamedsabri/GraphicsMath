@@ -9,7 +9,7 @@
 #include <gm/gm.h>
 #include <gm/tool/assert.h>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 /// \class Vec2i
 class Vec2i final
@@ -201,4 +201,4 @@ GM_HOST_DEVICE inline Vec2i operator*( const int& i_scalar, const Vec2i& i_vecto
     return Vec2i( i_vector[ 0 ] * i_scalar, i_vector[ 1 ] * i_scalar );
 }
 
-GM_NS_END
+GM_NS_CLOSE

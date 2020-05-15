@@ -10,7 +10,7 @@
 
 #include <limits>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 /// \class Bounds3f
 class Bounds3f final
@@ -75,4 +75,4 @@ private:
                          std::numeric_limits< float >::min() );
 };
 
-GM_NS_END
+GM_NS_CLOSE

@@ -10,7 +10,7 @@
 #include <gm/tool/almost.h>
 #include <gm/tool/assert.h>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 /// \class Mat4f
 class Mat4f final
@@ -425,4 +425,4 @@ GM_HOST_DEVICE inline Mat4f operator*( const float& i_scalar, const Mat4f& i_vec
                   i_vector[ 15 ] * i_scalar );
 }
 
-GM_NS_END
+GM_NS_CLOSE

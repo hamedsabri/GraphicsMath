@@ -6,6 +6,17 @@
 
 #include <stdio.h>
 
-#define GM_LOG_INFO( format, ... ) printf( format, ##__VA_ARGS__ );
-#define GM_LOG_WARN( format, ... ) printf( format, ##__VA_ARGS__ );
-#define GM_LOG_ERROR( format, ... ) printf( format, ##__VA_ARGS__ );
+/// \def GM_LOG_INFO( msgFormat, ... )
+///
+/// Logs a formatted message at the \em INFO level.
+#define GM_LOG_INFO( msgFormat, ... ) printf( msgFormat, ##__VA_ARGS__ );
+
+/// \def GM_LOG_WARN( msgFormat, ... )
+///
+/// Logs a formatted message at the \em WARN level.
+#define GM_LOG_WARN( msgFormat, ... ) printf( msgFormat, ##__VA_ARGS__ );
+
+/// \def GM_LOG_ERROR( msgFormat, ... )
+///
+/// Logs a formatted message at the \em ERROR level.
+#define GM_LOG_ERROR( msgFormat, ... ) fprintf( stderr, msgFormat, ##__VA_ARGS__ );

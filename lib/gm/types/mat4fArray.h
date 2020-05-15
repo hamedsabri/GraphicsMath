@@ -6,8 +6,8 @@
 
 #include <gm/types/mat4f.h>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 using Mat4fArray = std::vector< Mat4f >;
 
-GM_NS_END
+GM_NS_CLOSE

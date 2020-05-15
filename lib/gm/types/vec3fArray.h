@@ -6,8 +6,8 @@
 
 #include <gm/types/vec3f.h>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 using Vec3fArray = std::vector< Vec3f >;
 
-GM_NS_END
+GM_NS_CLOSE

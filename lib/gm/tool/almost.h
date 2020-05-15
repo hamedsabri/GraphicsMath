@@ -4,7 +4,7 @@
 
 #include <gm/gm.h>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 /// Function for comparing whether two values \p i_valueA and \p i_valueB are almost equal,
 /// within the threshold \p i_threshold.
@@ -18,4 +18,4 @@ bool AlmostEqual( const ValueT& i_valueA, const ValueT& i_valueB, const ValueT& 
     return std::abs( i_valueA - i_valueB ) < i_threshold;
 }
 
-GM_NS_END
+GM_NS_CLOSE

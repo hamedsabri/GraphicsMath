@@ -6,8 +6,8 @@
 
 #include <gm/types/vec4i.h>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 using Vec4iArray = std::vector< Vec4i >;
 
-GM_NS_END
+GM_NS_CLOSE

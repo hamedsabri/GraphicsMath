@@ -4,8 +4,8 @@
 
 #include <vector>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 using IntArray = std::vector< int >;
 
-GM_NS_END
+GM_NS_CLOSE

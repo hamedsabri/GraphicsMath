@@ -6,8 +6,8 @@
 
 #include <gm/types/mat3f.h>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 using Mat3fArray = std::vector< Mat3f >;
 
-GM_NS_END
+GM_NS_CLOSE

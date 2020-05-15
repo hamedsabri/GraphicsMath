@@ -10,7 +10,7 @@
 
 #include <limits>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 /// \class Bounds2i
 class Bounds2i final
@@ -71,4 +71,4 @@ private:
     Vec2i m_max = Vec2i( std::numeric_limits< int >::min(), std::numeric_limits< int >::min() );
 };
 
-GM_NS_END
+GM_NS_CLOSE

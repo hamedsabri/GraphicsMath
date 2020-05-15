@@ -16,7 +16,7 @@
 #include {{ include }}
 {% endfor %}
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 /// \class {{ context.className }}
 class {{ context.className }} final
@@ -92,4 +92,4 @@ private:
 {%- endfor %}
 };
 
-GM_NS_END
+GM_NS_CLOSE

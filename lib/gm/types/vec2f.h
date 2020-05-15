@@ -10,7 +10,7 @@
 #include <gm/tool/almost.h>
 #include <gm/tool/assert.h>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 /// \class Vec2f
 class Vec2f final
@@ -203,4 +203,4 @@ GM_HOST_DEVICE inline Vec2f operator*( const float& i_scalar, const Vec2f& i_vec
     return Vec2f( i_vector[ 0 ] * i_scalar, i_vector[ 1 ] * i_scalar );
 }
 
-GM_NS_END
+GM_NS_CLOSE

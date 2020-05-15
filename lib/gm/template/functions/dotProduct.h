@@ -16,7 +16,7 @@
 #include <gm/types/{{ vectorType.headerFileName }}>
 {% endfor %}
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 {% for vectorType in context.types %}
 /// Compute the dot product of two \ref {{ vectorType.className }}, \p i_lhs and \p i_rhs, and return the result.
@@ -34,4 +34,4 @@ inline {{ vectorType.elementType.className }} {{ context.functionName }}( const 
 }
 {% endfor %}
 
-GM_NS_END
+GM_NS_CLOSE

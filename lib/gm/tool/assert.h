@@ -40,7 +40,7 @@
 #define GM_ASSERT_MSG( expr, format, ... ) void()
 #endif
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 /// Not intended to be used directly, \ref GM_ASSERT instead.
 void _Assert( const char* i_expression, const char* i_file, size_t i_line )
@@ -59,4 +59,4 @@ void _Assert( const char* i_expression, const char* i_file, size_t i_line, const
     fprintf( stderr, "Assertion failed for expression: %s, at %s:%lu, %s\n", i_expression, i_file, i_line, buffer );
 }
 
-GM_NS_END
+GM_NS_CLOSE

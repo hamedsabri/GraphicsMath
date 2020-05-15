@@ -12,7 +12,7 @@
 #include <gm/tool/almost.h>
 {%- endif %}
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 /// \class {{ context.className }}
 class {{ context.className }} final
@@ -349,4 +349,4 @@ GM_HOST_DEVICE inline {{ context.className }} operator*( const {{ context.elemen
     );
 }
 
-GM_NS_END
+GM_NS_CLOSE

@@ -4,7 +4,7 @@
 #include <gm/types/bounds2i.h>
 #include <gm/types/vec2i.h>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 /// \class Vec2iRange
 ///
@@ -87,4 +87,4 @@ private:
     Vec2i m_end;
 };
 
-GM_NS_END
+GM_NS_CLOSE

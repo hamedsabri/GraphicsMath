@@ -9,7 +9,7 @@
 #include <gm/gm.h>
 #include <gm/tool/assert.h>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 /// \class Vec4i
 class Vec4i final
@@ -244,4 +244,4 @@ GM_HOST_DEVICE inline Vec4i operator*( const int& i_scalar, const Vec4i& i_vecto
                   i_vector[ 3 ] * i_scalar );
 }
 
-GM_NS_END
+GM_NS_CLOSE

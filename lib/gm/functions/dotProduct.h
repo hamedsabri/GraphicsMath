@@ -16,7 +16,7 @@
 #include <gm/types/vec3f.h>
 #include <gm/types/vec4f.h>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 /// Compute the dot product of two \ref Vec2f, \p i_lhs and \p i_rhs, and return the result.
 ///
@@ -57,4 +57,4 @@ inline float DotProduct( const Vec4f& i_lhs, const Vec4f& i_rhs )
     return product;
 }
 
-GM_NS_END
+GM_NS_CLOSE

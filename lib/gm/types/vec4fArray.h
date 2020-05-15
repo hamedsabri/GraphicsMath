@@ -6,8 +6,8 @@
 
 #include <gm/types/vec4f.h>
 
-GM_NS_BEGIN
+GM_NS_OPEN
 
 using Vec4fArray = std::vector< Vec4f >;
 
-GM_NS_END
+GM_NS_CLOSE
