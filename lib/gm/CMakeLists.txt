@@ -25,4 +25,4 @@ target_include_directories(${LIBRARY_NAME}
 add_subdirectory(base)
 add_subdirectory(tool)
 add_subdirectory(types)
-
+add_subdirectory(functions)

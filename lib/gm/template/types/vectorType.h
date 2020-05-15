@@ -18,6 +18,7 @@ GM_NS_OPEN
 class {{ context.className }} final
 {
 public:
+    /// Type of \ref {{ context.className }}'s elements.
     using ElementType = {{ context.elementType.className }};
 
     /// Default constructor.

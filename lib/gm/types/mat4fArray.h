@@ -8,6 +8,7 @@
 
 GM_NS_OPEN
 
+/// An array of \ref Mat4f.
 using Mat4fArray = std::vector< Mat4f >;
 
 GM_NS_CLOSE

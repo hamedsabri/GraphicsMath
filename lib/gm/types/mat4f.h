@@ -16,6 +16,7 @@ GM_NS_OPEN
 class Mat4f final
 {
 public:
+    /// Type of \ref Mat4f's elements.
     using ElementType = float;
 
     /// Default constructor.

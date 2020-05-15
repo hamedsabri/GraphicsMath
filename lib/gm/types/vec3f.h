@@ -16,6 +16,7 @@ GM_NS_OPEN
 class Vec3f final
 {
 public:
+    /// Type of \ref Vec3f's elements.
     using ElementType = float;
 
     /// Default constructor.

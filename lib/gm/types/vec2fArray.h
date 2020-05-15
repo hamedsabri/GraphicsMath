@@ -8,6 +8,7 @@
 
 GM_NS_OPEN
 
+/// An array of \ref Vec2f.
 using Vec2fArray = std::vector< Vec2f >;
 
 GM_NS_CLOSE

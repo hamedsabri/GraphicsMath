@@ -8,6 +8,7 @@
 
 GM_NS_OPEN
 
+/// An array of \ref Vec4i.
 using Vec4iArray = std::vector< Vec4i >;
 
 GM_NS_CLOSE

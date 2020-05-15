@@ -1,6 +1,6 @@
 #pragma once
 
-/// \file functions/{{ context.headerFileName }}
+/// \file {{ context.headerFileName }}
 ///
 /// Dot product, or scalar product between two <em>equal-length</em> vectors.
 ///
@@ -22,11 +22,10 @@ GM_NS_OPEN
 /// Compute the dot product of two \ref {{ vectorType.className }}, \p i_lhs and \p i_rhs, and return the result.
 ///
 /// \return computed dot product.
-GM_HOST_DEVICE
-inline {{ vectorType.elementType.className }} {{ context.functionName }}( const {{ vectorType.className }}& i_lhs,
-                                                                          const {{ vectorType.className }}& i_rhs )
+GM_HOST_DEVICE inline {{ vectorType.elementType.className }} {{ context.functionName }}( const {{ vectorType.className }}& i_lhs,
+                                                                                         const {{ vectorType.className }}& i_rhs )
 {
-    {{ vectorType.elementType.className }} product;
+    {{ vectorType.elementType.className }} product = {{ vectorType.GetCppNumber(0) }};
 {% for index in range(vectorType.elementSize) -%}
     product += i_lhs[ {{ index }} ] * i_rhs[ {{ index }} ];
 {%- endfor %}

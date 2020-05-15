@@ -16,6 +16,7 @@ GM_NS_OPEN
 class Mat3f final
 {
 public:
+    /// Type of \ref Mat3f's elements.
     using ElementType = float;
 
     /// Default constructor.

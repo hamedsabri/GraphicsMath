@@ -6,6 +6,7 @@
 
 GM_NS_OPEN
 
+/// An array of \p int.
 using IntArray = std::vector< int >;
 
 GM_NS_CLOSE

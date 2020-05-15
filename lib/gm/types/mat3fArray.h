@@ -8,6 +8,7 @@
 
 GM_NS_OPEN
 
+/// An array of \ref Mat3f.
 using Mat3fArray = std::vector< Mat3f >;
 
 GM_NS_CLOSE

@@ -15,6 +15,7 @@ GM_NS_OPEN
 class Vec3i final
 {
 public:
+    /// Type of \ref Vec3i's elements.
     using ElementType = int;
 
     /// Default constructor.
