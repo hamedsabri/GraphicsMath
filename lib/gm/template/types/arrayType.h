@@ -5,7 +5,7 @@
 #include <vector>
 
 {% if context.elementType.isVector %}
-#include <gm/type/{{ context.elementType.headerFileName }}>
+#include <gm/types/{{ context.elementType.headerFileName }}>
 {%- endif %}
 
 GM_NS_BEGIN

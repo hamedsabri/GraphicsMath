@@ -3,9 +3,9 @@
 
 #include <gm/tool/log.h>
 
-#include <gm/type/bounds2i.h>
-#include <gm/type/vec2iArray.h>
-#include <gm/type/vec2iRange.h>
+#include <gm/types/bounds2i.h>
+#include <gm/types/vec2iArray.h>
+#include <gm/types/vec2iRange.h>
 
 TEST_CASE( "testVec2iRange" )
 {

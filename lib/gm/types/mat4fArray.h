@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include <gm/type/mat4f.h>
+#include <gm/types/mat4f.h>
 
 GM_NS_BEGIN
 

@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <gm/type/vec3f.h>
+#include <gm/types/vec3f.h>
 
 TEST_CASE( "Vec3f_DefaultConstructor" )
 {

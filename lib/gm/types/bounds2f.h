@@ -6,7 +6,7 @@
 
 #include <gm/gm.h>
 
-#include <gm/type/vec2f.h>
+#include <gm/types/vec2f.h>
 
 #include <limits>
 

@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <gm/type/mat4f.h>
+#include <gm/types/mat4f.h>
 
 TEST_CASE( "Mat4f_DefaultConstructor" )
 {

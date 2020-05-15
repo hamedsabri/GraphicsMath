@@ -8,7 +8,7 @@
 
 {% for element in context.elements -%}
 {% if element.type.isVector or element.type.isComposite -%}
-#include <gm/type/{{ element.type.headerFileName }}>
+#include <gm/types/{{ element.type.headerFileName }}>
 {%- endif %}
 {% endfor %}
 

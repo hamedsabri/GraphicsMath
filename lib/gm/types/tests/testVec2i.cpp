@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <gm/type/vec2i.h>
+#include <gm/types/vec2i.h>
 
 TEST_CASE( "Vec2i_DefaultConstructor" )
 {

@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include <gm/type/vec2i.h>
+#include <gm/types/vec2i.h>
 
 GM_NS_BEGIN
 

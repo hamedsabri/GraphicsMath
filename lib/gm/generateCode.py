@@ -27,7 +27,7 @@ from codeGen.types import (
 """
 Name of the subdirectory where all types reside.
 """
-TYPE_DIR = "type"
+TYPES_DIR = "types"
 
 """
 Name of the subdirectory where all tests reside.
@@ -77,10 +77,10 @@ def GenerateCompositeType(compositeType):
     Returns:
         str: file path to the generated source file.
     """
-    filePath = os.path.join(os.path.abspath(TYPE_DIR), compositeType.headerFileName)
+    filePath = os.path.join(os.path.abspath(TYPES_DIR), compositeType.headerFileName)
     code = GenerateCode(
         compositeType,
-        GetTemplateFile(os.path.join(TYPE_DIR, "compositeType.h"))
+        GetTemplateFile(os.path.join(TYPES_DIR, "compositeType.h"))
     )
     WriteFile(filePath, code)
     return filePath
@@ -182,8 +182,8 @@ def GenerateArrayTypes():
     # Generate code for ArrayType(s)
     filePaths = []
     for arrayType in arrayTypes:
-        filePath = os.path.join(os.path.abspath(TYPE_DIR), arrayType.headerFileName)
-        code = GenerateCode(arrayType, GetTemplateFile(os.path.join(TYPE_DIR, 'arrayType.h')))
+        filePath = os.path.join(os.path.abspath(TYPES_DIR), arrayType.headerFileName)
+        code = GenerateCode(arrayType, GetTemplateFile(os.path.join(TYPES_DIR, 'arrayType.h')))
         WriteFile(filePath, code)
         filePaths.append(filePath)
 
@@ -200,16 +200,16 @@ def GenerateVectorTypes():
     # Generate vector class headers.
     filePaths = []
     for vectorType in VECTOR_TYPES:
-        code = GenerateCode(vectorType, GetTemplateFile(os.path.join(TYPE_DIR, "vectorType.h")))
-        filePath = os.path.join(os.path.abspath(TYPE_DIR), vectorType.headerFileName)
+        code = GenerateCode(vectorType, GetTemplateFile(os.path.join(TYPES_DIR, "vectorType.h")))
+        filePath = os.path.join(os.path.abspath(TYPES_DIR), vectorType.headerFileName)
         WriteFile(filePath, code)
         filePaths.append(filePath)
 
     # Tests
     for vectorType in VECTOR_TYPES:
-        code = GenerateCode(vectorType, GetTemplateFile(os.path.join(TYPE_DIR, "testVectorType.cpp")))
+        code = GenerateCode(vectorType, GetTemplateFile(os.path.join(TYPES_DIR, "testVectorType.cpp")))
         filePath = os.path.join(
-            os.path.abspath(TYPE_DIR),
+            os.path.abspath(TYPES_DIR),
             TESTS_DIR,
             "test{className}.cpp".format(className=vectorType.className)
         )

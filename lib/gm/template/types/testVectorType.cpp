@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <gm/type/{{ context.headerFileName }}>
+#include <gm/types/{{ context.headerFileName }}>
 
 TEST_CASE( "{{ context.className }}_DefaultConstructor" )
 {

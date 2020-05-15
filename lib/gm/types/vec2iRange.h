@@ -1,8 +1,8 @@
 #pragma once
 
 #include <gm/gm.h>
-#include <gm/type/bounds2i.h>
-#include <gm/type/vec2i.h>
+#include <gm/types/bounds2i.h>
+#include <gm/types/vec2i.h>
 
 GM_NS_BEGIN
 
