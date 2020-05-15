@@ -54,7 +54,7 @@ public:
     }
 
     /// Get the string representation.  For debugging purposes.
-    std::string GetString()
+    std::string GetString() const
     {
         std::stringstream ss;
         ss << "Bounds3f( ";
