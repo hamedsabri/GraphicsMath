@@ -44,7 +44,7 @@ def WriteFile(filePath, content):
         content (str): content to write.
     """
     print("Generated {!r}".format(filePath))
-    with open(filePath, 'w') as f:
+    with open(filePath, "w") as f:
         f.write(content)
 
 
@@ -81,7 +81,7 @@ def GenerateCode(context, templatePath):
     Returns:
         str: file name of generated source file.
     """
-    with open(templatePath, 'r') as f:
+    with open(templatePath, "r") as f:
         templateStr = f.read()
         template = Template(templateStr)
         code = template.render(context=context)

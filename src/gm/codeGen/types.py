@@ -53,7 +53,7 @@ class PODType(ValueType):
     """
 
     def __init__(self, typeName):
-        assert(isinstance(typeName, str))
+        assert isinstance(typeName, str)
         self._typeName = typeName
 
     def __hash__(self):
@@ -78,8 +78,8 @@ class VectorType(ValueType):
     """
 
     def __init__(self, dims, elementType):
-        assert(isinstance(dims, tuple))
-        assert(isinstance(elementType, PODType))
+        assert isinstance(dims, tuple)
+        assert isinstance(elementType, PODType)
         self.dims = dims
         self.elementType = elementType
 
@@ -111,7 +111,7 @@ class VectorType(ValueType):
         return "{prefix}{dims}{elementType}".format(
             prefix=prefix,
             dims=str(self.dims[0]),
-            elementType=self.elementType.className[0]
+            elementType=self.elementType.className[0],
         )
 
     @property
@@ -124,7 +124,7 @@ class VectorType(ValueType):
         return "{prefix}{dims}{elementType}.h".format(
             prefix=prefix,
             dims=str(self.dims[0]),
-            elementType=self.elementType.className[0]
+            elementType=self.elementType.className[0],
         )
 
     @property
@@ -149,7 +149,7 @@ class ArrayType(ValueType):
     """
 
     def __init__(self, elementType):
-        assert(isinstance(elementType, ValueType))
+        assert isinstance(elementType, ValueType)
         self.elementType = elementType
 
     def __hash__(self):
@@ -165,7 +165,9 @@ class ArrayType(ValueType):
     def headerFileName(self):
         if self.elementType.isVector:
             return "{elementHeaderFileName}Array.h".format(
-                elementHeaderFileName=os.path.splitext(self.elementType.headerFileName)[0]
+                elementHeaderFileName=os.path.splitext(self.elementType.headerFileName)[
+                    0
+                ]
             )
         else:
             return "{elementTypeName}Array.h".format(
@@ -185,7 +187,9 @@ Args:
     type (object): the data type.
     defaultValue (str): string, encoding C++ code that will be assigned to element member variable.
 """
-CompositeElement = collections.namedtuple("CompositeElement", ["name", "type", "defaultValue"])
+CompositeElement = collections.namedtuple(
+    "CompositeElement", ["name", "type", "defaultValue"]
+)
 
 
 class CompositeType(ValueType):
@@ -202,7 +206,7 @@ class CompositeType(ValueType):
 
     def __init__(self, name, elements, extraIncludes=None):
         for element in elements:
-            assert(isinstance(element.type, ValueType))
+            assert isinstance(element.type, ValueType)
         self._name = name
         self.elements = elements
         self.elementSize = len(self.elements)
@@ -217,12 +221,8 @@ class CompositeType(ValueType):
 
     @property
     def headerFileName(self):
-        return "{name}.h".format(
-            name=LowerCamelCase(self._name),
-        )
+        return "{name}.h".format(name=LowerCamelCase(self._name),)
 
     @property
     def isComposite(self):
         return True
-
-

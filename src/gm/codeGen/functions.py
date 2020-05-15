@@ -18,9 +18,7 @@ class Function:
         """
         Get the name of the header hosting this function.
         """
-        return "{name}.h".format(
-            name=self._name,
-        )
+        return "{name}.h".format(name=self._name,)
 
     @property
     def functionName(self):
@@ -45,5 +43,3 @@ class FunctionGroup:
                 setattr(function, key, value)
 
             self.functions.append(function)
-
-

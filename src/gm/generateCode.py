@@ -47,27 +47,25 @@ TESTS_DIR = "tests"
 """
 Global set of POD value types.
 """
-POD_TYPES = set([
-    PODType(FLOAT),
-    PODType(INT)
-])
+POD_TYPES = set([PODType(FLOAT), PODType(INT)])
 
 """
 VECTOR_TYPES Global set of vector value types to generate.
 """
-VECTOR_TYPES = set([
-    # Single-index vector types.
-    VectorType((2,), PODType(INT)),
-    VectorType((3,), PODType(INT)),
-    VectorType((4,), PODType(INT)),
-    VectorType((2,), PODType(FLOAT)),
-    VectorType((3,), PODType(FLOAT)),
-    VectorType((4,), PODType(FLOAT)),
-
-    # Matrix types.
-    VectorType((3,3), PODType(FLOAT)),
-    VectorType((4,4), PODType(FLOAT)),
-])
+VECTOR_TYPES = set(
+    [
+        # Single-index vector types.
+        VectorType((2,), PODType(INT)),
+        VectorType((3,), PODType(INT)),
+        VectorType((4,), PODType(INT)),
+        VectorType((2,), PODType(FLOAT)),
+        VectorType((3,), PODType(FLOAT)),
+        VectorType((4,), PODType(FLOAT)),
+        # Matrix types.
+        VectorType((3, 3), PODType(FLOAT)),
+        VectorType((4, 4), PODType(FLOAT)),
+    ]
+)
 
 """
 COMPOSITE_TYPES is a dict of type name (str) -> type object (CompositeType).
@@ -78,6 +76,7 @@ COMPOSITE_TYPES = {}
 #
 # Code generation for types.
 #
+
 
 def GenerateCompositeType(compositeType):
     """
@@ -91,8 +90,7 @@ def GenerateCompositeType(compositeType):
     """
     filePath = os.path.join(os.path.abspath(TYPES_DIR), compositeType.headerFileName)
     code = GenerateCode(
-        compositeType,
-        GetTemplateFile(os.path.join(TYPES_DIR, "compositeType.h"))
+        compositeType, GetTemplateFile(os.path.join(TYPES_DIR, "compositeType.h"))
     )
     WriteFile(filePath, code)
     return filePath
@@ -111,11 +109,11 @@ def GenerateBoundsCompositeTypes():
         VectorType((2,), PODType(FLOAT)),
         VectorType((3,), PODType(FLOAT)),
         VectorType((2,), PODType(INT)),
-        VectorType((3,), PODType(INT))
+        VectorType((3,), PODType(INT)),
     ]:
         compositeTypeName = "bounds{dims}{elementType}".format(
             dims=str(vectorType.dims[0]),
-            elementType=vectorType.elementType.className[0]
+            elementType=vectorType.elementType.className[0],
         )
 
         # Min default value.
@@ -145,12 +143,14 @@ def GenerateBoundsCompositeTypes():
         compositeType = CompositeType(
             compositeTypeName,
             [
-                CompositeElement(name="min", type=vectorType, defaultValue=minDefaultValue),
-                CompositeElement(name="max", type=vectorType, defaultValue=maxDefaultValue),
+                CompositeElement(
+                    name="min", type=vectorType, defaultValue=minDefaultValue
+                ),
+                CompositeElement(
+                    name="max", type=vectorType, defaultValue=maxDefaultValue
+                ),
             ],
-            extraIncludes=[
-                "<limits>",
-            ]
+            extraIncludes=["<limits>",],
         )
 
         # Store composite type into global COMPOSITE_TYPES, to be queried in function generation
@@ -195,7 +195,9 @@ def GenerateArrayTypes():
     filePaths = []
     for arrayType in arrayTypes:
         filePath = os.path.join(os.path.abspath(TYPES_DIR), arrayType.headerFileName)
-        code = GenerateCode(arrayType, GetTemplateFile(os.path.join(TYPES_DIR, 'arrayType.h')))
+        code = GenerateCode(
+            arrayType, GetTemplateFile(os.path.join(TYPES_DIR, "arrayType.h"))
+        )
         WriteFile(filePath, code)
         filePaths.append(filePath)
 
@@ -212,18 +214,22 @@ def GenerateVectorTypes():
     # Generate vector class headers.
     filePaths = []
     for vectorType in VECTOR_TYPES:
-        code = GenerateCode(vectorType, GetTemplateFile(os.path.join(TYPES_DIR, "vectorType.h")))
+        code = GenerateCode(
+            vectorType, GetTemplateFile(os.path.join(TYPES_DIR, "vectorType.h"))
+        )
         filePath = os.path.join(os.path.abspath(TYPES_DIR), vectorType.headerFileName)
         WriteFile(filePath, code)
         filePaths.append(filePath)
 
     # Tests
     for vectorType in VECTOR_TYPES:
-        code = GenerateCode(vectorType, GetTemplateFile(os.path.join(TYPES_DIR, "testVectorType.cpp")))
+        code = GenerateCode(
+            vectorType, GetTemplateFile(os.path.join(TYPES_DIR, "testVectorType.cpp"))
+        )
         filePath = os.path.join(
             os.path.abspath(TYPES_DIR),
             TESTS_DIR,
-            "test{className}.cpp".format(className=vectorType.className)
+            "test{className}.cpp".format(className=vectorType.className),
         )
         WriteFile(filePath, code)
         filePaths.append(filePath)
@@ -245,6 +251,7 @@ def GenerateTypes():
     filePaths += GenerateCompositeTypes()
     return filePaths
 
+
 #
 # Code generation for functions.
 #
@@ -262,8 +269,7 @@ def GenerateFunction(function):
     """
     filePath = os.path.join(os.path.abspath(FUNCTIONS_DIR), function.headerFileName)
     code = GenerateCode(
-        function,
-        GetTemplateFile(os.path.join(FUNCTIONS_DIR, function.headerFileName))
+        function, GetTemplateFile(os.path.join(FUNCTIONS_DIR, function.headerFileName))
     )
     WriteFile(filePath, code)
 
@@ -278,14 +284,14 @@ def GenerateFunctions():
         list: file paths to the generated files.
     """
     functionGroups = [
-        FunctionGroup([
-            "dotProduct",
-        ],
-        types=[
-            VectorType((2,), PODType(FLOAT)),
-            VectorType((3,), PODType(FLOAT)),
-            VectorType((4,), PODType(FLOAT)),
-        ]),
+        FunctionGroup(
+            ["dotProduct",],
+            types=[
+                VectorType((2,), PODType(FLOAT)),
+                VectorType((3,), PODType(FLOAT)),
+                VectorType((4,), PODType(FLOAT)),
+            ],
+        ),
     ]
 
     filePaths = []
