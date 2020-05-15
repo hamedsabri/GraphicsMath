@@ -12,6 +12,20 @@ from jinja2 import Template
 TEMPLATE_DIR = "template"
 
 
+def UpperCamelCase(lowerCamelCaseStr):
+    """
+    Return the UpperCamelCase variant of a lower camel case string.
+    """
+    return lowerCamelCaseStr[0].upper() + lowerCamelCaseStr[1:]
+
+
+def LowerCamelCase(upperCamelCaseStr):
+    """
+    Return the lowerCamelCase variant of an upper camel case string.
+    """
+    return upperCamelCaseStr[0].lower() + upperCamelCaseStr[1:]
+
+
 def RunCommand(command):
     """
     Run the ``command`` by forking a subprocess.

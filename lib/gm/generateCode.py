@@ -23,14 +23,24 @@ from codeGen.types import (
     FLOAT,
 )
 
+from codeGen.functions import (
+    Function,
+    FunctionGroup,
+)
+
 
 """
-Name of the subdirectory where all types reside.
+Name of the subdirectory where all type header files reside.
 """
 TYPES_DIR = "types"
 
 """
-Name of the subdirectory where all tests reside.
+Name of the subdirectory where all function header files reside.
+"""
+FUNCTIONS_DIR = "functions"
+
+"""
+Name of the subdirectory, under types/ and functions/ where their tests reside.
 """
 TESTS_DIR = "tests"
 
@@ -65,7 +75,9 @@ It is populated in GenerateCompositeTypes.
 """
 COMPOSITE_TYPES = {}
 
-
+#
+# Code generation for types.
+#
 
 def GenerateCompositeType(compositeType):
     """
@@ -233,7 +245,64 @@ def GenerateTypes():
     filePaths += GenerateCompositeTypes()
     return filePaths
 
+#
+# Code generation for functions.
+#
+
+
+def GenerateFunction(function):
+    """
+    Generate code for a function.
+
+    Args:
+        functionFileName (str): name of the template file.  This name will also be used to write the generated code.
+
+    Returns:
+        str: file path to the generated code.
+    """
+    filePath = os.path.join(os.path.abspath(FUNCTIONS_DIR), function.headerFileName)
+    code = GenerateCode(
+        function,
+        GetTemplateFile(os.path.join(FUNCTIONS_DIR, function.headerFileName))
+    )
+    WriteFile(filePath, code)
+
+    return filePath
+
+
+def GenerateFunctions():
+    """
+    Generate code for templatized function.
+
+    Returns:
+        list: file paths to the generated files.
+    """
+    functionGroups = [
+        FunctionGroup([
+            "dotProduct",
+        ],
+        types=[
+            VectorType((2,), PODType(FLOAT)),
+            VectorType((3,), PODType(FLOAT)),
+            VectorType((4,), PODType(FLOAT)),
+        ]),
+    ]
+
+    filePaths = []
+    for functionGroup in functionGroups:
+        for function in functionGroup.functions:
+            filePath = GenerateFunction(function)
+            filePaths.append(filePath)
+
+    return filePaths
+
 
 if __name__ == "__main__":
+    # Generate types first, to populate type registry.
     filePaths = GenerateTypes()
+
+    # Proceed with generating functions.
+    filePaths += GenerateFunctions()
+
+    # Format all the code to standard.
     FormatCode(filePaths)

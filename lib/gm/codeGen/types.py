@@ -7,6 +7,8 @@ import os
 import functools
 import collections
 
+from utils import LowerCamelCase, UpperCamelCase
+
 """
 POD types we are interested in generating code for.  Double is omitted for the time being.
 """
@@ -156,7 +158,7 @@ class ArrayType(ValueType):
     @property
     def className(self):
         return "{elementTypeName}Array".format(
-            elementTypeName=(self.elementType.className[0].upper() + self.elementType.className[1:])
+            elementTypeName=(UpperCamelCase(self.elementType.className))
         )
 
     @property
@@ -167,7 +169,7 @@ class ArrayType(ValueType):
             )
         else:
             return "{elementTypeName}Array.h".format(
-                elementTypeName=self.elementType.className[0].lower() + self.elementType.className[1:]
+                elementTypeName=LowerCamelCase(self.elementType.className),
             )
 
     @property
@@ -211,12 +213,12 @@ class CompositeType(ValueType):
 
     @property
     def className(self):
-        return self._name[:1].upper() + self._name[1:]
+        return UpperCamelCase(self._name)
 
     @property
     def headerFileName(self):
         return "{name}.h".format(
-            name=self._name[:1].lower() + self._name[1:]
+            name=LowerCamelCase(self._name),
         )
 
     @property
