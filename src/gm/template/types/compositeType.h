@@ -50,20 +50,20 @@ public:
 
 {% for element in context.elements %}
     /// Const accessor for "{{ element.name }}".
-    GM_HOST_DEVICE const {{ element.type.className }}& {{ element.name[0].upper() + element.name[1:] }}() const
+    GM_HOST_DEVICE inline const {{ element.type.className }}& {{ element.name[0].upper() + element.name[1:] }}() const
     {
         return m_{{ element.name }};
     }
 
     /// Mutable accessor for "{{ element.name }}".
-    GM_HOST_DEVICE {{ element.type.className }}& {{ element.name[0].upper() + element.name[1:] }}()
+    GM_HOST_DEVICE inline {{ element.type.className }}& {{ element.name[0].upper() + element.name[1:] }}()
     {
         return m_{{ element.name }};
     }
 {% endfor %}
 
     /// Get the string representation.  For debugging purposes.
-    std::string GetString() const
+    inline std::string GetString() const
     {
         std::stringstream ss;
         ss << "{{ context.className }}( ";

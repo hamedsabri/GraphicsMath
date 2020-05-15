@@ -30,31 +30,31 @@ public:
     }
 
     /// Const accessor for "min".
-    GM_HOST_DEVICE const Vec2f& Min() const
+    GM_HOST_DEVICE inline const Vec2f& Min() const
     {
         return m_min;
     }
 
     /// Mutable accessor for "min".
-    GM_HOST_DEVICE Vec2f& Min()
+    GM_HOST_DEVICE inline Vec2f& Min()
     {
         return m_min;
     }
 
     /// Const accessor for "max".
-    GM_HOST_DEVICE const Vec2f& Max() const
+    GM_HOST_DEVICE inline const Vec2f& Max() const
     {
         return m_max;
     }
 
     /// Mutable accessor for "max".
-    GM_HOST_DEVICE Vec2f& Max()
+    GM_HOST_DEVICE inline Vec2f& Max()
     {
         return m_max;
     }
 
     /// Get the string representation.  For debugging purposes.
-    std::string GetString() const
+    inline std::string GetString() const
     {
         std::stringstream ss;
         ss << "Bounds2f( ";
