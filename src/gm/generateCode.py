@@ -212,26 +212,36 @@ def GenerateVectorType(vectorType):
         vectorType (VectorType): vectorType object.
 
     Returns:
-        tuple: file path to the generated source and test code.
+        tuple: file path to the generated source code.
     """
     # Source code.
-    relativeSrcPath = os.path.join(TYPES_DIR, "vectorType.h")
-    templateSrcPath = GetTemplateFile(relativeSrcPath)
-    srcCode = GenerateCode(vectorType, templateSrcPath)
-    srcPath = os.path.abspath(relativeSrcPath)
-    WriteFile(srcPath, srcCode)
+    relativePath = os.path.join(TYPES_DIR, "vectorType.h")
+    templatePath = GetTemplateFile(relativePath)
+    code = GenerateCode(vectorType, templatePath)
+    filePath = os.path.abspath(relativePath)
+    WriteFile(filePath, code)
+    return filePath
 
-    # Tests
+
+def GenerateVectorTypeTest(vectorType):
+    """
+    Generate test code for a vector type.
+
+    Args:
+        vectorType (VectorType): vectorType object.
+
+    Returns:
+        tuple: file path to the generated test code.
+    """
     templateTestPath = GetTemplateFile(os.path.join(TYPES_DIR, TESTS_DIR, "testVectorType.cpp"))
-    testCode = GenerateCode(vectorType, templateTestPath)
-    testPath = os.path.join(
+    code = GenerateCode(vectorType, templateTestPath)
+    filePath = os.path.join(
         os.path.abspath(TYPES_DIR),
         TESTS_DIR,
         "test{className}.cpp".format(className=vectorType.className),
     )
-    WriteFile(testPath, testCode)
-
-    return srcPath, testPath
+    WriteFile(filePath, code)
+    return filePath
 
 
 def GenerateVectorTypes():
@@ -244,7 +254,8 @@ def GenerateVectorTypes():
     # Generate vector class headers.
     filePaths = []
     for vectorType in VECTOR_TYPES:
-        filePaths.extend(GenerateVectorType(vectorType))
+        filePaths.append(GenerateVectorType(vectorType))
+        filePaths.append(GenerateVectorTypeTest(vectorType))
     return filePaths
 
 
@@ -336,10 +347,9 @@ def GenerateFunctions():
     for functionGroup in functionGroups:
         for function in functionGroup.functions:
             filePaths.append(GenerateFunction(function))
-
-            testCode = GenerateFunctionTest(function)
-            if testCode:
-                filePaths.append(testCode)
+            testPath = GenerateFunctionTest(function)
+            if testPath:
+                filePaths.append(testPath)
 
     return filePaths
 
