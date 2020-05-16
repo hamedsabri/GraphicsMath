@@ -1,6 +1,6 @@
 #pragma once
 
-/// \file functions/length.h
+/// \file functions/{{ function.headerFileName }}
 ///
 /// Compute the \b length, or magnitude, of a vector.
 ///
@@ -9,7 +9,7 @@
 
 #include <gm/gm.h>
 
-{% for vectorType in context.types -%}
+{% for vectorType in function.types -%}
 #include <gm/types/{{ vectorType.headerFileName }}>
 {% endfor %}
 
@@ -17,11 +17,11 @@
 
 GM_NS_OPEN
 
-{% for vectorType in context.types %}
+{% for vectorType in function.types %}
 /// Compute the length of the vector \p i_vector.
 ///
 /// \return the length of the vector.
-GM_HOST_DEVICE inline {{ vectorType.elementType.className }} {{ context.functionName }}(
+GM_HOST_DEVICE inline {{ vectorType.elementType.className }} {{ function.name }}(
     const {{ vectorType.className }}& i_vector )
 {
     return sqrt( LengthSquared( i_vector ) );

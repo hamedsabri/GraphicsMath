@@ -1,11 +1,11 @@
 #include <catch2/catch.hpp>
 
-#include <gm/functions/{{ context.headerFileName }}>
+#include <gm/functions/{{ function.headerFileName }}>
 
 // This test is auto-generated! Please do not modify directly
 
-{% for vectorType in context.types %}
-TEST_CASE( "{{ context.functionName }}_{{ vectorType.className }}" )
+{% for vectorType in function.types %}
+TEST_CASE( "{{ function.name }}_{{ vectorType.className }}" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
 {% for index in range(vectorType.elementSize) -%}

@@ -70,12 +70,11 @@ def GetTemplateFile(templateName):
     return os.path.abspath(os.path.join(TEMPLATE_DIR, templateName))
 
 
-def GenerateCode(context, templatePath):
+def GenerateCode(templatePath, **kwargs):
     """
     Generate a single source file with a template and code-gen context.
 
     Args:
-        context (obj): context object with attributes which are consumed in the template rendering.
         templatePath (str): path to the template file to perform substitution.
 
     Returns:
@@ -84,5 +83,5 @@ def GenerateCode(context, templatePath):
     with open(templatePath, "r") as f:
         templateStr = f.read()
         template = Template(templateStr)
-        code = template.render(context=context)
+        code = template.render(**kwargs)
         return code

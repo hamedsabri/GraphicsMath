@@ -7,11 +7,14 @@ from utils import UpperCamelCase
 
 class Function:
     """
-    A simple code-gen context object for a function.  Not much to see here.
+    A simple code-gen context object for a function.
+
+    Args:
+        name (str): name of the function.
     """
 
-    def __init__(self, functionName):
-        self._name = functionName
+    def __init__(self, name):
+        self._name = name
 
     @property
     def headerFileName(self):
@@ -21,7 +24,7 @@ class Function:
         return "{name}.h".format(name=self._name,)
 
     @property
-    def functionName(self):
+    def name(self):
         """
         Get the functions C++ symbol name (without namespace).
         """
@@ -35,8 +38,8 @@ class FunctionGroup:
 
     def __init__(self, functionNames, **functionContext):
         self.functions = []
-        for functionName in functionNames:
-            function = Function(functionName)
+        for name in functionNames:
+            function = Function(name)
 
             # Set the function context as attributes on the Function each object.
             for key, value in functionContext.items():

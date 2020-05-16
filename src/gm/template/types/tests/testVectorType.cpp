@@ -1,316 +1,316 @@
 #include <catch2/catch.hpp>
 
-#include <gm/types/{{ context.headerFileName }}>
+#include <gm/types/{{ vectorType.headerFileName }}>
 
-TEST_CASE( "{{ context.className }}_DefaultConstructor" )
+TEST_CASE( "{{ vectorType.className }}_DefaultConstructor" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }};
-    CHECK( {{ context.variablePrefix }} ==
-    gm::{{ context.className }}(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(0) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }};
+    CHECK( {{ vectorType.variablePrefix }} ==
+    gm::{{ vectorType.className }}(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(0) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     ) );
 }
 
-TEST_CASE( "{{ context.className }}_CopyConstructor" )
+TEST_CASE( "{{ vectorType.className }}_CopyConstructor" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }}A(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    gm::{{ context.className }} {{ context.variablePrefix }}B( {{ context.variablePrefix }}A );
-    CHECK( {{ context.variablePrefix }}A == {{ context.variablePrefix }}B );
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B( {{ vectorType.variablePrefix }}A );
+    CHECK( {{ vectorType.variablePrefix }}A == {{ vectorType.variablePrefix }}B );
 }
 
-TEST_CASE( "{{ context.className }}_CopyAssignmentConstructor" )
+TEST_CASE( "{{ vectorType.className }}_CopyAssignmentConstructor" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }}A(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    gm::{{ context.className }} {{ context.variablePrefix }}B = {{ context.variablePrefix }}A;
-    CHECK( {{ context.variablePrefix }}A == {{ context.variablePrefix }}B );
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B = {{ vectorType.variablePrefix }}A;
+    CHECK( {{ vectorType.variablePrefix }}A == {{ vectorType.variablePrefix }}B );
 }
 
-TEST_CASE( "{{ context.className }}_ElementReadAccess" )
+TEST_CASE( "{{ vectorType.className }}_ElementReadAccess" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }}(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-{% for index in range(context.elementSize) -%}
-    CHECK( {{ context.variablePrefix }}[ {{ index }} ] == {{ context.GetCppNumber(index * 2) }} );
-{%- endfor %}
-}
-
-TEST_CASE( "{{ context.className }}_ElementWriteAccess" )
-{
-    gm::{{ context.className }} {{ context.variablePrefix }};
-{% for index in range(context.elementSize) -%}
-    {{ context.variablePrefix }}[ {{ index }} ] = {{ context.GetCppNumber(index * 5) }};
-{%- endfor %}
-{% for index in range(context.elementSize) -%}
-    CHECK( {{ context.variablePrefix }}[ {{ index }} ] == {{ context.GetCppNumber(index * 5) }} );
+{% for index in range(vectorType.elementSize) -%}
+    CHECK( {{ vectorType.variablePrefix }}[ {{ index }} ] == {{ vectorType.GetCppNumber(index * 2) }} );
 {%- endfor %}
 }
 
-TEST_CASE( "{{ context.className }}_Addition" )
+TEST_CASE( "{{ vectorType.className }}_ElementWriteAccess" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }}A(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }};
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.variablePrefix }}[ {{ index }} ] = {{ vectorType.GetCppNumber(index * 5) }};
+{%- endfor %}
+{% for index in range(vectorType.elementSize) -%}
+    CHECK( {{ vectorType.variablePrefix }}[ {{ index }} ] == {{ vectorType.GetCppNumber(index * 5) }} );
+{%- endfor %}
+}
+
+TEST_CASE( "{{ vectorType.className }}_Addition" )
+{
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    gm::{{ context.className }} {{ context.variablePrefix }}B(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 5) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 5) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    gm::{{ context.className }} {{ context.variablePrefix }}C =
-        {{ context.variablePrefix }}A + {{ context.variablePrefix }}B;
-    CHECK( {{ context.variablePrefix }}C == gm::{{ context.className }}(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 7) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}C =
+        {{ vectorType.variablePrefix }}A + {{ vectorType.variablePrefix }}B;
+    CHECK( {{ vectorType.variablePrefix }}C == gm::{{ vectorType.className }}(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 7) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     ) );
 }
 
-TEST_CASE( "{{ context.className }}_AdditionAssignment" )
+TEST_CASE( "{{ vectorType.className }}_AdditionAssignment" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }}A(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    gm::{{ context.className }} {{ context.variablePrefix }}B(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 5) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 5) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    {{ context.variablePrefix }}B += {{ context.variablePrefix }}A;
-    CHECK( {{ context.variablePrefix }}B == gm::{{ context.className }}(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 7) }}
-{%- if index + 1 < context.elementSize -%}
+    {{ vectorType.variablePrefix }}B += {{ vectorType.variablePrefix }}A;
+    CHECK( {{ vectorType.variablePrefix }}B == gm::{{ vectorType.className }}(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 7) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     ) );
 }
 
-TEST_CASE( "{{ context.className }}_Subtraction" )
+TEST_CASE( "{{ vectorType.className }}_Subtraction" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }}A(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 7) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 7) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    gm::{{ context.className }} {{ context.variablePrefix }}B(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 5) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 5) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    gm::{{ context.className }} {{ context.variablePrefix }}C =
-        {{ context.variablePrefix }}A - {{ context.variablePrefix }}B;
-    CHECK( {{ context.variablePrefix }}C == gm::{{ context.className }}(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}C =
+        {{ vectorType.variablePrefix }}A - {{ vectorType.variablePrefix }}B;
+    CHECK( {{ vectorType.variablePrefix }}C == gm::{{ vectorType.className }}(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     ) );
 }
 
-TEST_CASE( "{{ context.className }}_SubtractionAssignment" )
+TEST_CASE( "{{ vectorType.className }}_SubtractionAssignment" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }}A(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 5) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 5) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    gm::{{ context.className }} {{ context.variablePrefix }}B(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 7) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 7) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    {{ context.variablePrefix }}B -= {{ context.variablePrefix }}A;
-    CHECK( {{ context.variablePrefix }}B == gm::{{ context.className }}(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    {{ vectorType.variablePrefix }}B -= {{ vectorType.variablePrefix }}A;
+    CHECK( {{ vectorType.variablePrefix }}B == gm::{{ vectorType.className }}(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     ) );
 }
 
-TEST_CASE( "{{ context.className }}_ScalarVectorMultiplication" )
+TEST_CASE( "{{ vectorType.className }}_ScalarVectorMultiplication" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }}A(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
 
-    gm::{{ context.className }} {{ context.variablePrefix }}B =
-        5 * {{ context.variablePrefix }}A;
-    CHECK( {{ context.variablePrefix }}B == gm::{{ context.className }}(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 10) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B =
+        5 * {{ vectorType.variablePrefix }}A;
+    CHECK( {{ vectorType.variablePrefix }}B == gm::{{ vectorType.className }}(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 10) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     ) );
 }
 
-TEST_CASE( "{{ context.className }}_VectorScalarMultiplication" )
+TEST_CASE( "{{ vectorType.className }}_VectorScalarMultiplication" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }}A(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    gm::{{ context.className }} {{ context.variablePrefix }}B =
-        {{ context.variablePrefix }}A * {{ context.GetCppNumber(5) }};
-    CHECK( {{ context.variablePrefix }}B == gm::{{ context.className }}(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 10) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B =
+        {{ vectorType.variablePrefix }}A * {{ vectorType.GetCppNumber(5) }};
+    CHECK( {{ vectorType.variablePrefix }}B == gm::{{ vectorType.className }}(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 10) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     ) );
 }
 
-TEST_CASE( "{{ context.className }}_ScalarMultiplicationAssignment" )
+TEST_CASE( "{{ vectorType.className }}_ScalarMultiplicationAssignment" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }}A(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    {{ context.variablePrefix }}A *= 5;
-    CHECK( {{ context.variablePrefix }}A == gm::{{ context.className }}(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 10) }}
-{%- if index + 1 < context.elementSize -%}
+    {{ vectorType.variablePrefix }}A *= 5;
+    CHECK( {{ vectorType.variablePrefix }}A == gm::{{ vectorType.className }}(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 10) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     ) );
 }
 
-TEST_CASE( "{{ context.className }}_VectorScalarDivision" )
+TEST_CASE( "{{ vectorType.className }}_VectorScalarDivision" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }}A(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 10) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 10) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    gm::{{ context.className }} {{ context.variablePrefix }}B =
-        {{ context.variablePrefix }}A / {{ context.GetCppNumber(5) }};
-    CHECK( {{ context.variablePrefix }}B == gm::{{ context.className }}(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B =
+        {{ vectorType.variablePrefix }}A / {{ vectorType.GetCppNumber(5) }};
+    CHECK( {{ vectorType.variablePrefix }}B == gm::{{ vectorType.className }}(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     ) );
 }
 
-TEST_CASE( "{{ context.className }}_ScalarDivisionAssignment" )
+TEST_CASE( "{{ vectorType.className }}_ScalarDivisionAssignment" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }}A(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 10) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 10) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    {{ context.variablePrefix }}A /= {{ context.GetCppNumber(5) }};
-    CHECK( {{ context.variablePrefix }}A == gm::{{ context.className }}(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    {{ vectorType.variablePrefix }}A /= {{ vectorType.GetCppNumber(5) }};
+    CHECK( {{ vectorType.variablePrefix }}A == gm::{{ vectorType.className }}(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     ) );
 }
 
-TEST_CASE( "{{ context.className }}_Negation" )
+TEST_CASE( "{{ vectorType.className }}_Negation" )
 {
-    gm::{{ context.className }} {{ context.variablePrefix }}(
-{% for index in range(context.elementSize) -%}
-    {{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}(
+{% for index in range(vectorType.elementSize) -%}
+    {{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    CHECK( -{{ context.variablePrefix }} == gm::{{ context.className }}(
-{% for index in range(context.elementSize) -%}
-    -{{ context.GetCppNumber(index * 2) }}
-{%- if index + 1 < context.elementSize -%}
+    CHECK( -{{ vectorType.variablePrefix }} == gm::{{ vectorType.className }}(
+{% for index in range(vectorType.elementSize) -%}
+    -{{ vectorType.GetCppNumber(index * 2) }}
+{%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}

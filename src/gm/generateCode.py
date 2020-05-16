@@ -89,8 +89,8 @@ def GenerateCompositeType(compositeType):
         str: file path to the generated source file.
     """
     filePath = os.path.join(os.path.abspath(TYPES_DIR), compositeType.headerFileName)
-    code = GenerateCode(
-        compositeType, GetTemplateFile(os.path.join(TYPES_DIR, "compositeType.h"))
+    code = GenerateCode(GetTemplateFile(os.path.join(TYPES_DIR, "compositeType.h")),
+        compositeType=compositeType,
     )
     WriteFile(filePath, code)
     return filePath
@@ -196,7 +196,7 @@ def GenerateArrayTypes():
     for arrayType in arrayTypes:
         filePath = os.path.join(os.path.abspath(TYPES_DIR), arrayType.headerFileName)
         code = GenerateCode(
-            arrayType, GetTemplateFile(os.path.join(TYPES_DIR, "arrayType.h"))
+            GetTemplateFile(os.path.join(TYPES_DIR, "arrayType.h")), arrayType=arrayType
         )
         WriteFile(filePath, code)
         filePaths.append(filePath)
@@ -217,7 +217,7 @@ def GenerateVectorType(vectorType):
     # Source code.
     relativePath = os.path.join(TYPES_DIR, "vectorType.h")
     templatePath = GetTemplateFile(relativePath)
-    code = GenerateCode(vectorType, templatePath)
+    code = GenerateCode(templatePath, vectorType=vectorType)
     filePath = os.path.abspath(relativePath)
     WriteFile(filePath, code)
     return filePath
@@ -234,7 +234,7 @@ def GenerateVectorTypeTest(vectorType):
         tuple: file path to the generated test code.
     """
     templateTestPath = GetTemplateFile(os.path.join(TYPES_DIR, TESTS_DIR, "testVectorType.cpp"))
-    code = GenerateCode(vectorType, templateTestPath)
+    code = GenerateCode(templateTestPath, vectorType=vectorType)
     filePath = os.path.join(
         os.path.abspath(TYPES_DIR),
         TESTS_DIR,
@@ -291,7 +291,8 @@ def GenerateFunction(function):
     """
     filePath = os.path.join(os.path.abspath(FUNCTIONS_DIR), function.headerFileName)
     code = GenerateCode(
-        function, GetTemplateFile(os.path.join(FUNCTIONS_DIR, function.headerFileName))
+        GetTemplateFile(os.path.join(FUNCTIONS_DIR, function.headerFileName)),
+        function=function
     )
     WriteFile(filePath, code)
     return filePath
@@ -310,8 +311,8 @@ def GenerateFunctionTest(function):
     relativeTestPath = os.path.join(
         FUNCTIONS_DIR,
         TESTS_DIR,
-        "test{functionName}.cpp".format(
-            functionName=function.functionName,
+        "test{name}.cpp".format(
+            name=function.name,
         )
     )
     absTemplatePath = GetTemplateFile(relativeTestPath)
@@ -319,7 +320,7 @@ def GenerateFunctionTest(function):
         print("Cannot find template file {}".format(absTemplatePath))
         return None
 
-    code = GenerateCode(function, absTemplatePath)
+    code = GenerateCode(absTemplatePath, function=function)
     filePath = os.path.abspath(relativeTestPath)
     WriteFile(filePath, code)
     return filePath

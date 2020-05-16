@@ -1,21 +1,21 @@
 #pragma once
 
-/// \file {{ context.headerFileName }}
+/// \file {{ arrayType.headerFileName }}
 
 #include <vector>
 
-{% if context.elementType.isVector %}
-#include <gm/types/{{ context.elementType.headerFileName }}>
+{% if arrayType.elementType.isVector %}
+#include <gm/types/{{ arrayType.elementType.headerFileName }}>
 {%- endif %}
 
 GM_NS_OPEN
 
-{% if context.elementType.isVector %}
-/// An array of \ref {{ context.elementType.className }}.
+{% if arrayType.elementType.isVector %}
+/// An array of \ref {{ arrayType.elementType.className }}.
 {%- else %}
-/// An array of \p {{ context.elementType.className }}.
+/// An array of \p {{ arrayType.elementType.className }}.
 {%- endif %}
-using {{ context.className }} = std::vector< {{ context.elementType.className }} >;
+using {{ arrayType.className }} = std::vector< {{ arrayType.elementType.className }} >;
 
 GM_NS_CLOSE
 
