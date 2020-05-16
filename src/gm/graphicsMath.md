@@ -13,7 +13,7 @@ at cost of extra source code and a discrete code-gen step.
 The headers are organized in three main categories:
 - \p gm/base - common utilities and definitions.
 - \p gm/types - computer graphics value types (vectors, arrays)
-- \p gm/functions - functionality which operate on \gm types.
+- \p gm/functions - functionality which operate on \p gm types.
 
 Tests reside under each category sub-directory.
 
