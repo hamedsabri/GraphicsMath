@@ -1,6 +1,6 @@
 #pragma once
 
-/// \file dotProduct.h
+/// \file functions/dotProduct.h
 ///
 /// Dot product, or scalar product between two <em>equal-length</em> vectors.
 ///
@@ -23,10 +23,7 @@ GM_NS_OPEN
 /// \return computed dot product.
 GM_HOST_DEVICE inline float DotProduct( const Vec2f& i_lhs, const Vec2f& i_rhs )
 {
-    float product = 0.0f;
-    product += i_lhs[ 0 ] * i_rhs[ 0 ];
-    product += i_lhs[ 1 ] * i_rhs[ 1 ];
-    return product;
+    return i_lhs[ 0 ] * i_rhs[ 0 ] + i_lhs[ 1 ] * i_rhs[ 1 ];
 }
 
 /// Compute the dot product of two \ref Vec3f, \p i_lhs and \p i_rhs, and return the result.
@@ -34,11 +31,7 @@ GM_HOST_DEVICE inline float DotProduct( const Vec2f& i_lhs, const Vec2f& i_rhs )
 /// \return computed dot product.
 GM_HOST_DEVICE inline float DotProduct( const Vec3f& i_lhs, const Vec3f& i_rhs )
 {
-    float product = 0.0f;
-    product += i_lhs[ 0 ] * i_rhs[ 0 ];
-    product += i_lhs[ 1 ] * i_rhs[ 1 ];
-    product += i_lhs[ 2 ] * i_rhs[ 2 ];
-    return product;
+    return i_lhs[ 0 ] * i_rhs[ 0 ] + i_lhs[ 1 ] * i_rhs[ 1 ] + i_lhs[ 2 ] * i_rhs[ 2 ];
 }
 
 /// Compute the dot product of two \ref Vec4f, \p i_lhs and \p i_rhs, and return the result.
@@ -46,12 +39,7 @@ GM_HOST_DEVICE inline float DotProduct( const Vec3f& i_lhs, const Vec3f& i_rhs )
 /// \return computed dot product.
 GM_HOST_DEVICE inline float DotProduct( const Vec4f& i_lhs, const Vec4f& i_rhs )
 {
-    float product = 0.0f;
-    product += i_lhs[ 0 ] * i_rhs[ 0 ];
-    product += i_lhs[ 1 ] * i_rhs[ 1 ];
-    product += i_lhs[ 2 ] * i_rhs[ 2 ];
-    product += i_lhs[ 3 ] * i_rhs[ 3 ];
-    return product;
+    return i_lhs[ 0 ] * i_rhs[ 0 ] + i_lhs[ 1 ] * i_rhs[ 1 ] + i_lhs[ 2 ] * i_rhs[ 2 ] + i_lhs[ 3 ] * i_rhs[ 3 ];
 }
 
 GM_NS_CLOSE

@@ -6,8 +6,8 @@
 #include <cstring>
 #include <sstream>
 
-#include <gm/gm.h>
 #include <gm/base/assert.h>
+#include <gm/gm.h>
 
 GM_NS_OPEN
 

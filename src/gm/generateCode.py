@@ -285,7 +285,7 @@ def GenerateFunctions():
     """
     functionGroups = [
         FunctionGroup(
-            ["dotProduct",],
+            ["dotProduct", "length", "lengthSquared",],
             types=[
                 VectorType((2,), PODType(FLOAT)),
                 VectorType((3,), PODType(FLOAT)),
