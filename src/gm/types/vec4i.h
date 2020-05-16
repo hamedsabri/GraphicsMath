@@ -7,7 +7,7 @@
 #include <sstream>
 
 #include <gm/gm.h>
-#include <gm/tool/assert.h>
+#include <gm/base/assert.h>
 
 GM_NS_OPEN
 

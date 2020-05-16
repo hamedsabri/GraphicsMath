@@ -4,9 +4,9 @@
 
 #include <stdarg.h>
 
-/// \file tool/assert.h
+/// \file base/assert.h
 ///
-/// Assertion tool for printing out failure location when an expression wrapped with GM_ASSERT( ... ) fails to
+/// Assertion utility for printing out failure location when an expression wrapped with GM_ASSERT( ... ) fails to
 /// evaluate.
 ///
 /// In Debug builds, GM_ASSERT macro will print the stacktrace when the input expression evaluates to false.

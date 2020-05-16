@@ -7,9 +7,9 @@
 #include <sstream>
 
 #include <gm/gm.h>
-#include <gm/tool/assert.h>
+#include <gm/base/assert.h>
 {% if context.elementType.className != "int" -%}
-#include <gm/tool/almost.h>
+#include <gm/base/almost.h>
 {%- endif %}
 
 GM_NS_OPEN

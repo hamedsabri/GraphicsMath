@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <gm/tool/log.h>
+#include <gm/base/log.h>
 
 #include <gm/types/bounds2i.h>
 #include <gm/types/vec2iArray.h>

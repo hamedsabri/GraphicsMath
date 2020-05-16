@@ -1,6 +1,6 @@
 #pragma once
 
-/// \file hostdevice.h
+/// \file base/hostdevice.h
 
 /// \def GM_HOST_DEVICE
 ///

@@ -1,6 +1,6 @@
 #pragma once
 
-/// \file tool/almost.h
+/// \file base/almost.h
 
 #include <gm/gm.h>
 
