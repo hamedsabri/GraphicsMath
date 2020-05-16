@@ -204,6 +204,36 @@ def GenerateArrayTypes():
     return filePaths
 
 
+def GenerateVectorType(vectorType):
+    """
+    Generate code for a vector type.
+
+    Args:
+        vectorType (VectorType): vectorType object.
+
+    Returns:
+        tuple: file path to the generated source and test code.
+    """
+    # Source code.
+    relativeSrcPath = os.path.join(TYPES_DIR, "vectorType.h")
+    templateSrcPath = GetTemplateFile(relativeSrcPath)
+    srcCode = GenerateCode(vectorType, templateSrcPath)
+    srcPath = os.path.abspath(relativeSrcPath)
+    WriteFile(srcPath, srcCode)
+
+    # Tests
+    templateTestPath = GetTemplateFile(os.path.join(TYPES_DIR, TESTS_DIR, "testVectorType.cpp"))
+    testCode = GenerateCode(vectorType, templateTestPath)
+    testPath = os.path.join(
+        os.path.abspath(TYPES_DIR),
+        TESTS_DIR,
+        "test{className}.cpp".format(className=vectorType.className),
+    )
+    WriteFile(testPath, testCode)
+
+    return srcPath, testPath
+
+
 def GenerateVectorTypes():
     """
     Generate all vector type source files.
@@ -214,26 +244,7 @@ def GenerateVectorTypes():
     # Generate vector class headers.
     filePaths = []
     for vectorType in VECTOR_TYPES:
-        code = GenerateCode(
-            vectorType, GetTemplateFile(os.path.join(TYPES_DIR, "vectorType.h"))
-        )
-        filePath = os.path.join(os.path.abspath(TYPES_DIR), vectorType.headerFileName)
-        WriteFile(filePath, code)
-        filePaths.append(filePath)
-
-    # Tests
-    for vectorType in VECTOR_TYPES:
-        code = GenerateCode(
-            vectorType, GetTemplateFile(os.path.join(TYPES_DIR, "testVectorType.cpp"))
-        )
-        filePath = os.path.join(
-            os.path.abspath(TYPES_DIR),
-            TESTS_DIR,
-            "test{className}.cpp".format(className=vectorType.className),
-        )
-        WriteFile(filePath, code)
-        filePaths.append(filePath)
-
+        filePaths.extend(GenerateVectorType(vectorType))
     return filePaths
 
 
@@ -262,7 +273,7 @@ def GenerateFunction(function):
     Generate code for a function.
 
     Args:
-        functionFileName (str): name of the template file.  This name will also be used to write the generated code.
+        function (Function): function object.
 
     Returns:
         str: file path to the generated code.
@@ -272,7 +283,34 @@ def GenerateFunction(function):
         function, GetTemplateFile(os.path.join(FUNCTIONS_DIR, function.headerFileName))
     )
     WriteFile(filePath, code)
+    return filePath
 
+
+def GenerateFunctionTest(function):
+    """
+    Generate the test code for a function.
+
+    Args:
+        function (Function): function object.
+
+    Returns:
+        str: file path to the generated code.
+    """
+    relativeTestPath = os.path.join(
+        FUNCTIONS_DIR,
+        TESTS_DIR,
+        "test{functionName}.cpp".format(
+            functionName=function.functionName,
+        )
+    )
+    absTemplatePath = GetTemplateFile(relativeTestPath)
+    if not os.path.isfile(absTemplatePath):
+        print("Cannot find template file {}".format(absTemplatePath))
+        return None
+
+    code = GenerateCode(function, absTemplatePath)
+    filePath = os.path.abspath(relativeTestPath)
+    WriteFile(filePath, code)
     return filePath
 
 
@@ -297,8 +335,11 @@ def GenerateFunctions():
     filePaths = []
     for functionGroup in functionGroups:
         for function in functionGroup.functions:
-            filePath = GenerateFunction(function)
-            filePaths.append(filePath)
+            filePaths.append(GenerateFunction(function))
+
+            testCode = GenerateFunctionTest(function)
+            if testCode:
+                filePaths.append(testCode)
 
     return filePaths
 

@@ -11,4 +11,4 @@ install(
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${LIBRARY_NAME}/${CATEGORY_NAME}
 )
 
-# add_subdirectory(tests)
+add_subdirectory(tests)
