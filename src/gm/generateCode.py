@@ -219,7 +219,9 @@ def GenerateVectorType(vectorType):
     relativePath = os.path.join(TYPES_DIR, "vectorType.h")
     templatePath = GetTemplateFile(relativePath)
     code = GenerateCode(templatePath, vectorType=vectorType)
-    filePath = os.path.abspath(relativePath)
+    filePath = os.path.abspath(
+        os.path.join(TYPES_DIR, vectorType.headerFileName)
+    )
     WriteFile(filePath, code)
     return filePath
 
