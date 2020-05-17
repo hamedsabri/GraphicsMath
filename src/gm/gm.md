@@ -23,6 +23,8 @@ The executable python script located at \p src/gm/generateCode.py can be run to 
 
 Some common code generation logic are located under \p src/gm/codeGen/.
 
+The jinja2 templates are located under \p src/gm/template.
+
 \section GM_Motivation Motivation
 
 <em>Why another math library?</em>  
