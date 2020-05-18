@@ -15,7 +15,6 @@ TEST_CASE( "{{ function.name }}_{{ vectorType.className }}" )
 {%- endif -%}
 {%- endfor %}
     );
-
     CHECK( gm::LengthSquared( {{ vectorType.variablePrefix }} )
 {% if vectorType.elementSize == 2 -%}
            == {{ vectorType.GetCppNumber(4) }}
