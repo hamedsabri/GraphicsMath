@@ -12,7 +12,7 @@
 #include <gm/types/vec3f.h>
 #include <gm/types/vec4f.h>
 
-#include <gm/functions/lengthSquared.h>
+#include <gm/functions/dotProduct.h>
 
 GM_NS_OPEN
 
@@ -40,4 +40,4 @@ GM_HOST_DEVICE inline float LengthSquared( const Vec4f& i_vector )
     return DotProduct( i_vector, i_vector );
 }
 
-PBR_NAMESPACE_END
+GM_NS_CLOSE

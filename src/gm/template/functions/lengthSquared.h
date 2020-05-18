@@ -12,7 +12,7 @@
 #include <gm/types/{{ vectorType.headerFileName }}>
 {% endfor %}
 
-#include <gm/functions/lengthSquared.h>
+#include <gm/functions/dotProduct.h>
 
 GM_NS_OPEN
 
@@ -27,4 +27,4 @@ GM_HOST_DEVICE inline {{ vectorType.elementType.className }} {{ function.name }}
 }
 {% endfor %}
 
-PBR_NAMESPACE_END
+GM_NS_CLOSE
