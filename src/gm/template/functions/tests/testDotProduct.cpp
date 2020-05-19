@@ -23,7 +23,7 @@ TEST_CASE( "{{ function.name }}_{{ vectorType.className }}" )
 {%- endif -%}
 {%- endfor %}
     );
-    CHECK( gm::DotProduct( {{ vectorType.variablePrefix }}A, {{ vectorType.variablePrefix }}B )
+    CHECK( gm::{{ function.name }}( {{ vectorType.variablePrefix }}A, {{ vectorType.variablePrefix }}B )
 {% if vectorType.elementSize == 2 -%}
            == {{ vectorType.GetCppNumber(5) }}
 {% elif vectorType.elementSize == 3 -%}
