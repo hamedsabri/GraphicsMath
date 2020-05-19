@@ -5,6 +5,7 @@ Common code generation utilities.
 import os
 import shlex
 import subprocess
+import math
 
 from jinja2 import Template
 
@@ -83,5 +84,5 @@ def GenerateCode(templatePath, **kwargs):
     with open(templatePath, "r") as f:
         templateStr = f.read()
         template = Template(templateStr)
-        code = template.render(**kwargs)
+        code = template.render(math=math, **kwargs)
         return code
