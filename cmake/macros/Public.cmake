@@ -346,11 +346,11 @@ endfunction() # cpp_test_program
 
 # Builds a C++ python module.
 #
+# pybind11 and Python::Python are automatically added as library dependencies.
+#
 # Multi-value Arguments:
 #   CPPFILES
 #       C++ source files.
-#   PUBLIC_HEADERS
-#       Header files, which will be deployed for external usage.
 #   INCLUDE_PATHS
 #       Include paths for compiling the source files.
 #   LIBRARIES
