@@ -11,6 +11,7 @@ from codeGen.utils import (
     GenerateCode,
     WriteFile,
     FormatCode,
+    UpperCamelCase,
 )
 
 from codeGen.types import (
@@ -43,6 +44,11 @@ FUNCTIONS_DIR = "functions"
 Name of the subdirectory, under types/ and functions/ where their tests reside.
 """
 TESTS_DIR = "tests"
+
+"""
+Name of the python subdirectory, where the bindings reside.
+"""
+PYTHON_DIR = "python"
 
 """
 Global set of POD value types.
@@ -249,6 +255,28 @@ def GenerateVectorTypeTest(vectorType):
     return filePath
 
 
+def GenerateVectorTypePythonBinding(vectorType):
+    """
+    Generate python binding code for a vector type.
+
+    Args:
+        vectorType (VectorType): vectorType object.
+
+    Returns:
+        tuple: file path to the generated test code.
+    """
+    templatePath = GetTemplateFile(
+        os.path.join(PYTHON_DIR, "bindVectorType.h")
+    )
+    code = GenerateCode(templatePath, vectorType=vectorType)
+    filePath = os.path.join(
+        os.path.abspath(PYTHON_DIR),
+        "bind{headerFileName}".format(headerFileName=UpperCamelCase(vectorType.headerFileName)),
+    )
+    WriteFile(filePath, code)
+    return filePath
+
+
 def GenerateVectorTypes():
     """
     Generate all vector type source files.
@@ -261,6 +289,8 @@ def GenerateVectorTypes():
     for vectorType in VECTOR_TYPES:
         filePaths.append(GenerateVectorType(vectorType))
         filePaths.append(GenerateVectorTypeTest(vectorType))
+        filePaths.append(GenerateVectorTypePythonBinding(vectorType))
+
     return filePaths
 
 
@@ -282,7 +312,6 @@ def GenerateTypes():
 #
 # Code generation for functions.
 #
-
 
 def GenerateFunction(function):
     """
@@ -329,7 +358,7 @@ def GenerateFunctionTest(function):
 
 def GenerateFunctions():
     """
-    Generate code for templatized function.
+    Generate code for all of the functions.
 
     Returns:
         list: file paths to the generated files.
@@ -356,12 +385,31 @@ def GenerateFunctions():
     return filePaths
 
 
+#
+# Code generation for python.
+#
+
+def GeneratePythonModule():
+    """
+    Generate code for the python module.
+    """
+    relModulePath = os.path.join(PYTHON_DIR, "module.cpp")
+    absModulePath = GetTemplateFile(relModulePath)
+    code = GenerateCode(absModulePath, types=VECTOR_TYPES, UpperCamelCase=UpperCamelCase)
+    filePath = os.path.abspath(relModulePath)
+    WriteFile(filePath, code)
+    return filePath
+
+
 if __name__ == "__main__":
     # Generate types first, to populate type registry.
     filePaths = GenerateTypes()
 
     # Proceed with generating functions.
     filePaths += GenerateFunctions()
+
+    # Generate python module.
+    filePaths.append(GeneratePythonModule())
 
     # Format all the code to standard.
     FormatCode(filePaths)
