@@ -25,3 +25,7 @@ target_include_directories(${LIBRARY_NAME}
 add_subdirectory(base)
 add_subdirectory(types)
 add_subdirectory(functions)
+
+if(BUILD_PYTHON_BINDINGS)
+    add_subdirectory(python)
+endif()

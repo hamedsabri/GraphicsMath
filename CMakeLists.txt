@@ -10,6 +10,7 @@ project(
 
 # Options
 option(BUILD_DOCUMENTATION "Build doxygen documentation." ON)
+option(BUILD_PYTHON_BINDINGS "Build python bindings." ON)
 
 # Debug build flags.
 set(CMAKE_CXX_FLAGS_DEBUG "-DGM_DEBUG")
@@ -22,6 +23,11 @@ endif()
 # Discover macros.
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake/macros")
 include(Public)
+
+# Python bindings.
+if(BUILD_PYTHON_BINDINGS)
+    find_package(Python COMPONENTS Development)
+endif()
 
 # Testing.
 if(BUILD_TESTING)
