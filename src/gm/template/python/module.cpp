@@ -1,8 +1,8 @@
 #include <pybind11/pybind11.h>
 
-// Types
+// Type Declarations.
 {% for type in types -%}
-#include "bind{{ UpperCamelCase(type.headerFileName) }}"
+void Bind{{ type.className }}( pybind11::module& );
 {% endfor %}
 
 PYBIND11_MODULE( gm, o_module )

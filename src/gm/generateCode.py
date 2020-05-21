@@ -11,6 +11,7 @@ from codeGen.utils import (
     GenerateCode,
     WriteFile,
     FormatCode,
+    LowerCamelCase,
     UpperCamelCase,
 )
 
@@ -266,12 +267,12 @@ def GenerateVectorTypePythonBinding(vectorType):
         tuple: file path to the generated test code.
     """
     templatePath = GetTemplateFile(
-        os.path.join(PYTHON_DIR, "bindVectorType.h")
+        os.path.join(PYTHON_DIR, "bindVectorType.cpp")
     )
     code = GenerateCode(templatePath, vectorType=vectorType)
     filePath = os.path.join(
         os.path.abspath(PYTHON_DIR),
-        "bind{headerFileName}".format(headerFileName=UpperCamelCase(vectorType.headerFileName)),
+        "bind{className}.cpp".format(className=vectorType.className),
     )
     WriteFile(filePath, code)
     return filePath

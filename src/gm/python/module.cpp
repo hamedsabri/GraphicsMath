@@ -1,14 +1,14 @@
 #include <pybind11/pybind11.h>
 
-// Types
-#include "bindMat3f.h"
-#include "bindMat4f.h"
-#include "bindVec2f.h"
-#include "bindVec2i.h"
-#include "bindVec3f.h"
-#include "bindVec3i.h"
-#include "bindVec4f.h"
-#include "bindVec4i.h"
+// Type Declarations.
+void BindMat4f( pybind11::module& );
+void BindMat3f( pybind11::module& );
+void BindVec2i( pybind11::module& );
+void BindVec4f( pybind11::module& );
+void BindVec2f( pybind11::module& );
+void BindVec4i( pybind11::module& );
+void BindVec3f( pybind11::module& );
+void BindVec3i( pybind11::module& );
 
 PYBIND11_MODULE( gm, o_module )
 {
