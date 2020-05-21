@@ -2,7 +2,7 @@
 
 \section GM_Introduction Introduction
 
-GraphicsMath is a C++ header-only computer graphics math library.
+GraphicsMath is a C++ header-only computer graphics math library, with optional python bindings.
 
 Instead of using C++ templates, the source code of types, functions and their respective tests 
 are generated from jinja2 template files.  This is an effort to improve compilation times and code readability, 

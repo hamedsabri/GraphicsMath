@@ -1,6 +1,6 @@
 # GraphicsMath
 
-C++ header-only computer graphics math library.
+C++ header-only computer graphics math library, with optional python bindings.
 
 ## Requirements
 
