@@ -3,17 +3,15 @@
 /// \file {{ compositeType.headerFileName }}
 
 #include <sstream>
+{% for include in compositeType.extraIncludes -%}
+#include {{ include }}
+{% endfor %}
 
 #include <gm/gm.h>
-
 {% for element in compositeType.elements -%}
 {% if element.type.isVector or element.type.isComposite -%}
 #include <gm/types/{{ element.type.headerFileName }}>
 {%- endif %}
-{% endfor %}
-
-{% for include in compositeType.extraIncludes -%}
-#include {{ include }}
 {% endfor %}
 
 GM_NS_OPEN

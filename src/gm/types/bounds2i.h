@@ -6,13 +6,11 @@
 
 /// \file bounds2i.h
 
+#include <limits>
 #include <sstream>
 
 #include <gm/gm.h>
-
 #include <gm/types/vec2i.h>
-
-#include <limits>
 
 GM_NS_OPEN
 

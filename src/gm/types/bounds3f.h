@@ -6,13 +6,11 @@
 
 /// \file bounds3f.h
 
+#include <limits>
 #include <sstream>
 
 #include <gm/gm.h>
-
 #include <gm/types/vec3f.h>
-
-#include <limits>
 
 GM_NS_OPEN
 
