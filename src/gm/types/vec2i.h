@@ -1,3 +1,7 @@
+//
+// This file is auto-generated, please do not modify directly!
+//
+
 #pragma once
 
 /// \file vec2i.h

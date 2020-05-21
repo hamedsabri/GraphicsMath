@@ -83,6 +83,15 @@ def GenerateCode(templatePath, **kwargs):
     """
     with open(templatePath, "r") as f:
         templateStr = f.read()
+        templateStr = os.linesep.join(
+            [
+                "//",
+                "// This file is auto-generated, please do not modify directly!",
+                "//",
+                os.linesep,
+            ]
+            + templateStr.split(os.linesep)
+        )
         template = Template(templateStr)
         code = template.render(math=math, **kwargs)
         return code

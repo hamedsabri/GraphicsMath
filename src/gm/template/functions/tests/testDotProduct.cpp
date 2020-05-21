@@ -2,8 +2,6 @@
 
 #include <gm/functions/{{ function.headerFileName }}>
 
-// This test is auto-generated! Please do not modify directly
-
 {% for vectorType in function.types %}
 TEST_CASE( "{{ function.name }}_{{ vectorType.className }}" )
 {

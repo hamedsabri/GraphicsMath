@@ -1,8 +1,10 @@
+//
+// This file is auto-generated, please do not modify directly!
+//
+
 #include <catch2/catch.hpp>
 
 #include <gm/functions/length.h>
-
-// This test is auto-generated! Please do not modify directly
 
 TEST_CASE( "Length_Vec2f" )
 {

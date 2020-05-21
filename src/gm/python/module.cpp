@@ -1,3 +1,7 @@
+//
+// This file is auto-generated, please do not modify directly!
+//
+
 #include <pybind11/pybind11.h>
 
 // Type Declarations.
