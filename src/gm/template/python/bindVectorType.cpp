@@ -88,4 +88,16 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
                              {{ vectorType.elementType.className }} i_lhs ) {
         return i_lhs * i_rhs;
     } );
+
+
+    // Vector-scalar Division.
+    cls.def( "__div__", []( const {{ vectorType.className }}& i_lhs,
+                            {{ vectorType.elementType.className }} i_rhs ) {
+        if ( i_rhs == {{ vectorType.GetCppNumber( 0 ) }} )
+        {
+            // TODO throw pybind11::zero_division_error();
+            throw pybind11::value_error();
+        }
+        return i_lhs / i_rhs;
+    } );
 }

@@ -56,4 +56,14 @@ void BindVec2i( pybind11::module& o_module )
 
     // Scalar-vector Multiplication.
     cls.def( "__rmul__", []( const Vec2i& i_rhs, int i_lhs ) { return i_lhs * i_rhs; } );
+
+    // Vector-scalar Division.
+    cls.def( "__div__", []( const Vec2i& i_lhs, int i_rhs ) {
+        if ( i_rhs == 0 )
+        {
+            // TODO throw pybind11::zero_division_error();
+            throw pybind11::value_error();
+        }
+        return i_lhs / i_rhs;
+    } );
 }
