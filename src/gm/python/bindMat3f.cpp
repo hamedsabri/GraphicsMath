@@ -30,7 +30,7 @@ void BindMat3f( pybind11::module& o_module )
 
     // Object representation.
     cls.def( "__repr__", []( const Mat3f& i_lhs ) {
-        return pybind11::str( "gm.Mat3f({}, {}, {}, {}, {}, {}, {}, {}, {})" )
+        return pybind11::str( "gm.Mat3f(\n    {}, {}, {}, \n    {}, {}, {}, \n    {}, {}, {}\n)" )
             .format( i_lhs[ 0 ],
                      i_lhs[ 1 ],
                      i_lhs[ 2 ],

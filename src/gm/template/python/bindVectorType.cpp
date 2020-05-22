@@ -26,6 +26,18 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
     // Object representation.
     cls.def( "__repr__", []( const {{ vectorType.className }}& i_lhs ) {
         return pybind11::str("gm.{{vectorType.className}}(
+{%- if vectorType.dims|length == 2 -%}
+{%- for index in range(vectorType.elementSize) -%}
+{%- if index % vectorType.dims[0] == 0 -%}
+        \n{{ "    " }}
+{%- endif -%}
+        {}
+{%- if index + 1 < vectorType.elementSize -%}
+        ,{{ " " }}
+{%- endif -%}
+{%- endfor -%}
+            \n)" ).format(
+{%- else -%}
 {%- for index in range(vectorType.elementSize) -%}
         {}
 {%- if index + 1 < vectorType.elementSize -%}
@@ -33,6 +45,7 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
 {%- endif -%}
 {%- endfor -%}
             )" ).format(
+{%- endif -%}
 {%- for index in range(vectorType.elementSize) -%}
             i_lhs[ {{ index }} ]
 {%- if index + 1 < vectorType.elementSize -%}
