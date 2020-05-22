@@ -267,11 +267,12 @@ def GenerateVectorTypePythonBinding(vectorType):
         str: file path to the generated test code.
     """
     templatePath = GetTemplateFile(
-        os.path.join(PYTHON_DIR, "bindVectorType.cpp")
+        os.path.join(PYTHON_DIR, TYPES_DIR, "bindVectorType.cpp")
     )
     code = GenerateCode(templatePath, vectorType=vectorType)
     filePath = os.path.join(
         os.path.abspath(PYTHON_DIR),
+        TYPES_DIR,
         "bind{className}.cpp".format(className=vectorType.className),
     )
     WriteFile(filePath, code)
@@ -289,13 +290,13 @@ def GenerateVectorTypePythonBindingTest(vectorType):
         str: file path to the generated test code.
     """
     templatePath = GetTemplateFile(
-        os.path.join(PYTHON_DIR, TESTS_DIR, TYPES_DIR, "testVectorType.py")
+        os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "testVectorType.py")
     )
     code = GenerateCode(templatePath, vectorType=vectorType)
     filePath = os.path.join(
         os.path.abspath(PYTHON_DIR),
-        TESTS_DIR,
         TYPES_DIR,
+        TESTS_DIR,
         "test{className}.py".format(className=vectorType.className),
     )
     WriteFile(filePath, code)

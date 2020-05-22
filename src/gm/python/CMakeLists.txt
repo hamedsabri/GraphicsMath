@@ -1,4 +1,4 @@
-file(GLOB CPPFILES *.cpp)
+file(GLOB CPPFILES *.cpp types/*.cpp)
 cpp_python_module(gm
     TYPE
         SHARED
@@ -8,6 +8,4 @@ cpp_python_module(gm
         gm
 )
 
-if (BUILD_TESTING)
-    add_subdirectory(tests)
-endif()
+add_subdirectory(types)

@@ -18,4 +18,3 @@ GM_NS_OPEN
 using {{ arrayType.className }} = std::vector< {{ arrayType.elementType.className }} >;
 
 GM_NS_CLOSE
-

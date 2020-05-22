@@ -384,7 +384,7 @@ function(
     # Add a prefix to avoid conflict(s) between C++ targets and python target names.
     # Other targets should not be linking against python plugins anyway, so it is ok
     # if the target name is obfuscated.
-    set(TARGET_NAME pymodule_${MODULE_NAME})
+    set(TARGET_NAME pylib_${MODULE_NAME})
 
     # Add a new shared library target.
     add_library(${TARGET_NAME}
