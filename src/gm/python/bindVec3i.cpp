@@ -22,7 +22,7 @@ void BindVec3i( pybind11::module& o_module )
 
     // Object representation.
     cls.def( "__repr__", []( const Vec3i& i_lhs ) {
-        return pybind11::str( "gm.Vec3i({},{},{})" ).format( i_lhs[ 0 ], i_lhs[ 1 ], i_lhs[ 2 ] );
+        return pybind11::str( "gm.Vec3i({}, {}, {})" ).format( i_lhs[ 0 ], i_lhs[ 1 ], i_lhs[ 2 ] );
     } );
 
     // Element indexed read access.

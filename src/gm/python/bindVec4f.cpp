@@ -22,7 +22,7 @@ void BindVec4f( pybind11::module& o_module )
 
     // Object representation.
     cls.def( "__repr__", []( const Vec4f& i_lhs ) {
-        return pybind11::str( "gm.Vec4f({},{},{},{})" ).format( i_lhs[ 0 ], i_lhs[ 1 ], i_lhs[ 2 ], i_lhs[ 3 ] );
+        return pybind11::str( "gm.Vec4f({}, {}, {}, {})" ).format( i_lhs[ 0 ], i_lhs[ 1 ], i_lhs[ 2 ], i_lhs[ 3 ] );
     } );
 
     // Element indexed read access.

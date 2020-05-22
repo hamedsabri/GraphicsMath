@@ -29,7 +29,7 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
 {%- for index in range(vectorType.elementSize) -%}
         {}
 {%- if index + 1 < vectorType.elementSize -%}
-        ,
+        ,{{ " " }}
 {%- endif -%}
 {%- endfor -%}
             )" ).format(
