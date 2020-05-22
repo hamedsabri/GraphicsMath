@@ -78,4 +78,7 @@ void BindMat4f( pybind11::module& o_module )
 
     // Vector addition.
     cls.def( "__add__", []( const Mat4f& i_lhs, const Mat4f& i_rhs ) { return i_lhs + i_rhs; } );
+
+    // Vector subtraction.
+    cls.def( "__sub__", []( const Mat4f& i_lhs, const Mat4f& i_rhs ) { return i_lhs - i_rhs; } );
 }

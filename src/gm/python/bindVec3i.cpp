@@ -47,4 +47,7 @@ void BindVec3i( pybind11::module& o_module )
 
     // Vector addition.
     cls.def( "__add__", []( const Vec3i& i_lhs, const Vec3i& i_rhs ) { return i_lhs + i_rhs; } );
+
+    // Vector subtraction.
+    cls.def( "__sub__", []( const Vec3i& i_lhs, const Vec3i& i_rhs ) { return i_lhs - i_rhs; } );
 }

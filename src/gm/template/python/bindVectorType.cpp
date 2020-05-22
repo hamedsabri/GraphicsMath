@@ -71,4 +71,9 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
         return i_lhs + i_rhs;
     } );
 
+    // Vector subtraction.
+    cls.def( "__sub__", []( const {{ vectorType.className }}& i_lhs,
+                            const {{ vectorType.className }}& i_rhs ) {
+        return i_lhs - i_rhs;
+    } );
 }
