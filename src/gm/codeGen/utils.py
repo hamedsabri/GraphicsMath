@@ -96,7 +96,7 @@ def GenerateCode(templatePath, **kwargs):
                 commentPrefix,
                 commentPrefix + " This file is auto-generated, please do not modify directly!",
                 commentPrefix,
-                os.linesep,
+                "",
             ]
             + templateStr.split(os.linesep)
         )
