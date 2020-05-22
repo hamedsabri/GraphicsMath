@@ -8,13 +8,43 @@
 
 // Python bindings for Vec3i.
 
+GM_NS_USING
+
 void BindVec3i( pybind11::module& o_module )
 {
-    pybind11::class_< gm::Vec3i > cls( o_module, "Vec3i" );
+    pybind11::class_< Vec3i > cls( o_module, "Vec3i" );
 
     // Default initializer.
     cls.def( pybind11::init<>() );
 
     // Per-element initializer.
     cls.def( pybind11::init< const int&, const int&, const int& >() );
+
+    // Object representation.
+    cls.def( "__repr__", []( const Vec3i& i_lhs ) {
+        return pybind11::str( "gm.Vec3i({},{},{})" ).format( i_lhs[ 0 ], i_lhs[ 1 ], i_lhs[ 2 ] );
+    } );
+
+    // Element indexed read access.
+    cls.def( "__getitem__", []( const Vec3i& i_vector, size_t i_index ) {
+        if ( i_vector.GetElementSize() <= i_index )
+        {
+            throw pybind11::index_error();
+        }
+
+        return i_vector[ i_index ];
+    } );
+
+    // Element indexed write access.
+    cls.def( "__setitem__", []( Vec3i& o_vector, size_t i_index, int i_value ) {
+        if ( o_vector.GetElementSize() <= i_index )
+        {
+            throw pybind11::index_error();
+        }
+
+        o_vector[ i_index ] = i_value;
+    } );
+
+    // Vector addition.
+    cls.def( "__add__", []( const Vec3i& i_lhs, const Vec3i& i_rhs ) { return i_lhs + i_rhs; } );
 }
