@@ -26,7 +26,8 @@ include(Public)
 
 # Python bindings.
 if(BUILD_PYTHON_BINDINGS)
-    find_package(Python COMPONENTS Development)
+    find_package(Python COMPONENTS Development Interpreter)
+    message(STATUS "Found python executable: ${Python_EXECUTABLE}")
 endif()
 
 # Testing.

@@ -264,7 +264,7 @@ def GenerateVectorTypePythonBinding(vectorType):
         vectorType (VectorType): vectorType object.
 
     Returns:
-        tuple: file path to the generated test code.
+        str: file path to the generated test code.
     """
     templatePath = GetTemplateFile(
         os.path.join(PYTHON_DIR, "bindVectorType.cpp")
@@ -273,6 +273,30 @@ def GenerateVectorTypePythonBinding(vectorType):
     filePath = os.path.join(
         os.path.abspath(PYTHON_DIR),
         "bind{className}.cpp".format(className=vectorType.className),
+    )
+    WriteFile(filePath, code)
+    return filePath
+
+
+def GenerateVectorTypePythonBindingTest(vectorType):
+    """
+    Generate tests for vector type python binding.
+
+    Args:
+        vectorType (VectorType): vectorType object.
+
+    Returns:
+        str: file path to the generated test code.
+    """
+    templatePath = GetTemplateFile(
+        os.path.join(PYTHON_DIR, TESTS_DIR, TYPES_DIR, "testVectorType.py")
+    )
+    code = GenerateCode(templatePath, vectorType=vectorType)
+    filePath = os.path.join(
+        os.path.abspath(PYTHON_DIR),
+        TESTS_DIR,
+        TYPES_DIR,
+        "test{className}.py".format(className=vectorType.className),
     )
     WriteFile(filePath, code)
     return filePath
@@ -291,6 +315,7 @@ def GenerateVectorTypes():
         filePaths.append(GenerateVectorType(vectorType))
         filePaths.append(GenerateVectorTypeTest(vectorType))
         filePaths.append(GenerateVectorTypePythonBinding(vectorType))
+        GenerateVectorTypePythonBindingTest(vectorType)
 
     return filePaths
 

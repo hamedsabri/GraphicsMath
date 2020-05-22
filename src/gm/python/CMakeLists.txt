@@ -7,3 +7,7 @@ cpp_python_module(gm
     LIBRARIES
         gm
 )
+
+if (BUILD_TESTING)
+    add_subdirectory(tests)
+endif()

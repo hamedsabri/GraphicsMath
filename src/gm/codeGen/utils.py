@@ -81,13 +81,21 @@ def GenerateCode(templatePath, **kwargs):
     Returns:
         str: file name of generated source file.
     """
+    fileExt = os.path.splitext(templatePath)[1];
+    if fileExt in [".cpp", ".h"]:
+        commentPrefix = "//"
+    elif fileExt == ".py":
+        commentPrefix = "#"
+    else:
+        raise ValueError("Unknown codegen template suffix: %s".format(fileExt))
+
     with open(templatePath, "r") as f:
         templateStr = f.read()
         templateStr = os.linesep.join(
             [
-                "//",
-                "// This file is auto-generated, please do not modify directly!",
-                "//",
+                commentPrefix,
+                commentPrefix + " This file is auto-generated, please do not modify directly!",
+                commentPrefix,
                 os.linesep,
             ]
             + templateStr.split(os.linesep)
