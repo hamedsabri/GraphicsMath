@@ -76,6 +76,40 @@ void BindMat4f( pybind11::module& o_module )
         o_vector[ i_index ] = i_value;
     } );
 
+    // Matrix row-column indexed element read access.
+    cls.def( "__getitem__", []( const Mat4f& i_matrix, pybind11::tuple i_index ) {
+        if ( i_index.size() != 2 )
+        {
+            throw pybind11::index_error();
+        }
+
+        size_t row = i_index[ 0 ].cast< size_t >();
+        size_t col = i_index[ 1 ].cast< size_t >();
+        if ( row >= 4 || col >= 4 )
+        {
+            throw pybind11::index_error();
+        }
+
+        return i_matrix( row, col );
+    } );
+
+    // Matrix row-column indexed element write access.
+    cls.def( "__setitem__", []( Mat4f& o_matrix, pybind11::tuple i_index, float i_value ) {
+        if ( i_index.size() != 2 )
+        {
+            throw pybind11::index_error();
+        }
+
+        size_t row = i_index[ 0 ].cast< size_t >();
+        size_t col = i_index[ 1 ].cast< size_t >();
+        if ( row >= 4 || col >= 4 )
+        {
+            throw pybind11::index_error();
+        }
+
+        o_matrix( row, col ) = i_value;
+    } );
+
     // Vector addition.
     cls.def( "__add__", []( const Mat4f& i_lhs, const Mat4f& i_rhs ) { return i_lhs + i_rhs; } );
 
@@ -97,4 +131,7 @@ void BindMat4f( pybind11::module& o_module )
         }
         return i_lhs / i_rhs;
     } );
+
+    // Unary negation.
+    cls.def( "__neg__", []( const Mat4f& i_vector ) { return -i_vector; } );
 }

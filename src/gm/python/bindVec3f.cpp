@@ -66,4 +66,7 @@ void BindVec3f( pybind11::module& o_module )
         }
         return i_lhs / i_rhs;
     } );
+
+    // Unary negation.
+    cls.def( "__neg__", []( const Vec3f& i_vector ) { return -i_vector; } );
 }
