@@ -68,4 +68,13 @@ void BindVec2f( pybind11::module& o_module )
 
     // Unary negation.
     cls.def( "__neg__", []( const Vec2f& i_vector ) { return -i_vector; } );
+
+    // Equality.
+    cls.def( "__eq__", []( const Vec2f& i_lhs, const Vec2f& i_rhs ) { return i_lhs == i_rhs; } );
+
+    // Element size.
+    cls.def( "GetElementSize", &Vec2f::GetElementSize );
+
+    // Check for nans.
+    cls.def( "HasNans", &Vec2f::HasNans );
 }

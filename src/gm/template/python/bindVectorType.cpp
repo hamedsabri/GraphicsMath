@@ -129,4 +129,15 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
         return -i_vector;
     } );
 
+    // Equality.
+    cls.def( "__eq__", []( const {{ vectorType.className }}& i_lhs,
+                           const {{ vectorType.className }}& i_rhs ) {
+        return i_lhs == i_rhs;
+    } );
+
+    // Element size.
+    cls.def( "GetElementSize", &{{ vectorType.className }}::GetElementSize );
+
+    // Check for nans.
+    cls.def( "HasNans", &{{ vectorType.className }}::HasNans );
 }

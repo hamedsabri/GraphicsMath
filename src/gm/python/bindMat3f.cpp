@@ -110,4 +110,13 @@ void BindMat3f( pybind11::module& o_module )
 
     // Unary negation.
     cls.def( "__neg__", []( const Mat3f& i_vector ) { return -i_vector; } );
+
+    // Equality.
+    cls.def( "__eq__", []( const Mat3f& i_lhs, const Mat3f& i_rhs ) { return i_lhs == i_rhs; } );
+
+    // Element size.
+    cls.def( "GetElementSize", &Mat3f::GetElementSize );
+
+    // Check for nans.
+    cls.def( "HasNans", &Mat3f::HasNans );
 }
