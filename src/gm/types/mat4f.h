@@ -346,6 +346,7 @@ public:
     {
         std::stringstream ss;
         ss << "Mat4f( ";
+        ss << "\n    ";
         ss << m_elements[ 0 ];
         ss << ", ";
         ss << m_elements[ 1 ];
@@ -354,6 +355,7 @@ public:
         ss << ", ";
         ss << m_elements[ 3 ];
         ss << ", ";
+        ss << "\n    ";
         ss << m_elements[ 4 ];
         ss << ", ";
         ss << m_elements[ 5 ];
@@ -362,6 +364,7 @@ public:
         ss << ", ";
         ss << m_elements[ 7 ];
         ss << ", ";
+        ss << "\n    ";
         ss << m_elements[ 8 ];
         ss << ", ";
         ss << m_elements[ 9 ];
@@ -370,6 +373,7 @@ public:
         ss << ", ";
         ss << m_elements[ 11 ];
         ss << ", ";
+        ss << "\n    ";
         ss << m_elements[ 12 ];
         ss << ", ";
         ss << m_elements[ 13 ];
@@ -377,7 +381,7 @@ public:
         ss << m_elements[ 14 ];
         ss << ", ";
         ss << m_elements[ 15 ];
-        ss << " )";
+        ss << "\n)";
         return ss.str();
     }
 

@@ -21,9 +21,8 @@ void BindVec4i( pybind11::module& o_module )
     cls.def( pybind11::init< const int&, const int&, const int&, const int& >() );
 
     // Object representation.
-    cls.def( "__repr__", []( const Vec4i& i_lhs ) {
-        return pybind11::str( "gm.Vec4i({}, {}, {}, {})" ).format( i_lhs[ 0 ], i_lhs[ 1 ], i_lhs[ 2 ], i_lhs[ 3 ] );
-    } );
+    cls.def( "__repr__",
+             []( const Vec4i& i_vector ) { return pybind11::str( "gm." ) + pybind11::str( i_vector.GetString() ); } );
 
     // Element indexed read access.
     cls.def( "__getitem__", []( const Vec4i& i_vector, size_t i_index ) {

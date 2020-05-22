@@ -266,24 +266,27 @@ public:
     {
         std::stringstream ss;
         ss << "Mat3f( ";
+        ss << "\n    ";
         ss << m_elements[ 0 ];
         ss << ", ";
         ss << m_elements[ 1 ];
         ss << ", ";
         ss << m_elements[ 2 ];
         ss << ", ";
+        ss << "\n    ";
         ss << m_elements[ 3 ];
         ss << ", ";
         ss << m_elements[ 4 ];
         ss << ", ";
         ss << m_elements[ 5 ];
         ss << ", ";
+        ss << "\n    ";
         ss << m_elements[ 6 ];
         ss << ", ";
         ss << m_elements[ 7 ];
         ss << ", ";
         ss << m_elements[ 8 ];
-        ss << " )";
+        ss << "\n)";
         return ss.str();
     }
 

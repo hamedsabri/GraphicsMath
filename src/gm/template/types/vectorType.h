@@ -301,13 +301,26 @@ public:
     {
         std::stringstream ss;
         ss << "{{ vectorType.className }}( ";
+{%- if vectorType.dims|length == 2 -%}
+{%- for index in range(vectorType.elementSize) -%}
+{%- if index % vectorType.dims[0] == 0 -%}
+        ss << "\n    ";
+{%- endif -%}
+        ss << m_elements[ {{ index }} ];
+{%- if index + 1 < vectorType.elementSize -%}
+        ss << ", ";
+{%- endif -%}
+{%- endfor -%}
+        ss << "\n)";
+{%- else -%}
 {%- for index in range(vectorType.elementSize) -%}
         ss << m_elements[ {{ index }} ];
 {%- if index + 1 < vectorType.elementSize -%}
         ss << ", ";
-{%- endif %}
-{%- endfor %}
+{%- endif -%}
+{%- endfor -%}
         ss << " )";
+{%- endif -%}
         return ss.str();
     }
 

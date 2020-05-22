@@ -29,18 +29,8 @@ void BindMat3f( pybind11::module& o_module )
                              const float& >() );
 
     // Object representation.
-    cls.def( "__repr__", []( const Mat3f& i_lhs ) {
-        return pybind11::str( "gm.Mat3f(\n    {}, {}, {}, \n    {}, {}, {}, \n    {}, {}, {}\n)" )
-            .format( i_lhs[ 0 ],
-                     i_lhs[ 1 ],
-                     i_lhs[ 2 ],
-                     i_lhs[ 3 ],
-                     i_lhs[ 4 ],
-                     i_lhs[ 5 ],
-                     i_lhs[ 6 ],
-                     i_lhs[ 7 ],
-                     i_lhs[ 8 ] );
-    } );
+    cls.def( "__repr__",
+             []( const Mat3f& i_vector ) { return pybind11::str( "gm." ) + pybind11::str( i_vector.GetString() ); } );
 
     // Element indexed read access.
     cls.def( "__getitem__", []( const Mat3f& i_vector, size_t i_index ) {

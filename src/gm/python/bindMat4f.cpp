@@ -36,26 +36,8 @@ void BindMat4f( pybind11::module& o_module )
                              const float& >() );
 
     // Object representation.
-    cls.def( "__repr__", []( const Mat4f& i_lhs ) {
-        return pybind11::
-            str( "gm.Mat4f(\n    {}, {}, {}, {}, \n    {}, {}, {}, {}, \n    {}, {}, {}, {}, \n    {}, {}, {}, {}\n)" )
-                .format( i_lhs[ 0 ],
-                         i_lhs[ 1 ],
-                         i_lhs[ 2 ],
-                         i_lhs[ 3 ],
-                         i_lhs[ 4 ],
-                         i_lhs[ 5 ],
-                         i_lhs[ 6 ],
-                         i_lhs[ 7 ],
-                         i_lhs[ 8 ],
-                         i_lhs[ 9 ],
-                         i_lhs[ 10 ],
-                         i_lhs[ 11 ],
-                         i_lhs[ 12 ],
-                         i_lhs[ 13 ],
-                         i_lhs[ 14 ],
-                         i_lhs[ 15 ] );
-    } );
+    cls.def( "__repr__",
+             []( const Mat4f& i_vector ) { return pybind11::str( "gm." ) + pybind11::str( i_vector.GetString() ); } );
 
     // Element indexed read access.
     cls.def( "__getitem__", []( const Mat4f& i_vector, size_t i_index ) {
