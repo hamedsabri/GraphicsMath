@@ -81,4 +81,10 @@ void BindMat4f( pybind11::module& o_module )
 
     // Vector subtraction.
     cls.def( "__sub__", []( const Mat4f& i_lhs, const Mat4f& i_rhs ) { return i_lhs - i_rhs; } );
+
+    // Vector-scalar Multiplication.
+    cls.def( "__mul__", []( const Mat4f& i_lhs, float i_rhs ) { return i_lhs * i_rhs; } );
+
+    // Scalar-vector Multiplication.
+    cls.def( "__rmul__", []( const Mat4f& i_rhs, float i_lhs ) { return i_lhs * i_rhs; } );
 }

@@ -50,4 +50,10 @@ void BindVec4i( pybind11::module& o_module )
 
     // Vector subtraction.
     cls.def( "__sub__", []( const Vec4i& i_lhs, const Vec4i& i_rhs ) { return i_lhs - i_rhs; } );
+
+    // Vector-scalar Multiplication.
+    cls.def( "__mul__", []( const Vec4i& i_lhs, int i_rhs ) { return i_lhs * i_rhs; } );
+
+    // Scalar-vector Multiplication.
+    cls.def( "__rmul__", []( const Vec4i& i_rhs, int i_lhs ) { return i_lhs * i_rhs; } );
 }

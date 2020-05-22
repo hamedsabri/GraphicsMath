@@ -76,4 +76,16 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
                             const {{ vectorType.className }}& i_rhs ) {
         return i_lhs - i_rhs;
     } );
+
+    // Vector-scalar Multiplication.
+    cls.def( "__mul__", []( const {{ vectorType.className }}& i_lhs,
+                            {{ vectorType.elementType.className }} i_rhs ) {
+        return i_lhs * i_rhs;
+    } );
+
+    // Scalar-vector Multiplication.
+    cls.def( "__rmul__", []( const {{ vectorType.className }}& i_rhs,
+                             {{ vectorType.elementType.className }} i_lhs ) {
+        return i_lhs * i_rhs;
+    } );
 }
