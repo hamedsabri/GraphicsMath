@@ -13,6 +13,10 @@ void BindVec2f( pybind11::module& );
 void BindVec4i( pybind11::module& );
 void BindVec3f( pybind11::module& );
 void BindVec3i( pybind11::module& );
+void BindBounds3f( pybind11::module& );
+void BindBounds2i( pybind11::module& );
+void BindBounds3i( pybind11::module& );
+void BindBounds2f( pybind11::module& );
 
 PYBIND11_MODULE( gm, o_module )
 {
@@ -27,4 +31,8 @@ PYBIND11_MODULE( gm, o_module )
     BindVec4i( o_module );
     BindVec3f( o_module );
     BindVec3i( o_module );
+    BindBounds3f( o_module );
+    BindBounds2i( o_module );
+    BindBounds3i( o_module );
+    BindBounds2f( o_module );
 }

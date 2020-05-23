@@ -84,6 +84,36 @@ COMPOSITE_TYPES = {}
 # Code generation for types.
 #
 
+def GenerateTypePythonBinding(templateFileName, typeKey, typeObj):
+    """
+    Generate python binding code for a type object.
+
+    Args:
+        templateFileName (dict): name of the template file.
+        typeKey (str): key for accessing the type object in the template.
+        typeObj (BaseType): type object to generate code for.
+
+    Returns:
+        str: file path to the generated test code.
+    """
+    templatePath = GetTemplateFile(
+        os.path.join(PYTHON_DIR, TYPES_DIR, templateFileName)
+    )
+
+    # Create kwargs.
+    kwargs = {
+        typeKey: typeObj
+    }
+
+    code = GenerateCode(templatePath, **kwargs)
+    filePath = os.path.join(
+        os.path.abspath(PYTHON_DIR),
+        TYPES_DIR,
+        "bind{className}.cpp".format(className=typeObj.className),
+    )
+    WriteFile(filePath, code)
+    return filePath
+
 
 def GenerateCompositeType(compositeType):
     """
@@ -166,6 +196,7 @@ def GenerateBoundsCompositeTypes():
         COMPOSITE_TYPES[compositeType.className] = compositeType
 
         filePaths.append(GenerateCompositeType(compositeType))
+        filePaths.append(GenerateTypePythonBinding("bindCompositeType.cpp", typeKey="compositeType", typeObj=compositeType))
 
     return filePaths
 
@@ -422,7 +453,7 @@ def GeneratePythonModule():
     """
     relModulePath = os.path.join(PYTHON_DIR, "module.cpp")
     absModulePath = GetTemplateFile(relModulePath)
-    code = GenerateCode(absModulePath, types=VECTOR_TYPES, UpperCamelCase=UpperCamelCase)
+    code = GenerateCode(absModulePath, types=list(VECTOR_TYPES) + COMPOSITE_TYPES.values(), UpperCamelCase=UpperCamelCase)
     filePath = os.path.abspath(relModulePath)
     WriteFile(filePath, code)
     return filePath
