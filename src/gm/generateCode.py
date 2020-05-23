@@ -316,7 +316,7 @@ def GenerateVectorTypes():
         filePaths.append(GenerateVectorType(vectorType))
         filePaths.append(GenerateVectorTypeTest(vectorType))
         filePaths.append(GenerateVectorTypePythonBinding(vectorType))
-        GenerateVectorTypePythonBindingTest(vectorType)
+        filePaths.append(GenerateVectorTypePythonBindingTest(vectorType))
 
     return filePaths
 

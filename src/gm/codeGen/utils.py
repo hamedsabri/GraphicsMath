@@ -12,6 +12,20 @@ from jinja2 import Template
 # Name of the codegen template directory.
 TEMPLATE_DIR = "template"
 
+# Python source file extension.
+PY_SOURCE_EXT = ".py"
+
+# CPP file extension(s).
+CPP_SOURCE_EXT = ".cpp"
+CPP_HEADER_EXT = ".h"
+
+
+def GetFileExt(filePath):
+    """
+    Get the file extension of ``filePath``.
+    """
+    return os.path.splitext(filePath)[1]
+
 
 def UpperCamelCase(lowerCamelCaseStr):
     """
@@ -56,8 +70,14 @@ def FormatCode(fileNames):
     Args:
         fileNames (list): input files to automatically format.
     """
-    command = "clang-format -i " + " ".join(fileNames)
-    RunCommand(command)
+    pythonFiles = [fileName for fileName in fileNames if GetFileExt(fileName) == PY_SOURCE_EXT]
+    if pythonFiles:
+        RunCommand("black " + " ".join(pythonFiles))
+
+    cppFiles = [fileName for fileName in fileNames
+                if GetFileExt(fileName) in (CPP_SOURCE_EXT, CPP_HEADER_EXT)]
+    if cppFiles:
+        RunCommand("clang-format -i " + " ".join(cppFiles))
 
 
 def GetTemplateFile(templateName):
@@ -81,10 +101,10 @@ def GenerateCode(templatePath, **kwargs):
     Returns:
         str: file name of generated source file.
     """
-    fileExt = os.path.splitext(templatePath)[1];
-    if fileExt in [".cpp", ".h"]:
+    fileExt = GetFileExt(templatePath);
+    if fileExt in (CPP_SOURCE_EXT, CPP_HEADER_EXT):
         commentPrefix = "//"
-    elif fileExt == ".py":
+    elif fileExt == PY_SOURCE_EXT:
         commentPrefix = "#"
     else:
         raise ValueError("Unknown codegen template suffix: %s".format(fileExt))

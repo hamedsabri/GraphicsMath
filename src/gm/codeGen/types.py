@@ -142,6 +142,15 @@ class VectorType(ValueType):
         elif self.elementType.className == DOUBLE:
             return str(float(value))
 
+    def GetPyNumber(self, value):
+        """
+        Convert a numeric value ``value`` to the corresponding C++ compliant value as a string.
+        """
+        if self.elementType.className == INT:
+            return str(int(value))
+        elif self.elementType.className in (FLOAT, DOUBLE):
+            return str(float(value))
+
 
 class ArrayType(ValueType):
     """
