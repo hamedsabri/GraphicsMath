@@ -10,16 +10,18 @@ at cost of extra source code and a discrete code-gen step.
 
 \section GM_CodeOrganization Code organization
 
-The headers are organized in three main categories:
-- \p gm/base - common utilities and definitions.
-- \p gm/types - computer graphics value types (vectors, arrays)
-- \p gm/functions - functionality which operate on \p gm types.
+The C++ headers are organized into the three categories:
+- \p src/gm/base - common utilities and definitions.
+- \p src/gm/types - computer graphics value types (vectors, arrays).
+- \p src/gm/functions - functionality which operate on \p gm types.
 
-Tests reside under each category sub-directory.
+Python bindings for \p types and \p functions are available under \p src/gm/python.
+
+Tests reside within the sub-directories.
 
 \section GM_CodeGeneration Code generation
 
-The executable python script located at \p src/gm/generateCode.py can be run to generate and update source code.
+The executable python script located at \p src/gm/generateCode.py can be run to generate and update source code.  Coe-formatters \p clang-format and \p black need to be available in the codegen environment.
 
 Some common code generation logic are located under \p src/gm/codeGen/.
 
