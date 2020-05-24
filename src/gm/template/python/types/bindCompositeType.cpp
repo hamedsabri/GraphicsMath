@@ -13,4 +13,14 @@ void Bind{{ compositeType.className }}( pybind11::module& o_module )
 
     // Default initializer.
     cls.def( pybind11::init<>() );
+
+    // Element-wise initializer.
+    cls.def( pybind11::init<
+{%- for index in range(compositeType.elementSize) -%}
+        const {{ compositeType.elements[ index ].type.className }}&
+{%- if index + 1 < compositeType.elementSize -%}
+        ,
+{%- endif -%}
+{%- endfor %}
+    >() );
 }

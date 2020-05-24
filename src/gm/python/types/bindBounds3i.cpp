@@ -17,4 +17,7 @@ void BindBounds3i( pybind11::module& o_module )
 
     // Default initializer.
     cls.def( pybind11::init<>() );
+
+    // Element-wise initializer.
+    cls.def( pybind11::init< const Vec3i&, const Vec3i& >() );
 }
