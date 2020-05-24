@@ -196,7 +196,10 @@ def GenerateBoundsCompositeTypes():
         COMPOSITE_TYPES[compositeType.className] = compositeType
 
         filePaths.append(GenerateCompositeType(compositeType))
-        filePaths.append(GenerateTypePythonBinding("bindCompositeType.cpp", typeKey="compositeType", typeObj=compositeType))
+        filePaths.append(GenerateTypePythonBinding(
+            "bindCompositeType.cpp",
+            typeKey="compositeType",
+            typeObj=compositeType))
 
     return filePaths
 
@@ -287,29 +290,6 @@ def GenerateVectorTypeTest(vectorType):
     return filePath
 
 
-def GenerateVectorTypePythonBinding(vectorType):
-    """
-    Generate python binding code for a vector type.
-
-    Args:
-        vectorType (VectorType): vectorType object.
-
-    Returns:
-        str: file path to the generated test code.
-    """
-    templatePath = GetTemplateFile(
-        os.path.join(PYTHON_DIR, TYPES_DIR, "bindVectorType.cpp")
-    )
-    code = GenerateCode(templatePath, vectorType=vectorType)
-    filePath = os.path.join(
-        os.path.abspath(PYTHON_DIR),
-        TYPES_DIR,
-        "bind{className}.cpp".format(className=vectorType.className),
-    )
-    WriteFile(filePath, code)
-    return filePath
-
-
 def GenerateVectorTypePythonBindingTest(vectorType):
     """
     Generate tests for vector type python binding.
@@ -346,7 +326,10 @@ def GenerateVectorTypes():
     for vectorType in VECTOR_TYPES:
         filePaths.append(GenerateVectorType(vectorType))
         filePaths.append(GenerateVectorTypeTest(vectorType))
-        filePaths.append(GenerateVectorTypePythonBinding(vectorType))
+        filePaths.append(GenerateTypePythonBinding(
+            "bindVectorType.cpp",
+            "vectorType",
+            vectorType))
         filePaths.append(GenerateVectorTypePythonBindingTest(vectorType))
 
     return filePaths
