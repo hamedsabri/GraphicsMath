@@ -48,13 +48,13 @@ public:
 
 {% for element in compositeType.elements %}
     /// Const accessor for "{{ element.name }}".
-    GM_HOST_DEVICE inline const {{ element.type.className }}& {{ element.name[0].upper() + element.name[1:] }}() const
+    GM_HOST_DEVICE inline const {{ element.type.className }}& {{ element.accessorName }}() const
     {
         return m_{{ element.name }};
     }
 
     /// Mutable accessor for "{{ element.name }}".
-    GM_HOST_DEVICE inline {{ element.type.className }}& {{ element.name[0].upper() + element.name[1:] }}()
+    GM_HOST_DEVICE inline {{ element.type.className }}& {{ element.accessorName }}()
     {
         return m_{{ element.name }};
     }

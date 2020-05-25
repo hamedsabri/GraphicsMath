@@ -20,4 +20,20 @@ void BindBounds3i( pybind11::module& o_module )
 
     // Element-wise initializer.
     cls.def( pybind11::init< const Vec3i&, const Vec3i& >() );
+
+    // Mutable accessor for the "min" element.
+    cls.def_property( "min",
+                      pybind11::cpp_function( []( Bounds3i& o_composite ) -> Vec3i& { return o_composite.Min(); },
+                                              pybind11::return_value_policy::reference_internal ),
+                      pybind11::cpp_function(
+                          []( Bounds3i& o_composite, const Vec3i& i_element ) { o_composite.Min() = i_element; } ),
+                      "Property getter / setter for the min element." );
+
+    // Mutable accessor for the "max" element.
+    cls.def_property( "max",
+                      pybind11::cpp_function( []( Bounds3i& o_composite ) -> Vec3i& { return o_composite.Max(); },
+                                              pybind11::return_value_policy::reference_internal ),
+                      pybind11::cpp_function(
+                          []( Bounds3i& o_composite, const Vec3i& i_element ) { o_composite.Max() = i_element; } ),
+                      "Property getter / setter for the max element." );
 }

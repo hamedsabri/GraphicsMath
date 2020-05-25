@@ -188,17 +188,24 @@ class ArrayType(ValueType):
         return True
 
 
-"""
-CompositeElement is a single element of an CompositeType, described by a name, type, and default value.
+class CompositeElement:
+    """
+    CompositeElement is a single element of an CompositeType, described by a name, type, and default value.
 
-Args:
-    name (str): is used to uniquely address this element from the parent Composite type.
-    type (object): the data type.
-    defaultValue (str): string, encoding C++ code that will be assigned to element member variable.
-"""
-CompositeElement = collections.namedtuple(
-    "CompositeElement", ["name", "type", "defaultValue"]
-)
+    Args:
+        name (str): is used to uniquely address this element from the parent Composite type.
+        type (object): the data type.
+        defaultValue (str): string, encoding C++ code that will be assigned to element member variable.
+    """
+
+    def __init__(self, name, type, defaultValue):
+        self.name = name
+        self.type = type
+        self.defaultValue = defaultValue
+
+    @property
+    def accessorName(self):
+        return UpperCamelCase(self.name)
 
 
 class CompositeType(ValueType):
