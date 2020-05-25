@@ -25,7 +25,7 @@ void Bind{{ compositeType.className }}( pybind11::module& o_module )
     >() );
 
 {% for element in compositeType.elements %}
-    // Mutable accessor for the "{{ element.name }}" element.
+    // Property getter/setter for the "{{ element.name }}" element.
     cls.def_property( "{{ element.name }}",
         pybind11::cpp_function(
             []( {{ compositeType.className }}& o_composite ) -> {{ element.type.className }}&
