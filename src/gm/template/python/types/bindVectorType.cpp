@@ -25,7 +25,7 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
 
     // Object representation.
     cls.def( "__repr__", []( const {{ vectorType.className }}& i_vector ) {
-        return pybind11::str("gm.") + pybind11::str( i_vector.GetString() );
+        return pybind11::str("gm.") + pybind11::str( i_vector.GetString( "gm." ) );
     } );
 
     // Element indexed read access.

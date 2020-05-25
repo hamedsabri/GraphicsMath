@@ -56,13 +56,17 @@ public:
     }
 
     /// Get the string representation.  For debugging purposes.
-    inline std::string GetString() const
+    ///
+    /// \param i_classPrefix optional string to prefix class tokens.
+    ///
+    /// \return descriptive string representing this type instance.
+    inline std::string GetString( const std::string& i_classPrefix = std::string() ) const
     {
         std::stringstream ss;
-        ss << "Bounds3f( ";
-        ss << m_min.GetString();
+        ss << i_classPrefix << "Bounds3f( ";
+        ss << m_min.GetString( i_classPrefix );
         ss << ", ";
-        ss << m_max.GetString();
+        ss << m_max.GetString( i_classPrefix );
         ss << " )";
         return ss.str();
     }

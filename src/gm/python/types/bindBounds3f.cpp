@@ -21,6 +21,10 @@ void BindBounds3f( pybind11::module& o_module )
     // Element-wise initializer.
     cls.def( pybind11::init< const Vec3f&, const Vec3f& >() );
 
+    // Object representation.
+    cls.def( "__repr__",
+             []( const Bounds3f& i_composite ) { return pybind11::str( i_composite.GetString( "gm." ) ); } );
+
     // Property getter/setter for the "min" element.
     cls.def_property( "min",
                       pybind11::cpp_function( []( Bounds3f& o_composite ) -> Vec3f& { return o_composite.Min(); },

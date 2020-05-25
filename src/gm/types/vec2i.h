@@ -177,10 +177,14 @@ public:
     }
 
     /// Get the string representation.  For debugging purposes.
-    inline std::string GetString() const
+    ///
+    /// \param i_classPrefix optional string to prefix class tokens.
+    ///
+    /// \return descriptive string representing this type instance.
+    inline std::string GetString( const std::string& i_classPrefix = std::string() ) const
     {
         std::stringstream ss;
-        ss << "Vec2i( ";
+        ss << i_classPrefix << "Vec2i( ";
         ss << m_elements[ 0 ];
         ss << ", ";
         ss << m_elements[ 1 ];

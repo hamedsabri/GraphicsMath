@@ -21,8 +21,9 @@ void BindVec3i( pybind11::module& o_module )
     cls.def( pybind11::init< const int&, const int&, const int& >() );
 
     // Object representation.
-    cls.def( "__repr__",
-             []( const Vec3i& i_vector ) { return pybind11::str( "gm." ) + pybind11::str( i_vector.GetString() ); } );
+    cls.def( "__repr__", []( const Vec3i& i_vector ) {
+        return pybind11::str( "gm." ) + pybind11::str( i_vector.GetString( "gm." ) );
+    } );
 
     // Element indexed read access.
     cls.def( "__getitem__", []( const Vec3i& i_vector, size_t i_index ) {

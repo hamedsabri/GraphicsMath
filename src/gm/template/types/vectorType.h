@@ -297,10 +297,14 @@ public:
     }
 
     /// Get the string representation.  For debugging purposes.
-    inline std::string GetString() const
+    ///
+    /// \param i_classPrefix optional string to prefix class tokens.
+    ///
+    /// \return descriptive string representing this type instance.
+    inline std::string GetString( const std::string& i_classPrefix=std::string() ) const
     {
         std::stringstream ss;
-        ss << "{{ vectorType.className }}( ";
+        ss << i_classPrefix << "{{ vectorType.className }}( ";
 {%- if vectorType.dims|length == 2 -%}
 {%- for index in range(vectorType.elementSize) -%}
 {%- if index % vectorType.dims[0] == 0 -%}

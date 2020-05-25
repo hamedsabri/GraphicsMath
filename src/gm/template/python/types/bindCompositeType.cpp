@@ -24,6 +24,11 @@ void Bind{{ compositeType.className }}( pybind11::module& o_module )
 {%- endfor %}
     >() );
 
+    // Object representation.
+    cls.def( "__repr__", []( const {{ compositeType.className }}& i_composite ) {
+        return pybind11::str( i_composite.GetString( "gm." ) );
+    } );
+
 {% for element in compositeType.elements %}
     // Property getter/setter for the "{{ element.name }}" element.
     cls.def_property( "{{ element.name }}",

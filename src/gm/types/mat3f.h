@@ -262,10 +262,14 @@ public:
     }
 
     /// Get the string representation.  For debugging purposes.
-    inline std::string GetString() const
+    ///
+    /// \param i_classPrefix optional string to prefix class tokens.
+    ///
+    /// \return descriptive string representing this type instance.
+    inline std::string GetString( const std::string& i_classPrefix = std::string() ) const
     {
         std::stringstream ss;
-        ss << "Mat3f( ";
+        ss << i_classPrefix << "Mat3f( ";
         ss << "\n    ";
         ss << m_elements[ 0 ];
         ss << ", ";

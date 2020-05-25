@@ -61,13 +61,17 @@ public:
 {% endfor %}
 
     /// Get the string representation.  For debugging purposes.
-    inline std::string GetString() const
+    ///
+    /// \param i_classPrefix optional string to prefix class tokens.
+    ///
+    /// \return descriptive string representing this type instance.
+    inline std::string GetString( const std::string& i_classPrefix=std::string() ) const
     {
         std::stringstream ss;
-        ss << "{{ compositeType.className }}( ";
+        ss << i_classPrefix << "{{ compositeType.className }}( ";
 {%- for index in range(compositeType.elementSize) -%}
 {%- if compositeType.elements[ index ].type.isVector or compositeType.elements[ index ].type.isComposite %}
-        ss << m_{{ compositeType.elements[ index ].name }}.GetString();
+        ss << m_{{ compositeType.elements[ index ].name }}.GetString( i_classPrefix );
 {%- elif compositeType.elements[ index ].type.isScalar %}
         ss << m_{{ compositeType.elements[ index ].name }};
 {%- endif %}
