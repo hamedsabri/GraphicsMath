@@ -85,12 +85,9 @@ COMPOSITE_TYPES = {}
 #
 
 
-def GenerateBoundsCompositeTypes():
+def PopulateBoundsCompositeTypes():
     """
-    Generate Bounds composite type source file.
-
-    Returns:
-        list: paths to generated source files.
+    Populate bounds composite types, by updating the global ``COMPOSITE_TYPES``.
     """
     filePaths = []
 
@@ -147,23 +144,6 @@ def GenerateBoundsCompositeTypes():
         # in a later stage.
         COMPOSITE_TYPES[compositeType.className] = compositeType
 
-        # Generate C++ source code.
-        filePaths.append(
-            GenerateCode(
-                os.path.join(TYPES_DIR, "compositeType.h"),
-                os.path.join(TYPES_DIR, compositeType.headerFileName),
-                compositeType=compositeType
-            )
-        )
-
-        # Generate python bindings.
-        filePaths.append(
-            GenerateCode(
-                os.path.join(PYTHON_DIR, TYPES_DIR, "bindCompositeType.cpp"),
-                os.path.join(PYTHON_DIR, TYPES_DIR, "bind{className}.cpp".format(className=compositeType.className)),
-                compositeType=compositeType
-            )
-        )
 
     return filePaths
 
@@ -175,8 +155,39 @@ def GenerateCompositeTypes():
     Returns:
         list: paths to generated source files.
     """
+    PopulateBoundsCompositeTypes()
+
+    # Generate C++ source code.
     filePaths = []
-    filePaths += GenerateBoundsCompositeTypes()
+
+    for compositeType in COMPOSITE_TYPES.values():
+        # C++ source code.
+        filePaths.append(
+            GenerateCode(
+                os.path.join(TYPES_DIR, "compositeType.h"),
+                os.path.join(TYPES_DIR, compositeType.headerFileName),
+                compositeType=compositeType
+            )
+        )
+
+        # Python bindings.
+        filePaths.append(
+            GenerateCode(
+                os.path.join(PYTHON_DIR, TYPES_DIR, "bindCompositeType.cpp"),
+                os.path.join(PYTHON_DIR, TYPES_DIR, "bind{className}.cpp".format(className=compositeType.className)),
+                compositeType=compositeType
+            )
+        )
+
+        # Tests for python bindings.
+        filePaths.append(
+            GenerateCode(
+                os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "testCompositeType.py"),
+                os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "test{className}.py".format(className=compositeType.className)),
+                compositeType=compositeType
+            )
+        )
+
     return filePaths
 
 
