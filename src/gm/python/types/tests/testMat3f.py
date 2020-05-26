@@ -7,7 +7,7 @@ import gm
 
 
 class TestMat3f(unittest.TestCase):
-    def testInitialization(self):
+    def testDefaultInitialization(self):
         gm.Mat3f()
 
     def testElementInitialization(self):

@@ -84,55 +84,6 @@ COMPOSITE_TYPES = {}
 # Code generation for types.
 #
 
-def GenerateTypePythonBinding(templateFileName, typeKey, typeObj):
-    """
-    Generate python binding code for a type object.
-
-    Args:
-        templateFileName (dict): name of the template file.
-        typeKey (str): key for accessing the type object in the template.
-        typeObj (BaseType): type object to generate code for.
-
-    Returns:
-        str: file path to the generated test code.
-    """
-    templatePath = GetTemplateFile(
-        os.path.join(PYTHON_DIR, TYPES_DIR, templateFileName)
-    )
-
-    # Create kwargs.
-    kwargs = {
-        typeKey: typeObj
-    }
-
-    code = GenerateCode(templatePath, **kwargs)
-    filePath = os.path.join(
-        os.path.abspath(PYTHON_DIR),
-        TYPES_DIR,
-        "bind{className}.cpp".format(className=typeObj.className),
-    )
-    WriteFile(filePath, code)
-    return filePath
-
-
-def GenerateCompositeType(compositeType):
-    """
-    Generate a single C++ composite type source file.
-
-    Args:
-        compositeType (CompositeType): composite data type to generate definition source code for.
-
-    Returns:
-        str: file path to the generated source file.
-    """
-    filePath = os.path.join(os.path.abspath(TYPES_DIR), compositeType.headerFileName)
-    code = GenerateCode(
-        GetTemplateFile(os.path.join(TYPES_DIR, "compositeType.h")),
-        compositeType=compositeType,
-    )
-    WriteFile(filePath, code)
-    return filePath
-
 
 def GenerateBoundsCompositeTypes():
     """
@@ -178,6 +129,7 @@ def GenerateBoundsCompositeTypes():
                 maxDefaultValue += ","
         maxDefaultValue += ")"
 
+        # Instantiate the type with min-max elements.
         compositeType = CompositeType(
             compositeTypeName,
             [
@@ -195,11 +147,23 @@ def GenerateBoundsCompositeTypes():
         # in a later stage.
         COMPOSITE_TYPES[compositeType.className] = compositeType
 
-        filePaths.append(GenerateCompositeType(compositeType))
-        filePaths.append(GenerateTypePythonBinding(
-            "bindCompositeType.cpp",
-            typeKey="compositeType",
-            typeObj=compositeType))
+        # Generate C++ source code.
+        filePaths.append(
+            GenerateCode(
+                os.path.join(TYPES_DIR, "compositeType.h"),
+                os.path.join(TYPES_DIR, compositeType.headerFileName),
+                compositeType=compositeType
+            )
+        )
+
+        # Generate python bindings.
+        filePaths.append(
+            GenerateCode(
+                os.path.join(PYTHON_DIR, TYPES_DIR, "bindCompositeType.cpp"),
+                os.path.join(PYTHON_DIR, TYPES_DIR, "bind{className}.cpp".format(className=compositeType.className)),
+                compositeType=compositeType
+            )
+        )
 
     return filePaths
 
@@ -236,82 +200,15 @@ def GenerateArrayTypes():
     # Generate code for ArrayType(s)
     filePaths = []
     for arrayType in arrayTypes:
-        filePath = os.path.join(os.path.abspath(TYPES_DIR), arrayType.headerFileName)
-        code = GenerateCode(
-            GetTemplateFile(os.path.join(TYPES_DIR, "arrayType.h")), arrayType=arrayType
+        filePaths.append(
+            GenerateCode(
+                os.path.join(TYPES_DIR, "arrayType.h"),
+                os.path.join(TYPES_DIR, arrayType.headerFileName),
+                arrayType=arrayType,
+            )
         )
-        WriteFile(filePath, code)
-        filePaths.append(filePath)
 
     return filePaths
-
-
-def GenerateVectorType(vectorType):
-    """
-    Generate code for a vector type.
-
-    Args:
-        vectorType (VectorType): vectorType object.
-
-    Returns:
-        tuple: file path to the generated source code.
-    """
-    # Source code.
-    relativePath = os.path.join(TYPES_DIR, "vectorType.h")
-    templatePath = GetTemplateFile(relativePath)
-    code = GenerateCode(templatePath, vectorType=vectorType)
-    filePath = os.path.abspath(
-        os.path.join(TYPES_DIR, vectorType.headerFileName)
-    )
-    WriteFile(filePath, code)
-    return filePath
-
-
-def GenerateVectorTypeTest(vectorType):
-    """
-    Generate test code for a vector type.
-
-    Args:
-        vectorType (VectorType): vectorType object.
-
-    Returns:
-        tuple: file path to the generated test code.
-    """
-    templateTestPath = GetTemplateFile(
-        os.path.join(TYPES_DIR, TESTS_DIR, "testVectorType.cpp")
-    )
-    code = GenerateCode(templateTestPath, vectorType=vectorType)
-    filePath = os.path.join(
-        os.path.abspath(TYPES_DIR),
-        TESTS_DIR,
-        "test{className}.cpp".format(className=vectorType.className),
-    )
-    WriteFile(filePath, code)
-    return filePath
-
-
-def GenerateVectorTypePythonBindingTest(vectorType):
-    """
-    Generate tests for vector type python binding.
-
-    Args:
-        vectorType (VectorType): vectorType object.
-
-    Returns:
-        str: file path to the generated test code.
-    """
-    templatePath = GetTemplateFile(
-        os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "testVectorType.py")
-    )
-    code = GenerateCode(templatePath, vectorType=vectorType)
-    filePath = os.path.join(
-        os.path.abspath(PYTHON_DIR),
-        TYPES_DIR,
-        TESTS_DIR,
-        "test{className}.py".format(className=vectorType.className),
-    )
-    WriteFile(filePath, code)
-    return filePath
 
 
 def GenerateVectorTypes():
@@ -324,13 +221,41 @@ def GenerateVectorTypes():
     # Generate vector class headers.
     filePaths = []
     for vectorType in VECTOR_TYPES:
-        filePaths.append(GenerateVectorType(vectorType))
-        filePaths.append(GenerateVectorTypeTest(vectorType))
-        filePaths.append(GenerateTypePythonBinding(
-            "bindVectorType.cpp",
-            "vectorType",
-            vectorType))
-        filePaths.append(GenerateVectorTypePythonBindingTest(vectorType))
+        # C++ header source.
+        filePaths.append(
+            GenerateCode(
+                os.path.join(TYPES_DIR, "vectorType.h"),
+                os.path.join(TYPES_DIR, vectorType.headerFileName),
+                vectorType=vectorType,
+            )
+        )
+
+        # C++ tests.
+        filePaths.append(
+            GenerateCode(
+                os.path.join(TYPES_DIR, TESTS_DIR, "testVectorType.cpp"),
+                os.path.join(TYPES_DIR, TESTS_DIR, "test{className}.cpp".format(className=vectorType.className)),
+                vectorType=vectorType,
+            )
+        )
+
+        # Python bindings source.
+        filePaths.append(
+            GenerateCode(
+                os.path.join(PYTHON_DIR, TYPES_DIR, "bindVectorType.cpp"),
+                os.path.join(PYTHON_DIR, TYPES_DIR, "bind{className}.cpp".format(className=vectorType.className)),
+                vectorType=vectorType,
+            )
+        )
+
+        # Python bindings tests.
+        filePaths.append(
+            GenerateCode(
+                os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "testVectorType.py"),
+                os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "test{className}.py".format(className=vectorType.className)),
+                vectorType=vectorType,
+            )
+        )
 
     return filePaths
 
@@ -354,49 +279,6 @@ def GenerateTypes():
 # Code generation for functions.
 #
 
-def GenerateFunction(function):
-    """
-    Generate code for a function.
-
-    Args:
-        function (Function): function object.
-
-    Returns:
-        str: file path to the generated code.
-    """
-    filePath = os.path.join(os.path.abspath(FUNCTIONS_DIR), function.headerFileName)
-    code = GenerateCode(
-        GetTemplateFile(os.path.join(FUNCTIONS_DIR, function.headerFileName)),
-        function=function,
-    )
-    WriteFile(filePath, code)
-    return filePath
-
-
-def GenerateFunctionTest(function):
-    """
-    Generate the test code for a function.
-
-    Args:
-        function (Function): function object.
-
-    Returns:
-        str: file path to the generated code.
-    """
-    relativeTestPath = os.path.join(
-        FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name,)
-    )
-    absTemplatePath = GetTemplateFile(relativeTestPath)
-    if not os.path.isfile(absTemplatePath):
-        print("Cannot find template file {}".format(absTemplatePath))
-        return None
-
-    code = GenerateCode(absTemplatePath, function=function)
-    filePath = os.path.abspath(relativeTestPath)
-    WriteFile(filePath, code)
-    return filePath
-
-
 def GenerateFunctions():
     """
     Generate code for all of the functions.
@@ -418,29 +300,30 @@ def GenerateFunctions():
     filePaths = []
     for functionGroup in functionGroups:
         for function in functionGroup.functions:
-            filePaths.append(GenerateFunction(function))
-            testPath = GenerateFunctionTest(function)
-            if testPath:
-                filePaths.append(testPath)
+            # Generate C++ source code.
+            filePaths.append(
+                GenerateCode(
+                    os.path.join(FUNCTIONS_DIR, function.headerFileName),
+                    os.path.join(FUNCTIONS_DIR, function.headerFileName),
+                    function=function
+                )
+            )
+
+            # Generate C++ test code.
+            filePaths.append(
+                GenerateCode(
+                    os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)),
+                    os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)),
+                    function=function
+                )
+            )
 
     return filePaths
 
 
 #
-# Code generation for python.
+# Main
 #
-
-def GeneratePythonModule():
-    """
-    Generate code for the python module.
-    """
-    relModulePath = os.path.join(PYTHON_DIR, "module.cpp")
-    absModulePath = GetTemplateFile(relModulePath)
-    code = GenerateCode(absModulePath, types=list(VECTOR_TYPES) + COMPOSITE_TYPES.values(), UpperCamelCase=UpperCamelCase)
-    filePath = os.path.abspath(relModulePath)
-    WriteFile(filePath, code)
-    return filePath
-
 
 if __name__ == "__main__":
     # Generate types first, to populate type registry.
@@ -450,7 +333,14 @@ if __name__ == "__main__":
     filePaths += GenerateFunctions()
 
     # Generate python module.
-    filePaths.append(GeneratePythonModule())
+    filePaths.append(
+        GenerateCode(
+            os.path.join(PYTHON_DIR, "module.cpp"),
+            os.path.join(PYTHON_DIR, "module.cpp"),
+            types=list(VECTOR_TYPES) + COMPOSITE_TYPES.values(),
+            UpperCamelCase=UpperCamelCase
+        )
+    )
 
     # Format all the code to standard.
     FormatCode(filePaths)

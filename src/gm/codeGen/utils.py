@@ -91,9 +91,9 @@ def GetTemplateFile(templateName):
     return os.path.abspath(os.path.join(TEMPLATE_DIR, templateName))
 
 
-def GenerateCode(templatePath, **kwargs):
+def RenderTemplate(templatePath, **kwargs):
     """
-    Generate a single source file with a template and code-gen context.
+    Render a jinja2 template with a contextual information.
 
     Args:
         templatePath (str): path to the template file to perform substitution.
@@ -123,3 +123,17 @@ def GenerateCode(templatePath, **kwargs):
         template = Template(templateStr)
         code = template.render(math=math, **kwargs)
         return code
+
+
+def GenerateCode(relTemplatePath, outputPath, **kwargs):
+    """
+    Generate code by rendering the specified jinja2 template at ``relTemplatePath``, passing in ``kwargs``,
+    and saving the results onto disk at ``outputPath``.
+
+    Returns:
+        str: the file path to the generated code on disk.
+    """
+    code = RenderTemplate(GetTemplateFile(relTemplatePath), **kwargs)
+    outputAbsPath = os.path.abspath(outputPath)
+    WriteFile(outputAbsPath, code)
+    return outputAbsPath

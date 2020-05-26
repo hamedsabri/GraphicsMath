@@ -3,7 +3,7 @@ import gm
 
 class Test{{ vectorType.className }}(unittest.TestCase):
 
-    def testInitialization(self):
+    def testDefaultInitialization(self):
         gm.{{ vectorType.className }}()
 
     def testElementInitialization(self):

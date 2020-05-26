@@ -7,7 +7,7 @@ import gm
 
 
 class TestVec3i(unittest.TestCase):
-    def testInitialization(self):
+    def testDefaultInitialization(self):
         gm.Vec3i()
 
     def testElementInitialization(self):
