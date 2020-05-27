@@ -9,22 +9,23 @@
 
 #include <gm/gm.h>
 
-{% for vectorType in function.types -%}
-#include <gm/types/{{ vectorType.headerFileName }}>
+{% for type in function.GetTypeSet() -%}
+{%- if not type.isScalar -%}
+#include <gm/types/{{ type.headerFileName }}>
+{%- endif %}
 {% endfor %}
 
 #include <gm/functions/lengthSquared.h>
 
 GM_NS_OPEN
 
-{% for vectorType in function.types %}
-/// Compute the length of the vector \p i_vector.
+{% for signature in function.signatures %}
+/// Compute the length of the vector \p {{ signature.GetParameter("vector").cppName }}.
 ///
 /// \return the length of the vector.
-GM_HOST_DEVICE inline {{ vectorType.elementType.className }} {{ function.name }}(
-    const {{ vectorType.className }}& i_vector )
+GM_HOST_DEVICE inline {{ signature.cppReturnType }} {{ function.name }}( {{ signature.cppTypedParameters }} )
 {
-    return sqrt( LengthSquared( i_vector ) );
+    return sqrt( LengthSquared( {{ signature.GetParameter("vector").cppName }} ) );
 }
 {% endfor %}
 

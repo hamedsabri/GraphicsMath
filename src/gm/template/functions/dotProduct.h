@@ -12,24 +12,24 @@
 
 #include <gm/gm.h>
 
-{% for vectorType in function.types -%}
-#include <gm/types/{{ vectorType.headerFileName }}>
-{% endfor %}
+{% for type in function.GetTypeSet() -%}
+{%- if not type.isScalar -%}
+#include <gm/types/{{ type.headerFileName }}>
+{% endif -%}
+{%- endfor %}
 
 GM_NS_OPEN
 
-{% for vectorType in function.types %}
-/// Compute the dot product of two \ref {{ vectorType.className }}, \p i_lhs and \p i_rhs, and return the result.
+{% for signature in function.signatures %}
+/// Compute the dot product of two \ref {{ signature.GetParameter("lhs").type.className }}, \p i_lhs and \p i_rhs, and return the result.
 ///
 /// \return computed dot product.
-GM_HOST_DEVICE inline {{ vectorType.elementType.className }} {{ function.name }}(
-    const {{ vectorType.className }}& i_lhs,
-    const {{ vectorType.className }}& i_rhs )
+GM_HOST_DEVICE inline {{ signature.cppReturnType }} {{ function.name }}( {{ signature.cppTypedParameters }} )
 {
     return
-{% for index in range(vectorType.elementSize) -%}
-    i_lhs[ {{ index }} ] * i_rhs[ {{ index }} ]
-{%- if index + 1 < vectorType.elementSize -%}
+{% for index in range(signature.GetParameter("lhs").type.elementSize) -%}
+    {{ signature.GetParameter("lhs").cppName }}[ {{ index }} ] * {{ signature.GetParameter("rhs").cppName }}[ {{ index }} ]
+{%- if index + 1 < signature.GetParameter("lhs").type.elementSize -%}
         +
 {%- endif -%}
 {%- endfor -%}

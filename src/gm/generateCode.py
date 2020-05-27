@@ -27,6 +27,9 @@ from codeGen.types import (
 
 from codeGen.functions import (
     Function,
+    Signature,
+    Parameter,
+    Mutability,
     FunctionGroup,
 )
 
@@ -79,6 +82,12 @@ COMPOSITE_TYPES is a dict of type name (str) -> type object (CompositeType).
 It is populated in GenerateCompositeTypes.
 """
 COMPOSITE_TYPES = {}
+
+"""
+FUNCTIONS is a dict of function name (str) -> function object (Function).
+It is populated in GenerateFunctions.
+"""
+FUNCTIONS = {}
 
 #
 # Code generation for types.
@@ -299,11 +308,52 @@ def GenerateFunctions():
     """
     functionGroups = [
         FunctionGroup(
-            ["dotProduct", "length", "lengthSquared",],
-            types=[
-                VectorType((2,), PODType(FLOAT)),
-                VectorType((3,), PODType(FLOAT)),
-                VectorType((4,), PODType(FLOAT)),
+            ["dotProduct"],
+            signatures=[
+                Signature(
+                    parameters=[
+                        Parameter("lhs", VectorType((2,), PODType(FLOAT)), Mutability.Const),
+                        Parameter("rhs", VectorType((2,), PODType(FLOAT)), Mutability.Const),
+                    ],
+                    returnType=PODType(FLOAT),
+                ),
+                Signature(
+                    parameters=[
+                        Parameter("lhs", VectorType((3,), PODType(FLOAT)), Mutability.Const),
+                        Parameter("rhs", VectorType((3,), PODType(FLOAT)), Mutability.Const),
+                    ],
+                    returnType=PODType(FLOAT),
+                ),
+                Signature(
+                    parameters=[
+                        Parameter("lhs", VectorType((4,), PODType(FLOAT)), Mutability.Const),
+                        Parameter("rhs", VectorType((4,), PODType(FLOAT)), Mutability.Const),
+                    ],
+                    returnType=PODType(FLOAT),
+                ),
+            ],
+        ),
+        FunctionGroup(
+            ["length", "lengthSquared"],
+            signatures=[
+                Signature(
+                    parameters=[
+                        Parameter("vector", VectorType((2,), PODType(FLOAT)), Mutability.Const),
+                    ],
+                    returnType=PODType(FLOAT),
+                ),
+                Signature(
+                    parameters=[
+                        Parameter("vector", VectorType((3,), PODType(FLOAT)), Mutability.Const),
+                    ],
+                    returnType=PODType(FLOAT),
+                ),
+                Signature(
+                    parameters=[
+                        Parameter("vector", VectorType((4,), PODType(FLOAT)), Mutability.Const),
+                    ],
+                    returnType=PODType(FLOAT),
+                ),
             ],
         ),
     ]
@@ -321,13 +371,27 @@ def GenerateFunctions():
             )
 
             # Generate C++ test code.
+            # Need to decide if it is worth auto-generating function tests.
+            #filePaths.append(
+            #    GenerateCode(
+            #        os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)),
+            #        os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)),
+            #        function=function
+            #    )
+            #)
+
+            # Python bindings source.
             filePaths.append(
                 GenerateCode(
-                    os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)),
-                    os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)),
-                    function=function
+                    os.path.join(PYTHON_DIR, FUNCTIONS_DIR, "bindFunction.cpp"),
+                    os.path.join(PYTHON_DIR, FUNCTIONS_DIR, "bind{name}.cpp".format(name=function.name)),
+                    function=function,
                 )
             )
+
+            # Register in global FUNCTIONS
+            assert(function.name not in FUNCTIONS)
+            FUNCTIONS[function.name] = function
 
     return filePaths
 
@@ -349,6 +413,7 @@ if __name__ == "__main__":
             os.path.join(PYTHON_DIR, "module.cpp"),
             os.path.join(PYTHON_DIR, "module.cpp"),
             types=list(VECTOR_TYPES) + COMPOSITE_TYPES.values(),
+            functions=FUNCTIONS.values(),
             UpperCamelCase=UpperCamelCase
         )
     )

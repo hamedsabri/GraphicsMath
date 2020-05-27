@@ -18,11 +18,16 @@ void BindBounds2i( pybind11::module& );
 void BindBounds3i( pybind11::module& );
 void BindBounds2f( pybind11::module& );
 
+// Function Declarations.
+void BindDotProduct( pybind11::module& );
+void BindLength( pybind11::module& );
+void BindLengthSquared( pybind11::module& );
+
 PYBIND11_MODULE( gm, o_module )
 {
     o_module.doc() = "GraphicsMath python module.";
 
-    // Types
+    // Types.
     BindMat4f( o_module );
     BindMat3f( o_module );
     BindVec2i( o_module );
@@ -35,4 +40,9 @@ PYBIND11_MODULE( gm, o_module )
     BindBounds2i( o_module );
     BindBounds3i( o_module );
     BindBounds2f( o_module );
+
+    // Functions.
+    BindDotProduct( o_module );
+    BindLength( o_module );
+    BindLengthSquared( o_module );
 }
