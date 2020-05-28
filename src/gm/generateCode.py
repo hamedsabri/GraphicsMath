@@ -27,7 +27,7 @@ from codeGen.types import (
 
 from codeGen.functions import (
     Function,
-    Signature,
+    FunctionInterface,
     Parameter,
     Mutability,
     FunctionGroup,
@@ -309,22 +309,22 @@ def GenerateFunctions():
     functionGroups = [
         FunctionGroup(
             ["dotProduct"],
-            signatures=[
-                Signature(
+            interfaces=[
+                FunctionInterface(
                     parameters=[
                         Parameter("lhs", VectorType((2,), PODType(FLOAT)), Mutability.Const),
                         Parameter("rhs", VectorType((2,), PODType(FLOAT)), Mutability.Const),
                     ],
                     returnType=PODType(FLOAT),
                 ),
-                Signature(
+                FunctionInterface(
                     parameters=[
                         Parameter("lhs", VectorType((3,), PODType(FLOAT)), Mutability.Const),
                         Parameter("rhs", VectorType((3,), PODType(FLOAT)), Mutability.Const),
                     ],
                     returnType=PODType(FLOAT),
                 ),
-                Signature(
+                FunctionInterface(
                     parameters=[
                         Parameter("lhs", VectorType((4,), PODType(FLOAT)), Mutability.Const),
                         Parameter("rhs", VectorType((4,), PODType(FLOAT)), Mutability.Const),
@@ -335,20 +335,20 @@ def GenerateFunctions():
         ),
         FunctionGroup(
             ["length", "lengthSquared"],
-            signatures=[
-                Signature(
+            interfaces=[
+                FunctionInterface(
                     parameters=[
                         Parameter("vector", VectorType((2,), PODType(FLOAT)), Mutability.Const),
                     ],
                     returnType=PODType(FLOAT),
                 ),
-                Signature(
+                FunctionInterface(
                     parameters=[
                         Parameter("vector", VectorType((3,), PODType(FLOAT)), Mutability.Const),
                     ],
                     returnType=PODType(FLOAT),
                 ),
-                Signature(
+                FunctionInterface(
                     parameters=[
                         Parameter("vector", VectorType((4,), PODType(FLOAT)), Mutability.Const),
                     ],

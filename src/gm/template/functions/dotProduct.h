@@ -20,16 +20,16 @@
 
 GM_NS_OPEN
 
-{% for signature in function.signatures %}
-/// Compute the dot product of two \ref {{ signature.GetParameter("lhs").type.className }}, \p i_lhs and \p i_rhs, and return the result.
+{% for interface in function.interfaces %}
+/// Compute the dot product of two \ref {{ interface.GetParameter("lhs").type.className }}, \p i_lhs and \p i_rhs, and return the result.
 ///
 /// \return computed dot product.
-GM_HOST_DEVICE inline {{ signature.cppReturnType }} {{ function.name }}( {{ signature.cppTypedParameters }} )
+GM_HOST_DEVICE inline {{ interface.cppReturnType }} {{ function.name }}( {{ interface.cppTypedParameters }} )
 {
     return
-{% for index in range(signature.GetParameter("lhs").type.elementSize) -%}
-    {{ signature.GetParameter("lhs").cppName }}[ {{ index }} ] * {{ signature.GetParameter("rhs").cppName }}[ {{ index }} ]
-{%- if index + 1 < signature.GetParameter("lhs").type.elementSize -%}
+{% for index in range(interface.GetParameter("lhs").type.elementSize) -%}
+    {{ interface.GetParameter("lhs").cppName }}[ {{ index }} ] * {{ interface.GetParameter("rhs").cppName }}[ {{ index }} ]
+{%- if index + 1 < interface.GetParameter("lhs").type.elementSize -%}
         +
 {%- endif -%}
 {%- endfor -%}

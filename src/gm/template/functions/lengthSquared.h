@@ -18,14 +18,14 @@
 
 GM_NS_OPEN
 
-{% for signature in function.signatures %}
-/// Compute the length squared of the vector \p {{ signature.GetParameter("vector").cppName }}.
+{% for interface in function.interfaces %}
+/// Compute the length squared of the vector \p {{ interface.GetParameter("vector").cppName }}.
 ///
 /// \return the length squared of the vector.
-GM_HOST_DEVICE inline {{ signature.cppReturnType }} {{ function.name }}( {{ signature.cppTypedParameters }} )
+GM_HOST_DEVICE inline {{ interface.cppReturnType }} {{ function.name }}( {{ interface.cppTypedParameters }} )
 {
-    return DotProduct( {{ signature.GetParameter("vector").cppName }},
-                       {{ signature.GetParameter("vector").cppName }} );
+    return DotProduct( {{ interface.GetParameter("vector").cppName }},
+                       {{ interface.GetParameter("vector").cppName }} );
 }
 {% endfor %}
 

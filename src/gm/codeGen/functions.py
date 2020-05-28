@@ -43,9 +43,9 @@ class Parameter:
             return "o_" + self.name
 
 
-class Signature:
+class FunctionInterface:
     """
-    Signature of a function, describing the parameters (type and qualifiers), and return type.
+    Interface of a function, describing the parameters (type and qualifiers), and return type.
     """
 
     def __init__(self, parameters, returnType=None):
@@ -62,7 +62,7 @@ class Signature:
     @property
     def cppTypedParameters(self):
         """
-        Generate the parameters component of a function signature.
+        Generate the parameters component of a function interface.
         """
         paramString = ""
         for index, param in enumerate(self._parameters.values()):
@@ -81,7 +81,7 @@ class Signature:
 
     def GetParameter(self, name):
         """
-        Retrieve a parameter from this signature, by name.
+        Retrieve a parameter from this interface, by name.
         """
         return self._parameters[name]
 
@@ -94,9 +94,9 @@ class Function:
         name (str): name of the function.
     """
 
-    def __init__(self, name, signatures):
+    def __init__(self, name, interfaces):
         self._name = name
-        self.signatures = signatures
+        self.interfaces = interfaces
 
     @property
     def headerFileName(self):
@@ -114,13 +114,13 @@ class Function:
 
     def GetTypeSet(self):
         """
-        Return the set of types which are used in all the signatures of this function.
+        Return the set of types which are used in all the interfaces of this function.
         """
         types = set()
-        for signature in self.signatures:
-            types = types.union([param.type for param in signature._parameters.values()])
-            if signature._returnType:
-                types = types.union([signature._returnType])
+        for interface in self.interfaces:
+            types = types.union([param.type for param in interface._parameters.values()])
+            if interface._returnType:
+                types = types.union([interface._returnType])
         return types
 
 
@@ -129,8 +129,8 @@ class FunctionGroup:
     Group of functions which share a common code-generation context.
     """
 
-    def __init__(self, functionNames, signatures):
+    def __init__(self, functionNames, interfaces):
         self.functions = []
         for name in functionNames:
-            function = Function(name, signatures)
+            function = Function(name, interfaces)
             self.functions.append(function)

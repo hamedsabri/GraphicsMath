@@ -8,11 +8,11 @@ GM_NS_USING
 
 void Bind{{ function.name }}( pybind11::module& o_module )
 {
-    {% for signature in function.signatures -%}
+    {% for interface in function.interfaces -%}
     o_module.def( "{{ function.name }}",
-        []( {{ signature.cppTypedParameters }} )
+        []( {{ interface.cppTypedParameters }} )
         {
-            return {{ function.name }}( {{ signature.parameterNames }} );
+            return {{ function.name }}( {{ interface.parameterNames }} );
         }
     );
     {% endfor %}
