@@ -24,11 +24,11 @@ GM_NS_OPEN
 /// Compute the dot product of two \ref {{ interface.GetParameter("lhs").type.className }}, \p i_lhs and \p i_rhs, and return the result.
 ///
 /// \return computed dot product.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.GetTypedParameters() }} )
+GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedParameters }} )
 {
     return
 {% for index in range(interface.GetParameter("lhs").type.elementSize) -%}
-    {{ interface.GetParameter("lhs").cppName }}[ {{ index }} ] * {{ interface.GetParameter("rhs").cppName }}[ {{ index }} ]
+    {{ interface.GetParameter("lhs").variableName }}[ {{ index }} ] * {{ interface.GetParameter("rhs").variableName }}[ {{ index }} ]
 {%- if index + 1 < interface.GetParameter("lhs").type.elementSize -%}
         +
 {%- endif -%}

@@ -7,7 +7,7 @@ import shlex
 import subprocess
 import math
 
-from jinja2 import Template
+from jinja2 import Environment, Template, StrictUndefined
 
 # Name of the codegen template directory.
 TEMPLATE_DIR = "template"
@@ -18,6 +18,11 @@ PY_SOURCE_EXT = ".py"
 # CPP file extension(s).
 CPP_SOURCE_EXT = ".cpp"
 CPP_HEADER_EXT = ".h"
+
+# Global jinja2 environment.
+JINJA2_ENVIRONMENT = Environment(
+    undefined=StrictUndefined
+)
 
 
 def GetFileExt(filePath):
@@ -120,7 +125,7 @@ def RenderTemplate(templatePath, **kwargs):
             ]
             + templateStr.split(os.linesep)
         )
-        template = Template(templateStr)
+        template = JINJA2_ENVIRONMENT.from_string(templateStr)
         code = template.render(math=math, **kwargs)
         return code
 

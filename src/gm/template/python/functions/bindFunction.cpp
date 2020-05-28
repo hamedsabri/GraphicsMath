@@ -10,9 +10,9 @@ void Bind{{ function.name }}( pybind11::module& o_module )
 {
     {% for interface in function.interfaces -%}
     o_module.def( "{{ function.name }}",
-        []( {{ interface.GetTypedParameters() }} )
+        []( {{ interface.typedParameters }} )
         {
-            return {{ function.name }}( {{ interface.parameterNames }} );
+            return {{ function.name }}( {{ interface.namedParameters }} );
         }
     );
     {% endfor %}

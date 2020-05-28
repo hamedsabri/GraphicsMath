@@ -8,7 +8,7 @@ from collections import OrderedDict
 
 class Mutability:
     """
-    Enumeration class describing the mutability of a function parameter.
+    Describes the mutability of a function parameter.
     """
     Const = 0
     Mutable = 1
@@ -16,9 +16,10 @@ class Mutability:
 
 class FunctionParameter:
     """
-    Description of a function parameter (type, qualifiers).
+    Description of a function parameter.
 
     Args:
+        name (str): name of this parameter.
         type (ValueType): type of the parameter.
         mutability (Mutability): mutability of the parameter.
     """
@@ -29,14 +30,14 @@ class FunctionParameter:
         self.mutability = mutability
 
     @property
-    def cppConstQualifier(self):
+    def constQualifier(self):
         if self.mutability == Mutability.Const:
             return "const"
         else:
             return ""
 
     @property
-    def cppName(self):
+    def variableName(self):
         if self.mutability == Mutability.Const:
             return "i_" + self.name
         else:
@@ -59,28 +60,29 @@ class FunctionInterface:
         else:
             return "void"
 
-    def GetTypedParameters(self):
+    @property
+    def typedParameters(self):
         """
-        Generate the parameters component of a function interface.
+        Generate a string of typed, and named parameters.
         """
         paramString = ""
         for index, param in enumerate(self.parameters.values()):
-            paramString += param.cppConstQualifier
+            paramString += param.constQualifier
             paramString += " "
             paramString += param.type.className
             paramString += "& "
-            paramString += param.cppName
+            paramString += param.variableName
             if index + 1 < len(self.parameters):
                 paramString += ", "
         return paramString
 
     @property
-    def parameterNames(self):
-        return ", ".join([param.cppName for param in self.parameters.values()])
+    def namedParameters(self):
+        return ", ".join([param.variableName for param in self.parameters.values()])
 
     def GetParameter(self, name):
         """
-        Retrieve a parameter from this interface, by name.
+        Retrieve a ``FunctionParameter` from this interface, by name.
         """
         return self.parameters[name]
 
@@ -115,7 +117,7 @@ class Function:
 
     def GetTypeSet(self):
         """
-        Return the set of types which are used in all the interfaces of this function.
+        Return the unique set of types
         """
         types = set()
         for interface in self.interfaces:

@@ -19,13 +19,13 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-/// Compute the length squared of the vector \p {{ interface.GetParameter("vector").cppName }}.
+/// Compute the length squared of the vector \p {{ interface.GetParameter("vector").variableName }}.
 ///
 /// \return the length squared of the vector.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.GetTypedParameters() }} )
+GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedParameters }} )
 {
-    return DotProduct( {{ interface.GetParameter("vector").cppName }},
-                       {{ interface.GetParameter("vector").cppName }} );
+    return DotProduct( {{ interface.GetParameter("vector").variableName }},
+                       {{ interface.GetParameter("vector").variableName }} );
 }
 {% endfor %}
 

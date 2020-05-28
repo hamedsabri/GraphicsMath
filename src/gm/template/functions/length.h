@@ -20,12 +20,12 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-/// Compute the length of the vector \p {{ interface.GetParameter("vector").cppName }}.
+/// Compute the length of the vector \p {{ interface.GetParameter("vector").variableName }}.
 ///
 /// \return the length of the vector.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.GetTypedParameters() }} )
+GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedParameters }} )
 {
-    return sqrt( LengthSquared( {{ interface.GetParameter("vector").cppName }} ) );
+    return sqrt( LengthSquared( {{ interface.GetParameter("vector").variableName }} ) );
 }
 {% endfor %}
 
