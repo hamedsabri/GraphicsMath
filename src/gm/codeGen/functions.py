@@ -59,8 +59,7 @@ class FunctionInterface:
         else:
             return "void"
 
-    @property
-    def cppTypedParameters(self):
+    def GetTypedParameters(self):
         """
         Generate the parameters component of a function interface.
         """

@@ -10,7 +10,7 @@ void Bind{{ function.name }}( pybind11::module& o_module )
 {
     {% for interface in function.interfaces -%}
     o_module.def( "{{ function.name }}",
-        []( {{ interface.cppTypedParameters }} )
+        []( {{ interface.GetTypedParameters() }} )
         {
             return {{ function.name }}( {{ interface.parameterNames }} );
         }

@@ -22,7 +22,7 @@ GM_NS_OPEN
 /// Compute the length squared of the vector \p {{ interface.GetParameter("vector").cppName }}.
 ///
 /// \return the length squared of the vector.
-GM_HOST_DEVICE inline {{ interface.cppReturnType }} {{ function.name }}( {{ interface.cppTypedParameters }} )
+GM_HOST_DEVICE inline {{ interface.cppReturnType }} {{ function.name }}( {{ interface.GetTypedParameters() }} )
 {
     return DotProduct( {{ interface.GetParameter("vector").cppName }},
                        {{ interface.GetParameter("vector").cppName }} );

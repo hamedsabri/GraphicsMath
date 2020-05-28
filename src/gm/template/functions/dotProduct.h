@@ -24,7 +24,7 @@ GM_NS_OPEN
 /// Compute the dot product of two \ref {{ interface.GetParameter("lhs").type.className }}, \p i_lhs and \p i_rhs, and return the result.
 ///
 /// \return computed dot product.
-GM_HOST_DEVICE inline {{ interface.cppReturnType }} {{ function.name }}( {{ interface.cppTypedParameters }} )
+GM_HOST_DEVICE inline {{ interface.cppReturnType }} {{ function.name }}( {{ interface.GetTypedParameters() }} )
 {
     return
 {% for index in range(interface.GetParameter("lhs").type.elementSize) -%}

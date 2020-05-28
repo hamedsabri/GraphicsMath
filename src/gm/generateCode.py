@@ -26,11 +26,11 @@ from codeGen.types import (
 )
 
 from codeGen.functions import (
+    FunctionGroup,
     Function,
     FunctionInterface,
     FunctionParameter,
     Mutability,
-    FunctionGroup,
 )
 
 
