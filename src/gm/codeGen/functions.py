@@ -50,12 +50,12 @@ class FunctionInterface:
 
     def __init__(self, parameters, returnType=None):
         self.parameters = OrderedDict([(param.name, param) for param in parameters])
-        self.returnType = returnType
+        self._returnType = returnType
 
     @property
-    def cppReturnType(self):
-        if self.returnType:
-            return self.returnType.className
+    def returnType(self):
+        if self._returnType:
+            return self._returnType.className
         else:
             return "void"
 
@@ -120,8 +120,8 @@ class Function:
         types = set()
         for interface in self.interfaces:
             types = types.union([param.type for param in interface.parameters.values()])
-            if interface.returnType:
-                types = types.union([interface.returnType])
+            if interface._returnType:
+                types = types.union([interface._returnType])
         return types
 
 
