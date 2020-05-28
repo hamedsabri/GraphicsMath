@@ -14,7 +14,7 @@ class Mutability:
     Mutable = 1
 
 
-class Parameter:
+class FunctionParameter:
     """
     Description of a function parameter (type, qualifiers).
 
@@ -49,13 +49,13 @@ class FunctionInterface:
     """
 
     def __init__(self, parameters, returnType=None):
-        self._parameters = OrderedDict([(param.name, param) for param in parameters])
-        self._returnType = returnType
+        self.parameters = OrderedDict([(param.name, param) for param in parameters])
+        self.returnType = returnType
 
     @property
     def cppReturnType(self):
-        if self._returnType:
-            return self._returnType.className
+        if self.returnType:
+            return self.returnType.className
         else:
             return "void"
 
@@ -65,25 +65,25 @@ class FunctionInterface:
         Generate the parameters component of a function interface.
         """
         paramString = ""
-        for index, param in enumerate(self._parameters.values()):
+        for index, param in enumerate(self.parameters.values()):
             paramString += param.cppConstQualifier
             paramString += " "
             paramString += param.type.className
             paramString += "& "
             paramString += param.cppName
-            if index + 1 < len(self._parameters):
+            if index + 1 < len(self.parameters):
                 paramString += ", "
         return paramString
 
     @property
     def parameterNames(self):
-        return ", ".join([param.cppName for param in self._parameters.values()])
+        return ", ".join([param.cppName for param in self.parameters.values()])
 
     def GetParameter(self, name):
         """
         Retrieve a parameter from this interface, by name.
         """
-        return self._parameters[name]
+        return self.parameters[name]
 
 
 class Function:
@@ -92,6 +92,8 @@ class Function:
 
     Args:
         name (str): name of the function.
+        interfaces (list): list of interfaces which describe the different variations of
+            parameters and return types.
     """
 
     def __init__(self, name, interfaces):
@@ -118,9 +120,9 @@ class Function:
         """
         types = set()
         for interface in self.interfaces:
-            types = types.union([param.type for param in interface._parameters.values()])
-            if interface._returnType:
-                types = types.union([interface._returnType])
+            types = types.union([param.type for param in interface.parameters.values()])
+            if interface.returnType:
+                types = types.union([interface.returnType])
         return types
 
 

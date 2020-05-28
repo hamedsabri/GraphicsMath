@@ -28,7 +28,7 @@ from codeGen.types import (
 from codeGen.functions import (
     Function,
     FunctionInterface,
-    Parameter,
+    FunctionParameter,
     Mutability,
     FunctionGroup,
 )
@@ -312,22 +312,22 @@ def GenerateFunctions():
             interfaces=[
                 FunctionInterface(
                     parameters=[
-                        Parameter("lhs", VectorType((2,), PODType(FLOAT)), Mutability.Const),
-                        Parameter("rhs", VectorType((2,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter("lhs", VectorType((2,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter("rhs", VectorType((2,), PODType(FLOAT)), Mutability.Const),
                     ],
                     returnType=PODType(FLOAT),
                 ),
                 FunctionInterface(
                     parameters=[
-                        Parameter("lhs", VectorType((3,), PODType(FLOAT)), Mutability.Const),
-                        Parameter("rhs", VectorType((3,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter("lhs", VectorType((3,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter("rhs", VectorType((3,), PODType(FLOAT)), Mutability.Const),
                     ],
                     returnType=PODType(FLOAT),
                 ),
                 FunctionInterface(
                     parameters=[
-                        Parameter("lhs", VectorType((4,), PODType(FLOAT)), Mutability.Const),
-                        Parameter("rhs", VectorType((4,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter("lhs", VectorType((4,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter("rhs", VectorType((4,), PODType(FLOAT)), Mutability.Const),
                     ],
                     returnType=PODType(FLOAT),
                 ),
@@ -338,19 +338,19 @@ def GenerateFunctions():
             interfaces=[
                 FunctionInterface(
                     parameters=[
-                        Parameter("vector", VectorType((2,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter("vector", VectorType((2,), PODType(FLOAT)), Mutability.Const),
                     ],
                     returnType=PODType(FLOAT),
                 ),
                 FunctionInterface(
                     parameters=[
-                        Parameter("vector", VectorType((3,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter("vector", VectorType((3,), PODType(FLOAT)), Mutability.Const),
                     ],
                     returnType=PODType(FLOAT),
                 ),
                 FunctionInterface(
                     parameters=[
-                        Parameter("vector", VectorType((4,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter("vector", VectorType((4,), PODType(FLOAT)), Mutability.Const),
                     ],
                     returnType=PODType(FLOAT),
                 ),
