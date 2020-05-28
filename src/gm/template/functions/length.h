@@ -9,7 +9,7 @@
 
 #include <gm/gm.h>
 
-{% for type in function.GetTypeSet() -%}
+{% for type in function.types -%}
 {%- if not type.isScalar -%}
 #include <gm/types/{{ type.headerFileName }}>
 {%- endif %}
@@ -20,12 +20,12 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-/// Compute the length of the vector \p {{ interface.GetParameter("vector").variableName }}.
+/// Compute the length of the vector \p {{ interface.Param("vector").variableName }}.
 ///
 /// \return the length of the vector.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedParameters }} )
 {
-    return sqrt( LengthSquared( {{ interface.GetParameter("vector").variableName }} ) );
+    return sqrt( LengthSquared( {{ interface.Param("vector").variableName }} ) );
 }
 {% endfor %}
 

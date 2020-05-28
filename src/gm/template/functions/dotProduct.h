@@ -12,7 +12,7 @@
 
 #include <gm/gm.h>
 
-{% for type in function.GetTypeSet() -%}
+{% for type in function.types -%}
 {%- if not type.isScalar -%}
 #include <gm/types/{{ type.headerFileName }}>
 {% endif -%}
@@ -21,15 +21,15 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-/// Compute the dot product of two \ref {{ interface.GetParameter("lhs").type.className }}, \p i_lhs and \p i_rhs, and return the result.
+/// Compute the dot product of two \ref {{ interface.Param("lhs").type.className }}, \p i_lhs and \p i_rhs, and return the result.
 ///
 /// \return computed dot product.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedParameters }} )
 {
     return
-{% for index in range(interface.GetParameter("lhs").type.elementSize) -%}
-    {{ interface.GetParameter("lhs").variableName }}[ {{ index }} ] * {{ interface.GetParameter("rhs").variableName }}[ {{ index }} ]
-{%- if index + 1 < interface.GetParameter("lhs").type.elementSize -%}
+{% for index in range(interface.Param("lhs").type.elementSize) -%}
+    {{ interface.Param("lhs").variableName }}[ {{ index }} ] * {{ interface.Param("rhs").variableName }}[ {{ index }} ]
+{%- if index + 1 < interface.Param("lhs").type.elementSize -%}
         +
 {%- endif -%}
 {%- endfor -%}

@@ -47,10 +47,14 @@ class FunctionParameter:
 class FunctionInterface:
     """
     Interface of a function, describing the parameters (type and qualifiers), and return type.
+
+    Args:
+        parameters (list): ordered list of function parameters.
+        returnType (ValueType): return value type.  If `None` is specified, then the function return type is void.
     """
 
     def __init__(self, parameters, returnType=None):
-        self.parameters = OrderedDict([(param.name, param) for param in parameters])
+        self._parameters = OrderedDict([(param.name, param) for param in parameters])
         self._returnType = returnType
 
     @property
@@ -66,25 +70,25 @@ class FunctionInterface:
         Generate a string of typed, and named parameters.
         """
         paramString = ""
-        for index, param in enumerate(self.parameters.values()):
+        for index, param in enumerate(self._parameters.values()):
             paramString += param.constQualifier
             paramString += " "
             paramString += param.type.className
             paramString += "& "
             paramString += param.variableName
-            if index + 1 < len(self.parameters):
+            if index + 1 < len(self._parameters):
                 paramString += ", "
         return paramString
 
     @property
     def namedParameters(self):
-        return ", ".join([param.variableName for param in self.parameters.values()])
+        return ", ".join([param.variableName for param in self._parameters.values()])
 
-    def GetParameter(self, name):
+    def Param(self, name):
         """
         Retrieve a ``FunctionParameter` from this interface, by name.
         """
-        return self.parameters[name]
+        return self._parameters[name]
 
 
 class Function:
@@ -111,17 +115,20 @@ class Function:
     @property
     def name(self):
         """
-        Get the functions C++ symbol name (without namespace).
+        Returns:
+            str: the C++ symbol name of this function.
         """
         return UpperCamelCase(self._name)
 
-    def GetTypeSet(self):
+    @property
+    def types(self):
         """
-        Return the unique set of types
+        Return:
+            set: the unique set of types used across all interfaces of this function.
         """
         types = set()
         for interface in self.interfaces:
-            types = types.union([param.type for param in interface.parameters.values()])
+            types = types.union([param.type for param in interface._parameters.values()])
             if interface._returnType:
                 types = types.union([interface._returnType])
         return types
