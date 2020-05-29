@@ -356,6 +356,21 @@ def GenerateFunctions():
                 ),
             ],
         ),
+        FunctionGroup(
+            ["setIdentity"],
+            interfaces=[
+                FunctionInterface(
+                    parameters=[
+                        FunctionParameter("matrix", VectorType((3,3), PODType(FLOAT)), Mutability.Mutable),
+                    ],
+                ),
+                FunctionInterface(
+                    parameters=[
+                        FunctionParameter("matrix", VectorType((4,4), PODType(FLOAT)), Mutability.Mutable),
+                    ],
+                ),
+            ],
+        ),
     ]
 
     filePaths = []

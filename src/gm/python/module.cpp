@@ -22,6 +22,7 @@ void BindBounds2f( pybind11::module& );
 void BindDotProduct( pybind11::module& );
 void BindLength( pybind11::module& );
 void BindLengthSquared( pybind11::module& );
+void BindSetIdentity( pybind11::module& );
 
 PYBIND11_MODULE( gm, o_module )
 {
@@ -45,4 +46,5 @@ PYBIND11_MODULE( gm, o_module )
     BindDotProduct( o_module );
     BindLength( o_module );
     BindLengthSquared( o_module );
+    BindSetIdentity( o_module );
 }

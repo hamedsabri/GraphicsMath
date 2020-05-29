@@ -71,6 +71,17 @@ class PODType(ValueType):
     def isScalar(self):
         return True
 
+    def GetCppNumber(self, value):
+        """
+        Convert a numeric value ``value`` to the corresponding C++ compliant value as a string.
+        """
+        if self.className == INT:
+            return str(int(value))
+        elif self.className == FLOAT:
+            return str(float(value)) + "f"
+        elif self.className == DOUBLE:
+            return str(float(value))
+
 
 class VectorType(ValueType):
     """
@@ -135,12 +146,7 @@ class VectorType(ValueType):
         """
         Convert a numeric value ``value`` to the corresponding C++ compliant value as a string.
         """
-        if self.elementType.className == INT:
-            return str(int(value))
-        elif self.elementType.className == FLOAT:
-            return str(float(value)) + "f"
-        elif self.elementType.className == DOUBLE:
-            return str(float(value))
+        return self.elementType.GetCppNumber(value)
 
     def GetPyNumber(self, value):
         """
