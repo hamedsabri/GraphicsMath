@@ -8,7 +8,7 @@ TEST_CASE( "{{ vectorType.className }}_DefaultConstructor" )
     CHECK( {{ vectorType.variablePrefix }} ==
     gm::{{ vectorType.className }}(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(0) }}
+    {{ vectorType.CppNumber(0) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -20,7 +20,7 @@ TEST_CASE( "{{ vectorType.className }}_CopyConstructor" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -34,7 +34,7 @@ TEST_CASE( "{{ vectorType.className }}_CopyAssignmentConstructor" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -48,14 +48,14 @@ TEST_CASE( "{{ vectorType.className }}_ElementReadAccess" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
 {% for index in range(vectorType.elementSize) -%}
-    CHECK( {{ vectorType.variablePrefix }}[ {{ index }} ] == {{ vectorType.GetCppNumber(index * 2) }} );
+    CHECK( {{ vectorType.variablePrefix }}[ {{ index }} ] == {{ vectorType.CppNumber(index * 2) }} );
 {%- endfor %}
 }
 
@@ -63,10 +63,10 @@ TEST_CASE( "{{ vectorType.className }}_ElementWriteAccess" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }};
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.variablePrefix }}[ {{ index }} ] = {{ vectorType.GetCppNumber(index * 5) }};
+    {{ vectorType.variablePrefix }}[ {{ index }} ] = {{ vectorType.CppNumber(index * 5) }};
 {%- endfor %}
 {% for index in range(vectorType.elementSize) -%}
-    CHECK( {{ vectorType.variablePrefix }}[ {{ index }} ] == {{ vectorType.GetCppNumber(index * 5) }} );
+    CHECK( {{ vectorType.variablePrefix }}[ {{ index }} ] == {{ vectorType.CppNumber(index * 5) }} );
 {%- endfor %}
 }
 
@@ -74,7 +74,7 @@ TEST_CASE( "{{ vectorType.className }}_Addition" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -82,7 +82,7 @@ TEST_CASE( "{{ vectorType.className }}_Addition" )
     );
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 5) }}
+    {{ vectorType.CppNumber(index * 5) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -92,7 +92,7 @@ TEST_CASE( "{{ vectorType.className }}_Addition" )
         {{ vectorType.variablePrefix }}A + {{ vectorType.variablePrefix }}B;
     CHECK( {{ vectorType.variablePrefix }}C == gm::{{ vectorType.className }}(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 7) }}
+    {{ vectorType.CppNumber(index * 7) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -104,7 +104,7 @@ TEST_CASE( "{{ vectorType.className }}_AdditionAssignment" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -112,7 +112,7 @@ TEST_CASE( "{{ vectorType.className }}_AdditionAssignment" )
     );
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 5) }}
+    {{ vectorType.CppNumber(index * 5) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -121,7 +121,7 @@ TEST_CASE( "{{ vectorType.className }}_AdditionAssignment" )
     {{ vectorType.variablePrefix }}B += {{ vectorType.variablePrefix }}A;
     CHECK( {{ vectorType.variablePrefix }}B == gm::{{ vectorType.className }}(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 7) }}
+    {{ vectorType.CppNumber(index * 7) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -133,7 +133,7 @@ TEST_CASE( "{{ vectorType.className }}_Subtraction" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 7) }}
+    {{ vectorType.CppNumber(index * 7) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -141,7 +141,7 @@ TEST_CASE( "{{ vectorType.className }}_Subtraction" )
     );
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 5) }}
+    {{ vectorType.CppNumber(index * 5) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -151,7 +151,7 @@ TEST_CASE( "{{ vectorType.className }}_Subtraction" )
         {{ vectorType.variablePrefix }}A - {{ vectorType.variablePrefix }}B;
     CHECK( {{ vectorType.variablePrefix }}C == gm::{{ vectorType.className }}(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -163,7 +163,7 @@ TEST_CASE( "{{ vectorType.className }}_SubtractionAssignment" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 5) }}
+    {{ vectorType.CppNumber(index * 5) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -171,7 +171,7 @@ TEST_CASE( "{{ vectorType.className }}_SubtractionAssignment" )
     );
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 7) }}
+    {{ vectorType.CppNumber(index * 7) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -180,7 +180,7 @@ TEST_CASE( "{{ vectorType.className }}_SubtractionAssignment" )
     {{ vectorType.variablePrefix }}B -= {{ vectorType.variablePrefix }}A;
     CHECK( {{ vectorType.variablePrefix }}B == gm::{{ vectorType.className }}(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -192,7 +192,7 @@ TEST_CASE( "{{ vectorType.className }}_ScalarVectorMultiplication" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -203,7 +203,7 @@ TEST_CASE( "{{ vectorType.className }}_ScalarVectorMultiplication" )
         5 * {{ vectorType.variablePrefix }}A;
     CHECK( {{ vectorType.variablePrefix }}B == gm::{{ vectorType.className }}(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 10) }}
+    {{ vectorType.CppNumber(index * 10) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -215,17 +215,17 @@ TEST_CASE( "{{ vectorType.className }}_VectorScalarMultiplication" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B =
-        {{ vectorType.variablePrefix }}A * {{ vectorType.GetCppNumber(5) }};
+        {{ vectorType.variablePrefix }}A * {{ vectorType.CppNumber(5) }};
     CHECK( {{ vectorType.variablePrefix }}B == gm::{{ vectorType.className }}(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 10) }}
+    {{ vectorType.CppNumber(index * 10) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -237,7 +237,7 @@ TEST_CASE( "{{ vectorType.className }}_ScalarMultiplicationAssignment" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -246,7 +246,7 @@ TEST_CASE( "{{ vectorType.className }}_ScalarMultiplicationAssignment" )
     {{ vectorType.variablePrefix }}A *= 5;
     CHECK( {{ vectorType.variablePrefix }}A == gm::{{ vectorType.className }}(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 10) }}
+    {{ vectorType.CppNumber(index * 10) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -258,17 +258,17 @@ TEST_CASE( "{{ vectorType.className }}_VectorScalarDivision" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 10) }}
+    {{ vectorType.CppNumber(index * 10) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B =
-        {{ vectorType.variablePrefix }}A / {{ vectorType.GetCppNumber(5) }};
+        {{ vectorType.variablePrefix }}A / {{ vectorType.CppNumber(5) }};
     CHECK( {{ vectorType.variablePrefix }}B == gm::{{ vectorType.className }}(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -280,16 +280,16 @@ TEST_CASE( "{{ vectorType.className }}_ScalarDivisionAssignment" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 10) }}
+    {{ vectorType.CppNumber(index * 10) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    {{ vectorType.variablePrefix }}A /= {{ vectorType.GetCppNumber(5) }};
+    {{ vectorType.variablePrefix }}A /= {{ vectorType.CppNumber(5) }};
     CHECK( {{ vectorType.variablePrefix }}A == gm::{{ vectorType.className }}(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -301,7 +301,7 @@ TEST_CASE( "{{ vectorType.className }}_Negation" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -309,7 +309,7 @@ TEST_CASE( "{{ vectorType.className }}_Negation" )
     );
     CHECK( -{{ vectorType.variablePrefix }} == gm::{{ vectorType.className }}(
 {% for index in range(vectorType.elementSize) -%}
-    -{{ vectorType.GetCppNumber(index * 2) }}
+    -{{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}

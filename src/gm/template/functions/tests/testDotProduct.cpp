@@ -7,7 +7,7 @@ TEST_CASE( "{{ function.name }}_{{ vectorType.className }}" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}A(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index) }}
+    {{ vectorType.CppNumber(index) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -15,7 +15,7 @@ TEST_CASE( "{{ function.name }}_{{ vectorType.className }}" )
     );
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}B(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 5) }}
+    {{ vectorType.CppNumber(index * 5) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -23,11 +23,11 @@ TEST_CASE( "{{ function.name }}_{{ vectorType.className }}" )
     );
     CHECK( gm::{{ function.name }}( {{ vectorType.variablePrefix }}A, {{ vectorType.variablePrefix }}B )
 {% if vectorType.elementSize == 2 -%}
-           == {{ vectorType.GetCppNumber(5) }}
+           == {{ vectorType.CppNumber(5) }}
 {% elif vectorType.elementSize == 3 -%}
-           == {{ vectorType.GetCppNumber(25) }}
+           == {{ vectorType.CppNumber(25) }}
 {% elif vectorType.elementSize == 4 -%}
-           == {{ vectorType.GetCppNumber(70) }}
+           == {{ vectorType.CppNumber(70) }}
 {%- endif -%}
     );
 }

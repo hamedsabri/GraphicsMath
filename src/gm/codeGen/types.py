@@ -71,7 +71,7 @@ class PODType(ValueType):
     def isScalar(self):
         return True
 
-    def GetCppNumber(self, value):
+    def CppNumber(self, value):
         """
         Convert a numeric value ``value`` to the corresponding C++ compliant value as a string.
         """
@@ -142,13 +142,13 @@ class VectorType(ValueType):
     def isVector(self):
         return True
 
-    def GetCppNumber(self, value):
+    def CppNumber(self, value):
         """
         Convert a numeric value ``value`` to the corresponding C++ compliant value as a string.
         """
-        return self.elementType.GetCppNumber(value)
+        return self.elementType.CppNumber(value)
 
-    def GetPyNumber(self, value):
+    def PyNumber(self, value):
         """
         Convert a numeric value ``value`` to the corresponding C++ compliant value as a string.
         """

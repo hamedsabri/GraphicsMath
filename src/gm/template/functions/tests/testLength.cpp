@@ -7,7 +7,7 @@ TEST_CASE( "{{ function.name }}_{{ vectorType.className }}" )
 {
     gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}(
 {% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.GetCppNumber(index * 2) }}
+    {{ vectorType.CppNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif -%}
@@ -15,11 +15,11 @@ TEST_CASE( "{{ function.name }}_{{ vectorType.className }}" )
     );
     CHECK( gm::{{ function.name }}( {{ vectorType.variablePrefix }} )
 {% if vectorType.elementSize == 2 -%}
-           == Approx( {{ vectorType.GetCppNumber(math.sqrt(4.0)) }} )
+           == Approx( {{ vectorType.CppNumber(math.sqrt(4.0)) }} )
 {% elif vectorType.elementSize == 3 -%}
-           == Approx( {{ vectorType.GetCppNumber(math.sqrt(20.0)) }} )
+           == Approx( {{ vectorType.CppNumber(math.sqrt(20.0)) }} )
 {% elif vectorType.elementSize == 4 -%}
-           == Approx( {{ vectorType.GetCppNumber(math.sqrt(56)) }} )
+           == Approx( {{ vectorType.CppNumber(math.sqrt(56)) }} )
 {%- endif -%}
     );
 }

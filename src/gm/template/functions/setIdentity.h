@@ -22,9 +22,9 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
 {% for row in range(interface.Param("matrix").type.dims[0]) -%}
 {% for col in range(interface.Param("matrix").type.dims[1]) -%}
 {% if row == col -%}
-    {{ interface.Param("matrix").type.GetCppNumber( 1 ) }}
+    {{ interface.Param("matrix").type.CppNumber( 1 ) }}
 {%- else -%}
-    {{ interface.Param("matrix").type.GetCppNumber( 0 ) }}
+    {{ interface.Param("matrix").type.CppNumber( 0 ) }}
 {%- endif %}
 {% if row + 1 < interface.Param("matrix").type.dims[0] or col + 1 < interface.Param("matrix").type.dims[ 1 ] -%}
     ,
