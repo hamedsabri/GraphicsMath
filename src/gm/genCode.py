@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Main entry point / script for generating GraphicsMath C++ code.
+Main entry point / script for generating GraphicsMath C++ code from templates.
 """
 
 import os

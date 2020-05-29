@@ -21,7 +21,7 @@ Tests reside within the sub-directories.
 
 \section GM_CodeGeneration Code generation
 
-The executable python script located at \p src/gm/generateCode.py can be run to generate and update source code.  Coe-formatters \p clang-format and \p black need to be available in the codegen environment.
+The executable python script located at \p src/gm/genCode.py can be run to generate and update source code.  Coe-formatters \p clang-format and \p black need to be available in the codegen environment.
 
 Some common code generation logic are located under \p src/gm/codeGen/.
 
