@@ -70,12 +70,12 @@ class FunctionInterface:
         Generate a string of typed, and named parameters.
         """
         def typedParam(param):
-            return "{constQualifier} {className}& {variableName}{comma}".format(
+            return "{constQualifier} {className}& {variableName}".format(
                 constQualifier=param.constQualifier,
                 className=param.type.className,
                 variableName=param.variableName
             )
-        return ", ".join([typedParam(param) for param in self._parameters.values()]
+        return ", ".join([typedParam(param) for param in self._parameters.values()])
 
     @property
     def namedParameters(self):
