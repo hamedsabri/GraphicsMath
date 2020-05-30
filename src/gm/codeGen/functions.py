@@ -71,13 +71,12 @@ class FunctionInterface:
         """
         paramString = ""
         for index, param in enumerate(self._parameters.values()):
-            paramString += param.constQualifier
-            paramString += " "
-            paramString += param.type.className
-            paramString += "& "
-            paramString += param.variableName
-            if index + 1 < len(self._parameters):
-                paramString += ", "
+            paramString += "{constQualifier} {className}& {variableName}{comma}".format(
+                constQualifier=param.constQualifier,
+                className=param.type.className,
+                variableName=param.variableName,
+                comma=(", " if index + 1 < len(self._parameters) else "")
+            )
         return paramString
 
     @property
