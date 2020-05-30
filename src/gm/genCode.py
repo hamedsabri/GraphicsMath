@@ -57,25 +57,29 @@ PYTHON_DIR = "python"
 """
 Global set of POD value types.
 """
-POD_TYPES = set([PODType(FLOAT), PODType(INT)])
+POD_TYPES = [PODType(FLOAT), PODType(INT)]
 
 """
-VECTOR_TYPES Global set of vector value types to generate.
+Global set of vector value types to generate.
 """
-VECTOR_TYPES = set(
-    [
-        # Single-index vector types.
-        VectorType((2,), PODType(INT)),
-        VectorType((3,), PODType(INT)),
-        VectorType((4,), PODType(INT)),
-        VectorType((2,), PODType(FLOAT)),
-        VectorType((3,), PODType(FLOAT)),
-        VectorType((4,), PODType(FLOAT)),
-        # Matrix types.
-        VectorType((3, 3), PODType(FLOAT)),
-        VectorType((4, 4), PODType(FLOAT)),
-    ]
-)
+MATRIX_TYPES = [
+    VectorType((3, 3), PODType(FLOAT)),
+    VectorType((4, 4), PODType(FLOAT)),
+]
+
+SINGLE_INDEX_VECTOR_TYPES_FLOAT = [
+    VectorType((2,), PODType(FLOAT)),
+    VectorType((3,), PODType(FLOAT)),
+    VectorType((4,), PODType(FLOAT)),
+]
+
+SINGLE_INDEX_VECTOR_TYPES_INT = [
+    VectorType((2,), PODType(INT)),
+    VectorType((3,), PODType(INT)),
+    VectorType((4,), PODType(INT)),
+]
+
+VECTOR_TYPES = sorted(SINGLE_INDEX_VECTOR_TYPES_FLOAT + SINGLE_INDEX_VECTOR_TYPES_INT + MATRIX_TYPES)
 
 """
 COMPOSITE_TYPES is a dict of type name (str) -> type object (CompositeType).
@@ -328,99 +332,82 @@ def GenerateFunctions():
     Returns:
         list: file paths to the generated files.
     """
-    functionGroups = [
+    functionGroups = []
+
+    # Element-wise transformation.
+    elementWiseXformInterfaces = []
+    for valueType in [PODType(FLOAT)] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
+        elementWiseXformInterfaces.append(
+            FunctionInterface(
+                parameters=[
+                    FunctionParameter("value", valueType, Mutability.Const),
+                ],
+                returnType=valueType
+            )
+        )
+    functionGroups.append(
+        FunctionGroup(
+            ["floor"],
+            interfaces=elementWiseXformInterfaces,
+        )
+    )
+
+    # Vector product(s).
+    vectorProductInterfaces = []
+    for vectorType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
+        vectorProductInterfaces.append(
+            FunctionInterface(
+                parameters=[
+                    FunctionParameter("lhs", vectorType, Mutability.Const),
+                    FunctionParameter("rhs", vectorType, Mutability.Const),
+                ],
+                returnType=vectorType.elementType
+            )
+        )
+    functionGroups.append(
         FunctionGroup(
             ["dotProduct"],
-            interfaces=[
-                FunctionInterface(
-                    parameters=[
-                        FunctionParameter(
-                            "lhs", VectorType((2,), PODType(FLOAT)), Mutability.Const
-                        ),
-                        FunctionParameter(
-                            "rhs", VectorType((2,), PODType(FLOAT)), Mutability.Const
-                        ),
-                    ],
-                    returnType=PODType(FLOAT),
-                ),
-                FunctionInterface(
-                    parameters=[
-                        FunctionParameter(
-                            "lhs", VectorType((3,), PODType(FLOAT)), Mutability.Const
-                        ),
-                        FunctionParameter(
-                            "rhs", VectorType((3,), PODType(FLOAT)), Mutability.Const
-                        ),
-                    ],
-                    returnType=PODType(FLOAT),
-                ),
-                FunctionInterface(
-                    parameters=[
-                        FunctionParameter(
-                            "lhs", VectorType((4,), PODType(FLOAT)), Mutability.Const
-                        ),
-                        FunctionParameter(
-                            "rhs", VectorType((4,), PODType(FLOAT)), Mutability.Const
-                        ),
-                    ],
-                    returnType=PODType(FLOAT),
-                ),
-            ],
-        ),
+            interfaces=vectorProductInterfaces,
+        )
+    )
+
+    # Vector reduction.
+    vectorReductionInterfaces = []
+    for vectorType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
+        vectorReductionInterfaces.append(
+            FunctionInterface(
+                parameters=[
+                    FunctionParameter("vector", vectorType, Mutability.Const),
+                ],
+                returnType=vectorType.elementType
+            )
+        )
+
+    functionGroups.append(
         FunctionGroup(
             ["length", "lengthSquared"],
-            interfaces=[
-                FunctionInterface(
-                    parameters=[
-                        FunctionParameter(
-                            "vector", VectorType((2,), PODType(FLOAT)), Mutability.Const
-                        ),
-                    ],
-                    returnType=PODType(FLOAT),
-                ),
-                FunctionInterface(
-                    parameters=[
-                        FunctionParameter(
-                            "vector", VectorType((3,), PODType(FLOAT)), Mutability.Const
-                        ),
-                    ],
-                    returnType=PODType(FLOAT),
-                ),
-                FunctionInterface(
-                    parameters=[
-                        FunctionParameter(
-                            "vector", VectorType((4,), PODType(FLOAT)), Mutability.Const
-                        ),
-                    ],
-                    returnType=PODType(FLOAT),
-                ),
-            ],
-        ),
+            interfaces=vectorReductionInterfaces,
+        )
+    )
+
+    # Matrix constant group.
+    matrixConstantInterfaces = []
+    for matrixType in MATRIX_TYPES:
+        matrixConstantInterfaces.append(
+            FunctionInterface(
+                parameters=[
+                    FunctionParameter("matrix", matrixType, Mutability.Mutable),
+                ],
+            )
+        )
+    functionGroups.append(
         FunctionGroup(
             ["setIdentity"],
-            interfaces=[
-                FunctionInterface(
-                    parameters=[
-                        FunctionParameter(
-                            "matrix",
-                            VectorType((3, 3), PODType(FLOAT)),
-                            Mutability.Mutable,
-                        ),
-                    ],
-                ),
-                FunctionInterface(
-                    parameters=[
-                        FunctionParameter(
-                            "matrix",
-                            VectorType((4, 4), PODType(FLOAT)),
-                            Mutability.Mutable,
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ]
+            interfaces=matrixConstantInterfaces,
+        )
+    )
 
+    # Generate code.
     filePaths = []
     for functionGroup in functionGroups:
         for function in functionGroup.functions:
