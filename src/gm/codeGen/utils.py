@@ -20,9 +20,7 @@ CPP_SOURCE_EXT = ".cpp"
 CPP_HEADER_EXT = ".h"
 
 # Global jinja2 environment.
-JINJA2_ENVIRONMENT = Environment(
-    undefined=StrictUndefined
-)
+JINJA2_ENVIRONMENT = Environment(undefined=StrictUndefined)
 
 
 def GetFileExt(filePath):
@@ -75,12 +73,17 @@ def FormatCode(fileNames):
     Args:
         fileNames (list): input files to automatically format.
     """
-    pythonFiles = [fileName for fileName in fileNames if GetFileExt(fileName) == PY_SOURCE_EXT]
+    pythonFiles = [
+        fileName for fileName in fileNames if GetFileExt(fileName) == PY_SOURCE_EXT
+    ]
     if pythonFiles:
         RunCommand("black " + " ".join(pythonFiles))
 
-    cppFiles = [fileName for fileName in fileNames
-                if GetFileExt(fileName) in (CPP_SOURCE_EXT, CPP_HEADER_EXT)]
+    cppFiles = [
+        fileName
+        for fileName in fileNames
+        if GetFileExt(fileName) in (CPP_SOURCE_EXT, CPP_HEADER_EXT)
+    ]
     if cppFiles:
         RunCommand("clang-format -i " + " ".join(cppFiles))
 
@@ -106,7 +109,7 @@ def RenderTemplate(templatePath, **kwargs):
     Returns:
         str: file name of generated source file.
     """
-    fileExt = GetFileExt(templatePath);
+    fileExt = GetFileExt(templatePath)
     if fileExt in (CPP_SOURCE_EXT, CPP_HEADER_EXT):
         commentPrefix = "//"
     elif fileExt == PY_SOURCE_EXT:
@@ -119,7 +122,8 @@ def RenderTemplate(templatePath, **kwargs):
         templateStr = os.linesep.join(
             [
                 commentPrefix,
-                commentPrefix + " This file is auto-generated, please do not modify directly!",
+                commentPrefix
+                + " This file is auto-generated, please do not modify directly!",
                 commentPrefix,
                 "",
             ]

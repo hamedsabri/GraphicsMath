@@ -10,6 +10,7 @@ class Mutability:
     """
     Describes the mutability of a function parameter.
     """
+
     Const = 0
     Mutable = 1
 
@@ -69,12 +70,14 @@ class FunctionInterface:
         """
         Generate a string of typed, and named parameters.
         """
+
         def typedParam(param):
             return "{constQualifier} {className}& {variableName}".format(
                 constQualifier=param.constQualifier,
                 className=param.type.className,
-                variableName=param.variableName
+                variableName=param.variableName,
             )
+
         return ", ".join([typedParam(param) for param in self._parameters.values()])
 
     @property
@@ -125,7 +128,9 @@ class Function:
         """
         types = set()
         for interface in self.interfaces:
-            types = types.union([param.type for param in interface._parameters.values()])
+            types = types.union(
+                [param.type for param in interface._parameters.values()]
+            )
             if interface._returnType:
                 types = types.union([interface._returnType])
         return types

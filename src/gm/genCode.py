@@ -153,7 +153,6 @@ def PopulateBoundsCompositeTypes():
         # in a later stage.
         COMPOSITE_TYPES[compositeType.className] = compositeType
 
-
     return filePaths
 
 
@@ -175,7 +174,7 @@ def GenerateCompositeTypes():
             GenerateCode(
                 os.path.join(TYPES_DIR, "compositeType.h"),
                 os.path.join(TYPES_DIR, compositeType.headerFileName),
-                compositeType=compositeType
+                compositeType=compositeType,
             )
         )
 
@@ -183,8 +182,12 @@ def GenerateCompositeTypes():
         filePaths.append(
             GenerateCode(
                 os.path.join(PYTHON_DIR, TYPES_DIR, "bindCompositeType.cpp"),
-                os.path.join(PYTHON_DIR, TYPES_DIR, "bind{className}.cpp".format(className=compositeType.className)),
-                compositeType=compositeType
+                os.path.join(
+                    PYTHON_DIR,
+                    TYPES_DIR,
+                    "bind{className}.cpp".format(className=compositeType.className),
+                ),
+                compositeType=compositeType,
             )
         )
 
@@ -192,8 +195,13 @@ def GenerateCompositeTypes():
         filePaths.append(
             GenerateCode(
                 os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "testCompositeType.py"),
-                os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "test{className}.py".format(className=compositeType.className)),
-                compositeType=compositeType
+                os.path.join(
+                    PYTHON_DIR,
+                    TYPES_DIR,
+                    TESTS_DIR,
+                    "test{className}.py".format(className=compositeType.className),
+                ),
+                compositeType=compositeType,
             )
         )
 
@@ -254,7 +262,11 @@ def GenerateVectorTypes():
         filePaths.append(
             GenerateCode(
                 os.path.join(TYPES_DIR, TESTS_DIR, "testVectorType.cpp"),
-                os.path.join(TYPES_DIR, TESTS_DIR, "test{className}.cpp".format(className=vectorType.className)),
+                os.path.join(
+                    TYPES_DIR,
+                    TESTS_DIR,
+                    "test{className}.cpp".format(className=vectorType.className),
+                ),
                 vectorType=vectorType,
             )
         )
@@ -263,7 +275,11 @@ def GenerateVectorTypes():
         filePaths.append(
             GenerateCode(
                 os.path.join(PYTHON_DIR, TYPES_DIR, "bindVectorType.cpp"),
-                os.path.join(PYTHON_DIR, TYPES_DIR, "bind{className}.cpp".format(className=vectorType.className)),
+                os.path.join(
+                    PYTHON_DIR,
+                    TYPES_DIR,
+                    "bind{className}.cpp".format(className=vectorType.className),
+                ),
                 vectorType=vectorType,
             )
         )
@@ -272,7 +288,12 @@ def GenerateVectorTypes():
         filePaths.append(
             GenerateCode(
                 os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "testVectorType.py"),
-                os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "test{className}.py".format(className=vectorType.className)),
+                os.path.join(
+                    PYTHON_DIR,
+                    TYPES_DIR,
+                    TESTS_DIR,
+                    "test{className}.py".format(className=vectorType.className),
+                ),
                 vectorType=vectorType,
             )
         )
@@ -299,6 +320,7 @@ def GenerateTypes():
 # Code generation for functions.
 #
 
+
 def GenerateFunctions():
     """
     Generate code for all of the functions.
@@ -312,22 +334,34 @@ def GenerateFunctions():
             interfaces=[
                 FunctionInterface(
                     parameters=[
-                        FunctionParameter("lhs", VectorType((2,), PODType(FLOAT)), Mutability.Const),
-                        FunctionParameter("rhs", VectorType((2,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter(
+                            "lhs", VectorType((2,), PODType(FLOAT)), Mutability.Const
+                        ),
+                        FunctionParameter(
+                            "rhs", VectorType((2,), PODType(FLOAT)), Mutability.Const
+                        ),
                     ],
                     returnType=PODType(FLOAT),
                 ),
                 FunctionInterface(
                     parameters=[
-                        FunctionParameter("lhs", VectorType((3,), PODType(FLOAT)), Mutability.Const),
-                        FunctionParameter("rhs", VectorType((3,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter(
+                            "lhs", VectorType((3,), PODType(FLOAT)), Mutability.Const
+                        ),
+                        FunctionParameter(
+                            "rhs", VectorType((3,), PODType(FLOAT)), Mutability.Const
+                        ),
                     ],
                     returnType=PODType(FLOAT),
                 ),
                 FunctionInterface(
                     parameters=[
-                        FunctionParameter("lhs", VectorType((4,), PODType(FLOAT)), Mutability.Const),
-                        FunctionParameter("rhs", VectorType((4,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter(
+                            "lhs", VectorType((4,), PODType(FLOAT)), Mutability.Const
+                        ),
+                        FunctionParameter(
+                            "rhs", VectorType((4,), PODType(FLOAT)), Mutability.Const
+                        ),
                     ],
                     returnType=PODType(FLOAT),
                 ),
@@ -338,19 +372,25 @@ def GenerateFunctions():
             interfaces=[
                 FunctionInterface(
                     parameters=[
-                        FunctionParameter("vector", VectorType((2,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter(
+                            "vector", VectorType((2,), PODType(FLOAT)), Mutability.Const
+                        ),
                     ],
                     returnType=PODType(FLOAT),
                 ),
                 FunctionInterface(
                     parameters=[
-                        FunctionParameter("vector", VectorType((3,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter(
+                            "vector", VectorType((3,), PODType(FLOAT)), Mutability.Const
+                        ),
                     ],
                     returnType=PODType(FLOAT),
                 ),
                 FunctionInterface(
                     parameters=[
-                        FunctionParameter("vector", VectorType((4,), PODType(FLOAT)), Mutability.Const),
+                        FunctionParameter(
+                            "vector", VectorType((4,), PODType(FLOAT)), Mutability.Const
+                        ),
                     ],
                     returnType=PODType(FLOAT),
                 ),
@@ -361,12 +401,20 @@ def GenerateFunctions():
             interfaces=[
                 FunctionInterface(
                     parameters=[
-                        FunctionParameter("matrix", VectorType((3,3), PODType(FLOAT)), Mutability.Mutable),
+                        FunctionParameter(
+                            "matrix",
+                            VectorType((3, 3), PODType(FLOAT)),
+                            Mutability.Mutable,
+                        ),
                     ],
                 ),
                 FunctionInterface(
                     parameters=[
-                        FunctionParameter("matrix", VectorType((4,4), PODType(FLOAT)), Mutability.Mutable),
+                        FunctionParameter(
+                            "matrix",
+                            VectorType((4, 4), PODType(FLOAT)),
+                            Mutability.Mutable,
+                        ),
                     ],
                 ),
             ],
@@ -381,31 +429,35 @@ def GenerateFunctions():
                 GenerateCode(
                     os.path.join(FUNCTIONS_DIR, function.headerFileName),
                     os.path.join(FUNCTIONS_DIR, function.headerFileName),
-                    function=function
+                    function=function,
                 )
             )
 
             # Generate C++ test code.
             # Need to decide if it is worth auto-generating function tests.
-            #filePaths.append(
+            # filePaths.append(
             #    GenerateCode(
             #        os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)),
             #        os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)),
             #        function=function
             #    )
-            #)
+            # )
 
             # Python bindings source.
             filePaths.append(
                 GenerateCode(
                     os.path.join(PYTHON_DIR, FUNCTIONS_DIR, "bindFunction.cpp"),
-                    os.path.join(PYTHON_DIR, FUNCTIONS_DIR, "bind{name}.cpp".format(name=function.name)),
+                    os.path.join(
+                        PYTHON_DIR,
+                        FUNCTIONS_DIR,
+                        "bind{name}.cpp".format(name=function.name),
+                    ),
                     function=function,
                 )
             )
 
             # Register in global FUNCTIONS
-            assert(function.name not in FUNCTIONS)
+            assert function.name not in FUNCTIONS
             FUNCTIONS[function.name] = function
 
     return filePaths
@@ -429,7 +481,7 @@ if __name__ == "__main__":
             os.path.join(PYTHON_DIR, "module.cpp"),
             types=list(VECTOR_TYPES) + COMPOSITE_TYPES.values(),
             functions=FUNCTIONS.values(),
-            UpperCamelCase=UpperCamelCase
+            UpperCamelCase=UpperCamelCase,
         )
     )
 
