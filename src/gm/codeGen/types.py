@@ -82,6 +82,14 @@ class PODType(ValueType):
         elif self.className == DOUBLE:
             return str(float(value))
 
+    @property
+    def variablePrefix(self):
+        """
+        Returns:
+            str: a meaningful prefix for naming variables of this type.
+        """
+        return self.className + "Val"
+
 
 class VectorType(ValueType):
     """

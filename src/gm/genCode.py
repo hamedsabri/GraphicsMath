@@ -335,9 +335,9 @@ def GenerateFunctions():
     functionGroups = []
 
     # Element-wise transformation.
-    elementWiseXformInterfaces = []
+    floatScalarAndVectorInterfaces = []
     for valueType in [PODType(FLOAT)] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
-        elementWiseXformInterfaces.append(
+        floatScalarAndVectorInterfaces.append(
             FunctionInterface(
                 parameters=[
                     FunctionParameter("value", valueType, Mutability.Const),
@@ -348,7 +348,7 @@ def GenerateFunctions():
     functionGroups.append(
         FunctionGroup(
             ["floor"],
-            interfaces=elementWiseXformInterfaces,
+            interfaces=floatScalarAndVectorInterfaces,
         )
     )
 
@@ -420,7 +420,8 @@ def GenerateFunctions():
                 )
             )
 
-            # Generate C++ test code (only if the template is available.
+            # Generate C++ test code (if the template is available).
+            # Some tests are hand-authored.
             testTemplatePath = os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name))
             if os.path.isfile(GetTemplateFile(testTemplatePath)):
                 filePaths.append(
