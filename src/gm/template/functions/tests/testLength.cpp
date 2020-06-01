@@ -2,24 +2,24 @@
 
 #include <gm/functions/{{ function.headerFileName }}>
 
-{% for vectorType in function.types %}
-TEST_CASE( "{{ function.name }}_{{ vectorType.className }}" )
+{% for interface in function.interfaces %}
+TEST_CASE( "{{ function.name }}_{{ interface.Param("vector").type.className }}" )
 {
-    gm::{{ vectorType.className }} {{ vectorType.variablePrefix }}(
-{% for index in range(vectorType.elementSize) -%}
-    {{ vectorType.CppNumber(index * 2) }}
-{%- if index + 1 < vectorType.elementSize -%}
+    gm::{{ interface.Param("vector").type.className }} {{ interface.Param("vector").type.variablePrefix }}(
+{% for index in range(interface.Param("vector").type.elementSize) -%}
+    {{ interface.Param("vector").type.CppNumber(index * 2) }}
+{%- if index + 1 < interface.Param("vector").type.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
-    CHECK( gm::{{ function.name }}( {{ vectorType.variablePrefix }} )
-{% if vectorType.elementSize == 2 -%}
-           == Approx( {{ vectorType.CppNumber(math.sqrt(4.0)) }} )
-{% elif vectorType.elementSize == 3 -%}
-           == Approx( {{ vectorType.CppNumber(math.sqrt(20.0)) }} )
-{% elif vectorType.elementSize == 4 -%}
-           == Approx( {{ vectorType.CppNumber(math.sqrt(56)) }} )
+    CHECK( gm::{{ function.name }}( {{ interface.Param("vector").type.variablePrefix }} )
+{% if interface.Param("vector").type.elementSize == 2 -%}
+           == Approx( {{ interface.Param("vector").type.CppNumber(math.sqrt(4.0)) }} )
+{% elif interface.Param("vector").type.elementSize == 3 -%}
+           == Approx( {{ interface.Param("vector").type.CppNumber(math.sqrt(20.0)) }} )
+{% elif interface.Param("vector").type.elementSize == 4 -%}
+           == Approx( {{ interface.Param("vector").type.CppNumber(math.sqrt(56)) }} )
 {%- endif -%}
     );
 }

@@ -420,15 +420,16 @@ def GenerateFunctions():
                 )
             )
 
-            # Generate C++ test code.
-            # Need to decide if it is worth auto-generating function tests.
-            # filePaths.append(
-            #    GenerateCode(
-            #        os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)),
-            #        os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)),
-            #        function=function
-            #    )
-            # )
+            # Generate C++ test code (only if the template is available.
+            testTemplatePath = os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name))
+            if os.path.isfile(GetTemplateFile(testTemplatePath)):
+                filePaths.append(
+                   GenerateCode(
+                       testTemplatePath,
+                       os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)),
+                       function=function
+                   )
+                )
 
             # Python bindings source.
             filePaths.append(
