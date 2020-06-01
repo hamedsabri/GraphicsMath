@@ -38,7 +38,10 @@ class FunctionParameter:
             return ""
 
     @property
-    def variableName(self):
+    def argumentName(self):
+        """
+        Get the named identifier of this parameter when it is used as an argument to a function.
+        """
         if self.mutability == Mutability.Const:
             return "i_" + self.name
         else:
@@ -72,17 +75,17 @@ class FunctionInterface:
         """
 
         def typedParam(param):
-            return "{constQualifier} {className}& {variableName}".format(
+            return "{constQualifier} {className}& {argumentName}".format(
                 constQualifier=param.constQualifier,
                 className=param.type.className,
-                variableName=param.variableName,
+                argumentName=param.argumentName,
             )
 
         return ", ".join([typedParam(param) for param in self._parameters.values()])
 
     @property
     def namedParameters(self):
-        return ", ".join([param.variableName for param in self._parameters.values()])
+        return ", ".join([param.argumentName for param in self._parameters.values()])
 
     def Param(self, name):
         """
@@ -102,6 +105,22 @@ class FunctionInterface:
         ```
         """
         return self._parameters[name].type.variablePrefix
+
+    def ParamArg(self, name):
+        """
+        Convenience function to get the argument name of a parameter called ``name``.
+
+        Equivalent to Param("``name``").argumentName.
+        """
+        return self._parameters[name].argumentName
+
+    def ParamCls(self, name):
+        """
+        Convenience function to get the type class name of a parameter called ``name``.
+
+        Equivalent to Param("``name``").type.className.
+        """
+        return self._parameters[name].type.className
 
 
 class Function:

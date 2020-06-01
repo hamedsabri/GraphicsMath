@@ -18,17 +18,17 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-/// Floor the input \ref {{ interface.Param("value").type.className }} \p {{ interface.Param("value").variableName }} and return it.
+/// Floor the input \ref {{ interface.ParamCls("value") }} \p {{ interface.ParamArg("value") }} and return it.
 ///
 /// \return the floored input value.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedParameters }} )
 {
 {% if interface.Param("value").type.isScalar -%}
-    return std::floor( {{ interface.Param("value").variableName }} );
+    return std::floor( {{ interface.ParamArg("value") }} );
 {%- elif interface.Param("value").type.isVector -%}
-    return {{ interface.Param("value").type.className }}(
+    return {{ interface.ParamCls("value") }}(
 {%- for index in range(interface.Param("value").type.elementSize) %}
-        std::floor( {{ interface.Param("value").variableName }}[ {{ index }} ] )
+        std::floor( {{ interface.ParamArg("value") }}[ {{ index }} ] )
 {%- if index + 1 < interface.Param("value").type.elementSize -%}
         ,
 {%- endif -%}

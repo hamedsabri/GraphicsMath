@@ -21,14 +21,14 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-/// Compute the dot product of two \ref {{ interface.Param("lhs").type.className }}, \p i_lhs and \p i_rhs, and return the result.
+/// Compute the dot product of two \ref {{ interface.ParamCls("lhs") }}, \p i_lhs and \p i_rhs, and return the result.
 ///
 /// \return computed dot product.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedParameters }} )
 {
     return
 {% for index in range(interface.Param("lhs").type.elementSize) -%}
-    {{ interface.Param("lhs").variableName }}[ {{ index }} ] * {{ interface.Param("rhs").variableName }}[ {{ index }} ]
+    {{ interface.ParamArg("lhs") }}[ {{ index }} ] * {{ interface.ParamArg("rhs") }}[ {{ index }} ]
 {%- if index + 1 < interface.Param("lhs").type.elementSize -%}
         +
 {%- endif -%}

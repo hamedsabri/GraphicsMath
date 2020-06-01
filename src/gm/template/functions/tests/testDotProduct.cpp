@@ -3,9 +3,9 @@
 #include <gm/functions/{{ function.headerFileName }}>
 
 {% for interface in function.interfaces %}
-TEST_CASE( "{{ function.name }}_{{ interface.Param("lhs").type.className }}" )
+TEST_CASE( "{{ function.name }}_{{ interface.ParamCls("lhs") }}" )
 {
-    gm::{{ interface.Param("lhs").type.className }} {{ interface.ParamVar("lhs") }}A(
+    gm::{{ interface.ParamCls("lhs") }} {{ interface.ParamVar("lhs") }}A(
 {% for index in range(interface.Param("lhs").type.elementSize) -%}
     {{ interface.Param("lhs").type.CppNumber(index) }}
 {%- if index + 1 < interface.Param("lhs").type.elementSize -%}
@@ -13,7 +13,7 @@ TEST_CASE( "{{ function.name }}_{{ interface.Param("lhs").type.className }}" )
 {%- endif -%}
 {%- endfor %}
     );
-    gm::{{ interface.Param("lhs").type.className }} {{ interface.ParamVar("lhs") }}B(
+    gm::{{ interface.ParamCls("lhs") }} {{ interface.ParamVar("lhs") }}B(
 {% for index in range(interface.Param("lhs").type.elementSize) -%}
     {{ interface.Param("lhs").type.CppNumber(index * 5) }}
 {%- if index + 1 < interface.Param("lhs").type.elementSize -%}

@@ -15,10 +15,10 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-/// Set the identity matrix onto \p {{ interface.Param("matrix").variableName }}.
+/// Set the identity matrix onto \p {{ interface.ParamArg("matrix") }}.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedParameters }} )
 {
-    {{ interface.Param("matrix").variableName }} = {{ interface.Param("matrix").type.className }}(
+    {{ interface.ParamArg("matrix") }} = {{ interface.ParamCls("matrix") }}(
 {% for row in range(interface.Param("matrix").type.dims[0]) -%}
 {% for col in range(interface.Param("matrix").type.dims[1]) -%}
 {% if row == col -%}

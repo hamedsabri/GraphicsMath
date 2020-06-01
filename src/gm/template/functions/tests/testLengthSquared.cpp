@@ -3,9 +3,9 @@
 #include <gm/functions/{{ function.headerFileName }}>
 
 {% for interface in function.interfaces %}
-TEST_CASE( "{{ function.name }}_{{ interface.Param("vector").type.className }}" )
+TEST_CASE( "{{ function.name }}_{{ interface.ParamCls("vector") }}" )
 {
-    gm::{{ interface.Param("vector").type.className }} {{ interface.ParamVar("vector") }}(
+    gm::{{ interface.ParamCls("vector") }} {{ interface.ParamVar("vector") }}(
 {% for index in range(interface.Param("vector").type.elementSize) -%}
     {{ interface.Param("vector").type.CppNumber(index * 2) }}
 {%- if index + 1 < interface.Param("vector").type.elementSize -%}
