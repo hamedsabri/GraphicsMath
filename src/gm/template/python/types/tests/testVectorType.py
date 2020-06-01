@@ -17,7 +17,7 @@ class Test{{ vectorType.className }}(unittest.TestCase):
         )
 
     def testElementReadAccess(self):
-        {{ vectorType.variablePrefix }} = gm.{{ vectorType.className }}(
+        {{ vectorType.varName }} = gm.{{ vectorType.className }}(
 {%- for index in range(vectorType.elementSize) -%}
     {{ vectorType.PyNumber(index * 2) }}
 {%- if index + 1 < vectorType.elementSize -%}
@@ -26,15 +26,15 @@ class Test{{ vectorType.className }}(unittest.TestCase):
 {%- endfor -%}
         )
 {%- for index in range(vectorType.elementSize) %}
-        self.assertAlmostEqual({{ vectorType.variablePrefix }}[ {{ index }} ], {{ vectorType.PyNumber(index * 2) }})
+        self.assertAlmostEqual({{ vectorType.varName }}[ {{ index }} ], {{ vectorType.PyNumber(index * 2) }})
 {%- endfor %}
 
     def testElementWriteAccess(self):
-        {{ vectorType.variablePrefix }} = gm.{{ vectorType.className }}()
+        {{ vectorType.varName }} = gm.{{ vectorType.className }}()
 {%- for index in range(vectorType.elementSize) %}
-        {{ vectorType.variablePrefix }}[ {{ index }} ] = {{ vectorType.PyNumber(index * 2) }};
+        {{ vectorType.varName }}[ {{ index }} ] = {{ vectorType.PyNumber(index * 2) }};
 {%- endfor -%}
 {%- for index in range(vectorType.elementSize) %}
-        self.assertAlmostEqual({{ vectorType.variablePrefix }}[ {{ index }} ], {{ vectorType.PyNumber(index * 2) }})
+        self.assertAlmostEqual({{ vectorType.varName }}[ {{ index }} ], {{ vectorType.PyNumber(index * 2) }})
 {%- endfor %}
 

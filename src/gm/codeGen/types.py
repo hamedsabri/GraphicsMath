@@ -83,7 +83,7 @@ class PODType(ValueType):
             return str(float(value))
 
     @property
-    def variablePrefix(self):
+    def varName(self):
         """
         Returns:
             str: a meaningful prefix for naming variables of this type.
@@ -110,7 +110,7 @@ class VectorType(ValueType):
         return functools.reduce(lambda x, y: x * y, self.dims)
 
     @property
-    def variablePrefix(self):
+    def varName(self):
         """
         Returns:
             str: a meaningful prefix for naming variables of this type.

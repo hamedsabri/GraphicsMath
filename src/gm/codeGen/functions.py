@@ -93,18 +93,18 @@ class FunctionInterface:
         """
         return self._arguments[key]
 
-    def ArgVariable(self, key):
+    def ArgType(self, key):
         """
-        Convenience function to get the variable prefix of a argument called ``key``.
+        Convenience function to get the type of argument assigned by ``key``.
 
-        Equivalent to Arg("``key``").type.variablePrefix.
+        Equivalent to Arg("``key``").type.
 
-        The following command performs the search and replacement.
+        The following command performs the search and replacement:
         ```
-        find . -key ".git" -prune -o -type f -exec sed -i 's/Arg("\([a-zA-Z]\+\)").type.variablePrefix/ArgVariable("\1")/g' {} +
+        find . -key ".git" -prune -o -type f -exec sed -i 's/Arg("\([a-zA-Z]\+\)").type/ArgType("\1")/g' {} +
         ```
         """
-        return self._arguments[key].type.variablePrefix
+        return self._arguments[key].type
 
     def ArgName(self, key):
         """
