@@ -21,15 +21,15 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-/// Compute the dot product of two \ref {{ interface.ParamCls("lhs") }}, \p i_lhs and \p i_rhs, and return the result.
+/// Compute the dot product of two \ref {{ interface.ArgClass("lhs") }}, \p i_lhs and \p i_rhs, and return the result.
 ///
 /// \return computed dot product.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedParameters }} )
+GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
     return
-{% for index in range(interface.Param("lhs").type.elementSize) -%}
-    {{ interface.ParamArg("lhs") }}[ {{ index }} ] * {{ interface.ParamArg("rhs") }}[ {{ index }} ]
-{%- if index + 1 < interface.Param("lhs").type.elementSize -%}
+{% for index in range(interface.Arg("lhs").type.elementSize) -%}
+    {{ interface.ArgName("lhs") }}[ {{ index }} ] * {{ interface.ArgName("rhs") }}[ {{ index }} ]
+{%- if index + 1 < interface.Arg("lhs").type.elementSize -%}
         +
 {%- endif -%}
 {%- endfor -%}

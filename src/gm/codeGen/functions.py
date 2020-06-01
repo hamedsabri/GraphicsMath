@@ -8,7 +8,7 @@ from collections import OrderedDict
 
 class Mutability:
     """
-    Describes the mutability of a function parameter.
+    Describes the mutability of a function argument.
     """
 
     Const = 0
@@ -17,16 +17,16 @@ class Mutability:
 
 class FunctionArg:
     """
-    Description of a function parameter.
+    Description of a function argument.
 
     Args:
-        name (str): name of this parameter.
-        type (ValueType): type of the parameter.
-        mutability (Mutability): mutability of the parameter.
+        key (str): key of this argument.
+        type (ValueType): type of the argument.
+        mutability (Mutability): mutability of the argument.
     """
 
-    def __init__(self, name, type, mutability):
-        self.name = name
+    def __init__(self, key, type, mutability):
+        self.key = key
         self.type = type
         self.mutability = mutability
 
@@ -38,27 +38,27 @@ class FunctionArg:
             return ""
 
     @property
-    def argumentName(self):
+    def name(self):
         """
-        Get the named identifier of this parameter when it is used as an argument to a function.
+        Get the named identifier of this argument when it is used as an argument to a function.
         """
         if self.mutability == Mutability.Const:
-            return "i_" + self.name
+            return "i_" + self.key
         else:
-            return "o_" + self.name
+            return "o_" + self.key
 
 
 class FunctionInterface:
     """
-    Interface of a function, describing the parameters (type and qualifiers), and return type.
+    Interface of a function, describing the arguments (type and qualifiers), and return type.
 
     Args:
-        parameters (list): ordered list of function parameters.
+        arguments (list): ordered list of function arguments.
         returnType (ValueType): return value type.  If `None` is specified, then the function return type is void.
     """
 
-    def __init__(self, parameters, returnType=None):
-        self._parameters = OrderedDict([(param.name, param) for param in parameters])
+    def __init__(self, arguments, returnType=None):
+        self._arguments = OrderedDict([(arg.key, arg) for arg in arguments])
         self._returnType = returnType
 
     @property
@@ -69,58 +69,58 @@ class FunctionInterface:
             return "void"
 
     @property
-    def typedParameters(self):
+    def typedArgs(self):
         """
-        Generate a string of typed, and named parameters.
+        Generate a string of typed, and named arguments.
         """
 
-        def typedParam(param):
-            return "{constQualifier} {className}& {argumentName}".format(
-                constQualifier=param.constQualifier,
-                className=param.type.className,
-                argumentName=param.argumentName,
+        def typedArg(arg):
+            return "{constQualifier} {className}& {name}".format(
+                constQualifier=arg.constQualifier,
+                className=arg.type.className,
+                name=arg.name,
             )
 
-        return ", ".join([typedParam(param) for param in self._parameters.values()])
+        return ", ".join([typedArg(arg) for arg in self._arguments.values()])
 
     @property
-    def namedParameters(self):
-        return ", ".join([param.argumentName for param in self._parameters.values()])
+    def namedArgs(self):
+        return ", ".join([arg.name for arg in self._arguments.values()])
 
-    def Param(self, name):
+    def Arg(self, key):
         """
-        Retrieve a ``FunctionArg` from this interface, by name.
+        Retrieve a ``FunctionArg` from this interface, by key.
         """
-        return self._parameters[name]
+        return self._arguments[key]
 
-    def ParamVar(self, name):
+    def ArgVariable(self, key):
         """
-        Convenience function to get the variable prefix of a parameter called ``name``.
+        Convenience function to get the variable prefix of a argument called ``key``.
 
-        Equivalent to Param("``name``").type.variablePrefix.
+        Equivalent to Arg("``key``").type.variablePrefix.
 
         The following command performs the search and replacement.
         ```
-        find . -name ".git" -prune -o -type f -exec sed -i 's/Param("\([a-zA-Z]\+\)").type.variablePrefix/ParamVar("\1")/g' {} +
+        find . -key ".git" -prune -o -type f -exec sed -i 's/Arg("\([a-zA-Z]\+\)").type.variablePrefix/ArgVariable("\1")/g' {} +
         ```
         """
-        return self._parameters[name].type.variablePrefix
+        return self._arguments[key].type.variablePrefix
 
-    def ParamArg(self, name):
+    def ArgName(self, key):
         """
-        Convenience function to get the argument name of a parameter called ``name``.
+        Convenience function to get the argument key of a argument called ``key``.
 
-        Equivalent to Param("``name``").argumentName.
+        Equivalent to Arg("``key``").name.
         """
-        return self._parameters[name].argumentName
+        return self._arguments[key].name
 
-    def ParamCls(self, name):
+    def ArgClass(self, key):
         """
-        Convenience function to get the type class name of a parameter called ``name``.
+        Convenience function to get the type class key of a argument called ``key``.
 
-        Equivalent to Param("``name``").type.className.
+        Equivalent to Arg("``key``").type.className.
         """
-        return self._parameters[name].type.className
+        return self._arguments[key].type.className
 
 
 class Function:
@@ -130,7 +130,7 @@ class Function:
     Args:
         name (str): name of the function.
         interfaces (list): list of interfaces which describe the different variations of
-            parameters and return types.
+            arguments and return types.
     """
 
     def __init__(self, name, interfaces):
@@ -161,7 +161,7 @@ class Function:
         types = set()
         for interface in self.interfaces:
             types = types.union(
-                [param.type for param in interface._parameters.values()]
+                [arg.type for arg in interface._arguments.values()]
             )
             if interface._returnType:
                 types = types.union([interface._returnType])

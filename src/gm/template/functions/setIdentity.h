@@ -15,18 +15,18 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-/// Set the identity matrix onto \p {{ interface.ParamArg("matrix") }}.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedParameters }} )
+/// Set the identity matrix onto \p {{ interface.ArgName("matrix") }}.
+GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
-    {{ interface.ParamArg("matrix") }} = {{ interface.ParamCls("matrix") }}(
-{% for row in range(interface.Param("matrix").type.dims[0]) -%}
-{% for col in range(interface.Param("matrix").type.dims[1]) -%}
+    {{ interface.ArgName("matrix") }} = {{ interface.ArgClass("matrix") }}(
+{% for row in range(interface.Arg("matrix").type.dims[0]) -%}
+{% for col in range(interface.Arg("matrix").type.dims[1]) -%}
 {% if row == col -%}
-    {{ interface.Param("matrix").type.CppNumber( 1 ) }}
+    {{ interface.Arg("matrix").type.CppNumber( 1 ) }}
 {%- else -%}
-    {{ interface.Param("matrix").type.CppNumber( 0 ) }}
+    {{ interface.Arg("matrix").type.CppNumber( 0 ) }}
 {%- endif %}
-{% if row + 1 < interface.Param("matrix").type.dims[0] or col + 1 < interface.Param("matrix").type.dims[ 1 ] -%}
+{% if row + 1 < interface.Arg("matrix").type.dims[0] or col + 1 < interface.Arg("matrix").type.dims[ 1 ] -%}
     ,
 {%- endif %}
 {%- endfor -%}

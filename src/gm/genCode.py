@@ -339,7 +339,7 @@ def GenerateFunctions():
     for valueType in [PODType(FLOAT)] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
         floatScalarAndVectorInterfaces.append(
             FunctionInterface(
-                parameters=[
+                arguments=[
                     FunctionArg("value", valueType, Mutability.Const),
                 ],
                 returnType=valueType
@@ -357,7 +357,7 @@ def GenerateFunctions():
     for vectorType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
         vectorProductInterfaces.append(
             FunctionInterface(
-                parameters=[
+                arguments=[
                     FunctionArg("lhs", vectorType, Mutability.Const),
                     FunctionArg("rhs", vectorType, Mutability.Const),
                 ],
@@ -376,7 +376,7 @@ def GenerateFunctions():
     for vectorType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
         vectorReductionInterfaces.append(
             FunctionInterface(
-                parameters=[
+                arguments=[
                     FunctionArg("vector", vectorType, Mutability.Const),
                 ],
                 returnType=vectorType.elementType
@@ -395,7 +395,7 @@ def GenerateFunctions():
     for matrixType in MATRIX_TYPES:
         matrixConstantInterfaces.append(
             FunctionInterface(
-                parameters=[
+                arguments=[
                     FunctionArg("matrix", matrixType, Mutability.Mutable),
                 ],
             )

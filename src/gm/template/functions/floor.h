@@ -18,18 +18,18 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-/// Floor the input \ref {{ interface.ParamCls("value") }} \p {{ interface.ParamArg("value") }} and return it.
+/// Floor the input \ref {{ interface.ArgClass("value") }} \p {{ interface.ArgName("value") }} and return it.
 ///
 /// \return the floored input value.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedParameters }} )
+GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
-{% if interface.Param("value").type.isScalar -%}
-    return std::floor( {{ interface.ParamArg("value") }} );
-{%- elif interface.Param("value").type.isVector -%}
-    return {{ interface.ParamCls("value") }}(
-{%- for index in range(interface.Param("value").type.elementSize) %}
-        std::floor( {{ interface.ParamArg("value") }}[ {{ index }} ] )
-{%- if index + 1 < interface.Param("value").type.elementSize -%}
+{% if interface.Arg("value").type.isScalar -%}
+    return std::floor( {{ interface.ArgName("value") }} );
+{%- elif interface.Arg("value").type.isVector -%}
+    return {{ interface.ArgClass("value") }}(
+{%- for index in range(interface.Arg("value").type.elementSize) %}
+        std::floor( {{ interface.ArgName("value") }}[ {{ index }} ] )
+{%- if index + 1 < interface.Arg("value").type.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
