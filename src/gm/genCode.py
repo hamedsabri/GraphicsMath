@@ -29,7 +29,7 @@ from codeGen.functions import (
     FunctionGroup,
     Function,
     FunctionInterface,
-    FunctionParameter,
+    FunctionArg,
     Mutability,
 )
 
@@ -340,7 +340,7 @@ def GenerateFunctions():
         floatScalarAndVectorInterfaces.append(
             FunctionInterface(
                 parameters=[
-                    FunctionParameter("value", valueType, Mutability.Const),
+                    FunctionArg("value", valueType, Mutability.Const),
                 ],
                 returnType=valueType
             )
@@ -358,8 +358,8 @@ def GenerateFunctions():
         vectorProductInterfaces.append(
             FunctionInterface(
                 parameters=[
-                    FunctionParameter("lhs", vectorType, Mutability.Const),
-                    FunctionParameter("rhs", vectorType, Mutability.Const),
+                    FunctionArg("lhs", vectorType, Mutability.Const),
+                    FunctionArg("rhs", vectorType, Mutability.Const),
                 ],
                 returnType=vectorType.elementType
             )
@@ -377,7 +377,7 @@ def GenerateFunctions():
         vectorReductionInterfaces.append(
             FunctionInterface(
                 parameters=[
-                    FunctionParameter("vector", vectorType, Mutability.Const),
+                    FunctionArg("vector", vectorType, Mutability.Const),
                 ],
                 returnType=vectorType.elementType
             )
@@ -396,7 +396,7 @@ def GenerateFunctions():
         matrixConstantInterfaces.append(
             FunctionInterface(
                 parameters=[
-                    FunctionParameter("matrix", matrixType, Mutability.Mutable),
+                    FunctionArg("matrix", matrixType, Mutability.Mutable),
                 ],
             )
         )

@@ -15,7 +15,7 @@ class Mutability:
     Mutable = 1
 
 
-class FunctionParameter:
+class FunctionArg:
     """
     Description of a function parameter.
 
@@ -89,7 +89,7 @@ class FunctionInterface:
 
     def Param(self, name):
         """
-        Retrieve a ``FunctionParameter` from this interface, by name.
+        Retrieve a ``FunctionArg` from this interface, by name.
         """
         return self._parameters[name]
 
