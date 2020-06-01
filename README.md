@@ -16,4 +16,4 @@ A convenience build script is provided, for building all targets, and optionally
 
 ## Documentation
 
-[Hosted by Github Pages](https://moddyz.github.io/GraphicsMath/).
+Doxygen documentation based on the latest state of master, [hosted by GitHub Pages](https://moddyz.github.io/GraphicsMath/).
