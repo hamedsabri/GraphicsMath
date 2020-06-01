@@ -90,6 +90,19 @@ class FunctionInterface:
         """
         return self._parameters[name]
 
+    def ParamVar(self, name):
+        """
+        Convenience function to get the variable prefix of a parameter called ``name``.
+
+        Equivalent to Param("``name``").type.variablePrefix.
+
+        The following command performs the search and replacement.
+        ```
+        find . -name ".git" -prune -o -type f -exec sed -i 's/Param("\([a-zA-Z]\+\)").type.variablePrefix/ParamVar("\1")/g' {} +
+        ```
+        """
+        return self._parameters[name].type.variablePrefix
+
 
 class Function:
     """

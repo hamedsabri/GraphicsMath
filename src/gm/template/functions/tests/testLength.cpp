@@ -5,7 +5,7 @@
 {% for interface in function.interfaces %}
 TEST_CASE( "{{ function.name }}_{{ interface.Param("vector").type.className }}" )
 {
-    gm::{{ interface.Param("vector").type.className }} {{ interface.Param("vector").type.variablePrefix }}(
+    gm::{{ interface.Param("vector").type.className }} {{ interface.ParamVar("vector") }}(
 {% for index in range(interface.Param("vector").type.elementSize) -%}
     {{ interface.Param("vector").type.CppNumber(index * 2) }}
 {%- if index + 1 < interface.Param("vector").type.elementSize -%}
@@ -13,7 +13,7 @@ TEST_CASE( "{{ function.name }}_{{ interface.Param("vector").type.className }}" 
 {%- endif -%}
 {%- endfor %}
     );
-    CHECK( gm::{{ function.name }}( {{ interface.Param("vector").type.variablePrefix }} )
+    CHECK( gm::{{ function.name }}( {{ interface.ParamVar("vector") }} )
 {% if interface.Param("vector").type.elementSize == 2 -%}
            == Approx( {{ interface.Param("vector").type.CppNumber(math.sqrt(4.0)) }} )
 {% elif interface.Param("vector").type.elementSize == 3 -%}
