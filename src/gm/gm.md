@@ -17,7 +17,7 @@ The C++ headers are organized into the three categories:
 
 Python bindings for \p types and \p functions are available under \p src/gm/python.
 
-Tests reside within the sub-directories.
+Tests and benchmark code reside within the sub-directories.
 
 \section GM_CodeGeneration Code generation
 
