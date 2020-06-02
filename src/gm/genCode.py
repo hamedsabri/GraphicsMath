@@ -50,6 +50,11 @@ Name of the subdirectory, under types/ and functions/ where their tests reside.
 TESTS_DIR = "tests"
 
 """
+Name of the benchmarks sub-directory, under functions/, where benchmarking code reside.
+"""
+BENCHMARKS_DIR = "benchmarks"
+
+"""
 Name of the python subdirectory, where the bindings reside.
 """
 PYTHON_DIR = "python"
@@ -431,6 +436,15 @@ def GenerateFunctions():
                        function=function
                    )
                 )
+
+            # Benchmarking.
+            filePaths.append(
+                GenerateCode(
+                    os.path.join(FUNCTIONS_DIR, BENCHMARKS_DIR, "benchmarkFunction.cpp"),
+                    os.path.join(FUNCTIONS_DIR, BENCHMARKS_DIR, "benchmark{name}.cpp".format(name=function.name),),
+                    function=function,
+                )
+            )
 
             # Python bindings source.
             filePaths.append(

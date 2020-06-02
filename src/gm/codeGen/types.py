@@ -16,6 +16,11 @@ FLOAT = "float"
 DOUBLE = "double"
 INT = "int"
 
+"""
+Namespace of this library.
+"""
+NAMESPACE = "gm::"
+
 
 class ValueType:
     """
@@ -25,6 +30,10 @@ class ValueType:
     @property
     def className(self):
         raise NotImplementedError()
+
+    @property
+    def namespacedClassName(self):
+        return NAMESPACE + self.className
 
     @property
     def headerFileName(self):
@@ -66,6 +75,10 @@ class PODType(ValueType):
             str: the ctype of this type.
         """
         return self._typeName
+
+    @property
+    def namespacedClassName(self):
+        return self.className
 
     @property
     def isScalar(self):

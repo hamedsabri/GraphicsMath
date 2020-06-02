@@ -11,6 +11,7 @@ project(
 # Options
 option(BUILD_DOCUMENTATION "Build doxygen documentation." ON)
 option(BUILD_PYTHON_BINDINGS "Build python bindings." ON)
+option(BUILD_BENCHMARKING "Build performance benchmarking." OFF)
 
 # Debug build flags.
 set(CMAKE_CXX_FLAGS_DEBUG "-DGM_DEBUG")
@@ -31,7 +32,7 @@ if(BUILD_PYTHON_BINDINGS)
 endif()
 
 # Testing.
-if(BUILD_TESTING)
+if(BUILD_TESTING OR BUILD_BENCHMARKING)
     enable_testing()
     list(APPEND CMAKE_CTEST_ARGUMENTS "--output-on-failure")
 endif()

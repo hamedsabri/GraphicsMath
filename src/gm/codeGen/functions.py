@@ -1,5 +1,5 @@
 """
-A collection of classes serving as contextual objects used in the code-gen templates.
+A collection of classes which describes functions, used during code-gen.
 """
 
 from utils import UpperCamelCase
@@ -21,7 +21,7 @@ class FunctionArg:
 
     Args:
         key (str): key of this argument.
-        type (ValueType): type of the argument.
+        type (ValueType): value type of the argument.
         mutability (Mutability): mutability of the argument.
     """
 
@@ -32,6 +32,10 @@ class FunctionArg:
 
     @property
     def constQualifier(self):
+        """
+        Returns:
+            str: the const qualifier for this argument, if applicable.
+        """
         if self.mutability == Mutability.Const:
             return "const"
         else:
@@ -40,7 +44,8 @@ class FunctionArg:
     @property
     def name(self):
         """
-        Get the named identifier of this argument when it is used as an argument to a function.
+        Returns:
+            str: the name of this argument, used in the signature and implementation.
         """
         if self.mutability == Mutability.Const:
             return "i_" + self.key
@@ -53,7 +58,7 @@ class FunctionInterface:
     Interface of a function, describing the arguments (type and qualifiers), and return type.
 
     Args:
-        arguments (list): ordered list of function arguments.
+        arguments (list): list of function arguments.
         returnType (ValueType): return value type.  If `None` is specified, then the function return type is void.
     """
 
@@ -63,6 +68,10 @@ class FunctionInterface:
 
     @property
     def returnType(self):
+        """
+        Returns:
+            str: the c return type.
+        """
         if self._returnType:
             return self._returnType.className
         else:
@@ -71,7 +80,8 @@ class FunctionInterface:
     @property
     def typedArgs(self):
         """
-        Generate a string of typed, and named arguments.
+        Returns:
+            str: comma separated, cv-qualified typed and named arguments.  Used as the function signature.
         """
 
         def typedArg(arg):
@@ -85,7 +95,27 @@ class FunctionInterface:
 
     @property
     def namedArgs(self):
+        """
+        Returns:
+            str: comma separated, named arguments.  Generally used for passing into a function call.
+        """
         return ", ".join([arg.name for arg in self._arguments.values()])
+
+    @property
+    def testSuffix(self):
+        """
+        Returns:
+            str: underscore separated test suffix to identify the test for a particular interface.
+        """
+        return "_".join([arg.type.className for arg in self._arguments.values()])
+
+    @property
+    def arguments(self):
+        """
+        Returns:
+            list: arguments defined by this interface.
+        """
+        return self._arguments.values()
 
     def Arg(self, key):
         """
@@ -108,7 +138,7 @@ class FunctionInterface:
 
     def ArgName(self, key):
         """
-        Convenience function to get the argument key of a argument called ``key``.
+        Convenience function to get the argument name, by key.
 
         Equivalent to Arg("``key``").name.
         """
