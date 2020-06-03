@@ -352,7 +352,7 @@ def GenerateFunctions():
         )
     functionGroups.append(
         FunctionGroup(
-            ["floor"],
+            ["floor", "ceil",],
             interfaces=floatScalarAndVectorInterfaces,
         )
     )
