@@ -339,10 +339,10 @@ def GenerateFunctions():
     """
     functionGroups = []
 
-    # Element-wise transformation.
-    floatScalarAndVectorInterfaces = []
+    # Single input element-wise computation.
+    singleInputElementWiseInterfaces = []
     for valueType in [PODType(FLOAT)] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
-        floatScalarAndVectorInterfaces.append(
+        singleInputElementWiseInterfaces.append(
             FunctionInterface(
                 arguments=[
                     FunctionArg("value", valueType, Mutability.Const),
@@ -353,7 +353,26 @@ def GenerateFunctions():
     functionGroups.append(
         FunctionGroup(
             ["floor", "ceil",],
-            interfaces=floatScalarAndVectorInterfaces,
+            interfaces=singleInputElementWiseInterfaces,
+        )
+    )
+
+    # Dual-input element-wise computation.
+    dualInputElementWiseInterfaces = []
+    for valueType in POD_TYPES + VECTOR_TYPES:
+        dualInputElementWiseInterfaces.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("valueA", valueType, Mutability.Const),
+                    FunctionArg("valueB", valueType, Mutability.Const),
+                ],
+                returnType=valueType
+            )
+        )
+    functionGroups.append(
+        FunctionGroup(
+            ["min",],
+            interfaces=dualInputElementWiseInterfaces,
         )
     )
 
