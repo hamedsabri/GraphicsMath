@@ -27,6 +27,16 @@ TEST_CASE( "Max_int_int" )
     };
 }
 
+TEST_CASE( "Max_bool_bool" )
+{
+    bool valueA;
+    bool valueB;
+    BENCHMARK( "Max" )
+    {
+        return gm::Max( valueA, valueB );
+    };
+}
+
 TEST_CASE( "Max_Mat3f_Mat3f" )
 {
     gm::Mat3f valueA;

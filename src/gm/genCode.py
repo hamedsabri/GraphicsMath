@@ -23,6 +23,7 @@ from codeGen.types import (
     CompositeElement,
     INT,
     FLOAT,
+    BOOL,
 )
 
 from codeGen.functions import (
@@ -62,7 +63,8 @@ PYTHON_DIR = "python"
 """
 Global set of POD value types.
 """
-POD_TYPES = [PODType(FLOAT), PODType(INT)]
+NUMERIC_POD_TYPES = [PODType(FLOAT), PODType(INT)]
+POD_TYPES = NUMERIC_POD_TYPES + [PODType(BOOL)]
 
 """
 Global set of vector value types to generate.
@@ -402,16 +404,29 @@ def GenerateFunctions():
         )
     )
 
-    # Matrix constant group.
-    matrixConstantInterfaces = []
+    # Set matrix value.
+    setMatrixInterfaces = []
     for matrixType in MATRIX_TYPES:
-        matrixConstantInterfaces.append(
+        setMatrixInterfaces.append(
             FunctionInterface(
                 arguments=[FunctionArg("matrix", matrixType, Mutability.Mutable),],
             )
         )
     functionGroups.append(
-        FunctionGroup(["setIdentity"], interfaces=matrixConstantInterfaces,)
+        FunctionGroup(["setIdentity"], interfaces=setMatrixInterfaces,)
+    )
+
+    # Check matrix value.
+    checkMatrixInterfaces = []
+    for matrixType in MATRIX_TYPES:
+        checkMatrixInterfaces.append(
+            FunctionInterface(
+                arguments=[FunctionArg("matrix", matrixType, Mutability.Mutable),],
+                returnType=PODType(BOOL),
+            )
+        )
+    functionGroups.append(
+        FunctionGroup(["isIdentity"], interfaces=checkMatrixInterfaces,)
     )
 
     # Generate code.

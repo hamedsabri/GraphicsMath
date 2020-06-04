@@ -147,9 +147,9 @@ public:
     GM_HOST_DEVICE inline {{ vectorType.className }} operator/( const {{ vectorType.elementType.className }}& i_scalar ) const
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_scalar != {{ vectorType.CppNumber(0) }} );
+        GM_ASSERT( i_scalar != {{ vectorType.CppValue(0) }} );
 {% if vectorType.elementType == "float" or vectorType.elementType == "double" -%}
-        {{ vectorType.elementType.className }} reciprocal = {{ vectorType.CppNumber(1) }} / i_scalar;
+        {{ vectorType.elementType.className }} reciprocal = {{ vectorType.CppValue(1) }} / i_scalar;
         return {{ vectorType.className }}(
 {% for index in range(vectorType.elementSize) -%}
         m_elements[ {{ index }} ] * reciprocal
@@ -173,9 +173,9 @@ public:
     GM_HOST_DEVICE inline {{ vectorType.className }}& operator/=( const {{ vectorType.elementType.className }}& i_scalar )
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_scalar != {{ vectorType.CppNumber(0) }} );
+        GM_ASSERT( i_scalar != {{ vectorType.CppValue(0) }} );
 {% if vectorType.elementType == "float" or vectorType.elementType == "double" -%}
-        {{ vectorType.elementType.className }} reciprocal = {{ vectorType.CppNumber(1) }} / i_scalar;
+        {{ vectorType.elementType.className }} reciprocal = {{ vectorType.CppValue(1) }} / i_scalar;
 {% for index in range(vectorType.elementSize) -%}
         m_elements[ {{ index }} ] *= reciprocal;
 {%- endfor %}
@@ -331,7 +331,7 @@ public:
 private:
     {{ vectorType.elementType.className }} m_elements[ {{ vectorType.elementSize }} ] = {
 {%- for index in range(vectorType.elementSize) -%}
-        {{ vectorType.CppNumber(0) }}
+        {{ vectorType.CppValue(0) }}
 {%- if index + 1 < vectorType.elementSize -%}
         ,
 {%- endif %}

@@ -14,6 +14,7 @@ void BindMax( pybind11::module& o_module )
 {
     o_module.def( "Max", []( const float& i_valueA, const float& i_valueB ) { return Max( i_valueA, i_valueB ); } );
     o_module.def( "Max", []( const int& i_valueA, const int& i_valueB ) { return Max( i_valueA, i_valueB ); } );
+    o_module.def( "Max", []( const bool& i_valueA, const bool& i_valueB ) { return Max( i_valueA, i_valueB ); } );
     o_module.def( "Max", []( const Mat3f& i_valueA, const Mat3f& i_valueB ) { return Max( i_valueA, i_valueB ); } );
     o_module.def( "Max", []( const Mat4f& i_valueA, const Mat4f& i_valueB ) { return Max( i_valueA, i_valueB ); } );
     o_module.def( "Max", []( const Vec2f& i_valueA, const Vec2f& i_valueB ) { return Max( i_valueA, i_valueB ); } );

@@ -43,6 +43,14 @@ GM_HOST_DEVICE inline int Min( const int& i_valueA, const int& i_valueB )
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
 ///
 /// \return the minimum of the inputs.
+GM_HOST_DEVICE inline bool Min( const bool& i_valueA, const bool& i_valueB )
+{
+    return std::min( i_valueA, i_valueB );
+}
+
+/// Find the minimum from the inputs \p i_valueA and \p i_valueB.
+///
+/// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Mat3f Min( const Mat3f& i_valueA, const Mat3f& i_valueB )
 {
     return Mat3f( std::min( i_valueA[ 0 ], i_valueB[ 0 ] ),

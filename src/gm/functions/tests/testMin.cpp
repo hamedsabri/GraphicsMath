@@ -22,6 +22,14 @@ TEST_CASE( "Min_int" )
     CHECK( intValMin == Approx( 1 ) );
 }
 
+TEST_CASE( "Min_bool" )
+{
+    bool boolValA   = true;
+    bool boolValB   = true;
+    bool boolValMin = gm::Min( boolValA, boolValB );
+    CHECK( boolValMin == Approx( true ) );
+}
+
 TEST_CASE( "Min_Mat3f" )
 {
     gm::Mat3f matrixA( 0.0f, 2.333f, 4.666f, 6.999f, 9.332f, 11.665f, 13.998f, 16.331f, 18.664f );

@@ -7,13 +7,13 @@ TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("valueA") }}" )
 {
 {%- if interface.Arg("valueA").type.isScalar -%}
     {{ interface.ArgClass("valueA") }} {{ interface.ArgType("valueA").varName }}A =
-        {{ interface.Arg("valueA").type.CppNumber(2.333) }};
+        {{ interface.Arg("valueA").type.CppValue(2.333) }};
     {{ interface.ArgClass("valueA") }} {{ interface.ArgType("valueA").varName }}B =
-        {{ interface.Arg("valueA").type.CppNumber(1.333) }};
+        {{ interface.Arg("valueA").type.CppValue(1.333) }};
 {%- elif interface.Arg("valueA").type.isVector -%}
     gm::{{ interface.ArgClass("valueA") }} {{ interface.ArgType("valueA").varName }}A(
 {% for index in range(interface.Arg("valueA").type.elementSize) -%}
-    {{ interface.Arg("valueA").type.CppNumber(index * 2.333) }}
+    {{ interface.Arg("valueA").type.CppValue(index * 2.333) }}
 {%- if index + 1 < interface.Arg("valueA").type.elementSize -%}
         ,
 {%- endif -%}
@@ -21,7 +21,7 @@ TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("valueA") }}" )
     );
     gm::{{ interface.ArgClass("valueB") }} {{ interface.ArgType("valueB").varName }}B(
 {% for index in range(interface.Arg("valueB").type.elementSize) -%}
-    {{ interface.Arg("valueB").type.CppNumber(index * 1.333) }}
+    {{ interface.Arg("valueB").type.CppValue(index * 1.333) }}
 {%- if index + 1 < interface.Arg("valueB").type.elementSize -%}
         ,
 {%- endif -%}
@@ -37,11 +37,11 @@ TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("valueA") }}" )
 
 {%- if interface.Arg("valueA").type.isScalar -%}
     CHECK( {{ interface.ArgType("valueA").varName }}Min
-           == Approx( {{ interface.Arg("valueA").type.CppNumber( min(2.333, 1.333) ) }} ));
+           == Approx( {{ interface.Arg("valueA").type.CppValue( min(2.333, 1.333) ) }} ));
 {%- elif interface.Arg("valueA").type.isVector -%}
 {% for index in range(interface.Arg("valueA").type.elementSize) -%}
     CHECK( {{ interface.ArgType("valueA").varName }}Min[ {{ index }} ]
-           == Approx( {{ interface.Arg("valueA").type.CppNumber( min(index * 2.333, index * 1.333) ) }} ));
+           == Approx( {{ interface.Arg("valueA").type.CppValue( min(index * 2.333, index * 1.333) ) }} ));
 {%- endfor %}
 {%- endif %}
 }

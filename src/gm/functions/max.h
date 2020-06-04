@@ -43,6 +43,14 @@ GM_HOST_DEVICE inline int Max( const int& i_valueA, const int& i_valueB )
 /// Find the minimum from the inputs \p i_valueA and \p i_valueB.
 ///
 /// \return the minimum of the inputs.
+GM_HOST_DEVICE inline bool Max( const bool& i_valueA, const bool& i_valueB )
+{
+    return std::max( i_valueA, i_valueB );
+}
+
+/// Find the minimum from the inputs \p i_valueA and \p i_valueB.
+///
+/// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Mat3f Max( const Mat3f& i_valueA, const Mat3f& i_valueB )
 {
     return Mat3f( std::max( i_valueA[ 0 ], i_valueB[ 0 ] ),

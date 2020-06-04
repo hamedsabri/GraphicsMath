@@ -27,6 +27,16 @@ TEST_CASE( "Min_int_int" )
     };
 }
 
+TEST_CASE( "Min_bool_bool" )
+{
+    bool valueA;
+    bool valueB;
+    BENCHMARK( "Min" )
+    {
+        return gm::Min( valueA, valueB );
+    };
+}
+
 TEST_CASE( "Min_Mat3f_Mat3f" )
 {
     gm::Mat3f valueA;

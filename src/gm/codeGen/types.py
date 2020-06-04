@@ -14,6 +14,7 @@ POD types we are interested in generating code for.  Double is omitted for the t
 """
 FLOAT = "float"
 DOUBLE = "double"
+BOOL = "bool"
 INT = "int"
 
 """
@@ -84,9 +85,9 @@ class PODType(ValueType):
     def isScalar(self):
         return True
 
-    def CppNumber(self, value):
+    def CppValue(self, value):
         """
-        Convert a numeric value ``value`` to the corresponding C++ compliant value as a string.
+        Convert a value ``value`` to the corresponding C++ compliant value as a string.
         """
         if self.className == INT:
             return str(int(value))
@@ -94,6 +95,19 @@ class PODType(ValueType):
             return str(float(value)) + "f"
         elif self.className == DOUBLE:
             return str(float(value))
+        elif self.className == BOOL:
+            return str(bool(value)).lower()
+
+    def PyValue(self, value):
+        """
+        Convert a value ``value`` to the corresponding C++ compliant value as a string.
+        """
+        if self.className == INT:
+            return str(int(value))
+        elif self.className in (FLOAT, DOUBLE):
+            return str(float(value))
+        elif self.className == BOOL:
+            return str(bool(value))
 
     @property
     def varName(self):
@@ -163,20 +177,17 @@ class VectorType(ValueType):
     def isVector(self):
         return True
 
-    def CppNumber(self, value):
+    def CppValue(self, value):
         """
-        Convert a numeric value ``value`` to the corresponding C++ compliant value as a string.
+        Convert a value ``value`` to the corresponding C++ compliant value as a string.
         """
-        return self.elementType.CppNumber(value)
+        return self.elementType.CppValue(value)
 
-    def PyNumber(self, value):
+    def PyValue(self, value):
         """
-        Convert a numeric value ``value`` to the corresponding C++ compliant value as a string.
+        Convert a value ``value`` to the corresponding python compliant value as a string.
         """
-        if self.elementType.className == INT:
-            return str(int(value))
-        elif self.elementType.className in (FLOAT, DOUBLE):
-            return str(float(value))
+        return self.elementType.PyValue(value)
 
 
 class ArrayType(ValueType):
