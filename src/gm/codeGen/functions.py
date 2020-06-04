@@ -190,9 +190,7 @@ class Function:
         """
         types = set()
         for interface in self.interfaces:
-            types = types.union(
-                [arg.type for arg in interface._arguments.values()]
-            )
+            types = types.union([arg.type for arg in interface._arguments.values()])
             if interface._returnType:
                 types = types.union([interface._returnType])
         return types
