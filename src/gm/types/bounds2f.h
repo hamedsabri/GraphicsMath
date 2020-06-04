@@ -77,4 +77,17 @@ private:
     Vec2f m_max = Vec2f( std::numeric_limits< float >::min(), std::numeric_limits< float >::min() );
 };
 
+/// Operator overload for << to enable writing the string representation of \p i_composite into an output
+/// stream \p o_outputStream.
+///
+/// \param o_outputStream the output stream to write into.
+/// \param i_composite the source composite value type.
+///
+/// \return the output stream.
+inline std::ostream& operator<<( std::ostream& o_outputStream, const Bounds2f& i_composite )
+{
+    o_outputStream << i_composite.GetString();
+    return o_outputStream;
+}
+
 GM_NS_CLOSE

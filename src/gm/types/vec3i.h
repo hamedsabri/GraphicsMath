@@ -228,4 +228,17 @@ GM_HOST_DEVICE inline Vec3i operator*( const int& i_scalar, const Vec3i& i_vecto
     return Vec3i( i_vector[ 0 ] * i_scalar, i_vector[ 1 ] * i_scalar, i_vector[ 2 ] * i_scalar );
 }
 
+/// Operator overload for << to enable writing the string representation of \p i_vector into an output
+/// stream \p o_outputStream.
+///
+/// \param o_outputStream the output stream to write into.
+/// \param i_vector the source vector value type.
+///
+/// \return the output stream.
+inline std::ostream& operator<<( std::ostream& o_outputStream, const Vec3i& i_vector )
+{
+    o_outputStream << i_vector.GetString();
+    return o_outputStream;
+}
+
 GM_NS_CLOSE

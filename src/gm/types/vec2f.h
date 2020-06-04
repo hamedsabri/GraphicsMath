@@ -212,4 +212,17 @@ GM_HOST_DEVICE inline Vec2f operator*( const float& i_scalar, const Vec2f& i_vec
     return Vec2f( i_vector[ 0 ] * i_scalar, i_vector[ 1 ] * i_scalar );
 }
 
+/// Operator overload for << to enable writing the string representation of \p i_vector into an output
+/// stream \p o_outputStream.
+///
+/// \param o_outputStream the output stream to write into.
+/// \param i_vector the source vector value type.
+///
+/// \return the output stream.
+inline std::ostream& operator<<( std::ostream& o_outputStream, const Vec2f& i_vector )
+{
+    o_outputStream << i_vector.GetString();
+    return o_outputStream;
+}
+
 GM_NS_CLOSE

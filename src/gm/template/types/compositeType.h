@@ -94,4 +94,17 @@ private:
 {%- endfor %}
 };
 
+/// Operator overload for << to enable writing the string representation of \p i_composite into an output
+/// stream \p o_outputStream.
+///
+/// \param o_outputStream the output stream to write into.
+/// \param i_composite the source composite value type.
+///
+/// \return the output stream.
+inline std::ostream& operator<<( std::ostream& o_outputStream, const {{ compositeType.className }}& i_composite )
+{
+    o_outputStream << i_composite.GetString();
+    return o_outputStream;
+}
+
 GM_NS_CLOSE
