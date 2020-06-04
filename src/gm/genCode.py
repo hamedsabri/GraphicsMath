@@ -353,7 +353,9 @@ def GenerateFunctions():
             )
         )
     functionGroups.append(
-        FunctionGroup(["floor", "ceil",], interfaces=singleInputElementWiseInterfaces,)
+        FunctionGroup(
+            ["floor", "ceil", "abs",], interfaces=singleInputElementWiseInterfaces,
+        )
     )
 
     # Dual-input element-wise computation.

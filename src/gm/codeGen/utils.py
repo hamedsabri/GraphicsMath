@@ -130,7 +130,7 @@ def RenderTemplate(templatePath, **kwargs):
             + templateStr.split(os.linesep)
         )
         template = JINJA2_ENVIRONMENT.from_string(templateStr)
-        code = template.render(math=math, min=min, max=max, **kwargs)
+        code = template.render(math=math, min=min, max=max, abs=abs, **kwargs)
         return code
 
 
