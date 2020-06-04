@@ -84,7 +84,9 @@ SINGLE_INDEX_VECTOR_TYPES_INT = [
     VectorType((4,), PODType(INT)),
 ]
 
-VECTOR_TYPES = sorted(SINGLE_INDEX_VECTOR_TYPES_FLOAT + SINGLE_INDEX_VECTOR_TYPES_INT + MATRIX_TYPES)
+VECTOR_TYPES = sorted(
+    SINGLE_INDEX_VECTOR_TYPES_FLOAT + SINGLE_INDEX_VECTOR_TYPES_INT + MATRIX_TYPES
+)
 
 """
 COMPOSITE_TYPES is a dict of type name (str) -> type object (CompositeType).
@@ -344,17 +346,12 @@ def GenerateFunctions():
     for valueType in [PODType(FLOAT)] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
         singleInputElementWiseInterfaces.append(
             FunctionInterface(
-                arguments=[
-                    FunctionArg("value", valueType, Mutability.Const),
-                ],
-                returnType=valueType
+                arguments=[FunctionArg("value", valueType, Mutability.Const),],
+                returnType=valueType,
             )
         )
     functionGroups.append(
-        FunctionGroup(
-            ["floor", "ceil",],
-            interfaces=singleInputElementWiseInterfaces,
-        )
+        FunctionGroup(["floor", "ceil",], interfaces=singleInputElementWiseInterfaces,)
     )
 
     # Dual-input element-wise computation.
@@ -366,14 +363,11 @@ def GenerateFunctions():
                     FunctionArg("valueA", valueType, Mutability.Const),
                     FunctionArg("valueB", valueType, Mutability.Const),
                 ],
-                returnType=valueType
+                returnType=valueType,
             )
         )
     functionGroups.append(
-        FunctionGroup(
-            ["min",],
-            interfaces=dualInputElementWiseInterfaces,
-        )
+        FunctionGroup(["min", "max",], interfaces=dualInputElementWiseInterfaces,)
     )
 
     # Vector product(s).
@@ -385,14 +379,11 @@ def GenerateFunctions():
                     FunctionArg("lhs", vectorType, Mutability.Const),
                     FunctionArg("rhs", vectorType, Mutability.Const),
                 ],
-                returnType=vectorType.elementType
+                returnType=vectorType.elementType,
             )
         )
     functionGroups.append(
-        FunctionGroup(
-            ["dotProduct"],
-            interfaces=vectorProductInterfaces,
-        )
+        FunctionGroup(["dotProduct"], interfaces=vectorProductInterfaces,)
     )
 
     # Vector reduction.
@@ -400,17 +391,14 @@ def GenerateFunctions():
     for vectorType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
         vectorReductionInterfaces.append(
             FunctionInterface(
-                arguments=[
-                    FunctionArg("vector", vectorType, Mutability.Const),
-                ],
-                returnType=vectorType.elementType
+                arguments=[FunctionArg("vector", vectorType, Mutability.Const),],
+                returnType=vectorType.elementType,
             )
         )
 
     functionGroups.append(
         FunctionGroup(
-            ["length", "lengthSquared"],
-            interfaces=vectorReductionInterfaces,
+            ["length", "lengthSquared"], interfaces=vectorReductionInterfaces,
         )
     )
 
@@ -419,16 +407,11 @@ def GenerateFunctions():
     for matrixType in MATRIX_TYPES:
         matrixConstantInterfaces.append(
             FunctionInterface(
-                arguments=[
-                    FunctionArg("matrix", matrixType, Mutability.Mutable),
-                ],
+                arguments=[FunctionArg("matrix", matrixType, Mutability.Mutable),],
             )
         )
     functionGroups.append(
-        FunctionGroup(
-            ["setIdentity"],
-            interfaces=matrixConstantInterfaces,
-        )
+        FunctionGroup(["setIdentity"], interfaces=matrixConstantInterfaces,)
     )
 
     # Generate code.
@@ -446,21 +429,33 @@ def GenerateFunctions():
 
             # Generate C++ test code (if the template is available).
             # Some tests are hand-authored.
-            testTemplatePath = os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name))
+            testTemplatePath = os.path.join(
+                FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)
+            )
             if os.path.isfile(GetTemplateFile(testTemplatePath)):
                 filePaths.append(
-                   GenerateCode(
-                       testTemplatePath,
-                       os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)),
-                       function=function
-                   )
+                    GenerateCode(
+                        testTemplatePath,
+                        os.path.join(
+                            FUNCTIONS_DIR,
+                            TESTS_DIR,
+                            "test{name}.cpp".format(name=function.name),
+                        ),
+                        function=function,
+                    )
                 )
 
             # Benchmarking.
             filePaths.append(
                 GenerateCode(
-                    os.path.join(FUNCTIONS_DIR, BENCHMARKS_DIR, "benchmarkFunction.cpp"),
-                    os.path.join(FUNCTIONS_DIR, BENCHMARKS_DIR, "benchmark{name}.cpp".format(name=function.name),),
+                    os.path.join(
+                        FUNCTIONS_DIR, BENCHMARKS_DIR, "benchmarkFunction.cpp"
+                    ),
+                    os.path.join(
+                        FUNCTIONS_DIR,
+                        BENCHMARKS_DIR,
+                        "benchmark{name}.cpp".format(name=function.name),
+                    ),
                     function=function,
                 )
             )

@@ -24,7 +24,7 @@
 
 GM_NS_OPEN
 
-/// Find the minumum from the inputs \p i_valueA and \p i_valueB.
+/// Find the minimum from the inputs \p i_valueA and \p i_valueB.
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline float Min( const float& i_valueA, const float& i_valueB )
@@ -32,7 +32,7 @@ GM_HOST_DEVICE inline float Min( const float& i_valueA, const float& i_valueB )
     return std::min( i_valueA, i_valueB );
 }
 
-/// Find the minumum from the inputs \p i_valueA and \p i_valueB.
+/// Find the minimum from the inputs \p i_valueA and \p i_valueB.
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline int Min( const int& i_valueA, const int& i_valueB )
@@ -40,7 +40,7 @@ GM_HOST_DEVICE inline int Min( const int& i_valueA, const int& i_valueB )
     return std::min( i_valueA, i_valueB );
 }
 
-/// Find the minumum from the inputs \p i_valueA and \p i_valueB.
+/// Find the minimum from the inputs \p i_valueA and \p i_valueB.
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Mat3f Min( const Mat3f& i_valueA, const Mat3f& i_valueB )
@@ -56,7 +56,7 @@ GM_HOST_DEVICE inline Mat3f Min( const Mat3f& i_valueA, const Mat3f& i_valueB )
                   std::min( i_valueA[ 8 ], i_valueB[ 8 ] ) );
 }
 
-/// Find the minumum from the inputs \p i_valueA and \p i_valueB.
+/// Find the minimum from the inputs \p i_valueA and \p i_valueB.
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Mat4f Min( const Mat4f& i_valueA, const Mat4f& i_valueB )
@@ -79,7 +79,7 @@ GM_HOST_DEVICE inline Mat4f Min( const Mat4f& i_valueA, const Mat4f& i_valueB )
                   std::min( i_valueA[ 15 ], i_valueB[ 15 ] ) );
 }
 
-/// Find the minumum from the inputs \p i_valueA and \p i_valueB.
+/// Find the minimum from the inputs \p i_valueA and \p i_valueB.
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec2f Min( const Vec2f& i_valueA, const Vec2f& i_valueB )
@@ -87,7 +87,7 @@ GM_HOST_DEVICE inline Vec2f Min( const Vec2f& i_valueA, const Vec2f& i_valueB )
     return Vec2f( std::min( i_valueA[ 0 ], i_valueB[ 0 ] ), std::min( i_valueA[ 1 ], i_valueB[ 1 ] ) );
 }
 
-/// Find the minumum from the inputs \p i_valueA and \p i_valueB.
+/// Find the minimum from the inputs \p i_valueA and \p i_valueB.
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec3f Min( const Vec3f& i_valueA, const Vec3f& i_valueB )
@@ -97,7 +97,7 @@ GM_HOST_DEVICE inline Vec3f Min( const Vec3f& i_valueA, const Vec3f& i_valueB )
                   std::min( i_valueA[ 2 ], i_valueB[ 2 ] ) );
 }
 
-/// Find the minumum from the inputs \p i_valueA and \p i_valueB.
+/// Find the minimum from the inputs \p i_valueA and \p i_valueB.
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec4f Min( const Vec4f& i_valueA, const Vec4f& i_valueB )
@@ -108,7 +108,7 @@ GM_HOST_DEVICE inline Vec4f Min( const Vec4f& i_valueA, const Vec4f& i_valueB )
                   std::min( i_valueA[ 3 ], i_valueB[ 3 ] ) );
 }
 
-/// Find the minumum from the inputs \p i_valueA and \p i_valueB.
+/// Find the minimum from the inputs \p i_valueA and \p i_valueB.
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec2i Min( const Vec2i& i_valueA, const Vec2i& i_valueB )
@@ -116,7 +116,7 @@ GM_HOST_DEVICE inline Vec2i Min( const Vec2i& i_valueA, const Vec2i& i_valueB )
     return Vec2i( std::min( i_valueA[ 0 ], i_valueB[ 0 ] ), std::min( i_valueA[ 1 ], i_valueB[ 1 ] ) );
 }
 
-/// Find the minumum from the inputs \p i_valueA and \p i_valueB.
+/// Find the minimum from the inputs \p i_valueA and \p i_valueB.
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec3i Min( const Vec3i& i_valueA, const Vec3i& i_valueB )
@@ -126,7 +126,7 @@ GM_HOST_DEVICE inline Vec3i Min( const Vec3i& i_valueA, const Vec3i& i_valueB )
                   std::min( i_valueA[ 2 ], i_valueB[ 2 ] ) );
 }
 
-/// Find the minumum from the inputs \p i_valueA and \p i_valueB.
+/// Find the minimum from the inputs \p i_valueA and \p i_valueB.
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline Vec4i Min( const Vec4i& i_valueA, const Vec4i& i_valueB )

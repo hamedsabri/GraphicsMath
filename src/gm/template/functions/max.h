@@ -24,11 +24,11 @@ GM_NS_OPEN
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
 {% if interface.Arg("valueA").type.isScalar -%}
-    return std::min( {{ interface.ArgName("valueA") }}, {{ interface.ArgName("valueB") }} );
+    return std::max( {{ interface.ArgName("valueA") }}, {{ interface.ArgName("valueB") }} );
 {%- elif interface.Arg("valueA").type.isVector -%}
     return {{ interface.ArgClass("valueA") }}(
 {%- for index in range(interface.Arg("valueA").type.elementSize) %}
-        std::min( {{ interface.ArgName("valueA") }}[ {{ index }} ], {{ interface.ArgName("valueB") }}[ {{ index }} ] )
+        std::max( {{ interface.ArgName("valueA") }}[ {{ index }} ], {{ interface.ArgName("valueB") }}[ {{ index }} ] )
 {%- if index + 1 < interface.Arg("valueA").type.elementSize -%}
         ,
 {%- endif -%}
