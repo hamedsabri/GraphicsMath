@@ -69,22 +69,22 @@ POD_TYPES = NUMERIC_POD_TYPES + [PODType(BOOL)]
 """
 Global set of vector value types to generate.
 """
-MATRIX_TYPES = [
+MATRIX_TYPES = (
     VectorType((3, 3), PODType(FLOAT)),
     VectorType((4, 4), PODType(FLOAT)),
-]
+)
 
-SINGLE_INDEX_VECTOR_TYPES_FLOAT = [
+SINGLE_INDEX_VECTOR_TYPES_FLOAT = (
     VectorType((2,), PODType(FLOAT)),
     VectorType((3,), PODType(FLOAT)),
     VectorType((4,), PODType(FLOAT)),
-]
+)
 
-SINGLE_INDEX_VECTOR_TYPES_INT = [
+SINGLE_INDEX_VECTOR_TYPES_INT = (
     VectorType((2,), PODType(INT)),
     VectorType((3,), PODType(INT)),
     VectorType((4,), PODType(INT)),
-]
+)
 
 VECTOR_TYPES = sorted(
     SINGLE_INDEX_VECTOR_TYPES_FLOAT + SINGLE_INDEX_VECTOR_TYPES_INT + MATRIX_TYPES
@@ -342,9 +342,9 @@ def GenerateFunctions():
         list: file paths to the generated files.
     """
     # Single input element-wise computation.
-    singleInputElementWiseInterfaces = []
-    for valueType in [PODType(FLOAT)] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
-        singleInputElementWiseInterfaces.append(
+    elementOps = []
+    for valueType in (PODType(FLOAT),) + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
+        elementOps.append(
             FunctionInterface(
                 arguments=[FunctionArg("value", valueType, Mutability.Const),],
                 returnType=valueType,
@@ -352,9 +352,9 @@ def GenerateFunctions():
         )
 
     # Dual-input element-wise computation.
-    dualInputElementWiseInterfaces = []
+    elementComparisonOps = []
     for valueType in POD_TYPES + VECTOR_TYPES:
-        dualInputElementWiseInterfaces.append(
+        elementComparisonOps.append(
             FunctionInterface(
                 arguments=[
                     FunctionArg("valueA", valueType, Mutability.Const),
@@ -365,9 +365,9 @@ def GenerateFunctions():
         )
 
     # Vector product(s).
-    vectorProductInterfaces = []
+    vectorProductOps = []
     for vectorType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
-        vectorProductInterfaces.append(
+        vectorProductOps.append(
             FunctionInterface(
                 arguments=[
                     FunctionArg("lhs", vectorType, Mutability.Const),
@@ -378,9 +378,9 @@ def GenerateFunctions():
         )
 
     # Vector reduction.
-    vectorReductionInterfaces = []
+    vectorReductionOps = []
     for vectorType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
-        vectorReductionInterfaces.append(
+        vectorReductionOps.append(
             FunctionInterface(
                 arguments=[FunctionArg("vector", vectorType, Mutability.Const),],
                 returnType=vectorType.elementType,
@@ -388,18 +388,18 @@ def GenerateFunctions():
         )
 
     # Set matrix value.
-    setMatrixInterfaces = []
+    setMatrixOps = []
     for matrixType in MATRIX_TYPES:
-        setMatrixInterfaces.append(
+        setMatrixOps.append(
             FunctionInterface(
                 arguments=[FunctionArg("matrix", matrixType, Mutability.Mutable),],
             )
         )
 
     # Check matrix value.
-    checkMatrixInterfaces = []
+    checkMatrixOps = []
     for matrixType in MATRIX_TYPES:
-        checkMatrixInterfaces.append(
+        checkMatrixOps.append(
             FunctionInterface(
                 arguments=[FunctionArg("matrix", matrixType, Mutability.Const),],
                 returnType=PODType(BOOL),
@@ -407,24 +407,37 @@ def GenerateFunctions():
         )
 
     # Angle interfaces.
-    angleInterfaces = []
-    for podType in [PODType(FLOAT)]:
-        angleInterfaces.append(
+    angleOps = []
+    for podType in (PODType(FLOAT),):
+        angleOps.append(
             FunctionInterface(
                 arguments=[FunctionArg("angle", podType, Mutability.Const),],
                 returnType=podType,
             )
         )
 
+    # Euclidean space point operations.
+    pointReductionOps = []
+    for vectorType in (VectorType((2,), PODType(FLOAT)), VectorType((3,), PODType(FLOAT))):
+        pointReductionOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("pointA", vectorType, Mutability.Const),
+                    FunctionArg("pointB", vectorType, Mutability.Const),
+                ],
+                returnType=vectorType.elementType,
+            )
+        )
 
     functionGroups = [
-        FunctionGroup(["floor", "ceil", "abs",], interfaces=singleInputElementWiseInterfaces),
-        FunctionGroup(["min", "max",], interfaces=dualInputElementWiseInterfaces,),
-        FunctionGroup(["isIdentity"], interfaces=checkMatrixInterfaces,),
-        FunctionGroup(["setIdentity"], interfaces=setMatrixInterfaces,),
-        FunctionGroup(["length", "lengthSquared"], interfaces=vectorReductionInterfaces,),
-        FunctionGroup(["dotProduct"], interfaces=vectorProductInterfaces,),
-        FunctionGroup(["degrees", "radians",], interfaces=angleInterfaces,),
+        FunctionGroup(["floor", "ceil", "abs",], interfaces=elementOps),
+        FunctionGroup(["min", "max",], interfaces=elementComparisonOps,),
+        FunctionGroup(["isIdentity"], interfaces=checkMatrixOps,),
+        FunctionGroup(["setIdentity"], interfaces=setMatrixOps,),
+        FunctionGroup(["length", "lengthSquared"], interfaces=vectorReductionOps,),
+        FunctionGroup(["dotProduct"], interfaces=vectorProductOps,),
+        FunctionGroup(["degrees", "radians",], interfaces=angleOps,),
+        FunctionGroup(["distance"], interfaces=pointReductionOps,),
     ]
 
     # Generate code.
