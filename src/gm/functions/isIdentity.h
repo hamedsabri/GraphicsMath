@@ -15,26 +15,26 @@
 
 GM_NS_OPEN
 
-/// Check if the matrix \p o_matrix is the identity matrix.
+/// Check if the matrix \p i_matrix is the identity matrix.
 ///
-/// \return true if \p o_matrix is the identity matrix.
-GM_HOST_DEVICE inline bool IsIdentity( Mat3f& o_matrix )
+/// \return true if \p i_matrix is the identity matrix.
+GM_HOST_DEVICE inline bool IsIdentity( const Mat3f& i_matrix )
 {
-    return o_matrix( 0, 0 ) == 1.0f && o_matrix( 0, 1 ) == 0.0f && o_matrix( 0, 2 ) == 0.0f &&
-           o_matrix( 1, 0 ) == 0.0f && o_matrix( 1, 1 ) == 1.0f && o_matrix( 1, 2 ) == 0.0f &&
-           o_matrix( 2, 0 ) == 0.0f && o_matrix( 2, 1 ) == 0.0f && o_matrix( 2, 2 ) == 1.0f;
+    return i_matrix( 0, 0 ) == 1.0f && i_matrix( 0, 1 ) == 0.0f && i_matrix( 0, 2 ) == 0.0f &&
+           i_matrix( 1, 0 ) == 0.0f && i_matrix( 1, 1 ) == 1.0f && i_matrix( 1, 2 ) == 0.0f &&
+           i_matrix( 2, 0 ) == 0.0f && i_matrix( 2, 1 ) == 0.0f && i_matrix( 2, 2 ) == 1.0f;
 }
 
-/// Check if the matrix \p o_matrix is the identity matrix.
+/// Check if the matrix \p i_matrix is the identity matrix.
 ///
-/// \return true if \p o_matrix is the identity matrix.
-GM_HOST_DEVICE inline bool IsIdentity( Mat4f& o_matrix )
+/// \return true if \p i_matrix is the identity matrix.
+GM_HOST_DEVICE inline bool IsIdentity( const Mat4f& i_matrix )
 {
-    return o_matrix( 0, 0 ) == 1.0f && o_matrix( 0, 1 ) == 0.0f && o_matrix( 0, 2 ) == 0.0f &&
-           o_matrix( 0, 3 ) == 0.0f && o_matrix( 1, 0 ) == 0.0f && o_matrix( 1, 1 ) == 1.0f &&
-           o_matrix( 1, 2 ) == 0.0f && o_matrix( 1, 3 ) == 0.0f && o_matrix( 2, 0 ) == 0.0f &&
-           o_matrix( 2, 1 ) == 0.0f && o_matrix( 2, 2 ) == 1.0f && o_matrix( 2, 3 ) == 0.0f &&
-           o_matrix( 3, 0 ) == 0.0f && o_matrix( 3, 1 ) == 0.0f && o_matrix( 3, 2 ) == 0.0f && o_matrix( 3, 3 ) == 1.0f;
+    return i_matrix( 0, 0 ) == 1.0f && i_matrix( 0, 1 ) == 0.0f && i_matrix( 0, 2 ) == 0.0f &&
+           i_matrix( 0, 3 ) == 0.0f && i_matrix( 1, 0 ) == 0.0f && i_matrix( 1, 1 ) == 1.0f &&
+           i_matrix( 1, 2 ) == 0.0f && i_matrix( 1, 3 ) == 0.0f && i_matrix( 2, 0 ) == 0.0f &&
+           i_matrix( 2, 1 ) == 0.0f && i_matrix( 2, 2 ) == 1.0f && i_matrix( 2, 3 ) == 0.0f &&
+           i_matrix( 3, 0 ) == 0.0f && i_matrix( 3, 1 ) == 0.0f && i_matrix( 3, 2 ) == 0.0f && i_matrix( 3, 3 ) == 1.0f;
 }
 
 GM_NS_CLOSE

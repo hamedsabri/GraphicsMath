@@ -341,8 +341,6 @@ def GenerateFunctions():
     Returns:
         list: file paths to the generated files.
     """
-    functionGroups = []
-
     # Single input element-wise computation.
     singleInputElementWiseInterfaces = []
     for valueType in [PODType(FLOAT)] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
@@ -352,11 +350,6 @@ def GenerateFunctions():
                 returnType=valueType,
             )
         )
-    functionGroups.append(
-        FunctionGroup(
-            ["floor", "ceil", "abs",], interfaces=singleInputElementWiseInterfaces,
-        )
-    )
 
     # Dual-input element-wise computation.
     dualInputElementWiseInterfaces = []
@@ -370,9 +363,6 @@ def GenerateFunctions():
                 returnType=valueType,
             )
         )
-    functionGroups.append(
-        FunctionGroup(["min", "max",], interfaces=dualInputElementWiseInterfaces,)
-    )
 
     # Vector product(s).
     vectorProductInterfaces = []
@@ -386,9 +376,6 @@ def GenerateFunctions():
                 returnType=vectorType.elementType,
             )
         )
-    functionGroups.append(
-        FunctionGroup(["dotProduct"], interfaces=vectorProductInterfaces,)
-    )
 
     # Vector reduction.
     vectorReductionInterfaces = []
@@ -400,12 +387,6 @@ def GenerateFunctions():
             )
         )
 
-    functionGroups.append(
-        FunctionGroup(
-            ["length", "lengthSquared"], interfaces=vectorReductionInterfaces,
-        )
-    )
-
     # Set matrix value.
     setMatrixInterfaces = []
     for matrixType in MATRIX_TYPES:
@@ -414,22 +395,37 @@ def GenerateFunctions():
                 arguments=[FunctionArg("matrix", matrixType, Mutability.Mutable),],
             )
         )
-    functionGroups.append(
-        FunctionGroup(["setIdentity"], interfaces=setMatrixInterfaces,)
-    )
 
     # Check matrix value.
     checkMatrixInterfaces = []
     for matrixType in MATRIX_TYPES:
         checkMatrixInterfaces.append(
             FunctionInterface(
-                arguments=[FunctionArg("matrix", matrixType, Mutability.Mutable),],
+                arguments=[FunctionArg("matrix", matrixType, Mutability.Const),],
                 returnType=PODType(BOOL),
             )
         )
-    functionGroups.append(
-        FunctionGroup(["isIdentity"], interfaces=checkMatrixInterfaces,)
-    )
+
+    # Angle interfaces.
+    angleInterfaces = []
+    for podType in [PODType(FLOAT)]:
+        angleInterfaces.append(
+            FunctionInterface(
+                arguments=[FunctionArg("angle", podType, Mutability.Const),],
+                returnType=podType,
+            )
+        )
+
+
+    functionGroups = [
+        FunctionGroup(["floor", "ceil", "abs",], interfaces=singleInputElementWiseInterfaces),
+        FunctionGroup(["min", "max",], interfaces=dualInputElementWiseInterfaces,),
+        FunctionGroup(["isIdentity"], interfaces=checkMatrixInterfaces,),
+        FunctionGroup(["setIdentity"], interfaces=setMatrixInterfaces,),
+        FunctionGroup(["length", "lengthSquared"], interfaces=vectorReductionInterfaces,),
+        FunctionGroup(["dotProduct"], interfaces=vectorProductInterfaces,),
+        FunctionGroup(["degrees", "radians",], interfaces=angleInterfaces,),
+    ]
 
     # Generate code.
     filePaths = []

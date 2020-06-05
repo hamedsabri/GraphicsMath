@@ -12,6 +12,6 @@ GM_NS_USING
 
 void BindIsIdentity( pybind11::module& o_module )
 {
-    o_module.def( "IsIdentity", []( Mat3f& o_matrix ) { return IsIdentity( o_matrix ); } );
-    o_module.def( "IsIdentity", []( Mat4f& o_matrix ) { return IsIdentity( o_matrix ); } );
+    o_module.def( "IsIdentity", []( const Mat3f& i_matrix ) { return IsIdentity( i_matrix ); } );
+    o_module.def( "IsIdentity", []( const Mat4f& i_matrix ) { return IsIdentity( i_matrix ); } );
 }

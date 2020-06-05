@@ -23,11 +23,13 @@ void BindLengthSquared( pybind11::module& );
 void BindMin( pybind11::module& );
 void BindMax( pybind11::module& );
 void BindFloor( pybind11::module& );
+void BindRadians( pybind11::module& );
 void BindCeil( pybind11::module& );
 void BindLength( pybind11::module& );
 void BindAbs( pybind11::module& );
 void BindIsIdentity( pybind11::module& );
 void BindDotProduct( pybind11::module& );
+void BindDegrees( pybind11::module& );
 void BindSetIdentity( pybind11::module& );
 
 PYBIND11_MODULE( gm, o_module )
@@ -53,10 +55,12 @@ PYBIND11_MODULE( gm, o_module )
     BindMin( o_module );
     BindMax( o_module );
     BindFloor( o_module );
+    BindRadians( o_module );
     BindCeil( o_module );
     BindLength( o_module );
     BindAbs( o_module );
     BindIsIdentity( o_module );
     BindDotProduct( o_module );
+    BindDegrees( o_module );
     BindSetIdentity( o_module );
 }
