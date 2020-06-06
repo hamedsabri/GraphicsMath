@@ -19,6 +19,7 @@ void BindBounds3i( pybind11::module& );
 void BindBounds2f( pybind11::module& );
 
 // Function Declarations.
+void BindNormalize( pybind11::module& );
 void BindDistance( pybind11::module& );
 void BindLengthSquared( pybind11::module& );
 void BindMin( pybind11::module& );
@@ -52,6 +53,7 @@ PYBIND11_MODULE( gm, o_module )
     BindBounds2f( o_module );
 
     // Functions.
+    BindNormalize( o_module );
     BindDistance( o_module );
     BindLengthSquared( o_module );
     BindMin( o_module );

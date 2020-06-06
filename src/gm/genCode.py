@@ -387,6 +387,16 @@ def GenerateFunctions():
             )
         )
 
+    # Vector unary operation.
+    vectorOps = []
+    for vectorType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
+        vectorOps.append(
+            FunctionInterface(
+                arguments=[FunctionArg("vector", vectorType, Mutability.Const),],
+                returnType=vectorType,
+            )
+        )
+
     # Set matrix value.
     setMatrixOps = []
     for matrixType in MATRIX_TYPES:
@@ -434,7 +444,8 @@ def GenerateFunctions():
         FunctionGroup(["min", "max",], interfaces=elementComparisonOps,),
         FunctionGroup(["isIdentity"], interfaces=checkMatrixOps,),
         FunctionGroup(["setIdentity"], interfaces=setMatrixOps,),
-        FunctionGroup(["length", "lengthSquared"], interfaces=vectorReductionOps,),
+        FunctionGroup(["normalize",], interfaces=vectorOps,),
+        FunctionGroup(["length", "lengthSquared",], interfaces=vectorReductionOps,),
         FunctionGroup(["dotProduct"], interfaces=vectorProductOps,),
         FunctionGroup(["degrees", "radians",], interfaces=angleOps,),
         FunctionGroup(["distance"], interfaces=pointReductionOps,),
