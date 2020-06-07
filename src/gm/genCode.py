@@ -416,6 +416,16 @@ def GenerateFunctions():
             )
         )
 
+    # Matrix unary ops.
+    matrixUnaryOps = []
+    for matrixType in MATRIX_TYPES:
+        matrixUnaryOps.append(
+            FunctionInterface(
+                arguments=[FunctionArg("matrix", matrixType, Mutability.Const),],
+                returnType=matrixType,
+            )
+        )
+
     # Angle interfaces.
     angleOps = []
     for podType in (PODType(FLOAT),):
@@ -444,6 +454,7 @@ def GenerateFunctions():
         FunctionGroup(["min", "max",], interfaces=elementComparisonOps,),
         FunctionGroup(["isIdentity"], interfaces=checkMatrixOps,),
         FunctionGroup(["setIdentity"], interfaces=setMatrixOps,),
+        FunctionGroup(["transpose"], interfaces=matrixUnaryOps,),
         FunctionGroup(["normalize",], interfaces=vectorOps,),
         FunctionGroup(["length", "lengthSquared",], interfaces=vectorReductionOps,),
         FunctionGroup(["dotProduct"], interfaces=vectorProductOps,),
