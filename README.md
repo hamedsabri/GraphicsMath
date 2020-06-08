@@ -3,8 +3,8 @@
 **GraphicsMath** is a C++ header-only computer graphics math library. 
 
 Optional features include:
-- python bindings.
-- usage in CUDA device code.
+- Python bindings.
+- Usage in CUDA device code.
 
 ## Requirements
 
