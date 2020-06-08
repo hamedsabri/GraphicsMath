@@ -24,6 +24,7 @@ endif()
 # Discover macros.
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake/macros")
 include(Public)
+include(Python)
 
 # Python bindings.
 if(BUILD_PYTHON_BINDINGS)
