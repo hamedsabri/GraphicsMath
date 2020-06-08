@@ -31,6 +31,7 @@ void BindCeil( pybind11::module& );
 void BindLength( pybind11::module& );
 void BindAbs( pybind11::module& );
 void BindIsIdentity( pybind11::module& );
+void BindMatrixProduct( pybind11::module& );
 void BindDotProduct( pybind11::module& );
 void BindDegrees( pybind11::module& );
 void BindSetIdentity( pybind11::module& );
@@ -66,6 +67,7 @@ PYBIND11_MODULE( gm, o_module )
     BindLength( o_module );
     BindAbs( o_module );
     BindIsIdentity( o_module );
+    BindMatrixProduct( o_module );
     BindDotProduct( o_module );
     BindDegrees( o_module );
     BindSetIdentity( o_module );

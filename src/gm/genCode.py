@@ -426,6 +426,19 @@ def GenerateFunctions():
             )
         )
 
+    # Matrix binary ops.
+    matrixBinaryOps = []
+    for matrixType in MATRIX_TYPES:
+        matrixBinaryOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("lhs", matrixType, Mutability.Const),
+                    FunctionArg("rhs", matrixType, Mutability.Const),
+                ],
+                returnType=matrixType,
+            )
+        )
+
     # Angle interfaces.
     angleOps = []
     for podType in (PODType(FLOAT),):
@@ -438,7 +451,10 @@ def GenerateFunctions():
 
     # Euclidean space point operations.
     pointReductionOps = []
-    for vectorType in (VectorType((2,), PODType(FLOAT)), VectorType((3,), PODType(FLOAT))):
+    for vectorType in (
+        VectorType((2,), PODType(FLOAT)),
+        VectorType((3,), PODType(FLOAT)),
+    ):
         pointReductionOps.append(
             FunctionInterface(
                 arguments=[
@@ -455,6 +471,7 @@ def GenerateFunctions():
         FunctionGroup(["isIdentity"], interfaces=checkMatrixOps,),
         FunctionGroup(["setIdentity"], interfaces=setMatrixOps,),
         FunctionGroup(["transpose"], interfaces=matrixUnaryOps,),
+        FunctionGroup(["matrixProduct"], interfaces=matrixBinaryOps,),
         FunctionGroup(["normalize",], interfaces=vectorOps,),
         FunctionGroup(["length", "lengthSquared",], interfaces=vectorReductionOps,),
         FunctionGroup(["dotProduct"], interfaces=vectorProductOps,),
