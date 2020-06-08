@@ -30,7 +30,7 @@ TEST_CASE( "MatrixProduct_Mat3f" )
         3, 0, 1
     ) );
 
-    // U * U = U
+    // L * L = L
     matrixA = gm::Mat3f(
         1, 0, 0,
         1, 1, 0,
@@ -79,7 +79,7 @@ TEST_CASE( "MatrixProduct_Mat4f" )
         0, 0, 0, 1
     ) );
 
-    // U * U = U
+    // L * L = L
     matrixA = gm::Mat4f(
         1, 0, 0, 0,
         1, 1, 0, 0,
