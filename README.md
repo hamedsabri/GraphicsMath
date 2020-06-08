@@ -1,6 +1,10 @@
 # GraphicsMath
 
-C++ header-only computer graphics math library, with optional python bindings.
+**GraphicsMath** is a C++ header-only computer graphics math library. 
+
+Optional features include:
+- python bindings.
+- usage in CUDA device code.
 
 ## Requirements
 
