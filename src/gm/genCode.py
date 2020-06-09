@@ -439,6 +439,18 @@ def GenerateFunctions():
             )
         )
 
+    # Set vector transform channels.
+    setVectorTransformOps = []
+    for matrixType in MATRIX_TYPES:
+        setVectorTransformOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("vector", VectorType((matrixType.dims[0] - 1,), matrixType.elementType), Mutability.Const),
+                    FunctionArg("matrix", matrixType, Mutability.Mutable),
+                ],
+            )
+        )
+
     # Angle interfaces.
     angleOps = []
     for podType in (PODType(FLOAT),):
@@ -477,6 +489,7 @@ def GenerateFunctions():
         FunctionGroup(["dotProduct"], interfaces=vectorProductOps,),
         FunctionGroup(["degrees", "radians",], interfaces=angleOps,),
         FunctionGroup(["distance"], interfaces=pointReductionOps,),
+        FunctionGroup(["setTranslate"], interfaces=setVectorTransformOps,),
     ]
 
     # Generate code.
