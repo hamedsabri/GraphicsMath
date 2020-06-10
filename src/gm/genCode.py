@@ -489,7 +489,7 @@ def GenerateFunctions():
         FunctionGroup(["dotProduct"], interfaces=vectorProductOps,),
         FunctionGroup(["degrees", "radians",], interfaces=angleOps,),
         FunctionGroup(["distance"], interfaces=pointReductionOps,),
-        FunctionGroup(["setTranslate"], interfaces=setVectorTransformOps,),
+        FunctionGroup(["setTranslate", "setScale",], interfaces=setVectorTransformOps,),
     ]
 
     # Generate code.
