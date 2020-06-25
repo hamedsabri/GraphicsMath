@@ -341,20 +341,20 @@ def GenerateFunctions():
     Returns:
         list: file paths to the generated files.
     """
-    # Single input element-wise computation.
-    elementOps = []
+    # Unary operations.
+    unaryOps = []
     for valueType in [PODType(FLOAT),] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
-        elementOps.append(
+        unaryOps.append(
             FunctionInterface(
                 arguments=[FunctionArg("value", valueType, Mutability.Const),],
                 returnType=valueType,
             )
         )
 
-    # Dual-input element-wise computation.
-    elementComparisonOps = []
+    # Binary comparison operations.
+    binaryComparisonOps = []
     for valueType in POD_TYPES + VECTOR_TYPES:
-        elementComparisonOps.append(
+        binaryComparisonOps.append(
             FunctionInterface(
                 arguments=[
                     FunctionArg("valueA", valueType, Mutability.Const),
@@ -498,8 +498,8 @@ def GenerateFunctions():
         )
 
     functionGroups = [
-        FunctionGroup(["floor", "ceil", "abs",], interfaces=elementOps),
-        FunctionGroup(["min", "max",], interfaces=elementComparisonOps,),
+        FunctionGroup(["floor", "ceil", "abs",], interfaces=unaryOps),
+        FunctionGroup(["min", "max",], interfaces=binaryComparisonOps,),
         FunctionGroup(["isIdentity"], interfaces=checkMatrixOps,),
         FunctionGroup(["setIdentity"], interfaces=setMatrixOps,),
         FunctionGroup(["transpose"], interfaces=matrixUnaryOps,),
