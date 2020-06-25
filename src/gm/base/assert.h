@@ -21,7 +21,7 @@
 #define GM_ASSERT( expr )                                                                                              \
     if ( !( expr ) )                                                                                                   \
     {                                                                                                                  \
-        gm::_Assert( #expr, __FILE__, __LINE__ );                                                                      \
+        GM_NS::_Assert( #expr, __FILE__, __LINE__ );                                                                   \
     }
 #else
 #define GM_ASSERT( expr, ... ) void()
@@ -34,7 +34,8 @@
 #define GM_ASSERT_MSG( expr, format, ... )                                                                             \
     if ( !( expr ) )                                                                                                   \
     {                                                                                                                  \
-        gm::_Assert( #expr, format, __FILE__, __LINE__, ##__VA_ARGS__ );                                               \
+        GM_NS::_Assert( #expr, __FILE__, __LINE__ );                                                                   \
+        fprintf( stderr, format, ##__VA_ARGS__ );                                                                      \
     }
 #else
 #define GM_ASSERT_MSG( expr, format, ... ) void()
@@ -46,18 +47,6 @@ GM_NS_OPEN
 GM_HOST_DEVICE inline void _Assert( const char* i_expression, const char* i_file, size_t i_line )
 {
     fprintf( stderr, "Assertion failed for expression: %s, at %s:%lu\n", i_expression, i_file, i_line );
-}
-
-/// Not intended to be used directly, \ref GM_ASSERT_MSG instead.
-GM_HOST_DEVICE inline void
-_Assert( const char* i_expression, const char* i_file, size_t i_line, const char* i_format, ... )
-{
-    char    buffer[ 256 ];
-    va_list args;
-    va_start( args, i_format );
-    vsprintf( buffer, i_format, args );
-    va_end( args );
-    fprintf( stderr, "Assertion failed for expression: %s, at %s:%lu, %s\n", i_expression, i_file, i_line, buffer );
 }
 
 GM_NS_CLOSE

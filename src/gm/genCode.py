@@ -69,22 +69,22 @@ POD_TYPES = NUMERIC_POD_TYPES + [PODType(BOOL)]
 """
 Global set of vector value types to generate.
 """
-MATRIX_TYPES = (
+MATRIX_TYPES = [
     VectorType((3, 3), PODType(FLOAT)),
     VectorType((4, 4), PODType(FLOAT)),
-)
+]
 
-SINGLE_INDEX_VECTOR_TYPES_FLOAT = (
+SINGLE_INDEX_VECTOR_TYPES_FLOAT = [
     VectorType((2,), PODType(FLOAT)),
     VectorType((3,), PODType(FLOAT)),
     VectorType((4,), PODType(FLOAT)),
-)
+]
 
-SINGLE_INDEX_VECTOR_TYPES_INT = (
+SINGLE_INDEX_VECTOR_TYPES_INT = [
     VectorType((2,), PODType(INT)),
     VectorType((3,), PODType(INT)),
     VectorType((4,), PODType(INT)),
-)
+]
 
 VECTOR_TYPES = sorted(
     SINGLE_INDEX_VECTOR_TYPES_FLOAT + SINGLE_INDEX_VECTOR_TYPES_INT + MATRIX_TYPES
@@ -343,7 +343,7 @@ def GenerateFunctions():
     """
     # Single input element-wise computation.
     elementOps = []
-    for valueType in (PODType(FLOAT),) + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
+    for valueType in [PODType(FLOAT),] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
         elementOps.append(
             FunctionInterface(
                 arguments=[FunctionArg("value", valueType, Mutability.Const),],
@@ -477,6 +477,26 @@ def GenerateFunctions():
             )
         )
 
+    # Interpolation operators.
+    interpolationOps = []
+    for valueType in [PODType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT:
+        arguments = [
+            FunctionArg("valueA", valueType, Mutability.Const),
+            FunctionArg("valueB", valueType, Mutability.Const),
+        ]
+        if valueType.isScalar:
+            arguments.append(FunctionArg("weight", valueType, Mutability.Const))
+        else:
+            assert(valueType.isVector)
+            arguments.append(FunctionArg("weight", valueType.elementType, Mutability.Const))
+
+        interpolationOps.append(
+            FunctionInterface(
+                arguments=arguments,
+                returnType=valueType,
+            )
+        )
+
     functionGroups = [
         FunctionGroup(["floor", "ceil", "abs",], interfaces=elementOps),
         FunctionGroup(["min", "max",], interfaces=elementComparisonOps,),
@@ -490,6 +510,7 @@ def GenerateFunctions():
         FunctionGroup(["degrees", "radians",], interfaces=angleOps,),
         FunctionGroup(["distance"], interfaces=pointReductionOps,),
         FunctionGroup(["setTranslate", "setScale",], interfaces=setVectorTransformOps,),
+        FunctionGroup(["lerp",], interfaces=interpolationOps,),
     ]
 
     # Generate code.

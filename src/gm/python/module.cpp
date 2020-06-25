@@ -37,6 +37,7 @@ void BindDotProduct( pybind11::module& );
 void BindDegrees( pybind11::module& );
 void BindSetIdentity( pybind11::module& );
 void BindSetTranslate( pybind11::module& );
+void BindLerp( pybind11::module& );
 
 PYBIND11_MODULE( gm, o_module )
 {
@@ -75,4 +76,5 @@ PYBIND11_MODULE( gm, o_module )
     BindDegrees( o_module );
     BindSetIdentity( o_module );
     BindSetTranslate( o_module );
+    BindLerp( o_module );
 }
