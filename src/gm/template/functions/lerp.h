@@ -21,8 +21,11 @@ GM_NS_OPEN
 ///
 /// \param {{ interface.ArgName("valueA") }} the source value to interpolate from.
 /// \param {{ interface.ArgName("valueB") }} the target value to interpolate to.
-/// \param {{ interface.ArgName("weight") }} must be in the range of [0,1].  Describes the percentage of \p {{ interface.ArgName("valueB") }} in the final,
-/// interpolated value.
+/// \param {{ interface.ArgName("weight") }} Describes the percentage of \p {{ interface.ArgName("valueB") }} in the final, interpolated value.
+///
+/// \pre \p i_weight must be in the range of [0,1].
+///
+/// \return the interpolated value.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
     GM_ASSERT_MSG( {{ interface.ArgName("weight") }} >= 0.0f && {{ interface.ArgName("weight") }} <= 1.0f,
