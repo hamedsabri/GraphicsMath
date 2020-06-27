@@ -497,6 +497,19 @@ def GenerateFunctions():
             )
         )
 
+    rayOps = []
+    for valueType in (VectorType((2,), PODType(FLOAT)), VectorType((3,), PODType(FLOAT)),):
+        rayOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("origin", valueType, Mutability.Const),
+                    FunctionArg("direction", valueType, Mutability.Const),
+                    FunctionArg("magnitude", valueType.elementType, Mutability.Const)
+                ],
+                returnType=valueType,
+            )
+        )
+
     functionGroups = [
         FunctionGroup(["floor", "ceil", "abs",], interfaces=unaryOps),
         FunctionGroup(["min", "max",], interfaces=binaryComparisonOps,),
@@ -511,6 +524,7 @@ def GenerateFunctions():
         FunctionGroup(["distance"], interfaces=pointReductionOps,),
         FunctionGroup(["setTranslate", "setScale",], interfaces=setVectorTransformOps,),
         FunctionGroup(["lerp",], interfaces=interpolationOps,),
+        FunctionGroup(["rayPosition",], interfaces=rayOps,),
     ]
 
     # Generate code.
