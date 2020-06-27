@@ -6,10 +6,9 @@ Optional features include:
 - Python bindings.
 - Usage in CUDA device code.
 
-## Requirements
+## Documentation
 
-- \>= CMake-3.17
-- \>= C++11
+Doxygen documentation based on the latest state of master, [hosted by GitHub Pages](https://moddyz.github.io/GraphicsMath/).
 
 ## Building
 
@@ -18,6 +17,7 @@ A convenience build script is provided, for building all targets, and optionally
 ./build.sh <OPTIONAL_INSTALL_LOCATION>
 ```
 
-## Documentation
+### Requirements
 
-Doxygen documentation based on the latest state of master, [hosted by GitHub Pages](https://moddyz.github.io/GraphicsMath/).
+- \>= CMake-3.17
+- \>= C++11
