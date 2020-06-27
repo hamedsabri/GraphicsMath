@@ -50,9 +50,9 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
         {{ interface.ArgName("firstRoot") }} = ( -{{ interface.ArgName("b") }} + sqrt( discriminant ) ) * reciprocal;
         {{ interface.ArgName("secondRoot") }} = ( -{{ interface.ArgName("b") }} - sqrt( discriminant ) ) * reciprocal;
         // Make the smaller root appear first.
-        if ( {{ interface.ArgName("firstRoot") }} > {{ interface.ArgName("firstRoot") }} )
+        if ( {{ interface.ArgName("firstRoot") }} > {{ interface.ArgName("secondRoot") }} )
         {
-            std::swap( {{ interface.ArgName("firstRoot") }}, {{ interface.ArgName("firstRoot") }} );
+            std::swap( {{ interface.ArgName("firstRoot") }}, {{ interface.ArgName("secondRoot") }} );
         }
 
         return 2;

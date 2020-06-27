@@ -524,6 +524,22 @@ def GenerateFunctions():
             )
         )
 
+    raySphereIntersectionOps = []
+    for valueType in (VectorType((3,), PODType(FLOAT)),):
+        raySphereIntersectionOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("sphereOrigin", valueType, Mutability.Const),
+                    FunctionArg("sphereRadius", valueType.elementType, Mutability.Const),
+                    FunctionArg("rayOrigin", valueType, Mutability.Const),
+                    FunctionArg("rayDirection", valueType, Mutability.Const),
+                    FunctionArg("firstIntersection", valueType.elementType, Mutability.Mutable),
+                    FunctionArg("secondIntersection", valueType.elementType, Mutability.Mutable),
+                ],
+                returnType=PODType(INT),
+            )
+        )
+
     functionGroups = [
         FunctionGroup(["floor", "ceil", "abs",], interfaces=unaryOps),
         FunctionGroup(["min", "max",], interfaces=binaryComparisonOps,),
@@ -538,8 +554,9 @@ def GenerateFunctions():
         FunctionGroup(["distance"], interfaces=pointReductionOps,),
         FunctionGroup(["setTranslate", "setScale",], interfaces=setVectorTransformOps,),
         FunctionGroup(["lerp",], interfaces=interpolationOps,),
-        FunctionGroup(["rayPosition",], interfaces=rayOps,),
         FunctionGroup(["solveQuadraticRoots",], interfaces=quadraticOps,),
+        FunctionGroup(["rayPosition",], interfaces=rayOps,),
+        FunctionGroup(["raySphereIntersection",], interfaces=raySphereIntersectionOps,),
     ]
 
     # Generate code.

@@ -53,9 +53,9 @@ SolveQuadraticRoots( const float& i_a, const float& i_b, const float& i_c, float
         o_firstRoot      = ( -i_b + sqrt( discriminant ) ) * reciprocal;
         o_secondRoot     = ( -i_b - sqrt( discriminant ) ) * reciprocal;
         // Make the smaller root appear first.
-        if ( o_firstRoot > o_firstRoot )
+        if ( o_firstRoot > o_secondRoot )
         {
-            std::swap( o_firstRoot, o_firstRoot );
+            std::swap( o_firstRoot, o_secondRoot );
         }
 
         return 2;
