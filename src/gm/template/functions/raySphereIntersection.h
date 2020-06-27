@@ -32,11 +32,11 @@
 ///
 /// Substituting \f$(5)\f$ into \f$(4)\f$ gives:
 ///
-/// \f$(4)\f$ \f$(O+tD-C)^2-R^2=0\f$
+/// \f$(6)\f$ \f$(O+tD-C)^2-R^2=0\f$
 ///
 /// Which can be expanded into:
 ///
-/// \f$(5)\f$ \f$D^2t^2+2(O-C)Dt+(O-C)^2-R^2=0\f$
+/// \f$(7)\f$ \f$D^2t^2+2(O-C)Dt+(O-C)^2-R^2=0\f$
 ///
 /// Fitting the root quadratic form \f$ax^2+bx+c=0\f$ such that \f$x=t\f$, \f$a=D^2\f$, \f$b=2D(O-C)\f$, and
 /// \f$c=(O-C)^2-R^2\f$.
