@@ -106,7 +106,6 @@ FUNCTIONS = {}
 # Code generation for types.
 #
 
-
 def PopulateBoundsCompositeTypes():
     """
     Populate bounds composite types, by updating the global ``COMPOSITE_TYPES``.
@@ -504,9 +503,24 @@ def GenerateFunctions():
                 arguments=[
                     FunctionArg("origin", valueType, Mutability.Const),
                     FunctionArg("direction", valueType, Mutability.Const),
-                    FunctionArg("magnitude", valueType.elementType, Mutability.Const)
+                    FunctionArg("magnitude", valueType.elementType, Mutability.Const),
                 ],
                 returnType=valueType,
+            )
+        )
+
+    quadraticOps = []
+    for valueType in (PODType(FLOAT),):
+        quadraticOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("a", valueType, Mutability.Const),
+                    FunctionArg("b", valueType, Mutability.Const),
+                    FunctionArg("c", valueType, Mutability.Const),
+                    FunctionArg("firstRoot", valueType, Mutability.Mutable),
+                    FunctionArg("secondRoot", valueType, Mutability.Mutable),
+                ],
+                returnType=PODType(INT),
             )
         )
 
@@ -525,6 +539,7 @@ def GenerateFunctions():
         FunctionGroup(["setTranslate", "setScale",], interfaces=setVectorTransformOps,),
         FunctionGroup(["lerp",], interfaces=interpolationOps,),
         FunctionGroup(["rayPosition",], interfaces=rayOps,),
+        FunctionGroup(["solveQuadraticRoots",], interfaces=quadraticOps,),
     ]
 
     # Generate code.

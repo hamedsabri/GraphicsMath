@@ -34,6 +34,7 @@ void BindAbs( pybind11::module& );
 void BindIsIdentity( pybind11::module& );
 void BindMatrixProduct( pybind11::module& );
 void BindRayPosition( pybind11::module& );
+void BindSolveQuadraticRoots( pybind11::module& );
 void BindDotProduct( pybind11::module& );
 void BindDegrees( pybind11::module& );
 void BindSetIdentity( pybind11::module& );
@@ -74,6 +75,7 @@ PYBIND11_MODULE( gm, o_module )
     BindIsIdentity( o_module );
     BindMatrixProduct( o_module );
     BindRayPosition( o_module );
+    BindSolveQuadraticRoots( o_module );
     BindDotProduct( o_module );
     BindDegrees( o_module );
     BindSetIdentity( o_module );
