@@ -49,6 +49,12 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
         float reciprocal = 1.0f / ( 2.0f * {{ interface.ArgName("a") }} );
         {{ interface.ArgName("firstRoot") }} = ( -{{ interface.ArgName("b") }} + sqrt( discriminant ) ) * reciprocal;
         {{ interface.ArgName("secondRoot") }} = ( -{{ interface.ArgName("b") }} - sqrt( discriminant ) ) * reciprocal;
+        // Make the smaller root appear first.
+        if ( {{ interface.ArgName("firstRoot") }} > {{ interface.ArgName("firstRoot") }} )
+        {
+            std::swap( {{ interface.ArgName("firstRoot") }}, {{ interface.ArgName("firstRoot") }} );
+        }
+
         return 2;
     }
     else
