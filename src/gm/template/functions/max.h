@@ -1,6 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
+/// \ingroup GM_group_functions_basic
 ///
 /// Find the minimum of two input values.
 /// If the value type is a vector, the minimum will be performed element-wise.
@@ -19,6 +20,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Find the minimum from the inputs \p {{ interface.ArgName("valueA") }} and \p {{ interface.ArgName("valueB") }}.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the minimum of the inputs.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )

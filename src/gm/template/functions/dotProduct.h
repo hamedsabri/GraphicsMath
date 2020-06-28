@@ -1,6 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
+/// \ingroup GM_group_functions_linearAlgebra
 ///
 /// Dot product, or scalar product between two <em>equal-length</em> vectors.
 ///
@@ -22,6 +23,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Compute the dot product of two \ref {{ interface.ArgClass("lhs") }}, \p i_lhs and \p i_rhs, and return the result.
+/// \ingroup GM_group_functions_linearAlgebra
 ///
 /// \return computed dot product.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )

@@ -1,6 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
+/// \ingroup GM_group_functions_basic
 ///
 /// Floor the input value, by rounding downwards, returning the largest integral number less than the input.
 /// If the value type is a vector, the floor will be performed element-wise.
@@ -19,6 +20,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Floor the input \ref {{ interface.ArgClass("value") }} \p {{ interface.ArgName("value") }} and return it.
+/// \ingroup GM_group_functions_basic
 ///
 /// \return the floored input value.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )

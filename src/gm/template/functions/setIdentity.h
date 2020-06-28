@@ -1,6 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
+/// \ingroup GM_group_functions_linearAlgebra
 ///
 /// Set the identity matrix, defined as the neutral element with respect to matrix multiplication.
 
@@ -16,6 +17,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Set the identity matrix onto \p {{ interface.ArgName("matrix") }}.
+/// \ingroup GM_group_functions_linearAlgebra
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
     {{ interface.ArgName("matrix") }} = {{ interface.ArgClass("matrix") }}(

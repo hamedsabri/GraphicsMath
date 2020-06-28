@@ -1,6 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
+/// \ingroup GM_group_functions_linearAlgebra
 ///
 /// Matrix transpose.
 ///
@@ -22,6 +23,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Transpose the input matrix \p {{ interface.ArgName("matrix") }}.
+/// \ingroup GM_group_functions_linearAlgebra
 ///
 /// \return the transposed matrix.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
