@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/rayPosition.h
-/// \ingroup GM_group_Functions
+/// \ingroup GM_group_functions
 ///
 /// Position along a ray.
 ///
@@ -29,9 +29,8 @@
 
 GM_NS_OPEN
 
-///
-
 /// Compute the position along a ray by scalar magnitude \p i_magnitude.
+/// \ingroup GM_group_functions
 ///
 /// \pre \p i_direction must be a normalized vector.
 ///

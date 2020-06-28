@@ -1,6 +1,7 @@
 #pragma once
 
 /// \file {{ arrayType.headerFileName }}
+/// \ingroup GM_group_arrayTypes
 
 #include <vector>
 
@@ -10,11 +11,10 @@
 
 GM_NS_OPEN
 
-{% if arrayType.elementType.isVector %}
-/// An array of \ref {{ arrayType.elementType.className }}.
-{%- else %}
-/// An array of \p {{ arrayType.elementType.className }}.
-{%- endif %}
+/// \typedef {{ arrayType.className }}
+/// \ingroup GM_group_arrayTypes
+///
+/// Type definition of an array of \ref {{ arrayType.elementType.className }}.
 using {{ arrayType.className }} = std::vector< {{ arrayType.elementType.className }} >;
 
 GM_NS_CLOSE

@@ -5,9 +5,7 @@
 #pragma once
 
 /// \file vec4f.h
-/// \ingroup GM_group_VectorTypes
-///
-/// Class definition for \ref Vec4f.
+/// \ingroup GM_group_vectorTypes
 
 #include <cmath>
 #include <cstring>
@@ -20,9 +18,9 @@
 GM_NS_OPEN
 
 /// \class Vec4f
-/// \ingroup GM_group_VectorTypes
+/// \ingroup GM_group_vectorTypes
 ///
-/// A vector class with 4 elements.
+/// Class definition of a vector with 4 elements.
 class Vec4f final
 {
 public:

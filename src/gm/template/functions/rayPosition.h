@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_Functions
+/// \ingroup GM_group_functions
 ///
 /// Position along a ray.
 ///
@@ -31,6 +31,7 @@ GM_NS_OPEN
 {% for interface in function.interfaces %}
 {% if interface == function.interfaces[0] %}
 /// Compute the position along a ray by scalar magnitude \p {{ interface.ArgName("magnitude") }}.
+/// \ingroup GM_group_functions
 ///
 /// \pre \p {{ interface.ArgName("direction") }} must be a normalized vector.
 ///

@@ -5,9 +5,7 @@
 #pragma once
 
 /// \file mat4f.h
-/// \ingroup GM_group_VectorTypes
-///
-/// Class definition for \ref Mat4f.
+/// \ingroup GM_group_vectorTypes
 
 #include <cmath>
 #include <cstring>
@@ -20,9 +18,9 @@
 GM_NS_OPEN
 
 /// \class Mat4f
-/// \ingroup GM_group_VectorTypes
+/// \ingroup GM_group_vectorTypes
 ///
-/// A matrix class with 16 elements.
+/// Class definition of a matrix with 16 elements.
 class Mat4f final
 {
 public:
