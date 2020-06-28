@@ -28,13 +28,10 @@ class {{ compositeType.className }} final
 {
 public:
     /// Default constructor.
-    {{ compositeType.className }}()  = default;
-
-    /// Destructor.
-    ~{{ compositeType.className }}() = default;
+    GM_HOST_DEVICE constexpr inline {{ compositeType.className }}()  = default;
 
     /// Element-wise constructor.
-    explicit {{ compositeType.className }}(
+    GM_HOST_DEVICE explicit constexpr inline {{ compositeType.className }}(
 {% for index in range(compositeType.elementSize) -%}
         const {{ compositeType.elements[ index ].type.className }}& i_{{ compositeType.elements[ index ].name }}
 {%- if index + 1 < compositeType.elementSize -%}

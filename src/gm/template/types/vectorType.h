@@ -22,17 +22,16 @@ GM_NS_OPEN
 class {{ vectorType.className }} final
 {
 public:
-    /// Type of \ref {{ vectorType.className }}'s elements.
+    /// \typedef ElementType
+    ///
+    /// Convenience type definition of \ref {{ vectorType.className }}'s elements.
     using ElementType = {{ vectorType.elementType.className }};
 
-    /// Default constructor.
-    {{ vectorType.className }}()  = default;
-
-    /// Destructor.
-    ~{{ vectorType.className }}() = default;
+    /// Default constructor, initializing all of the element values to 0.
+    GM_HOST_DEVICE constexpr inline {{ vectorType.className }}()  = default;
 
     /// Element-wise constructor.
-    explicit {{ vectorType.className }}(
+    GM_HOST_DEVICE explicit constexpr inline {{ vectorType.className }}(
 {% for index in range(vectorType.elementSize) -%}
         const {{ vectorType.elementType.className }}& i_element{{ index }}
 {%- if index + 1 < vectorType.elementSize -%}
@@ -52,24 +51,13 @@ public:
         GM_ASSERT( !HasNans() );
     }
 
-#ifdef GM_DEBUG
-    /// Copy constructor.
-    {{ vectorType.className }}( const {{ vectorType.className }}& i_vector )
-    {
-        std::memcpy( ( void* ) m_elements, ( const void* ) i_vector.m_elements, sizeof( {{ vectorType.elementType.className }}  )* {{ vectorType.elementSize }} );
-        GM_ASSERT( !HasNans() );
-    }
-
-    /// Copy assignment operator.
-    {{ vectorType.className }}& operator=( const {{ vectorType.className }}& i_vector )
-    {
-        std::memcpy( ( void* ) m_elements, ( const void* ) i_vector.m_elements, sizeof( {{ vectorType.elementType.className }}  )* {{ vectorType.elementSize }} );
-        GM_ASSERT( !HasNans() );
-        return *this;
-    }
-#endif
-
-    /// Element-wise index read accessor.
+    /// Indexed element write access.
+    ///
+    /// \param i_index index of the element.
+    ///
+    /// \pre \p i_index must be less than {{ vectorType.elementSize }}.
+    ///
+    /// \return mutable element value.
     GM_HOST_DEVICE inline {{ vectorType.elementType.className }}& operator[]( size_t i_index )
     {
         GM_ASSERT( !HasNans() );
@@ -77,7 +65,13 @@ public:
         return m_elements[ i_index ];
     }
 
-    /// Element-wise index write accessor.
+    /// Indexed element read access.
+    ///
+    /// \param i_index index of the element.
+    ///
+    /// \pre \p i_index must be less than {{ vectorType.elementSize }}.
+    ///
+    /// \return immutable element value.
     GM_HOST_DEVICE inline const {{ vectorType.elementType.className }}& operator[]( size_t i_index ) const
     {
         GM_ASSERT( !HasNans() );
@@ -89,7 +83,11 @@ public:
     // Arithmetic Operator Overloading.
     //
 
-    /// Vector addition.
+    /// Element-wise vector addition.
+    ///
+    /// Corresponding elements of the current vector and \p i_vector are added to form a new vector.
+    ///
+    /// \return the new vector.
     GM_HOST_DEVICE inline {{ vectorType.className }} operator+( const {{ vectorType.className }}& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
@@ -103,7 +101,7 @@ public:
         );
     }
 
-    /// Vector addition assignment.
+    /// Element-wise vector addition assignment.
     GM_HOST_DEVICE inline {{ vectorType.className }}& operator+=( const {{ vectorType.className }}& i_vector )
     {
         GM_ASSERT( !HasNans() );
