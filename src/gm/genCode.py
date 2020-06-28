@@ -554,7 +554,7 @@ def GenerateFunctions():
         FunctionGroup(["distance"], interfaces=pointReductionOps,),
         FunctionGroup(["setTranslate", "setScale",], interfaces=setVectorTransformOps,),
         FunctionGroup(["lerp",], interfaces=interpolationOps,),
-        FunctionGroup(["solveQuadraticRoots",], interfaces=quadraticOps,),
+        FunctionGroup(["quadraticRoots",], interfaces=quadraticOps,),
         FunctionGroup(["rayPosition",], interfaces=rayOps,),
         FunctionGroup(["raySphereIntersection",], interfaces=raySphereIntersectionOps,),
     ]

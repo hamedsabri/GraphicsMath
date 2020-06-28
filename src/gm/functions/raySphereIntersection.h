@@ -60,7 +60,7 @@
 #include <gm/types/vec3f.h>
 
 #include <gm/functions/dotProduct.h>
-#include <gm/functions/solveQuadraticRoots.h>
+#include <gm/functions/quadraticRoots.h>
 #ifdef GM_DEBUG
 #include <gm/functions/length.h>
 #endif
@@ -115,7 +115,7 @@ GM_HOST_DEVICE inline int RaySphereIntersection( const Vec3f& i_sphereOrigin,
     float c          = DotProduct( originDiff, originDiff ) - i_sphereRadius * i_sphereRadius;
 
     // Solve for quadratic roots.
-    int numRoots = SolveQuadraticRoots( a, b, c, o_firstIntersection, o_secondIntersection );
+    int numRoots = QuadraticRoots( a, b, c, o_firstIntersection, o_secondIntersection );
 
     // Check for number of roots (number of intersections).
     // The conditionals are ordered in terms of likeliness to occur.

@@ -59,7 +59,7 @@
 {% endfor %}
 
 #include <gm/functions/dotProduct.h>
-#include <gm/functions/solveQuadraticRoots.h>
+#include <gm/functions/quadraticRoots.h>
 #ifdef GM_DEBUG
 #include <gm/functions/length.h>
 #endif
@@ -113,7 +113,7 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
               {{ interface.ArgName("sphereRadius") }} * {{ interface.ArgName("sphereRadius") }};
 
     // Solve for quadratic roots.
-    int numRoots = SolveQuadraticRoots(
+    int numRoots = QuadraticRoots(
         a,
         b,
         c,

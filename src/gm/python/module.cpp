@@ -29,7 +29,6 @@ void BindFloor( pybind11::module& );
 void BindTranspose( pybind11::module& );
 void BindSetScale( pybind11::module& );
 void BindCeil( pybind11::module& );
-void BindSolveQuadraticRoots( pybind11::module& );
 void BindDotProduct( pybind11::module& );
 void BindSetTranslate( pybind11::module& );
 void BindDistance( pybind11::module& );
@@ -40,6 +39,7 @@ void BindLengthSquared( pybind11::module& );
 void BindRaySphereIntersection( pybind11::module& );
 void BindMatrixProduct( pybind11::module& );
 void BindRayPosition( pybind11::module& );
+void BindQuadraticRoots( pybind11::module& );
 void BindDegrees( pybind11::module& );
 
 PYBIND11_MODULE( gm, o_module )
@@ -71,7 +71,6 @@ PYBIND11_MODULE( gm, o_module )
     BindTranspose( o_module );
     BindSetScale( o_module );
     BindCeil( o_module );
-    BindSolveQuadraticRoots( o_module );
     BindDotProduct( o_module );
     BindSetTranslate( o_module );
     BindDistance( o_module );
@@ -82,5 +81,6 @@ PYBIND11_MODULE( gm, o_module )
     BindRaySphereIntersection( o_module );
     BindMatrixProduct( o_module );
     BindRayPosition( o_module );
+    BindQuadraticRoots( o_module );
     BindDegrees( o_module );
 }

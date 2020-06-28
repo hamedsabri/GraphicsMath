@@ -5,17 +5,17 @@
 #define CATCH_CONFIG_ENABLE_BENCHMARKING
 #include <catch2/catch.hpp>
 
-#include <gm/functions/solveQuadraticRoots.h>
+#include <gm/functions/quadraticRoots.h>
 
-TEST_CASE( "SolveQuadraticRoots_float_float_float_float_float" )
+TEST_CASE( "QuadraticRoots_float_float_float_float_float" )
 {
     float a;
     float b;
     float c;
     float firstRoot;
     float secondRoot;
-    BENCHMARK( "SolveQuadraticRoots" )
+    BENCHMARK( "QuadraticRoots" )
     {
-        return gm::SolveQuadraticRoots( a, b, c, firstRoot, secondRoot );
+        return gm::QuadraticRoots( a, b, c, firstRoot, secondRoot );
     };
 }

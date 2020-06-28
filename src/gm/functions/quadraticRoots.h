@@ -4,7 +4,7 @@
 
 #pragma once
 
-/// \file functions/solveQuadraticRoots.h
+/// \file functions/quadraticRoots.h
 ///
 /// Solve for the roots of a quadratic equation of the form \f$ax^2+bx+c=0\f$
 ///
@@ -36,7 +36,7 @@ GM_NS_OPEN
 /// \retval 1 A single intersection by the vertex of the parabola.
 /// \retval 2 Two symmetrical intersections with respect to the vertex.
 GM_HOST_DEVICE inline int
-SolveQuadraticRoots( const float& i_a, const float& i_b, const float& i_c, float& o_firstRoot, float& o_secondRoot )
+QuadraticRoots( const float& i_a, const float& i_b, const float& i_c, float& o_firstRoot, float& o_secondRoot )
 {
     GM_ASSERT( i_a != 0.0f );
 
