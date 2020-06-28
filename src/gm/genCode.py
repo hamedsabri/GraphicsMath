@@ -496,6 +496,27 @@ def GenerateFunctions():
             )
         )
 
+    # Map operators.
+    mapOps = []
+    for valueType in [PODType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT:
+        if valueType.isScalar:
+            rangeValueType = VectorType((2,), valueType)
+        else:
+            rangeValueType = VectorType((2,), valueType.elementType)
+
+        arguments = [
+            FunctionArg("sourceValue", valueType, Mutability.Const),
+            FunctionArg("sourceRange", rangeValueType, Mutability.Const),
+            FunctionArg("targetRange", rangeValueType, Mutability.Const),
+        ]
+
+        mapOps.append(
+            FunctionInterface(
+                arguments=arguments,
+                returnType=valueType,
+            )
+        )
+
     rayOps = []
     for valueType in (VectorType((2,), PODType(FLOAT)), VectorType((3,), PODType(FLOAT)),):
         rayOps.append(
@@ -552,6 +573,7 @@ def GenerateFunctions():
         FunctionGroup(["distance"], interfaces=pointReductionOps,),
         FunctionGroup(["setTranslate", "setScale",], interfaces=setVectorTransformOps,),
         FunctionGroup(["linearInterpolation",], interfaces=interpolationOps,),
+        FunctionGroup(["linearMap",], interfaces=mapOps,),
         FunctionGroup(["quadraticRoots",], interfaces=quadraticOps,),
         FunctionGroup(["rayPosition",], interfaces=rayOps,),
         FunctionGroup(["raySphereIntersection",], interfaces=raySphereIntersectionOps,),

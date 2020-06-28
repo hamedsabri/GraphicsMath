@@ -27,13 +27,13 @@ GM_NS_OPEN
 /// Linearly interpolate between \p {{ interface.ArgName("source") }} and \p {{ interface.ArgName("target") }}, with weight \p {{ interface.ArgName("weight") }}.
 /// \ingroup GM_group_functions_interpolation
 ///
-/// \param {{ interface.ArgName("source") }} the source value to interpolate from.
-/// \param {{ interface.ArgName("target") }} the target value to interpolate to.
+/// \param {{ interface.ArgName("source") }} Source value to interpolate from.
+/// \param {{ interface.ArgName("target") }} Target value to interpolate to.
 /// \param {{ interface.ArgName("weight") }} Describes the percentage of \p {{ interface.ArgName("target") }} in the final, interpolated value.
 ///
 /// \pre \p i_weight must be in the range of [0,1].
 ///
-/// \return the interpolated value.
+/// \return Linearly interpolated value.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
     GM_ASSERT_MSG( {{ interface.ArgName("weight") }} >= 0.0f && {{ interface.ArgName("weight") }} <= 1.0f,
