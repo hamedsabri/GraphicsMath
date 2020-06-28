@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file functions/rayPosition.h
-/// \ingroup GM_group_functions
+/// \ingroup GM_group_functions_rayTracing
 ///
 /// Position along a ray.
 ///
@@ -29,8 +29,8 @@
 
 GM_NS_OPEN
 
+/// \ingroup GM_group_functions_rayTracing
 /// Compute the position along a ray by scalar magnitude \p i_magnitude.
-/// \ingroup GM_group_functions
 ///
 /// \pre \p i_direction must be a normalized vector.
 ///
@@ -47,7 +47,18 @@ GM_HOST_DEVICE inline Vec2f RayPosition( const Vec2f& i_origin, const Vec2f& i_d
     return i_origin + ( i_direction * i_magnitude );
 }
 
-/// \overload
+/// \ingroup GM_group_functions_rayTracing
+/// Compute the position along a ray by scalar magnitude \p i_magnitude.
+///
+/// \pre \p i_direction must be a normalized vector.
+///
+/// \sa \ref Normalize for vector normalization.
+///
+/// \param i_origin The origin of the ray.
+/// \param i_direction The direction of the ray.
+/// \param i_magnitude The magnitude to project the ray.
+///
+/// \return the position along the curve.
 GM_HOST_DEVICE inline Vec3f RayPosition( const Vec3f& i_origin, const Vec3f& i_direction, const float& i_magnitude )
 {
     GM_ASSERT_MSG( Length( i_direction ) == 1.0f, "Direction i_direction is not normalised!" );

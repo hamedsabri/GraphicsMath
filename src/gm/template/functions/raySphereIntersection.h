@@ -1,8 +1,13 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
+/// \ingroup GM_group_functions_rayTracing
 ///
 /// Ray sphere intersection test.
+///
+/// Computes the intersection points between a ray and a sphere.
+///
+/// \section GM_section_raySphereIntersectionAnalyticProof Analytic proof of Ray Sphere Intersection
 ///
 /// The points along the surface of a 3D sphere (centered at origin) can be defined by the following algebraic equation:
 ///
@@ -62,7 +67,26 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
+/// \ingroup GM_group_functions_rayTracing
 /// Find the intersection(s) between a ray and a sphere.
+///
+/// The points of intersection can be computed from the intersection magnitudes
+/// \p {{ interface.ArgName("firstIntersection") }} and \p {{ interface.ArgName("secondIntersection") }}
+/// via \ref RayPosition.
+///
+/// Example usage:
+/// \code{.cpp}
+/// if ( gm::RaySphereIntersection( sphereOrigin,
+///                                 sphereRadius,
+///                                 rayOrigin,
+///                                 rayDirection,
+///                                 firstIntersection,
+///                                 secondIntersection ) == 2 )
+/// {
+///     gm::Vec3f firstIntersectionPoint = gm::RayPosition( rayOrigin, rayDirection, firstIntersection );
+///     // ...
+/// }
+/// \endcode
 ///
 /// \param {{ interface.ArgName("sphereOrigin") }} The origin or center of the sphere.
 /// \param {{ interface.ArgName("sphereRadius") }} The radius of the sphere.

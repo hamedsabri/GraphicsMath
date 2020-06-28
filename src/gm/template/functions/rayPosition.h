@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions
+/// \ingroup GM_group_functions_rayTracing
 ///
 /// Position along a ray.
 ///
@@ -29,9 +29,8 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-{% if interface == function.interfaces[0] %}
+/// \ingroup GM_group_functions_rayTracing
 /// Compute the position along a ray by scalar magnitude \p {{ interface.ArgName("magnitude") }}.
-/// \ingroup GM_group_functions
 ///
 /// \pre \p {{ interface.ArgName("direction") }} must be a normalized vector.
 ///
@@ -42,9 +41,6 @@ GM_NS_OPEN
 /// \param {{ interface.ArgName("magnitude") }} The magnitude to project the ray.
 ///
 /// \return the position along the curve.
-{%- else -%}
-/// \overload
-{%- endif %}
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
     GM_ASSERT_MSG( Length( {{ interface.ArgName("direction") }} ) ==

@@ -54,22 +54,3 @@ This is a personal project to internalize math concepts and explore data and com
 \section GM_section_github GitHub Repository
 
 The GraphicsMath project is hosted on GitHub: https://github.com/moddyz/GraphicsMath.
-
-\defgroup GM_group_types Types
-\brief In-memory value types to perform operations on.
-
-\defgroup GM_group_vectorTypes Vector Types
-\ingroup GM_group_types
-\brief Fixed length containers of element count greater than 1.
-
-\defgroup GM_group_arrayTypes Array Types
-\ingroup GM_group_types
-\brief Dynamic length containers of scalar and vector value types.
-
-\defgroup GM_group_compositeTypes Composite Types
-\ingroup GM_group_types
-\brief \em Named element compositions of array, vector, scalar, or other composite value types.
-
-\defgroup GM_group_functions Functions
-\brief Value types.
-
