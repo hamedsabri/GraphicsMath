@@ -4,21 +4,21 @@
 
 #include <catch2/catch.hpp>
 
-#include <gm/functions/lerp.h>
+#include <gm/functions/linearInterpolation.h>
 
-TEST_CASE( "Lerp_float" )
+TEST_CASE( "LinearInterpolation_float" )
 {
     float floatValA    = 3.0f;
     float floatValB    = 1.0f;
-    float floatValLerp = gm::Lerp( floatValA, floatValB, 0.5f );
+    float floatValLerp = gm::LinearInterpolation( floatValA, floatValB, 0.5f );
     CHECK( floatValLerp == Approx( 2.0f ) );
 }
 
-TEST_CASE( "Lerp_Mat3f" )
+TEST_CASE( "LinearInterpolation_Mat3f" )
 {
     gm::Mat3f matrixA( 0.0f, 2.0f, 4.0f, 6.0f, 8.0f, 10.0f, 12.0f, 14.0f, 16.0f );
     gm::Mat3f matrixB( 0.0f, 4.0f, 8.0f, 12.0f, 16.0f, 20.0f, 24.0f, 28.0f, 32.0f );
-    gm::Mat3f matrixLerp = gm::Lerp( matrixA, matrixB, 0.5f );
+    gm::Mat3f matrixLerp = gm::LinearInterpolation( matrixA, matrixB, 0.5f );
     CHECK( matrixLerp[ 0 ] == Approx( 0.0f ) );
     CHECK( matrixLerp[ 1 ] == Approx( 3.0f ) );
     CHECK( matrixLerp[ 2 ] == Approx( 6.0f ) );
@@ -30,7 +30,7 @@ TEST_CASE( "Lerp_Mat3f" )
     CHECK( matrixLerp[ 8 ] == Approx( 24.0f ) );
 }
 
-TEST_CASE( "Lerp_Mat4f" )
+TEST_CASE( "LinearInterpolation_Mat4f" )
 {
     gm::Mat4f matrixA( 0.0f,
                        2.0f,
@@ -64,7 +64,7 @@ TEST_CASE( "Lerp_Mat4f" )
                        52.0f,
                        56.0f,
                        60.0f );
-    gm::Mat4f matrixLerp = gm::Lerp( matrixA, matrixB, 0.5f );
+    gm::Mat4f matrixLerp = gm::LinearInterpolation( matrixA, matrixB, 0.5f );
     CHECK( matrixLerp[ 0 ] == Approx( 0.0f ) );
     CHECK( matrixLerp[ 1 ] == Approx( 3.0f ) );
     CHECK( matrixLerp[ 2 ] == Approx( 6.0f ) );
@@ -83,30 +83,30 @@ TEST_CASE( "Lerp_Mat4f" )
     CHECK( matrixLerp[ 15 ] == Approx( 45.0f ) );
 }
 
-TEST_CASE( "Lerp_Vec2f" )
+TEST_CASE( "LinearInterpolation_Vec2f" )
 {
     gm::Vec2f vectorA( 0.0f, 2.0f );
     gm::Vec2f vectorB( 0.0f, 4.0f );
-    gm::Vec2f vectorLerp = gm::Lerp( vectorA, vectorB, 0.5f );
+    gm::Vec2f vectorLerp = gm::LinearInterpolation( vectorA, vectorB, 0.5f );
     CHECK( vectorLerp[ 0 ] == Approx( 0.0f ) );
     CHECK( vectorLerp[ 1 ] == Approx( 3.0f ) );
 }
 
-TEST_CASE( "Lerp_Vec3f" )
+TEST_CASE( "LinearInterpolation_Vec3f" )
 {
     gm::Vec3f vectorA( 0.0f, 2.0f, 4.0f );
     gm::Vec3f vectorB( 0.0f, 4.0f, 8.0f );
-    gm::Vec3f vectorLerp = gm::Lerp( vectorA, vectorB, 0.5f );
+    gm::Vec3f vectorLerp = gm::LinearInterpolation( vectorA, vectorB, 0.5f );
     CHECK( vectorLerp[ 0 ] == Approx( 0.0f ) );
     CHECK( vectorLerp[ 1 ] == Approx( 3.0f ) );
     CHECK( vectorLerp[ 2 ] == Approx( 6.0f ) );
 }
 
-TEST_CASE( "Lerp_Vec4f" )
+TEST_CASE( "LinearInterpolation_Vec4f" )
 {
     gm::Vec4f vectorA( 0.0f, 2.0f, 4.0f, 6.0f );
     gm::Vec4f vectorB( 0.0f, 4.0f, 8.0f, 12.0f );
-    gm::Vec4f vectorLerp = gm::Lerp( vectorA, vectorB, 0.5f );
+    gm::Vec4f vectorLerp = gm::LinearInterpolation( vectorA, vectorB, 0.5f );
     CHECK( vectorLerp[ 0 ] == Approx( 0.0f ) );
     CHECK( vectorLerp[ 1 ] == Approx( 3.0f ) );
     CHECK( vectorLerp[ 2 ] == Approx( 6.0f ) );

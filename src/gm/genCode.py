@@ -480,8 +480,8 @@ def GenerateFunctions():
     interpolationOps = []
     for valueType in [PODType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT:
         arguments = [
-            FunctionArg("valueA", valueType, Mutability.Const),
-            FunctionArg("valueB", valueType, Mutability.Const),
+            FunctionArg("source", valueType, Mutability.Const),
+            FunctionArg("target", valueType, Mutability.Const),
         ]
         if valueType.isScalar:
             arguments.append(FunctionArg("weight", valueType, Mutability.Const))
@@ -551,7 +551,7 @@ def GenerateFunctions():
         FunctionGroup(["degrees", "radians",], interfaces=angleOps,),
         FunctionGroup(["distance"], interfaces=pointReductionOps,),
         FunctionGroup(["setTranslate", "setScale",], interfaces=setVectorTransformOps,),
-        FunctionGroup(["lerp",], interfaces=interpolationOps,),
+        FunctionGroup(["linearInterpolation",], interfaces=interpolationOps,),
         FunctionGroup(["quadraticRoots",], interfaces=quadraticOps,),
         FunctionGroup(["rayPosition",], interfaces=rayOps,),
         FunctionGroup(["raySphereIntersection",], interfaces=raySphereIntersectionOps,),
