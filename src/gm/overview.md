@@ -45,7 +45,7 @@ Some common code generation logic are located under \p src/gm/codeGen/.
 
 The jinja2 templates are located under \p src/gm/template.
 
-\subsection GM_developerNotes_motivation Motivation
+\subsection GM_section_developerNotes_motivation Motivation
 
 <em>Why another math library?</em>  
 
