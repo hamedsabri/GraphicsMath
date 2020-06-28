@@ -71,8 +71,7 @@ GM_NS_OPEN
 /// Find the intersection(s) between a ray and a sphere.
 ///
 /// The points of intersection can be computed from the intersection magnitudes
-/// \p {{ interface.ArgName("firstIntersection") }} and \p {{ interface.ArgName("secondIntersection") }}
-/// via \ref RayPosition.
+/// \p {{ interface.ArgName("intersections") }} /// via \ref RayPosition.
 ///
 /// Example usage:
 /// \code{.cpp}
@@ -80,10 +79,9 @@ GM_NS_OPEN
 ///                                 sphereRadius,
 ///                                 rayOrigin,
 ///                                 rayDirection,
-///                                 firstIntersection,
-///                                 secondIntersection ) == 2 )
+///                                 intersections ) == 2 )
 /// {
-///     gm::Vec3f firstIntersectionPoint = gm::RayPosition( rayOrigin, rayDirection, firstIntersection );
+///     gm::Vec3f firstIntersectionPoint = gm::RayPosition( rayOrigin, rayDirection, intersections[ 0 ] );
 ///     // ...
 /// }
 /// \endcode
@@ -92,8 +90,7 @@ GM_NS_OPEN
 /// \param {{ interface.ArgName("sphereRadius") }} The radius of the sphere.
 /// \param {{ interface.ArgName("rayOrigin") }} The origin of the ray.
 /// \param {{ interface.ArgName("rayDirection") }} The direction of the ray.
-/// \param {{ interface.ArgName("firstIntersection") }} The first ray-sphere intersection as a ray magnitude.
-/// \param {{ interface.ArgName("secondIntersection") }} The second ray-sphere intersection as a ray magnitude.
+/// \param {{ interface.ArgName("intersections") }} The magnitudes of the intersections with respect to the ray.
 ///
 /// \return The number of times the ray intersections the sphere.
 /// \retval 0 The ray does not intersect the sphere at all.
@@ -117,8 +114,7 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
         a,
         b,
         c,
-        {{ interface.ArgName("firstIntersection" ) }},
-        {{ interface.ArgName("secondIntersection" ) }}
+        {{ interface.ArgName("intersections") }}
     );
 
     // Check for number of roots (number of intersections).
@@ -133,16 +129,16 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
         // Two intersections.
 
         // Store the intersection farther from the ray origin in the second root.
-        if ( {{ interface.ArgName("firstIntersection" ) }} > {{ interface.ArgName("secondIntersection" ) }} )
+        if ( {{ interface.ArgName("intersections") }}[ 0 ] > {{ interface.ArgName("intersections") }}[ 1 ] )
         {
-            std::swap( {{ interface.ArgName("firstIntersection" ) }}, {{ interface.ArgName("secondIntersection" ) }} );
+            std::swap( {{ interface.ArgName("intersections") }}[ 0 ], {{ interface.ArgName("intersections") }}[ 1 ] );
         }
 
         // Root negative check, as to not intersect with objects behind the ray direction.
-        if ( {{ interface.ArgName("firstIntersection" ) }} < 0 )
+        if ( {{ interface.ArgName("intersections") }}[ 0 ] < 0 )
         {
-            {{ interface.ArgName("firstIntersection" ) }} = {{ interface.ArgName("secondIntersection" ) }};
-            if ( {{ interface.ArgName("firstIntersection" ) }} < 0 )
+            {{ interface.ArgName("intersections") }}[ 0 ] = {{ interface.ArgName("intersections") }}[ 1 ];
+            if ( {{ interface.ArgName("intersections") }}[ 0 ] < 0 )
             {
                 // Both roots are negative, count it as no intersection.
                 return 0;
@@ -161,7 +157,7 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
     {
         // A single intersection.
 
-        if ( {{ interface.ArgName("firstIntersection" ) }} < 0 )
+        if ( {{ interface.ArgName("intersections") }}[ 0 ] < 0 )
         {
             // Do not intersect with spheres opposite of the ray direction.
             return 0;

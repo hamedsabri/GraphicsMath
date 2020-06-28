@@ -7,21 +7,15 @@
 
 #include <gm/functions/raySphereIntersection.h>
 
-TEST_CASE( "RaySphereIntersection_Vec3f_float_Vec3f_Vec3f_float_float" )
+TEST_CASE( "RaySphereIntersection_Vec3f_float_Vec3f_Vec3f_Vec2f" )
 {
     gm::Vec3f sphereOrigin;
     float     sphereRadius;
     gm::Vec3f rayOrigin;
     gm::Vec3f rayDirection;
-    float     firstIntersection;
-    float     secondIntersection;
+    gm::Vec2f intersections;
     BENCHMARK( "RaySphereIntersection" )
     {
-        return gm::RaySphereIntersection( sphereOrigin,
-                                          sphereRadius,
-                                          rayOrigin,
-                                          rayDirection,
-                                          firstIntersection,
-                                          secondIntersection );
+        return gm::RaySphereIntersection( sphereOrigin, sphereRadius, rayOrigin, rayDirection, intersections );
     };
 }

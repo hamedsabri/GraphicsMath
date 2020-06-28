@@ -17,13 +17,11 @@ void BindRaySphereIntersection( pybind11::module& o_module )
                       const float& i_sphereRadius,
                       const Vec3f& i_rayOrigin,
                       const Vec3f& i_rayDirection,
-                      float&       o_firstIntersection,
-                      float&       o_secondIntersection ) {
+                      Vec2f&       o_intersections ) {
                       return RaySphereIntersection( i_sphereOrigin,
                                                     i_sphereRadius,
                                                     i_rayOrigin,
                                                     i_rayDirection,
-                                                    o_firstIntersection,
-                                                    o_secondIntersection );
+                                                    o_intersections );
                   } );
 }

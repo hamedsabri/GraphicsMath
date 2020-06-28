@@ -517,8 +517,7 @@ def GenerateFunctions():
                     FunctionArg("a", valueType, Mutability.Const),
                     FunctionArg("b", valueType, Mutability.Const),
                     FunctionArg("c", valueType, Mutability.Const),
-                    FunctionArg("firstRoot", valueType, Mutability.Mutable),
-                    FunctionArg("secondRoot", valueType, Mutability.Mutable),
+                    FunctionArg("roots", VectorType((2,), valueType), Mutability.Mutable),
                 ],
                 returnType=PODType(INT),
             )
@@ -533,8 +532,7 @@ def GenerateFunctions():
                     FunctionArg("sphereRadius", valueType.elementType, Mutability.Const),
                     FunctionArg("rayOrigin", valueType, Mutability.Const),
                     FunctionArg("rayDirection", valueType, Mutability.Const),
-                    FunctionArg("firstIntersection", valueType.elementType, Mutability.Mutable),
-                    FunctionArg("secondIntersection", valueType.elementType, Mutability.Mutable),
+                    FunctionArg("intersections", VectorType((2,), valueType.elementType), Mutability.Mutable),
                 ],
                 returnType=PODType(INT),
             )

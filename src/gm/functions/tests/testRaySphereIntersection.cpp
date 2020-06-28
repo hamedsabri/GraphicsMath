@@ -12,13 +12,12 @@ TEST_CASE( "RaySphereIntersection_float" )
         gm::Vec3f rayOrigin( 0, 0, 0.0f );
         gm::Vec3f rayDirection( 0, 1.0, -1.0f );
         rayDirection = gm::Normalize( rayDirection );
-        float firstIntersection, secondIntersection;
+        gm::Vec2f intersections;
         CHECK( gm::RaySphereIntersection( sphereOrigin,
                                           sphereRadius,
                                           rayOrigin,
                                           rayDirection,
-                                          firstIntersection,
-                                          secondIntersection ) == 0 );
+                                          intersections ) == 0 );
     }
 
     {
@@ -28,14 +27,13 @@ TEST_CASE( "RaySphereIntersection_float" )
         gm::Vec3f rayOrigin( 0, 0, 0.0f );
         gm::Vec3f rayDirection( 0, 0, -1.0f );
         rayDirection = gm::Normalize( rayDirection );
-        float firstIntersection, secondIntersection;
+        gm::Vec2f intersections;
         CHECK( gm::RaySphereIntersection( sphereOrigin,
                                           sphereRadius,
                                           rayOrigin,
                                           rayDirection,
-                                          firstIntersection,
-                                          secondIntersection ) == 2 );
-        CHECK( firstIntersection == 0.5f );
-        CHECK( secondIntersection == 1.5f );
+                                          intersections ) == 2 );
+        CHECK( intersections[ 0 ] == 0.5f );
+        CHECK( intersections[ 1 ] == 1.5f );
     }
 }

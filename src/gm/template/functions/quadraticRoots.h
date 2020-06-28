@@ -17,6 +17,12 @@
 
 #include <gm/base/assert.h>
 
+{% for type in function.types -%}
+{%- if not type.isScalar -%}
+#include <gm/types/{{ type.headerFileName }}>
+{%- endif %}
+{% endfor %}
+
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
@@ -26,8 +32,7 @@ GM_NS_OPEN
 /// \param {{ interface.ArgName("a") }} The \f$a\f$ co-efficient.
 /// \param {{ interface.ArgName("b") }} The \f$b\f$ co-efficient.
 /// \param {{ interface.ArgName("c") }} The \f$c\f$ co-efficient.
-/// \param {{ interface.ArgName("firstRoot") }} the first root. This value is only defined if the number of roots is \p 1 or \p 2.
-/// \param {{ interface.ArgName("secondRoot") }} the second root. This value is only defined if the number of roots is \p 2.
+/// \param {{ interface.ArgName("roots") }} the roots, or solutions.  The first element is only defined if the number of roots is \p 1 or \p 2.  The second element is only defined if the number of roots is \p 2.
 ///
 /// \return The number of roots for the quadratic equation.
 ///
@@ -49,12 +54,12 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
     {
         // Two roots.
         float reciprocal = 1.0f / ( 2.0f * {{ interface.ArgName("a") }} );
-        {{ interface.ArgName("firstRoot") }} = ( -{{ interface.ArgName("b") }} + sqrt( discriminant ) ) * reciprocal;
-        {{ interface.ArgName("secondRoot") }} = ( -{{ interface.ArgName("b") }} - sqrt( discriminant ) ) * reciprocal;
+        {{ interface.ArgName("roots") }}[ 0 ] = ( -{{ interface.ArgName("b") }} + sqrt( discriminant ) ) * reciprocal;
+        {{ interface.ArgName("roots") }}[ 1 ] = ( -{{ interface.ArgName("b") }} - sqrt( discriminant ) ) * reciprocal;
         // Make the smaller root appear first.
-        if ( {{ interface.ArgName("firstRoot") }} > {{ interface.ArgName("secondRoot") }} )
+        if ( {{ interface.ArgName("roots") }}[ 0 ] > {{ interface.ArgName("roots") }}[ 1 ] )
         {
-            std::swap( {{ interface.ArgName("firstRoot") }}, {{ interface.ArgName("secondRoot") }} );
+            std::swap( {{ interface.ArgName("roots") }}[ 0 ], {{ interface.ArgName("roots") }}[ 1 ] );
         }
 
         return 2;
@@ -62,7 +67,7 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
     else
     {
         // A single root.
-        {{ interface.ArgName("firstRoot") }} = -{{ interface.ArgName("b") }} / ( 2.0f * {{ interface.ArgName("a") }} );
+        {{ interface.ArgName("roots") }}[ 0 ] = -{{ interface.ArgName("b") }} / ( 2.0f * {{ interface.ArgName("a") }} );
         return 1;
     }
 }

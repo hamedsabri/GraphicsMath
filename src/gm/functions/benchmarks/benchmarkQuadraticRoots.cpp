@@ -7,15 +7,14 @@
 
 #include <gm/functions/quadraticRoots.h>
 
-TEST_CASE( "QuadraticRoots_float_float_float_float_float" )
+TEST_CASE( "QuadraticRoots_float_float_float_Vec2f" )
 {
-    float a;
-    float b;
-    float c;
-    float firstRoot;
-    float secondRoot;
+    float     a;
+    float     b;
+    float     c;
+    gm::Vec2f roots;
     BENCHMARK( "QuadraticRoots" )
     {
-        return gm::QuadraticRoots( a, b, c, firstRoot, secondRoot );
+        return gm::QuadraticRoots( a, b, c, roots );
     };
 }

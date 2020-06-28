@@ -9,8 +9,8 @@ TEST_CASE( "QuadraticRoots_float" )
         float a = 1.0f;
         float b = -3.0f;
         float c = 4.0f;
-        float firstRoot, secondRoot;
-        CHECK( gm::QuadraticRoots( a, b, c, firstRoot, secondRoot ) == 0 );
+        gm::Vec2f roots;
+        CHECK( gm::QuadraticRoots( a, b, c, roots ) == 0 );
     }
 
     {
@@ -18,9 +18,9 @@ TEST_CASE( "QuadraticRoots_float" )
         float a = -4.0f;
         float b = 12.0f;
         float c = -9.0f;
-        float firstRoot, secondRoot;
-        CHECK( gm::QuadraticRoots( a, b, c, firstRoot, secondRoot ) == 1 );
-        CHECK( firstRoot == 1.5f );
+        gm::Vec2f roots;
+        CHECK( gm::QuadraticRoots( a, b, c, roots ) == 1 );
+        CHECK( roots[ 0 ] == 1.5f );
     }
 
     {
@@ -28,9 +28,9 @@ TEST_CASE( "QuadraticRoots_float" )
         float a = 2.0f;
         float b = -11.0f;
         float c = 5.0f;
-        float firstRoot, secondRoot;
-        CHECK( gm::QuadraticRoots( a, b, c, firstRoot, secondRoot ) == 2 );
-        CHECK( firstRoot == 0.5f );
-        CHECK( secondRoot == 5.0f );
+        gm::Vec2f roots;
+        CHECK( gm::QuadraticRoots( a, b, c, roots ) == 2 );
+        CHECK( roots[ 0 ] == 0.5f );
+        CHECK( roots[ 1 ] == 5.0f );
     }
 }

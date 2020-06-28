@@ -12,8 +12,7 @@ GM_NS_USING
 
 void BindQuadraticRoots( pybind11::module& o_module )
 {
-    o_module.def( "QuadraticRoots",
-                  []( const float& i_a, const float& i_b, const float& i_c, float& o_firstRoot, float& o_secondRoot ) {
-                      return QuadraticRoots( i_a, i_b, i_c, o_firstRoot, o_secondRoot );
-                  } );
+    o_module.def( "QuadraticRoots", []( const float& i_a, const float& i_b, const float& i_c, Vec2f& o_roots ) {
+        return QuadraticRoots( i_a, i_b, i_c, o_roots );
+    } );
 }
