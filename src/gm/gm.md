@@ -8,6 +8,10 @@ Instead of using C++ templates, the source code of types, functions and their re
 are generated from jinja2 template files.  This is an effort to improve compilation times and code readability, 
 at cost of extra source code and a discrete code-gen step.
 
+\section GM_Usage Library usage
+
+The library is organized into \ref GM_group_Types and \ref GM_group_Functions.
+
 \section GM_Building Building
 
 A convenience build script is provided at the root of the repository for building all targets, and optionally installing to a location: `./build.sh <OPTIONAL_INSTALL_LOCATION>`.
@@ -50,4 +54,22 @@ This is a personal project to internalize math concepts and explore data and com
 \section GM_GitHubHosted GitHub Repository
 
 The GraphicsMath project is hosted on GitHub: https://github.com/moddyz/GraphicsMath.
+
+\defgroup GM_group_Types Types
+\brief In-memory value types to perform operations on.
+
+\defgroup GM_group_VectorTypes Vector Types
+\ingroup GM_group_Types
+\brief Fixed length containers of element count greater than 1.
+
+\defgroup GM_group_ArrayTypes Array Types
+\ingroup GM_group_Types
+\brief Dynamic length containers of scalar and vector value types.
+
+\defgroup GM_group_Composite Composite Types
+\ingroup GM_group_Types
+\brief \em Named element compositions of array, vector, scalar, or other composite value types.
+
+\defgroup GM_group_Functions Functions
+\brief Value types.
 

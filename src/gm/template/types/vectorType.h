@@ -1,6 +1,9 @@
 #pragma once
 
 /// \file {{ vectorType.headerFileName }}
+/// \ingroup GM_group_VectorTypes
+///
+/// Class definition for \ref {{ vectorType.className }}.
 
 #include <cmath>
 #include <cstring>
@@ -15,6 +18,9 @@
 GM_NS_OPEN
 
 /// \class {{ vectorType.className }}
+/// \ingroup GM_group_VectorTypes
+///
+/// A {{ vectorType.varName }} class with {{ vectorType.elementSize }} elements.
 class {{ vectorType.className }} final
 {
 public:

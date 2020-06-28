@@ -5,6 +5,9 @@
 #pragma once
 
 /// \file mat3f.h
+/// \ingroup GM_group_VectorTypes
+///
+/// Class definition for \ref Mat3f.
 
 #include <cmath>
 #include <cstring>
@@ -17,6 +20,9 @@
 GM_NS_OPEN
 
 /// \class Mat3f
+/// \ingroup GM_group_VectorTypes
+///
+/// A matrix class with 9 elements.
 class Mat3f final
 {
 public:
