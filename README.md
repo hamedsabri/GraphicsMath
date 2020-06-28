@@ -19,5 +19,12 @@ A convenience build script is provided, for building all targets, and optionally
 
 ### Requirements
 
-- \>= CMake-3.17
-- \>= C++11
+- `>= CMake-3.17`
+- `>= C++11`
+
+### Build Status
+
+|       | master | 
+| ----- | ------ | 
+|Ubuntu-18.04 / macOS-10.14 | [![Build Status](https://travis-ci.com/moddyz/GraphicsMath.svg?branch=master)](https://travis-ci.com/moddyz/GraphicsMath) |
+
