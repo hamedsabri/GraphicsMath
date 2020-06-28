@@ -1,10 +1,20 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
+/// \ingroup GM_group_Functions
 ///
-/// Ray position computation.
+/// Position along a ray.
 ///
-/// Compute the position of the ray from an \b origin, offset by a \b direction and \b magnitude.
+/// Computed as the scalar \em multiplication of a \b direction vector \em added to a point \b origin.
+///
+/// \ref RayPosition can be used to find the exact intersection points against objects in the scene.
+///
+/// Equation of a position \f$P\f$ along a ray:
+///
+/// \f[ O+tD=P                              \f]
+/// \f[ O=\textnormal{Ray origin vector}    \f]
+/// \f[ t=\textnormal{Magnitude scalar}     \f]
+/// \f[ D=\textnormal{Ray direction vector} \f]
 
 #include <gm/gm.h>
 
@@ -19,13 +29,21 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-/// Compute the ray position from \p i_origin project into direction \p i_direction with magnitude \p i_magnitude.
+{% if interface == function.interfaces[0] %}
+/// Compute the position along a ray by scalar magnitude \p {{ interface.ArgName("magnitude") }}.
+///
+/// \pre \p {{ interface.ArgName("direction") }} must be a normalized vector.
+///
+/// \sa \ref Normalize for vector normalization.
 ///
 /// \param {{ interface.ArgName("origin") }} The origin of the ray.
 /// \param {{ interface.ArgName("direction") }} The direction of the ray.
 /// \param {{ interface.ArgName("magnitude") }} The magnitude to project the ray.
 ///
-/// \return the projected ray position.
+/// \return the position along the curve.
+{%- else -%}
+/// \overload
+{%- endif %}
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
     GM_ASSERT_MSG( Length( {{ interface.ArgName("direction") }} ) ==
