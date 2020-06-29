@@ -6,6 +6,12 @@ Optional features include:
 - Python bindings.
 - Usage in CUDA device code.
 
+## Table of Contents
+
+- [Documentation](#documentation)
+- [Building](#building)
+- [Build Status](#build-status)
+
 ## Documentation
 
 Doxygen documentation based on the latest state of master, [hosted by GitHub Pages](https://moddyz.github.io/GraphicsMath/).
@@ -26,5 +32,5 @@ A convenience build script is provided, for building all targets, and optionally
 
 |       | master | 
 | ----- | ------ | 
-|Ubuntu-18.04 / macOS-10.14 | [![Build Status](https://travis-ci.com/moddyz/GraphicsMath.svg?branch=master)](https://travis-ci.com/moddyz/GraphicsMath) |
+| macOS-10.14 | [![Build Status](https://travis-ci.com/moddyz/GraphicsMath.svg?branch=master)](https://travis-ci.com/moddyz/GraphicsMath) |
 
