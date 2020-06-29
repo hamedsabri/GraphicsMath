@@ -20,7 +20,7 @@ A convenience build script is provided, for building all targets, and optionally
 ### Requirements
 
 - `>= CMake-3.17`
-- `>= C++14`
+- `>= C++17`
 
 ## Build Status
 
