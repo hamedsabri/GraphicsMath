@@ -36,7 +36,7 @@ function(
     )
 
     target_compile_features(${TARGET_NAME}
-        PRIVATE cxx_std_11
+        PRIVATE cxx_std_14
     )
 
     # Set-up include paths.
