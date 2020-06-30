@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Compute the length squared of a vector, defined as the <em>sum of the squares</em> of <em>each vector element</em>.
 ///
@@ -21,7 +21,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Compute the length squared of the vector \p {{ interface.ArgName("vector") }}.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the length squared of the vector.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )

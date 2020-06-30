@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file vec4i.h
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 
 #include <cmath>
 #include <cstring>
@@ -17,7 +17,7 @@
 GM_NS_OPEN
 
 /// \class Vec4i
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 ///
 /// Class definition of a vector with 4 elements.
 class Vec4i final

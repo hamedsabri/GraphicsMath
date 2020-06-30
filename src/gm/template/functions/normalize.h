@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Vector normalization.
 ///
@@ -23,7 +23,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Compute the normalised vector from the input vector \p {{ interface.ArgName("vector") }}.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the normalised vector.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )

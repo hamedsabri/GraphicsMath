@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Set a translation on a transformation matrix.
 
@@ -17,7 +17,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Set the translation \p {{ interface.ArgName("vector") }} onto the transformation matrix \p {{ interface.ArgName("matrix") }}.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
 {% for row in range(interface.ArgType("matrix").dims[0]) -%}

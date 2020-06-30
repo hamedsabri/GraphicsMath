@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions_rayTracing
+/// \ingroup gm_functions_rayTracing
 ///
 /// Ray sphere intersection test.
 ///
@@ -67,7 +67,7 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-/// \ingroup GM_group_functions_rayTracing
+/// \ingroup gm_functions_rayTracing
 /// Find the intersection(s) between a ray and a sphere.
 ///
 /// The points of intersection can be computed from the intersection magnitudes

@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// Find the absolute value of two input values, defined as the magnitude of a real number without its sign.
 ///
@@ -21,7 +21,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Find the absolute value of the input \p {{ interface.ArgName("value") }}.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the absolute value of the input.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )

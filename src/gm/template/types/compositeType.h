@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file {{ compositeType.headerFileName }}
-/// \ingroup GM_group_compositeTypes
+/// \ingroup gm_types_composite
 
 #include <sstream>
 {% for include in compositeType.extraIncludes -%}
@@ -18,7 +18,7 @@
 GM_NS_OPEN
 
 /// \class {{ compositeType.className }}
-/// \ingroup GM_group_compositeTypes
+/// \ingroup gm_types_composite
 ///
 /// Class definition of a composite type with named elements:
 {% for element in compositeType.elements -%}

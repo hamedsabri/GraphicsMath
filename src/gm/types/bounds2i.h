@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file bounds2i.h
-/// \ingroup GM_group_compositeTypes
+/// \ingroup gm_types_composite
 
 #include <limits>
 #include <sstream>
@@ -16,7 +16,7 @@
 GM_NS_OPEN
 
 /// \class Bounds2i
-/// \ingroup GM_group_compositeTypes
+/// \ingroup gm_types_composite
 ///
 /// Class definition of a composite type with named elements:
 /// - min (\ref Vec2i)

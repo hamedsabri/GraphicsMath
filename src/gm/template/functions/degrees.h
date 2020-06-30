@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// Unit conversion from an angle encoded as radians into degrees.
 
@@ -13,7 +13,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Converts angle \p {{ interface.ArgName("angle") }} from radians to degrees.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \return the angle in units of degrees.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )

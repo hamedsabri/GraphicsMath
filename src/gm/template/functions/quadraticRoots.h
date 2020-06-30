@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// Solve for the roots of a quadratic equation of the form \f$ax^2+bx+c=0\f$
 ///
@@ -27,7 +27,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Solve for the roots of a quadratic equation.
-/// \ingroup GM_group_functions_basic
+/// \ingroup gm_functions_basic
 ///
 /// \param {{ interface.ArgName("a") }} The \f$a\f$ co-efficient.
 /// \param {{ interface.ArgName("b") }} The \f$b\f$ co-efficient.

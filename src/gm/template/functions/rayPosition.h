@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions_rayTracing
+/// \ingroup gm_functions_rayTracing
 ///
 /// Position along a ray.
 ///
@@ -29,7 +29,7 @@
 GM_NS_OPEN
 
 {% for interface in function.interfaces %}
-/// \ingroup GM_group_functions_rayTracing
+/// \ingroup gm_functions_rayTracing
 /// Compute the position along a ray by scalar magnitude \p {{ interface.ArgName("magnitude") }}.
 ///
 /// \pre \p {{ interface.ArgName("direction") }} must be a normalized vector.

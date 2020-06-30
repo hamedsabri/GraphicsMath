@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Check if the input matrix is the identity matrix.
 
@@ -17,7 +17,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Check if the matrix \p {{ interface.ArgName("matrix") }} is the identity matrix.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return true if \p {{ interface.ArgName("matrix") }} is the identity matrix.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )

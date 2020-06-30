@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file bounds3f.h
-/// \ingroup GM_group_compositeTypes
+/// \ingroup gm_types_composite
 
 #include <limits>
 #include <sstream>
@@ -16,7 +16,7 @@
 GM_NS_OPEN
 
 /// \class Bounds3f
-/// \ingroup GM_group_compositeTypes
+/// \ingroup gm_types_composite
 ///
 /// Class definition of a composite type with named elements:
 /// - min (\ref Vec3f)

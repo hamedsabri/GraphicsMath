@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file {{ vectorType.headerFileName }}
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 
 #include <cmath>
 #include <cstring>
@@ -16,7 +16,7 @@
 GM_NS_OPEN
 
 /// \class {{ vectorType.className }}
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 ///
 /// Class definition of a {{ vectorType.varName }} with {{ vectorType.elementSize }} elements.
 class {{ vectorType.className }} final

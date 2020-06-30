@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Matrix multiplication.
 ///
@@ -26,7 +26,7 @@ GM_NS_OPEN
 {% for interface in function.interfaces %}
 /// Multiply input matrices \p {{ interface.ArgName("lhs") }} and \p {{ interface.ArgName("rhs") }}
 /// to produce their matrix product.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the matrix product.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )

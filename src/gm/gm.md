@@ -10,7 +10,7 @@ at cost of extra source code and a discrete code-gen step.
 
 \section GM_section_usage Library usage
 
-The library is organized into \ref GM_group_types and \ref GM_group_functions.
+The library is organized into \ref GM_types and \ref GM_functions.
 
 \section GM_section_building Building
 
@@ -55,36 +55,36 @@ This is a personal project to internalize math concepts and explore data and com
 
 The GraphicsMath project is hosted on GitHub: https://github.com/moddyz/GraphicsMath.
 
-\defgroup GM_group_types Types
+\defgroup GM_types Types
 \brief Value types commonly used in computer graphics.
 
-\defgroup GM_group_vectorTypes Vector types
-\ingroup GM_group_types
+\defgroup gm_types_vector Vector types
+\ingroup GM_types
 \brief Fixed length containers of element count greater than 1.
 
-\defgroup GM_group_arrayTypes Array types
-\ingroup GM_group_types
+\defgroup gm_types_array Array types
+\ingroup GM_types
 \brief Dynamic length containers of scalar and vector value types.
 
-\defgroup GM_group_compositeTypes Composite types
-\ingroup GM_group_types
+\defgroup gm_types_composite Composite types
+\ingroup GM_types
 \brief \em Named element compositions of array, vector, scalar, or other composite value types.
 
-\defgroup GM_group_functions Functions
+\defgroup GM_functions Functions
 \brief Functional operators commonly used in computer graphics.
 
-\defgroup GM_group_functions_basic Basic math operators
-\ingroup GM_group_functions
+\defgroup gm_functions_basic Basic math operators
+\ingroup GM_functions
 \brief Basic math operators such as absolute value, floor, min, max, and angle unit conversion.
 
-\defgroup GM_group_functions_interpolation Interpolation operators
-\ingroup GM_group_functions
+\defgroup gm_functions_interpolation Interpolation operators
+\ingroup GM_functions
 \brief Interpolation operators for producing new data sets.
 
-\defgroup GM_group_functions_linearAlgebra Linear algebra operators
-\ingroup GM_group_functions
+\defgroup gm_functions_linearAlgebra Linear algebra operators
+\ingroup GM_functions
 \brief Linear algebra operators operating on vectors and matrices.
 
-\defgroup GM_group_functions_rayTracing Ray tracing operators
-\ingroup GM_group_functions
+\defgroup gm_functions_rayTracing Ray tracing operators
+\ingroup GM_functions
 \brief Common operators used in ray tracing, including ray intersection tests.

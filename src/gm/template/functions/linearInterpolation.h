@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions_interpolation
+/// \ingroup gm_functions_interpolation
 ///
 /// Linear interpolation.
 ///
@@ -25,7 +25,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Linearly interpolate between \p {{ interface.ArgName("source") }} and \p {{ interface.ArgName("target") }}, with weight \p {{ interface.ArgName("weight") }}.
-/// \ingroup GM_group_functions_interpolation
+/// \ingroup gm_functions_interpolation
 ///
 /// \param {{ interface.ArgName("source") }} Source value to interpolate from.
 /// \param {{ interface.ArgName("target") }} Target value to interpolate to.

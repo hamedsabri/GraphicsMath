@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Compute the \b distance between two points.
 ///
@@ -21,7 +21,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Compute the distance of between points \p {{ interface.ArgName("pointA") }} and \p {{ interface.ArgName("pointB") }}.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \return the distance between the two points.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )

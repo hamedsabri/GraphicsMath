@@ -5,7 +5,7 @@
 #pragma once
 
 /// \file vec3f.h
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 
 #include <cmath>
 #include <cstring>
@@ -18,7 +18,7 @@
 GM_NS_OPEN
 
 /// \class Vec3f
-/// \ingroup GM_group_vectorTypes
+/// \ingroup gm_types_vector
 ///
 /// Class definition of a vector with 3 elements.
 class Vec3f final

@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file {{ arrayType.headerFileName }}
-/// \ingroup GM_group_arrayTypes
+/// \ingroup gm_types_array
 
 #include <vector>
 
@@ -12,7 +12,7 @@
 GM_NS_OPEN
 
 /// \typedef {{ arrayType.className }}
-/// \ingroup GM_group_arrayTypes
+/// \ingroup gm_types_array
 ///
 /// Type definition of an array of \ref {{ arrayType.elementType.className }}.
 using {{ arrayType.className }} = std::vector< {{ arrayType.elementType.className }} >;

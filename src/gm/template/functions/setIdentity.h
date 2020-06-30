@@ -1,7 +1,7 @@
 #pragma once
 
 /// \file functions/{{ function.headerFileName }}
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// Set the \em identity matrix \f$I\f$, defined as the neutral element with respect to matrix multiplication:
 /// \f[ AI=A\f]
@@ -33,7 +33,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Set the identity matrix onto \p {{ interface.ArgName("matrix") }}.
-/// \ingroup GM_group_functions_linearAlgebra
+/// \ingroup gm_functions_linearAlgebra
 ///
 /// \param {{ interface.ArgName("matrix") }} the matrix to set to the identity.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
