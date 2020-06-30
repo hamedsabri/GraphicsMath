@@ -27,6 +27,7 @@ GM_NS_OPEN
 
 {% for interface in function.interfaces %}
 /// Linearly maps a source value in range \p {{ interface.ArgName("sourceRange") }} into the range \p {{ interface.ArgName("targetRange") }}.
+/// \ingroup GM_group_functions_interpolation
 ///
 /// \param {{ interface.ArgName("sourceValue") }} Value to map from the source range.
 /// \param {{ interface.ArgName("sourceRange") }} Source value range to map from.

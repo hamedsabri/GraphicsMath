@@ -30,6 +30,7 @@
 GM_NS_OPEN
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
+/// \ingroup GM_group_functions_interpolation
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -47,6 +48,7 @@ LinearMap( const float& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& 
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
+/// \ingroup GM_group_functions_interpolation
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -72,6 +74,7 @@ LinearMap( const Mat3f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& 
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
+/// \ingroup GM_group_functions_interpolation
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -104,6 +107,7 @@ LinearMap( const Mat4f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& 
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
+/// \ingroup GM_group_functions_interpolation
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -122,6 +126,7 @@ LinearMap( const Vec2f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& 
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
+/// \ingroup GM_group_functions_interpolation
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
@@ -141,6 +146,7 @@ LinearMap( const Vec3f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& 
 }
 
 /// Linearly maps a source value in range \p i_sourceRange into the range \p i_targetRange.
+/// \ingroup GM_group_functions_interpolation
 ///
 /// \param i_sourceValue Value to map from the source range.
 /// \param i_sourceRange Source value range to map from.
