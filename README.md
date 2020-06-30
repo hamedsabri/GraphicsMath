@@ -10,6 +10,7 @@ Optional features include:
 
 - [Documentation](#documentation)
 - [Building](#building)
+  - [Requirements](#requirements)
 - [Build Status](#build-status)
 
 ## Documentation
