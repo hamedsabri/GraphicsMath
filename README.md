@@ -28,6 +28,7 @@ A convenience build script is provided, for building all targets, and optionally
 
 - `>= CMake-3.17`
 - `>= C++17`
+- `doxygen` and `graphviz` (optional for documentation)
 
 ## Build Status
 
