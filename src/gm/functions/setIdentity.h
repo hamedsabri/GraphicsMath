@@ -9,7 +9,7 @@
 ///
 /// Set the \em identity matrix \f$I\f$, defined as the neutral element with respect to matrix multiplication:
 /// \f[ AI=A\f]
-/// \f[ A=\textnormal{Any matrix}\neq0 \f]
+/// \f[ A=\textnormal{Any matrix} \f]
 /// \f[ I=\textnormal{Identity matrix} \f]
 ///
 /// The identity matrix is square(\f$M\textnormal{x}N\f$) with \f$1\f$s down the main diagonal,
