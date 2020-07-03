@@ -16,8 +16,9 @@ from codeGen.utils import (
 )
 
 from codeGen.types import (
-    PODType,
+    ScalarType,
     VectorType,
+    RangeType,
     ArrayType,
     CompositeType,
     CompositeElement,
@@ -61,34 +62,46 @@ Name of the python subdirectory, where the bindings reside.
 PYTHON_DIR = "python"
 
 """
-Global set of POD value types.
+Global set of Scalar value types.
 """
-NUMERIC_POD_TYPES = [PODType(FLOAT), PODType(INT)]
-POD_TYPES = NUMERIC_POD_TYPES + [PODType(BOOL)]
+NUMERIC_SCALAR_TYPES = [ScalarType(FLOAT), ScalarType(INT)]
+SCALAR_TYPES = NUMERIC_SCALAR_TYPES + [ScalarType(BOOL)]
 
 """
 Global set of vector value types to generate.
 """
 MATRIX_TYPES = [
-    VectorType((3, 3), PODType(FLOAT)),
-    VectorType((4, 4), PODType(FLOAT)),
+    VectorType((3, 3), ScalarType(FLOAT)),
+    VectorType((4, 4), ScalarType(FLOAT)),
 ]
 
 SINGLE_INDEX_VECTOR_TYPES_FLOAT = [
-    VectorType((2,), PODType(FLOAT)),
-    VectorType((3,), PODType(FLOAT)),
-    VectorType((4,), PODType(FLOAT)),
+    VectorType((2,), ScalarType(FLOAT)),
+    VectorType((3,), ScalarType(FLOAT)),
+    VectorType((4,), ScalarType(FLOAT)),
 ]
 
 SINGLE_INDEX_VECTOR_TYPES_INT = [
-    VectorType((2,), PODType(INT)),
-    VectorType((3,), PODType(INT)),
-    VectorType((4,), PODType(INT)),
+    VectorType((2,), ScalarType(INT)),
+    VectorType((3,), ScalarType(INT)),
+    VectorType((4,), ScalarType(INT)),
 ]
 
 VECTOR_TYPES = sorted(
     SINGLE_INDEX_VECTOR_TYPES_FLOAT + SINGLE_INDEX_VECTOR_TYPES_INT + MATRIX_TYPES
 )
+
+"""
+RANGE_TYPES is a fixed, global set of range based types (min, max) to generate code for.
+"""
+RANGE_TYPES = [
+    RangeType(ScalarType(INT)),
+    RangeType(VectorType((2, 2), ScalarType(INT))),
+    RangeType(VectorType((3, 3), ScalarType(INT))),
+    RangeType(ScalarType(FLOAT)),
+    RangeType(VectorType((2, 2), ScalarType(FLOAT))),
+    RangeType(VectorType((3, 3), ScalarType(FLOAT))),
+]
 
 """
 COMPOSITE_TYPES is a dict of type name (str) -> type object (CompositeType).
@@ -113,13 +126,13 @@ def PopulateBoundsCompositeTypes():
     filePaths = []
 
     for vectorType in [
-        VectorType((2,), PODType(FLOAT)),
-        VectorType((3,), PODType(FLOAT)),
-        VectorType((2,), PODType(INT)),
-        VectorType((3,), PODType(INT)),
+        VectorType((2,), ScalarType(FLOAT)),
+        VectorType((3,), ScalarType(FLOAT)),
+        VectorType((2,), ScalarType(INT)),
+        VectorType((3,), ScalarType(INT)),
     ]:
-        compositeTypeName = "bounds{dims}{elementType}".format(
-            dims=str(vectorType.dims[0]),
+        compositeTypeName = "bounds{shape}{elementType}".format(
+            shape=str(vectorType.shape[0]),
             elementType=vectorType.elementType.className[0],
         )
 
@@ -127,11 +140,11 @@ def PopulateBoundsCompositeTypes():
         minDefaultValue = "{vectorClassName}(".format(
             vectorClassName=vectorType.className
         )
-        for index in range(vectorType.dims[0]):
+        for index in range(vectorType.shape[0]):
             minDefaultValue += "std::numeric_limits< {vectorElementType} >::max()".format(
                 vectorElementType=vectorType.elementType.className
             )
-            if index + 1 < vectorType.dims[0]:
+            if index + 1 < vectorType.shape[0]:
                 minDefaultValue += ","
         minDefaultValue += ")"
 
@@ -139,11 +152,11 @@ def PopulateBoundsCompositeTypes():
         maxDefaultValue = "{vectorClassName}(".format(
             vectorClassName=vectorType.className
         )
-        for index in range(vectorType.dims[0]):
+        for index in range(vectorType.shape[0]):
             maxDefaultValue += "std::numeric_limits< {vectorElementType} >::min()".format(
                 vectorElementType=vectorType.elementType.className
             )
-            if index + 1 < vectorType.dims[0]:
+            if index + 1 < vectorType.shape[0]:
                 maxDefaultValue += ","
         maxDefaultValue += ")"
 
@@ -229,8 +242,8 @@ def GenerateArrayTypes():
     """
     # Build ArrayType(s)
     arrayTypes = []
-    for podType in POD_TYPES:
-        arrayType = ArrayType(podType)
+    for scalarType in SCALAR_TYPES:
+        arrayType = ArrayType(scalarType)
         arrayTypes.append(arrayType)
 
     for vectorType in VECTOR_TYPES:
@@ -342,7 +355,7 @@ def GenerateFunctions():
     """
     # Unary operations.
     unaryOps = []
-    for valueType in [PODType(FLOAT),] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
+    for valueType in [ScalarType(FLOAT),] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
         unaryOps.append(
             FunctionInterface(
                 arguments=[FunctionArg("value", valueType, Mutability.Const),],
@@ -352,7 +365,7 @@ def GenerateFunctions():
 
     # Binary comparison operations.
     binaryComparisonOps = []
-    for valueType in POD_TYPES + VECTOR_TYPES:
+    for valueType in SCALAR_TYPES + VECTOR_TYPES:
         binaryComparisonOps.append(
             FunctionInterface(
                 arguments=[
@@ -411,7 +424,7 @@ def GenerateFunctions():
         checkMatrixOps.append(
             FunctionInterface(
                 arguments=[FunctionArg("matrix", matrixType, Mutability.Const),],
-                returnType=PODType(BOOL),
+                returnType=ScalarType(BOOL),
             )
         )
 
@@ -444,7 +457,7 @@ def GenerateFunctions():
         setVectorTransformOps.append(
             FunctionInterface(
                 arguments=[
-                    FunctionArg("vector", VectorType((matrixType.dims[0] - 1,), matrixType.elementType), Mutability.Const),
+                    FunctionArg("vector", VectorType((matrixType.shape[0] - 1,), matrixType.elementType), Mutability.Const),
                     FunctionArg("matrix", matrixType, Mutability.Mutable),
                 ],
             )
@@ -452,19 +465,19 @@ def GenerateFunctions():
 
     # Angle interfaces.
     angleOps = []
-    for podType in (PODType(FLOAT),):
+    for scalarType in (ScalarType(FLOAT),):
         angleOps.append(
             FunctionInterface(
-                arguments=[FunctionArg("angle", podType, Mutability.Const),],
-                returnType=podType,
+                arguments=[FunctionArg("angle", scalarType, Mutability.Const),],
+                returnType=scalarType,
             )
         )
 
     # Euclidean space point operations.
     pointReductionOps = []
     for vectorType in (
-        VectorType((2,), PODType(FLOAT)),
-        VectorType((3,), PODType(FLOAT)),
+        VectorType((2,), ScalarType(FLOAT)),
+        VectorType((3,), ScalarType(FLOAT)),
     ):
         pointReductionOps.append(
             FunctionInterface(
@@ -478,7 +491,7 @@ def GenerateFunctions():
 
     # Interpolation operators.
     interpolationOps = []
-    for valueType in [PODType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT:
+    for valueType in [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT:
         arguments = [
             FunctionArg("source", valueType, Mutability.Const),
             FunctionArg("target", valueType, Mutability.Const),
@@ -498,7 +511,7 @@ def GenerateFunctions():
 
     # Map operators.
     mapOps = []
-    for valueType in [PODType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT:
+    for valueType in [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT:
         if valueType.isScalar:
             rangeValueType = VectorType((2,), valueType)
         else:
@@ -518,7 +531,7 @@ def GenerateFunctions():
         )
 
     rayOps = []
-    for valueType in (VectorType((2,), PODType(FLOAT)), VectorType((3,), PODType(FLOAT)),):
+    for valueType in (VectorType((2,), ScalarType(FLOAT)), VectorType((3,), ScalarType(FLOAT)),):
         rayOps.append(
             FunctionInterface(
                 arguments=[
@@ -531,7 +544,7 @@ def GenerateFunctions():
         )
 
     quadraticOps = []
-    for valueType in (PODType(FLOAT),):
+    for valueType in (ScalarType(FLOAT),):
         quadraticOps.append(
             FunctionInterface(
                 arguments=[
@@ -540,12 +553,12 @@ def GenerateFunctions():
                     FunctionArg("c", valueType, Mutability.Const),
                     FunctionArg("roots", VectorType((2,), valueType), Mutability.Mutable),
                 ],
-                returnType=PODType(INT),
+                returnType=ScalarType(INT),
             )
         )
 
     raySphereIntersectionOps = []
-    for valueType in (VectorType((3,), PODType(FLOAT)),):
+    for valueType in (VectorType((3,), ScalarType(FLOAT)),):
         raySphereIntersectionOps.append(
             FunctionInterface(
                 arguments=[
@@ -555,7 +568,7 @@ def GenerateFunctions():
                     FunctionArg("rayDirection", valueType, Mutability.Const),
                     FunctionArg("intersections", VectorType((2,), valueType.elementType), Mutability.Mutable),
                 ],
-                returnType=PODType(INT),
+                returnType=ScalarType(INT),
             )
         )
 

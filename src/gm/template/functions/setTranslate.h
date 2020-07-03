@@ -20,9 +20,9 @@ GM_NS_OPEN
 /// \ingroup gm_functions_linearAlgebra
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
-{% for row in range(interface.ArgType("matrix").dims[0]) -%}
-{% for col in range(interface.ArgType("matrix").dims[1]) -%}
-{% if row + 1 < interface.ArgType("matrix").dims[0] and col + 1 == interface.ArgType("matrix").dims[1] -%}
+{% for row in range(interface.ArgType("matrix").shape[0]) -%}
+{% for col in range(interface.ArgType("matrix").shape[1]) -%}
+{% if row + 1 < interface.ArgType("matrix").shape[0] and col + 1 == interface.ArgType("matrix").shape[1] -%}
     {{ interface.ArgName("matrix") }}( {{ row }}, {{ col }} ) = {{ interface.ArgName("vector") }}[ {{ row }} ];
 {%- endif %}
 {%- endfor -%}

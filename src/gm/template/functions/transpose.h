@@ -29,10 +29,10 @@ GM_NS_OPEN
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
     return {{ interface.ArgType("matrix").className }}(
-{% for row in range(interface.ArgType("matrix").dims[0]) -%}
-{% for col in range(interface.ArgType("matrix").dims[1]) -%}
+{% for row in range(interface.ArgType("matrix").shape[0]) -%}
+{% for col in range(interface.ArgType("matrix").shape[1]) -%}
     {{ interface.ArgName("matrix") }}( {{ col }}, {{ row }} )
-{% if row + 1 < interface.ArgType("matrix").dims[0] or col + 1 < interface.ArgType("matrix").dims[ 1 ] -%}
+{% if row + 1 < interface.ArgType("matrix").shape[0] or col + 1 < interface.ArgType("matrix").shape[ 1 ] -%}
     ,
 {%- endif %}
 {%- endfor -%}

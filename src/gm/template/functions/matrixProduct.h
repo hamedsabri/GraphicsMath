@@ -32,13 +32,13 @@ GM_NS_OPEN
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
     return {{ interface.ArgType("lhs").className }}(
-{%- for row in range(interface.ArgType("lhs").dims[0] ) -%}
-{%- for col in range(interface.ArgType("lhs").dims[1] ) -%}
-{%- for index in range( interface.ArgType("lhs").dims[0] ) -%}
+{%- for row in range(interface.ArgType("lhs").shape[0] ) -%}
+{%- for col in range(interface.ArgType("lhs").shape[1] ) -%}
+{%- for index in range( interface.ArgType("lhs").shape[0] ) -%}
     {{ interface.ArgName("lhs") }}( {{ row }}, {{ index }} ) * {{ interface.ArgName("rhs") }}( {{ index }}, {{ col }} )
-{%- if index + 1 < interface.ArgType("lhs").dims[0] -%}
+{%- if index + 1 < interface.ArgType("lhs").shape[0] -%}
     +
-{%- elif (index + 1 == interface.ArgType("lhs").dims[1]) and (row + 1 < interface.ArgType("lhs").dims[0] or col + 1 < interface.ArgType("lhs").dims[1])-%}
+{%- elif (index + 1 == interface.ArgType("lhs").shape[1]) and (row + 1 < interface.ArgType("lhs").shape[0] or col + 1 < interface.ArgType("lhs").shape[1])-%}
     ,
 {%- endif -%}
 {%- endfor -%}

@@ -1,5 +1,8 @@
 """
-A collection of classes serving as contextual objects used in the code gen templates.
+types.py
+
+A collection of classes representing value types, serving as contextual objects
+used in the code generation templates.
 """
 
 
@@ -10,12 +13,12 @@ import collections
 from utils import LowerCamelCase, UpperCamelCase
 
 """
-POD types we are interested in generating code for.  Double is omitted for the time being.
+Scalar types we are interested in generating code for.
 """
-FLOAT = "float"
-DOUBLE = "double"
 BOOL = "bool"
 INT = "int"
+FLOAT = "float"
+DOUBLE = "double"
 
 """
 Namespace of this library.
@@ -25,41 +28,105 @@ NAMESPACE = "gm::"
 
 class ValueType:
     """
-    Abstract base class for all data types.
+    Abstract base class for all value types in the GraphicsMath library.
+
+    ValueType instances are used throughout the code generation templates, for both
+    C++ and python sources, and for both types and functions.
     """
 
     @property
     def className(self):
+        """
+        Implementation should return the name of the C++ class or typename associated
+        with the value type.
+        """
+        raise NotImplementedError()
+
+    @property
+    def headerFileName(self):
+        """
+        Implementation should return the base file name of the header associated with the value type.
+        """
+        raise NotImplementedError()
+
+    @property
+    def varName(self):
+        """
+        Implementation should return a variable name suitable for the current value type.
+        """
+        raise NotImplementedError()
+
+    def CppValue(self, value):
+        """
+        Implementation should implement this helper method for converting a value instance into
+        a representative string, with respect to the current value type and to the C++ language.
+        """
+        raise NotImplementedError()
+
+    def PyValue(self, value):
+        """
+        Implementation should implement this helper method for converting a value instance into
+        a representative string, with respect to the current value type and to the Python language.
+        """
         raise NotImplementedError()
 
     @property
     def namespacedClassName(self):
+        """
+        Returns:
+             str: Globally namespaced symbol name associated with this value type.
+        """
         return NAMESPACE + self.className
 
     @property
-    def headerFileName(self):
-        raise NotImplementedError()
-
-    @property
     def isScalar(self):
+        """
+        Implementation should return ``True`` if it is a scalar type.  By default, ``False`` will be returned.
+
+        Returns:
+            bool: False
+        """
         return False
 
     @property
     def isVector(self):
+        """
+        Implementation should return ``True`` if it is a vector type.  By default, ``False`` will be returned.
+
+        Returns:
+            bool: False
+        """
         return False
 
     @property
     def isArray(self):
+        """
+        Implementation should return ``True`` if it is a array type.  By default, ``False`` will be returned.
+
+        Returns:
+            bool: False
+        """
         return False
 
     @property
     def isComposite(self):
+        """
+        Implementation should return ``True`` if it is a array type.  By default, ``False`` will be returned.
+
+        Returns:
+            bool: False
+        """
         return False
 
 
-class PODType(ValueType):
+class ScalarType(ValueType):
     """
-    POD (Plain old data) type, used in code-gen contexts.
+    Scalar type, used in code-gen contexts.
+    Without being perfectly accurate to the mathematical definition, Scalar to capture POD types provided by C++.
+    POD is rather tiring to type!
+
+    Args:
+        typeName (str): the C++ typename of the value type.
     """
 
     def __init__(self, typeName):
@@ -67,6 +134,9 @@ class PODType(ValueType):
         self._typeName = typeName
 
     def __hash__(self):
+        """
+        Scalar types are simply unique by their C++ typename.
+        """
         return hash((self._typeName))
 
     @property
@@ -79,15 +149,29 @@ class PODType(ValueType):
 
     @property
     def namespacedClassName(self):
+        """
+        The scalar types we have defined so far do not need a namespace.
+        The design choice has been made to not obfuscate the POD types with type definition.
+        """
         return self.className
 
     @property
     def isScalar(self):
+        """
+        Returns:
+            bool: True.
+        """
         return True
 
     def CppValue(self, value):
         """
-        Convert a value ``value`` to the corresponding C++ compliant value as a string.
+        Convert the ``value`` instance to the C++ compliant value of the current type, as a string.
+
+        Args:
+            value (object): value instance.
+
+        Returns:
+            str: string representation of ``value``.
         """
         if self.className == INT:
             return str(int(value))
@@ -100,7 +184,13 @@ class PODType(ValueType):
 
     def PyValue(self, value):
         """
-        Convert a value ``value`` to the corresponding C++ compliant value as a string.
+        Convert the ``value`` instance to the Python compliant value of the current type, as a string.
+
+        Args:
+            value (object): value instance.
+
+        Returns:
+            str: string representation of ``value``.
         """
         if self.className == INT:
             return str(int(value))
@@ -113,28 +203,84 @@ class PODType(ValueType):
     def varName(self):
         """
         Returns:
-            str: a meaningful prefix for naming variables of this type.
+            str: variable name for this value type.
         """
         return self.className + "Val"
 
 
 class VectorType(ValueType):
     """
-    Code generation for an C++ vector type.
+    Code generation representation of a homogenously typed fixed size container of arbituary shape.
+
+    VectorType captures the following categories of value types:
+
+        1. Vectors in the traditional mathematical sense (think column and row vectors)
+        2. Matrices.
+
+    Args:
+        shape (tuple): The shape, or dimensions of this vector container type.
+        elementType (ValueType): The value type of the elements within this vector container.
     """
 
-    def __init__(self, dims, elementType):
-        assert isinstance(dims, tuple)
-        assert isinstance(elementType, PODType)
-        self.dims = dims
+    def __init__(self, shape, elementType):
+        assert isinstance(shape, tuple)
+        assert isinstance(elementType, ScalarType)
+        self.shape = shape
         self.elementType = elementType
 
     def __hash__(self):
-        return hash((self.dims, self.elementType))
+        """
+        VectorType(s) are unique by its shape and element type.
+        """
+        return hash((self.shape, self.elementType))
+
+    @property
+    def className(self):
+        """
+        VectorType class names are described by the combination of:
+
+            1. A named prefix associated with the shape dimension,
+            2. The shape's _first_ length
+            3. The element type.
+
+        We might need to extend this if there was a requirement to support 3 X 4 matrices
+        for efficient storage of per-instance matrices.
+        """
+        if len(self.shape) == 2:
+            prefix = "Mat"
+        else:
+            prefix = "Vec"
+
+        return "{prefix}{shape}{elementType}".format(
+            prefix=prefix,
+            shape=str(self.shape[0]),
+            elementType=self.elementType.className[0],
+        )
+
+    @property
+    def headerFileName(self):
+        """
+        Similar to ``VectorType.className``, but lowerCamelCasing for the named shape prefix.
+        """
+        if len(self.shape) == 2:
+            prefix = "mat"
+        else:
+            prefix = "vec"
+
+        return "{prefix}{shape}{elementType}.h".format(
+            prefix=prefix,
+            shape=str(self.shape[0]),
+            elementType=self.elementType.className[0],
+        )
 
     @property
     def elementSize(self):
-        return functools.reduce(lambda x, y: x * y, self.dims)
+        """
+        Returns:
+            int: the fixed number of elements in this vector container.  The element size is the
+               product of all the shape lengths.
+        """
+        return functools.reduce(lambda x, y: x * y, self.shape)
 
     @property
     def varName(self):
@@ -142,57 +288,66 @@ class VectorType(ValueType):
         Returns:
             str: a meaningful prefix for naming variables of this type.
         """
-        if len(self.dims) == 2:
+        if len(self.shape) == 2:
             return "matrix"
         else:
             return "vector"
 
     @property
-    def className(self):
-        if len(self.dims) == 2:
-            prefix = "Mat"
-        else:
-            prefix = "Vec"
-
-        return "{prefix}{dims}{elementType}".format(
-            prefix=prefix,
-            dims=str(self.dims[0]),
-            elementType=self.elementType.className[0],
-        )
-
-    @property
-    def headerFileName(self):
-        if len(self.dims) == 2:
-            prefix = "mat"
-        else:
-            prefix = "vec"
-
-        return "{prefix}{dims}{elementType}.h".format(
-            prefix=prefix,
-            dims=str(self.dims[0]),
-            elementType=self.elementType.className[0],
-        )
-
-    @property
     def isVector(self):
+        """
+        Returns:
+            bool: True, this class is indeed a vector!
+        """
         return True
 
     def CppValue(self, value):
         """
-        Convert a value ``value`` to the corresponding C++ compliant value as a string.
+        Convert the ``value`` instance to the C++ compliant value of the current vector's element type, as a string.
+
+        Args:
+            value (object): value instance.
+
+        Returns:
+            str: string representation of ``value``.
         """
         return self.elementType.CppValue(value)
 
     def PyValue(self, value):
         """
-        Convert a value ``value`` to the corresponding python compliant value as a string.
+        Convert the ``value`` instance to the Python compliant value of the current vector's element type, as a string.
+
+        Args:
+            value (object): value instance.
+
+        Returns:
+            str: string representation of ``value``.
         """
         return self.elementType.PyValue(value)
 
 
+class RangeType(ValueType):
+    """
+    Code generation object for representing a range of values, of a particular type, with lower and upper limits (min and max).
+
+    Originally, RangeType(s) were generated as bounding boxes via CompositeType - however, the it is also useful to have
+    scalar value ranges but the terminology "bounds" usually is associated with 2 dimensional or 3 dimensional ranges.
+
+    The code generation templates of RangeType(s) of integral element type also implement iteration policy for
+    iterating over all the discrete "indices" within the range.  A useful application of this is for iterating
+    over a Range2i, for accessing pixel values of a 2D image!
+    """
+
+    def __init__(self, elementType):
+        assert isinstance(elementType, ValueType)
+        self.elementType = elementType
+
+
 class ArrayType(ValueType):
     """
-    Code generation for an C++ array type.
+    Code generation for an sequentially-ordered, dynamically re-sizable, and homogenously typed container type.
+
+    Currently, the array types in GraphicsMath are simply type definitions of std::vector.
     """
 
     def __init__(self, elementType):
@@ -200,16 +355,37 @@ class ArrayType(ValueType):
         self.elementType = elementType
 
     def __hash__(self):
+        """
+        The hash combination of its element type, with an Array suffix.
+        """
         return hash((self.elementType, "Array"))
 
     @property
     def className(self):
+        """
+        The class name of an ArrayType is the class name of its element type joined
+        with an "Array" suffix.
+
+        Returns:
+            str: the class name of this array type.
+        """
         return "{elementTypeName}Array".format(
             elementTypeName=(UpperCamelCase(self.elementType.className))
         )
 
     @property
     def headerFileName(self):
+        """
+        The header file name of an ArrayType is th header file name of its element type joined
+        with an "Array" suffix.
+
+        There is the special case when its element type is scalar - there is no header file
+        associated with scalar types (they're all POD types, with no type definition).
+        The lowerCamelCased className is used for scalar types.
+
+        Returns:
+            str: the header file name of this array type.
+        """
         if self.elementType.isVector:
             return "{elementHeaderFileName}Array.h".format(
                 elementHeaderFileName=os.path.splitext(self.elementType.headerFileName)[
@@ -223,12 +399,16 @@ class ArrayType(ValueType):
 
     @property
     def isArray(self):
+        """
+        Returns:
+            bool: True, this class is indeed an array type.
+        """
         return True
 
 
 class CompositeElement:
     """
-    CompositeElement is a single element of an CompositeType, described by a name, type, and default value.
+    CompositeElement is a uniquely named child of a CompositeType.
 
     Args:
         name (str): is used to uniquely address this element from the parent Composite type.

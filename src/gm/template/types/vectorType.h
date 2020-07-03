@@ -203,24 +203,24 @@ public:
         );
     }
 
-{% if vectorType.dims|length == 2 -%}
+{% if vectorType.shape|length == 2 -%}
     /// Matrix element read-access.
     GM_HOST_DEVICE inline const {{ vectorType.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
     {
-        return m_elements[ i_row * {{ vectorType.dims[ 0 ] }} + i_column ];
+        return m_elements[ i_row * {{ vectorType.shape[ 0 ] }} + i_column ];
     }
 {%- endif %}
 
 
-{% if vectorType.dims|length == 2 -%}
+{% if vectorType.shape|length == 2 -%}
     /// Matrix element write-access.
     GM_HOST_DEVICE inline {{ vectorType.elementType.className }}& operator()( size_t i_row, size_t i_column )
     {
-        return m_elements[ i_row * {{ vectorType.dims[ 0 ] }} + i_column ];
+        return m_elements[ i_row * {{ vectorType.shape[ 0 ] }} + i_column ];
     }
 {%- endif %}
 
-{% if vectorType.dims|length == 1 and vectorType.elementSize <= 4 -%}
+{% if vectorType.shape|length == 1 and vectorType.elementSize <= 4 -%}
     /// X component accessor for the first element.
     GM_HOST_DEVICE inline {{ vectorType.elementType.className }} X() const
     {
@@ -229,7 +229,7 @@ public:
     }
 {%- endif %}
 
-{% if vectorType.dims|length == 1 and vectorType.elementSize >= 2 and vectorType.elementSize <= 4 -%}
+{% if vectorType.shape|length == 1 and vectorType.elementSize >= 2 and vectorType.elementSize <= 4 -%}
     /// Y component accessor for the second element.
     GM_HOST_DEVICE inline {{ vectorType.elementType.className }} Y() const
     {
@@ -238,7 +238,7 @@ public:
     }
 {%- endif %}
 
-{% if vectorType.dims|length == 1 and vectorType.elementSize >= 3 and vectorType.elementSize <= 4 -%}
+{% if vectorType.shape|length == 1 and vectorType.elementSize >= 3 and vectorType.elementSize <= 4 -%}
     /// Z component accessor for the third element.
     GM_HOST_DEVICE inline {{ vectorType.elementType.className }} Z() const
     {
@@ -247,7 +247,7 @@ public:
     }
 {%- endif %}
 
-{% if vectorType.dims|length == 1 and vectorType.elementSize == 4 %}
+{% if vectorType.shape|length == 1 and vectorType.elementSize == 4 %}
     /// W component accessor for the fourth element.
     GM_HOST_DEVICE inline {{ vectorType.elementType.className }} W() const
     {
@@ -307,9 +307,9 @@ public:
     {
         std::stringstream ss;
         ss << i_classPrefix << "{{ vectorType.className }}( ";
-{%- if vectorType.dims|length == 2 -%}
+{%- if vectorType.shape|length == 2 -%}
 {%- for index in range(vectorType.elementSize) -%}
-{%- if index % vectorType.dims[0] == 0 -%}
+{%- if index % vectorType.shape[0] == 0 -%}
         ss << "\n    ";
 {%- endif -%}
         ss << m_elements[ {{ index }} ];

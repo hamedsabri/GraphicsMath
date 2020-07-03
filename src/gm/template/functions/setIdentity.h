@@ -39,14 +39,14 @@ GM_NS_OPEN
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
     {{ interface.ArgName("matrix") }} = {{ interface.ArgClass("matrix") }}(
-{% for row in range(interface.Arg("matrix").type.dims[0]) -%}
-{% for col in range(interface.Arg("matrix").type.dims[1]) -%}
+{% for row in range(interface.Arg("matrix").type.shape[0]) -%}
+{% for col in range(interface.Arg("matrix").type.shape[1]) -%}
 {% if row == col -%}
     {{ interface.Arg("matrix").type.CppValue( 1 ) }}
 {%- else -%}
     {{ interface.Arg("matrix").type.CppValue( 0 ) }}
 {%- endif %}
-{% if row + 1 < interface.Arg("matrix").type.dims[0] or col + 1 < interface.Arg("matrix").type.dims[ 1 ] -%}
+{% if row + 1 < interface.Arg("matrix").type.shape[0] or col + 1 < interface.Arg("matrix").type.shape[ 1 ] -%}
     ,
 {%- endif %}
 {%- endfor -%}

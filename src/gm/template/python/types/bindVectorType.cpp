@@ -50,7 +50,7 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
         o_vector[ i_index ] = i_value;
     } );
 
-{% if vectorType.dims|length == 2 -%}
+{% if vectorType.shape|length == 2 -%}
     // Matrix row-column indexed element read access.
     cls.def( "__getitem__", []( const {{ vectorType.className }}& i_matrix, pybind11::tuple i_index ) {
         if ( i_index.size() != 2 )
@@ -60,7 +60,7 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
 
         size_t row = i_index[0].cast< size_t >();
         size_t col = i_index[1].cast< size_t >();
-        if ( row >= {{ vectorType.dims[0] }} || col >= {{ vectorType.dims[1] }} )
+        if ( row >= {{ vectorType.shape[0] }} || col >= {{ vectorType.shape[1] }} )
         {
             throw pybind11::index_error();
         }
@@ -79,7 +79,7 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
 
         size_t row = i_index[0].cast< size_t >();
         size_t col = i_index[1].cast< size_t >();
-        if ( row >= {{ vectorType.dims[0] }} || col >= {{ vectorType.dims[1] }} )
+        if ( row >= {{ vectorType.shape[0] }} || col >= {{ vectorType.shape[1] }} )
         {
             throw pybind11::index_error();
         }
