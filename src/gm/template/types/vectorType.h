@@ -18,7 +18,7 @@ GM_NS_OPEN
 /// \class {{ vectorType.className }}
 /// \ingroup gm_types_vector
 ///
-/// Class definition of a {{ vectorType.varName }} with {{ vectorType.elementSize }} elements.
+/// Class definition of a {{ vectorType.varName }} with {{ vectorType.elementSize }} {{ vectorType.elementType.className }} elements.
 class {{ vectorType.className }} final
 {
 public:
@@ -26,6 +26,10 @@ public:
     ///
     /// Convenience type definition of \ref {{ vectorType.className }}'s elements.
     using ElementType = {{ vectorType.elementType.className }};
+
+    // --------------------------------------------------------------------- //
+    /// \name Construction
+    // --------------------------------------------------------------------- //
 
     /// Default constructor, initializing all of the element values to 0.
     GM_HOST_DEVICE constexpr inline {{ vectorType.className }}()  = default;
@@ -50,6 +54,10 @@ public:
     {
         GM_ASSERT( !HasNans() );
     }
+
+    // --------------------------------------------------------------------- //
+    /// \name Element access
+    // --------------------------------------------------------------------- //
 
     /// Indexed element write access.
     ///
@@ -79,9 +87,62 @@ public:
         return m_elements[ i_index ];
     }
 
-    //
-    // Arithmetic Operator Overloading.
-    //
+{% if vectorType.shape|length == 2 -%}
+    /// Matrix element read-access.
+    GM_HOST_DEVICE inline const {{ vectorType.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
+    {
+        return m_elements[ i_row * {{ vectorType.shape[ 0 ] }} + i_column ];
+    }
+{%- endif %}
+
+
+{% if vectorType.shape|length == 2 -%}
+    /// Matrix element write-access.
+    GM_HOST_DEVICE inline {{ vectorType.elementType.className }}& operator()( size_t i_row, size_t i_column )
+    {
+        return m_elements[ i_row * {{ vectorType.shape[ 0 ] }} + i_column ];
+    }
+{%- endif %}
+
+{% if vectorType.shape|length == 1 and vectorType.elementSize <= 4 -%}
+    /// X component accessor for the first element.
+    GM_HOST_DEVICE inline {{ vectorType.elementType.className }} X() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 0 ];
+    }
+{%- endif %}
+
+{% if vectorType.shape|length == 1 and vectorType.elementSize >= 2 and vectorType.elementSize <= 4 -%}
+    /// Y component accessor for the second element.
+    GM_HOST_DEVICE inline {{ vectorType.elementType.className }} Y() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 1 ];
+    }
+{%- endif %}
+
+{% if vectorType.shape|length == 1 and vectorType.elementSize >= 3 and vectorType.elementSize <= 4 -%}
+    /// Z component accessor for the third element.
+    GM_HOST_DEVICE inline {{ vectorType.elementType.className }} Z() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 2 ];
+    }
+{%- endif %}
+
+{% if vectorType.shape|length == 1 and vectorType.elementSize == 4 %}
+    /// W component accessor for the fourth element.
+    GM_HOST_DEVICE inline {{ vectorType.elementType.className }} W() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 3 ];
+    }
+{%- endif %}
+
+    // --------------------------------------------------------------------- //
+    /// \name Arithmetic operators
+    // --------------------------------------------------------------------- //
 
     /// Element-wise vector addition.
     ///
@@ -203,58 +264,9 @@ public:
         );
     }
 
-{% if vectorType.shape|length == 2 -%}
-    /// Matrix element read-access.
-    GM_HOST_DEVICE inline const {{ vectorType.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
-    {
-        return m_elements[ i_row * {{ vectorType.shape[ 0 ] }} + i_column ];
-    }
-{%- endif %}
-
-
-{% if vectorType.shape|length == 2 -%}
-    /// Matrix element write-access.
-    GM_HOST_DEVICE inline {{ vectorType.elementType.className }}& operator()( size_t i_row, size_t i_column )
-    {
-        return m_elements[ i_row * {{ vectorType.shape[ 0 ] }} + i_column ];
-    }
-{%- endif %}
-
-{% if vectorType.shape|length == 1 and vectorType.elementSize <= 4 -%}
-    /// X component accessor for the first element.
-    GM_HOST_DEVICE inline {{ vectorType.elementType.className }} X() const
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 0 ];
-    }
-{%- endif %}
-
-{% if vectorType.shape|length == 1 and vectorType.elementSize >= 2 and vectorType.elementSize <= 4 -%}
-    /// Y component accessor for the second element.
-    GM_HOST_DEVICE inline {{ vectorType.elementType.className }} Y() const
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 1 ];
-    }
-{%- endif %}
-
-{% if vectorType.shape|length == 1 and vectorType.elementSize >= 3 and vectorType.elementSize <= 4 -%}
-    /// Z component accessor for the third element.
-    GM_HOST_DEVICE inline {{ vectorType.elementType.className }} Z() const
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 2 ];
-    }
-{%- endif %}
-
-{% if vectorType.shape|length == 1 and vectorType.elementSize == 4 %}
-    /// W component accessor for the fourth element.
-    GM_HOST_DEVICE inline {{ vectorType.elementType.className }} W() const
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 3 ];
-    }
-{%- endif %}
+    // --------------------------------------------------------------------- //
+    /// \name Comparison operators
+    // --------------------------------------------------------------------- //
 
     /// Comparison operator
     GM_HOST_DEVICE inline bool operator==( const {{vectorType.className}}& i_vector ) const
@@ -279,11 +291,19 @@ public:
         return !( (*this) == i_vector );
     }
 
+    // --------------------------------------------------------------------- //
+    /// \name Shape
+    // --------------------------------------------------------------------- //
+
     /// Get the number of elements in this vector.
     GM_HOST_DEVICE inline static size_t GetElementSize()
     {
         return {{ vectorType.elementSize }};
     }
+
+    // --------------------------------------------------------------------- //
+    /// \name Debug
+    // --------------------------------------------------------------------- //
 
     /// Are any of the element values NaNs?
     GM_HOST_DEVICE inline bool HasNans() const
