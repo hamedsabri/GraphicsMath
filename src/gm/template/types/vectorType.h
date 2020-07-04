@@ -1,22 +1,20 @@
-#pragma once
+{% extends "types/baseType.h" %}
 
-/// \file {{ valueType.headerFileName }}
-/// \ingroup gm_types_vector
-
+{% block includes %}
 #include <cmath>
 #include <cstring>
 #include <sstream>
 
-#include <gm/gm.h>
 #include <gm/base/assert.h>
 {% if valueType.elementType.className != "int" -%}
 #include <gm/base/almost.h>
 {%- endif %}
+{% endblock %}
 
-GM_NS_OPEN
+{% block body %}
 
 /// \class {{ valueType.className }}
-/// \ingroup gm_types_vector
+/// \ingroup gm_types_{{ valueType.CATEGORY }}
 ///
 /// Class definition of a {{ valueType.varName }} with {{ valueType.elementSize }} {{ valueType.elementType.className }} elements.
 class {{ valueType.className }} final
@@ -402,4 +400,4 @@ inline std::ostream& operator<<( std::ostream& o_outputStream, const {{ valueTyp
     return o_outputStream;
 }
 
-GM_NS_CLOSE
+{% endblock %}

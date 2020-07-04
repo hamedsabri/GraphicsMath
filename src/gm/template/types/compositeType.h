@@ -1,21 +1,19 @@
-#pragma once
+{% extends "types/baseType.h" %}
 
-/// \file {{ valueType.headerFileName }}
-/// \ingroup gm_types_composite
-
+{% block includes %}
 #include <sstream>
 {% for include in valueType.extraIncludes -%}
 #include {{ include }}
 {% endfor %}
 
-#include <gm/gm.h>
 {% for element in valueType.elements -%}
 {% if element.type.isVector or element.type.isComposite -%}
 #include <gm/types/{{ element.type.headerFileName }}>
 {%- endif %}
 {% endfor %}
+{% endblock %}
 
-GM_NS_OPEN
+{% block body %}
 
 /// \class {{ valueType.className }}
 /// \ingroup gm_types_composite
@@ -111,4 +109,4 @@ inline std::ostream& operator<<( std::ostream& o_outputStream, const {{ valueTyp
     return o_outputStream;
 }
 
-GM_NS_CLOSE
+{% endblock %}

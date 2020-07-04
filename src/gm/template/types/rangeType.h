@@ -1,21 +1,18 @@
-#pragma once
+{% extends "types/baseType.h" %}
 
-/// \file {{ valueType.headerFileName }}
-/// \ingroup gm_types_range
-
-#include <gm/gm.h>
-
+{% block includes %}
 {% if valueType.elementType.isVector %}
 #include <gm/types/{{ valueType.elementType.headerFileName }}>
 {%- endif %}
 
 #include <limits>
 #include <sstream>
+{% endblock %}
 
-GM_NS_OPEN
+{% block body %}
 
 /// \class {{ valueType.className }}
-/// \ingroup gm_types_range
+/// \ingroup gm_types_{{ valueType.CATEGORY }}
 ///
 /// Class definition for a bounded range of {{ valueType.elementType.className }}(s).
 class {{ valueType.className }} final
@@ -291,4 +288,4 @@ inline std::ostream& operator<<( std::ostream& o_outputStream, const {{ valueTyp
     return o_outputStream;
 }
 
-GM_NS_CLOSE
+{% endblock %}
