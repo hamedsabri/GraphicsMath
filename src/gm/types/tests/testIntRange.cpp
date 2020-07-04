@@ -19,3 +19,17 @@ TEST_CASE( "IntRange_MinMaxConstructor" )
     CHECK( range.Min() == -1 );
     CHECK( range.Max() == 1 );
 }
+
+TEST_CASE( "IntRange_MinAccessor" )
+{
+    gm::IntRange range;
+    range.Min() = -1;
+    CHECK( range.Min() == -1 );
+}
+
+TEST_CASE( "IntRange_MaxAccessor" )
+{
+    gm::IntRange range;
+    range.Max() = 1;
+    CHECK( range.Max() == 1 );
+}

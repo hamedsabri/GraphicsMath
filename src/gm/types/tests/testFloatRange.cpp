@@ -16,6 +16,20 @@ TEST_CASE( "FloatRange_DefaultConstructor" )
 TEST_CASE( "FloatRange_MinMaxConstructor" )
 {
     gm::FloatRange range( -1.0f, 1.0f );
-    CHECK( range.Min() == -1 );
-    CHECK( range.Max() == 1 );
+    CHECK( range.Min() == -1.0f );
+    CHECK( range.Max() == 1.0f );
+}
+
+TEST_CASE( "FloatRange_MinAccessor" )
+{
+    gm::FloatRange range;
+    range.Min() = -1.0f;
+    CHECK( range.Min() == -1.0f );
+}
+
+TEST_CASE( "FloatRange_MaxAccessor" )
+{
+    gm::FloatRange range;
+    range.Max() = 1.0f;
+    CHECK( range.Max() == 1.0f );
 }

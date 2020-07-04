@@ -23,3 +23,17 @@ TEST_CASE( "Vec3iRange_MinMaxConstructor" )
     CHECK( range.Min() == gm::Vec3i( -1, -1, -1 ) );
     CHECK( range.Max() == gm::Vec3i( 1, 1, 1 ) );
 }
+
+TEST_CASE( "Vec3iRange_MinAccessor" )
+{
+    gm::Vec3iRange range;
+    range.Min() = gm::Vec3i( -1, -1, -1 );
+    CHECK( range.Min() == gm::Vec3i( -1, -1, -1 ) );
+}
+
+TEST_CASE( "Vec3iRange_MaxAccessor" )
+{
+    gm::Vec3iRange range;
+    range.Max() = gm::Vec3i( 1, 1, 1 );
+    CHECK( range.Max() == gm::Vec3i( 1, 1, 1 ) );
+}

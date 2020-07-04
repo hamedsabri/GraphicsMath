@@ -15,7 +15,21 @@ TEST_CASE( "Vec2fRange_DefaultConstructor" )
 
 TEST_CASE( "Vec2fRange_MinMaxConstructor" )
 {
-    gm::Vec2fRange range( gm::Vec2f( -1, -1 ), gm::Vec2f( 1, 1 ) );
-    CHECK( range.Min() == gm::Vec2f( -1, -1 ) );
-    CHECK( range.Max() == gm::Vec2f( 1, 1 ) );
+    gm::Vec2fRange range( gm::Vec2f( -1.0f, -1.0f ), gm::Vec2f( 1.0f, 1.0f ) );
+    CHECK( range.Min() == gm::Vec2f( -1.0f, -1.0f ) );
+    CHECK( range.Max() == gm::Vec2f( 1.0f, 1.0f ) );
+}
+
+TEST_CASE( "Vec2fRange_MinAccessor" )
+{
+    gm::Vec2fRange range;
+    range.Min() = gm::Vec2f( -1.0f, -1.0f );
+    CHECK( range.Min() == gm::Vec2f( -1.0f, -1.0f ) );
+}
+
+TEST_CASE( "Vec2fRange_MaxAccessor" )
+{
+    gm::Vec2fRange range;
+    range.Max() = gm::Vec2f( 1.0f, 1.0f );
+    CHECK( range.Max() == gm::Vec2f( 1.0f, 1.0f ) );
 }
