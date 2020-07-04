@@ -9,14 +9,14 @@
 TEST_CASE( "LinearMap_float" )
 {
     float floatVal       = 0.5f;
-    float floatValMapped = gm::LinearMap( floatVal, gm::Vec2f( -1.0f, 1.0f ), gm::Vec2f( 0.0f, 1.0f ) );
+    float floatValMapped = gm::LinearMap( floatVal, gm::FloatRange( -1.0f, 1.0f ), gm::FloatRange( 0.0f, 1.0f ) );
     CHECK( floatValMapped == Approx( 0.75f ) );
 }
 
 TEST_CASE( "LinearMap_Mat3f" )
 {
     gm::Mat3f matrix( 0.0f, 0.05f, 0.1f, 0.15f, 0.2f, 0.25f, 0.3f, 0.35f, 0.4f );
-    gm::Mat3f matrixMapped = gm::LinearMap( matrix, gm::Vec2f( -1.0f, 1.0f ), gm::Vec2f( 0.0f, 1.0f ) );
+    gm::Mat3f matrixMapped = gm::LinearMap( matrix, gm::FloatRange( -1.0f, 1.0f ), gm::FloatRange( 0.0f, 1.0f ) );
     CHECK( matrixMapped[ 0 ] == Approx( 0.5f ) );
     CHECK( matrixMapped[ 1 ] == Approx( 0.525f ) );
     CHECK( matrixMapped[ 2 ] == Approx( 0.55f ) );
@@ -46,7 +46,7 @@ TEST_CASE( "LinearMap_Mat4f" )
                       0.65f,
                       0.7f,
                       0.75f );
-    gm::Mat4f matrixMapped = gm::LinearMap( matrix, gm::Vec2f( -1.0f, 1.0f ), gm::Vec2f( 0.0f, 1.0f ) );
+    gm::Mat4f matrixMapped = gm::LinearMap( matrix, gm::FloatRange( -1.0f, 1.0f ), gm::FloatRange( 0.0f, 1.0f ) );
     CHECK( matrixMapped[ 0 ] == Approx( 0.5f ) );
     CHECK( matrixMapped[ 1 ] == Approx( 0.525f ) );
     CHECK( matrixMapped[ 2 ] == Approx( 0.55f ) );
@@ -68,7 +68,7 @@ TEST_CASE( "LinearMap_Mat4f" )
 TEST_CASE( "LinearMap_Vec2f" )
 {
     gm::Vec2f vector( 0.0f, 0.05f );
-    gm::Vec2f vectorMapped = gm::LinearMap( vector, gm::Vec2f( -1.0f, 1.0f ), gm::Vec2f( 0.0f, 1.0f ) );
+    gm::Vec2f vectorMapped = gm::LinearMap( vector, gm::FloatRange( -1.0f, 1.0f ), gm::FloatRange( 0.0f, 1.0f ) );
     CHECK( vectorMapped[ 0 ] == Approx( 0.5f ) );
     CHECK( vectorMapped[ 1 ] == Approx( 0.525f ) );
 }
@@ -76,7 +76,7 @@ TEST_CASE( "LinearMap_Vec2f" )
 TEST_CASE( "LinearMap_Vec3f" )
 {
     gm::Vec3f vector( 0.0f, 0.05f, 0.1f );
-    gm::Vec3f vectorMapped = gm::LinearMap( vector, gm::Vec2f( -1.0f, 1.0f ), gm::Vec2f( 0.0f, 1.0f ) );
+    gm::Vec3f vectorMapped = gm::LinearMap( vector, gm::FloatRange( -1.0f, 1.0f ), gm::FloatRange( 0.0f, 1.0f ) );
     CHECK( vectorMapped[ 0 ] == Approx( 0.5f ) );
     CHECK( vectorMapped[ 1 ] == Approx( 0.525f ) );
     CHECK( vectorMapped[ 2 ] == Approx( 0.55f ) );
@@ -85,7 +85,7 @@ TEST_CASE( "LinearMap_Vec3f" )
 TEST_CASE( "LinearMap_Vec4f" )
 {
     gm::Vec4f vector( 0.0f, 0.05f, 0.1f, 0.15f );
-    gm::Vec4f vectorMapped = gm::LinearMap( vector, gm::Vec2f( -1.0f, 1.0f ), gm::Vec2f( 0.0f, 1.0f ) );
+    gm::Vec4f vectorMapped = gm::LinearMap( vector, gm::FloatRange( -1.0f, 1.0f ), gm::FloatRange( 0.0f, 1.0f ) );
     CHECK( vectorMapped[ 0 ] == Approx( 0.5f ) );
     CHECK( vectorMapped[ 1 ] == Approx( 0.525f ) );
     CHECK( vectorMapped[ 2 ] == Approx( 0.55f ) );

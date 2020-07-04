@@ -13,27 +13,27 @@ GM_NS_USING
 void BindLinearMap( pybind11::module& o_module )
 {
     o_module.def( "LinearMap",
-                  []( const float& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& i_targetRange ) {
+                  []( const float& i_sourceValue, const FloatRange& i_sourceRange, const FloatRange& i_targetRange ) {
                       return LinearMap( i_sourceValue, i_sourceRange, i_targetRange );
                   } );
     o_module.def( "LinearMap",
-                  []( const Mat3f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& i_targetRange ) {
+                  []( const Mat3f& i_sourceValue, const FloatRange& i_sourceRange, const FloatRange& i_targetRange ) {
                       return LinearMap( i_sourceValue, i_sourceRange, i_targetRange );
                   } );
     o_module.def( "LinearMap",
-                  []( const Mat4f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& i_targetRange ) {
+                  []( const Mat4f& i_sourceValue, const FloatRange& i_sourceRange, const FloatRange& i_targetRange ) {
                       return LinearMap( i_sourceValue, i_sourceRange, i_targetRange );
                   } );
     o_module.def( "LinearMap",
-                  []( const Vec2f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& i_targetRange ) {
+                  []( const Vec2f& i_sourceValue, const FloatRange& i_sourceRange, const FloatRange& i_targetRange ) {
                       return LinearMap( i_sourceValue, i_sourceRange, i_targetRange );
                   } );
     o_module.def( "LinearMap",
-                  []( const Vec3f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& i_targetRange ) {
+                  []( const Vec3f& i_sourceValue, const FloatRange& i_sourceRange, const FloatRange& i_targetRange ) {
                       return LinearMap( i_sourceValue, i_sourceRange, i_targetRange );
                   } );
     o_module.def( "LinearMap",
-                  []( const Vec4f& i_sourceValue, const Vec2f& i_sourceRange, const Vec2f& i_targetRange ) {
+                  []( const Vec4f& i_sourceValue, const FloatRange& i_sourceRange, const FloatRange& i_targetRange ) {
                       return LinearMap( i_sourceValue, i_sourceRange, i_targetRange );
                   } );
 }

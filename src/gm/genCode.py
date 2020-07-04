@@ -378,9 +378,10 @@ def GenerateFunctions():
     mapOps = []
     for valueType in [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT:
         if valueType.isScalar:
-            rangeValueType = VectorType((2,), valueType)
+            rangeValueType = RangeType(valueType)
         else:
-            rangeValueType = VectorType((2,), valueType.elementType)
+            assert(valueType.isVector)
+            rangeValueType = RangeType(valueType.elementType)
 
         arguments = [
             FunctionArg("sourceValue", valueType, Mutability.Const),

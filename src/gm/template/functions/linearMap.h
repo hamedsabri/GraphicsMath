@@ -38,18 +38,18 @@ GM_NS_OPEN
 /// \return Linearly mapped target value.
 GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
 {
-    GM_ASSERT( {{ interface.ArgName("sourceRange") }}[ 0 ] !=
-               {{ interface.ArgName("sourceRange") }}[ 1 ] );
-    float ratio = ( {{ interface.ArgName("targetRange") }}[ 1 ] - {{ interface.ArgName("targetRange") }}[ 0 ] ) /
-                  ( {{ interface.ArgName("sourceRange") }}[ 1 ] - {{ interface.ArgName("sourceRange") }}[ 0 ] );
+    GM_ASSERT( {{ interface.ArgName("sourceRange") }}.Min() !=
+               {{ interface.ArgName("sourceRange") }}.Max() );
+    float ratio = ( {{ interface.ArgName("targetRange") }}.Max() - {{ interface.ArgName("targetRange") }}.Min() ) /
+                  ( {{ interface.ArgName("sourceRange") }}.Max() - {{ interface.ArgName("sourceRange") }}.Min() );
 {% if interface.Arg("sourceValue").type.isScalar -%}
-    return {{ interface.ArgName("targetRange") }}[ 0 ] +
-           ( ratio * ( {{ interface.ArgName("sourceValue") }} - {{ interface.ArgName("sourceRange") }}[ 0 ] ) );
+    return {{ interface.ArgName("targetRange") }}.Min() +
+           ( ratio * ( {{ interface.ArgName("sourceValue") }} - {{ interface.ArgName("sourceRange") }}.Min() ) );
 {%- elif interface.Arg("sourceValue").type.isVector -%}
     return {{ interface.ArgClass("sourceValue") }}(
 {%- for index in range(interface.Arg("sourceValue").type.elementSize) %}
-    {{ interface.ArgName("targetRange") }}[ 0 ] +
-           ( ratio * ( {{ interface.ArgName("sourceValue") }}[ {{ index }} ] - {{ interface.ArgName("sourceRange") }}[ 0 ] ) )
+    {{ interface.ArgName("targetRange") }}.Min() +
+           ( ratio * ( {{ interface.ArgName("sourceValue") }}[ {{ index }} ] - {{ interface.ArgName("sourceRange") }}.Min() ) )
 {%- if index + 1 < interface.Arg("sourceValue").type.elementSize -%}
         ,
 {%- endif -%}
