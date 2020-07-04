@@ -4,6 +4,7 @@
 
 #include <catch2/catch.hpp>
 
+#include <gm/types/vec4fArray.h>
 #include <gm/types/vec4fRange.h>
 
 TEST_CASE( "Vec4fRange_DefaultConstructor" )
