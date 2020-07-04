@@ -5,6 +5,8 @@
 
 #include <vector>
 
+#include <gm/gm.h>
+
 {% if arrayType.elementType.isVector %}
 #include <gm/types/{{ arrayType.elementType.headerFileName }}>
 {%- endif %}

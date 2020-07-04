@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Main entry point / script for generating GraphicsMath C++ code from templates.
+Main entry point / script for generating GraphicsMath C++ and Python source code from templates.
 """
 
 import os
@@ -92,15 +92,22 @@ VECTOR_TYPES = sorted(
 )
 
 """
-RANGE_TYPES is a fixed, global set of range based types (min, max) to generate code for.
+RANGE_TYPES is the fixed, global set of range-based types (min, max) to generate code for.
 """
 RANGE_TYPES = [
-    RangeType(ScalarType(INT)),
-    RangeType(VectorType((2, 2), ScalarType(INT))),
-    RangeType(VectorType((3, 3), ScalarType(INT))),
-    RangeType(ScalarType(FLOAT)),
-    RangeType(VectorType((2, 2), ScalarType(FLOAT))),
-    RangeType(VectorType((3, 3), ScalarType(FLOAT))),
+    RangeType(scalarType) for scalarType in NUMERIC_SCALAR_TYPES
+] + [
+    RangeType(vectorType) for vectorType in VECTOR_TYPES if len(vectorType.shape) == 1
+]
+
+
+"""
+ARRAY_TYPES is the fixed, global set of array-based value types to generate code for.
+"""
+ARRAY_TYPES = [
+    ArrayType(scalarType) for scalarType in SCALAR_TYPES
+] + [
+    ArrayType(vectorType) for vectorType in VECTOR_TYPES
 ]
 
 """
@@ -119,213 +126,6 @@ FUNCTIONS = {}
 # Code generation for types.
 #
 
-def PopulateBoundsCompositeTypes():
-    """
-    Populate bounds composite types, by updating the global ``COMPOSITE_TYPES``.
-    """
-    filePaths = []
-
-    for vectorType in [
-        VectorType((2,), ScalarType(FLOAT)),
-        VectorType((3,), ScalarType(FLOAT)),
-        VectorType((2,), ScalarType(INT)),
-        VectorType((3,), ScalarType(INT)),
-    ]:
-        compositeTypeName = "bounds{shape}{elementType}".format(
-            shape=str(vectorType.shape[0]),
-            elementType=vectorType.elementType.className[0],
-        )
-
-        # Min default value.
-        minDefaultValue = "{vectorClassName}(".format(
-            vectorClassName=vectorType.className
-        )
-        for index in range(vectorType.shape[0]):
-            minDefaultValue += "std::numeric_limits< {vectorElementType} >::max()".format(
-                vectorElementType=vectorType.elementType.className
-            )
-            if index + 1 < vectorType.shape[0]:
-                minDefaultValue += ","
-        minDefaultValue += ")"
-
-        # Max default value.
-        maxDefaultValue = "{vectorClassName}(".format(
-            vectorClassName=vectorType.className
-        )
-        for index in range(vectorType.shape[0]):
-            maxDefaultValue += "std::numeric_limits< {vectorElementType} >::min()".format(
-                vectorElementType=vectorType.elementType.className
-            )
-            if index + 1 < vectorType.shape[0]:
-                maxDefaultValue += ","
-        maxDefaultValue += ")"
-
-        # Instantiate the type with min-max elements.
-        compositeType = CompositeType(
-            compositeTypeName,
-            [
-                CompositeElement(
-                    name="min", type=vectorType, defaultValue=minDefaultValue
-                ),
-                CompositeElement(
-                    name="max", type=vectorType, defaultValue=maxDefaultValue
-                ),
-            ],
-            extraIncludes=["<limits>",],
-        )
-
-        # Store composite type into global COMPOSITE_TYPES, to be queried in function generation
-        # in a later stage.
-        COMPOSITE_TYPES[compositeType.className] = compositeType
-
-    return filePaths
-
-
-def GenerateCompositeTypes():
-    """
-    Generate all composite type source files.
-
-    Returns:
-        list: paths to generated source files.
-    """
-    PopulateBoundsCompositeTypes()
-
-    # Generate C++ source code.
-    filePaths = []
-
-    for compositeType in COMPOSITE_TYPES.values():
-        # C++ source code.
-        filePaths.append(
-            GenerateCode(
-                os.path.join(TYPES_DIR, "compositeType.h"),
-                os.path.join(TYPES_DIR, compositeType.headerFileName),
-                compositeType=compositeType,
-            )
-        )
-
-        # Python bindings.
-        filePaths.append(
-            GenerateCode(
-                os.path.join(PYTHON_DIR, TYPES_DIR, "bindCompositeType.cpp"),
-                os.path.join(
-                    PYTHON_DIR,
-                    TYPES_DIR,
-                    "bind{className}.cpp".format(className=compositeType.className),
-                ),
-                compositeType=compositeType,
-            )
-        )
-
-        # Tests for python bindings.
-        filePaths.append(
-            GenerateCode(
-                os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "testCompositeType.py"),
-                os.path.join(
-                    PYTHON_DIR,
-                    TYPES_DIR,
-                    TESTS_DIR,
-                    "test{className}.py".format(className=compositeType.className),
-                ),
-                compositeType=compositeType,
-            )
-        )
-
-    return filePaths
-
-
-def GenerateArrayTypes():
-    """
-    Generate all array type source files.
-
-    Returns:
-        list: paths to generated source files.
-    """
-    # Build ArrayType(s)
-    arrayTypes = []
-    for scalarType in SCALAR_TYPES:
-        arrayType = ArrayType(scalarType)
-        arrayTypes.append(arrayType)
-
-    for vectorType in VECTOR_TYPES:
-        arrayType = ArrayType(vectorType)
-        arrayTypes.append(arrayType)
-
-    # Generate code for ArrayType(s)
-    filePaths = []
-    for arrayType in arrayTypes:
-        filePaths.append(
-            GenerateCode(
-                os.path.join(TYPES_DIR, "arrayType.h"),
-                os.path.join(TYPES_DIR, arrayType.headerFileName),
-                arrayType=arrayType,
-            )
-        )
-
-    return filePaths
-
-
-def GenerateVectorTypes():
-    """
-    Generate all vector type source files.
-
-    Returns:
-        list: paths to generated source files.
-    """
-    # Generate vector class headers.
-    filePaths = []
-    for vectorType in VECTOR_TYPES:
-        # C++ header source.
-        filePaths.append(
-            GenerateCode(
-                os.path.join(TYPES_DIR, "vectorType.h"),
-                os.path.join(TYPES_DIR, vectorType.headerFileName),
-                vectorType=vectorType,
-            )
-        )
-
-        # C++ tests.
-        filePaths.append(
-            GenerateCode(
-                os.path.join(TYPES_DIR, TESTS_DIR, "testVectorType.cpp"),
-                os.path.join(
-                    TYPES_DIR,
-                    TESTS_DIR,
-                    "test{className}.cpp".format(className=vectorType.className),
-                ),
-                vectorType=vectorType,
-            )
-        )
-
-        # Python bindings source.
-        filePaths.append(
-            GenerateCode(
-                os.path.join(PYTHON_DIR, TYPES_DIR, "bindVectorType.cpp"),
-                os.path.join(
-                    PYTHON_DIR,
-                    TYPES_DIR,
-                    "bind{className}.cpp".format(className=vectorType.className),
-                ),
-                vectorType=vectorType,
-            )
-        )
-
-        # Python bindings tests.
-        filePaths.append(
-            GenerateCode(
-                os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "testVectorType.py"),
-                os.path.join(
-                    PYTHON_DIR,
-                    TYPES_DIR,
-                    TESTS_DIR,
-                    "test{className}.py".format(className=vectorType.className),
-                ),
-                vectorType=vectorType,
-            )
-        )
-
-    return filePaths
-
-
 def GenerateTypes():
     """
     Top-level entry point for generating all data type source files.
@@ -333,18 +133,68 @@ def GenerateTypes():
     Array types of pod, vectors, and matrices will also be generated.
 
     Returns:
-        list: paths to of generated source files.
+        tuple: (
+            list: paths to of generated source files.
+            list: associated ValueType(s)
+        )
     """
-    filePaths = GenerateVectorTypes()
-    filePaths += GenerateArrayTypes()
-    filePaths += GenerateCompositeTypes()
-    return filePaths
+    # TODO Generate composite types.
+
+    filePaths = []
+    valueTypes = ( VECTOR_TYPES + RANGE_TYPES + ARRAY_TYPES )
+    for valueType in valueTypes:
+        kwargs = {
+            ("{category}Type".format(category=valueType.CATEGORY)) : valueType,
+        }
+
+        # C++ source code.
+        filePaths.append(
+            GenerateCode(
+                os.path.join(TYPES_DIR, "{category}Type.h".format(
+                    category=valueType.CATEGORY,
+                )),
+                os.path.join(TYPES_DIR, valueType.headerFileName),
+                **kwargs
+            )
+        )
+
+        # Python bindings.
+        filePaths.append(
+            GenerateCode(
+                os.path.join(PYTHON_DIR, TYPES_DIR, "bind{category}Type.cpp".format(
+                    category=UpperCamelCase(valueType.CATEGORY),
+                )),
+                os.path.join(
+                    PYTHON_DIR,
+                    TYPES_DIR,
+                    "bind{className}.cpp".format(className=valueType.className),
+                ),
+                **kwargs
+            )
+        )
+
+        # Tests for python bindings.
+        filePaths.append(
+            GenerateCode(
+                os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "test{category}Type.py".format(
+                    category=UpperCamelCase(valueType.CATEGORY),
+                )),
+                os.path.join(
+                    PYTHON_DIR,
+                    TYPES_DIR,
+                    TESTS_DIR,
+                    "test{className}.py".format(className=valueType.className),
+                ),
+                **kwargs
+            )
+        )
+
+    return filePaths, valueTypes
 
 
 #
 # Code generation for functions.
 #
-
 
 def GenerateFunctions():
     """
@@ -663,10 +513,10 @@ def GenerateFunctions():
 #
 
 if __name__ == "__main__":
-    # Generate types first, to populate type registry.
-    filePaths = GenerateTypes()
+    # Generate the complete set ValueTypes first, pre-requisite to generating functions.
+    filePaths, valueTypes = GenerateTypes()
 
-    # Proceed with generating functions.
+    # Follow up with generating functions.
     filePaths += GenerateFunctions()
 
     # Generate python module.
@@ -674,7 +524,7 @@ if __name__ == "__main__":
         GenerateCode(
             os.path.join(PYTHON_DIR, "module.cpp"),
             os.path.join(PYTHON_DIR, "module.cpp"),
-            types=list(VECTOR_TYPES) + COMPOSITE_TYPES.values(),
+            types=valueTypes,
             functions=FUNCTIONS.values(),
             UpperCamelCase=UpperCamelCase,
         )

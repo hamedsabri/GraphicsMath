@@ -33,6 +33,7 @@ class ValueType:
     ValueType instances are used throughout the code generation templates, for both
     C++ and python sources, and for both types and functions.
     """
+    CATEGORY = None
 
     @property
     def className(self):
@@ -81,7 +82,7 @@ class ValueType:
     @property
     def isScalar(self):
         """
-        Implementation should return ``True`` if it is a scalar type.  By default, ``False`` will be returned.
+        Implementation should return ``True`` if it is a ScalarType.  By default, ``False`` will be returned.
 
         Returns:
             bool: False
@@ -91,7 +92,7 @@ class ValueType:
     @property
     def isVector(self):
         """
-        Implementation should return ``True`` if it is a vector type.  By default, ``False`` will be returned.
+        Implementation should return ``True`` if it is a VectorType.  By default, ``False`` will be returned.
 
         Returns:
             bool: False
@@ -101,7 +102,17 @@ class ValueType:
     @property
     def isArray(self):
         """
-        Implementation should return ``True`` if it is a array type.  By default, ``False`` will be returned.
+        Implementation should return ``True`` if it is a ArrayType.  By default, ``False`` will be returned.
+
+        Returns:
+            bool: False
+        """
+        return False
+
+    @property
+    def isRange(self):
+        """
+        Implementation should return ``True`` if it is a RangeType.  By default, ``False`` will be returned.
 
         Returns:
             bool: False
@@ -127,7 +138,11 @@ class ScalarType(ValueType):
 
     Args:
         typeName (str): the C++ typename of the value type.
+
+    Class members:
+        CATEGORY (str): The named category of all scalar value types.
     """
+    CATEGORY = "scalar"
 
     def __init__(self, typeName):
         assert isinstance(typeName, str)
@@ -208,7 +223,51 @@ class ScalarType(ValueType):
         return self.className + "Val"
 
 
-class VectorType(ValueType):
+class ElementContainerType(ValueType):
+    """
+    Base class for all value types which are homogenous element type containers.
+    """
+
+    def __hash__(self):
+        """
+        The hash combination of its element type, with an Array suffix.
+        """
+        return hash((self.elementType, self.CATEGORY))
+
+    def CppValue(self, value):
+        """
+        Convert the ``value`` instance to the C++ compliant value of the current vector's element type, as a string.
+
+        Args:
+            value (object): value instance.
+
+        Returns:
+            str: string representation of ``value``.
+        """
+        return self.elementType.CppValue(value)
+
+    def PyValue(self, value):
+        """
+        Convert the ``value`` instance to the Python compliant value of the current vector's element type, as a string.
+
+        Args:
+            value (object): value instance.
+
+        Returns:
+            str: string representation of ``value``.
+        """
+        return self.elementType.PyValue(value)
+
+    @property
+    def varName(self):
+        """
+        Returns:
+            str: A name for variables of this type.
+        """
+        return self.CATEGORY
+
+
+class VectorType(ElementContainerType):
     """
     Code generation representation of a homogenously typed fixed size container of arbituary shape.
 
@@ -220,7 +279,11 @@ class VectorType(ValueType):
     Args:
         shape (tuple): The shape, or dimensions of this vector container type.
         elementType (ValueType): The value type of the elements within this vector container.
+
+    Class members:
+        CATEGORY (str): The named category of all vector value types.
     """
+    CATEGORY = "vector"
 
     def __init__(self, shape, elementType):
         assert isinstance(shape, tuple)
@@ -301,54 +364,84 @@ class VectorType(ValueType):
         """
         return True
 
-    def CppValue(self, value):
-        """
-        Convert the ``value`` instance to the C++ compliant value of the current vector's element type, as a string.
 
-        Args:
-            value (object): value instance.
-
-        Returns:
-            str: string representation of ``value``.
-        """
-        return self.elementType.CppValue(value)
-
-    def PyValue(self, value):
-        """
-        Convert the ``value`` instance to the Python compliant value of the current vector's element type, as a string.
-
-        Args:
-            value (object): value instance.
-
-        Returns:
-            str: string representation of ``value``.
-        """
-        return self.elementType.PyValue(value)
-
-
-class RangeType(ValueType):
+class RangeType(ElementContainerType):
     """
     Code generation object for representing a range of values, of a particular type, with lower and upper limits (min and max).
 
-    Originally, RangeType(s) were generated as bounding boxes via CompositeType - however, the it is also useful to have
-    scalar value ranges but the terminology "bounds" usually is associated with 2 dimensional or 3 dimensional ranges.
+    Originally, RangeType(s) were generated as Bounds classes implemented through CompositeType -
+    however, the it is also useful to have scalar value ranges.  The terminology "bounds" usually is
+    associated with 2 dimensional or 3 dimensional ranges - it felt inappropriate for a 1 dimensional range.
 
     The code generation templates of RangeType(s) of integral element type also implement iteration policy for
     iterating over all the discrete "indices" within the range.  A useful application of this is for iterating
     over a Range2i, for accessing pixel values of a 2D image!
+
+    Class members:
+        CATEGORY (str): The named category of all Range value types.
     """
+    CATEGORY = "range"
 
     def __init__(self, elementType):
-        assert isinstance(elementType, ValueType)
+        assert isinstance(elementType, (ScalarType, VectorType))
         self.elementType = elementType
 
+    @property
+    def className(self):
+        """
+        The class name of an RangeType is the class name of its element type joined
+        with a "Range" suffix.
 
-class ArrayType(ValueType):
+        Returns:
+            str: the class name of this range type.
+        """
+        return "{elementTypeName}Range".format(
+            elementTypeName=(UpperCamelCase(self.elementType.className))
+        )
+
+    @property
+    def headerFileName(self):
+        """
+        The header file name of an RangeType is th header file name of its element type joined
+        with a "Range" suffix.
+
+        There is the special case when its element type is scalar - there is no header file
+        associated with scalar types (they're C++ POD types, with no type definition).
+        The lowerCamelCased className is used for scalar types.
+
+        Returns:
+            str: the header file name of this RangeType.
+        """
+        if self.elementType.isVector:
+            return "{elementHeaderFileName}Range.h".format(
+                elementHeaderFileName=os.path.splitext(self.elementType.headerFileName)[
+                    0
+                ]
+            )
+        else:
+            return "{elementTypeName}Range.h".format(
+                elementTypeName=LowerCamelCase(self.elementType.className),
+            )
+
+    @property
+    def isRange(self):
+        """
+        Returns:
+            bool: True, this class is indeed an array type.
+        """
+        return True
+
+
+class ArrayType(ElementContainerType):
     """
-    Code generation for an sequentially-ordered, dynamically re-sizable, and homogenously typed container type.
+    Code generation for an sequentially-ordered, dynamically re-sizable, and homogenously typed container.
 
     Currently, the array types in GraphicsMath are simply type definitions of std::vector.
+
+    Class members:
+        CATEGORY (str): The named category of all Array value types.
     """
+    CATEGORY = "array"
 
     def __init__(self, elementType):
         assert isinstance(elementType, ValueType)
@@ -436,7 +529,11 @@ class CompositeType(ValueType):
         name (str): name of the composite type.
         elements (list): list of CompositeElement(s).
         extraIncludes (list): list of extras includes to encode near the top of the source file.
+
+    Class members:
+        CATEGORY (str): The named category of all Composite value types.
     """
+    CATEGORY = "composite"
 
     def __init__(self, name, elements, extraIncludes=None):
         for element in elements:

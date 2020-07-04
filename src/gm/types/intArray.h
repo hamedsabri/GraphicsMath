@@ -9,6 +9,8 @@
 
 #include <vector>
 
+#include <gm/gm.h>
+
 GM_NS_OPEN
 
 /// \typedef IntArray

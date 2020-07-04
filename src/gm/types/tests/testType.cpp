@@ -2,16 +2,16 @@
 
 #include <gm/base/log.h>
 
-#include <gm/types/bounds2i.h>
 #include <gm/types/vec2iArray.h>
 #include <gm/types/vec2iRange.h>
 
+#include <iostream>
+
 TEST_CASE( "testVec2iRange" )
 {
-    gm::Bounds2i bounds( gm::Vec2i( 0, 0 ), gm::Vec2i( 5, 5 ) );
-
+    gm::Vec2iRange range( gm::Vec2i( 0, 0 ), gm::Vec2i( 5, 5 ) );
     gm::Vec2iArray array;
-    for ( const gm::Vec2i& point : gm::Vec2iRange( bounds.Min(), bounds.Max() ) )
+    for ( const gm::Vec2i& point : range )
     {
         array.push_back( point );
     }
@@ -22,6 +22,5 @@ TEST_CASE( "testVec2iRange" )
         gm::Vec2i( 0, 2 ), gm::Vec2i( 1, 2 ), gm::Vec2i( 2, 2 ), gm::Vec2i( 3, 2 ), gm::Vec2i( 4, 2 ),
         gm::Vec2i( 0, 3 ), gm::Vec2i( 1, 3 ), gm::Vec2i( 2, 3 ), gm::Vec2i( 3, 3 ), gm::Vec2i( 4, 3 ),
         gm::Vec2i( 0, 4 ), gm::Vec2i( 1, 4 ), gm::Vec2i( 2, 4 ), gm::Vec2i( 3, 4 ), gm::Vec2i( 4, 4 )};
-
     CHECK( array == expectedArray );
 }

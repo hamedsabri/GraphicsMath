@@ -9,6 +9,8 @@
 
 #include <vector>
 
+#include <gm/gm.h>
+
 #include <gm/types/vec2f.h>
 
 GM_NS_OPEN
