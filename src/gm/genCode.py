@@ -158,6 +158,21 @@ def GenerateTypes():
             )
         )
 
+        # Cpp tests.
+        filePaths.append(
+            GenerateCode(
+                os.path.join(TYPES_DIR, TESTS_DIR, "test{category}Type.cpp".format(
+                    category=UpperCamelCase(valueType.CATEGORY),
+                )),
+                os.path.join(
+                    TYPES_DIR,
+                    TESTS_DIR,
+                    "test{className}.cpp".format(className=valueType.className),
+                ),
+                **kwargs
+            )
+        )
+
         # Python bindings.
         filePaths.append(
             GenerateCode(
