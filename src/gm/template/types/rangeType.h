@@ -1,12 +1,12 @@
 #pragma once
 
-/// \file {{ rangeType.headerFileName }}
+/// \file {{ valueType.headerFileName }}
 /// \ingroup gm_types_range
 
 #include <gm/gm.h>
 
-{% if rangeType.elementType.isVector %}
-#include <gm/types/{{ rangeType.elementType.headerFileName }}>
+{% if valueType.elementType.isVector %}
+#include <gm/types/{{ valueType.elementType.headerFileName }}>
 {%- endif %}
 
 #include <limits>
@@ -14,11 +14,11 @@
 
 GM_NS_OPEN
 
-/// \class {{ rangeType.className }}
+/// \class {{ valueType.className }}
 /// \ingroup gm_types_range
 ///
-/// Class definition for a bounded range of {{ rangeType.elementType.className }}(s).
-class {{ rangeType.className }} final
+/// Class definition for a bounded range of {{ valueType.elementType.className }}(s).
+class {{ valueType.className }} final
 {
 public:
     // --------------------------------------------------------------------- //
@@ -29,15 +29,15 @@ public:
     ///
     /// An empty range has a min value with max numerical limit, conversely
     /// a max value with min numerical limit.
-    GM_HOST_DEVICE constexpr inline {{ rangeType.className }}() = default;
+    GM_HOST_DEVICE constexpr inline {{ valueType.className }}() = default;
 
     /// Explicit constructor for initializing a minimum maximum range.
     ///
     /// \param i_min Minimum bounds.
     /// \param i_max Maximum bounds.
-    GM_HOST_DEVICE constexpr explicit inline {{ rangeType.className }}(
-        const {{ rangeType.elementType.className }}& i_min,
-        const {{ rangeType.elementType.className }}& i_max
+    GM_HOST_DEVICE constexpr explicit inline {{ valueType.className }}(
+        const {{ valueType.elementType.className }}& i_min,
+        const {{ valueType.elementType.className }}& i_max
     )
         : m_min( i_min )
         , m_max( i_max )
@@ -51,7 +51,7 @@ public:
     /// Read access to the minimum bound of this range.
     ///
     /// \return The minimum bound.
-    GM_HOST_DEVICE inline const {{ rangeType.elementType.className }}& Min() const
+    GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& Min() const
     {
         return m_min;
     }
@@ -59,7 +59,7 @@ public:
     /// Write access to the minimum bound of this range.
     ///
     /// \return The minimum bound.
-    GM_HOST_DEVICE inline {{ rangeType.elementType.className }}& Min()
+    GM_HOST_DEVICE inline {{ valueType.elementType.className }}& Min()
     {
         return m_min;
     }
@@ -67,7 +67,7 @@ public:
     /// Read access to the maximum bound of this range.
     ///
     /// \return The maximum bound.
-    GM_HOST_DEVICE inline const {{ rangeType.elementType.className }}& Max() const
+    GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& Max() const
     {
         return m_max;
     }
@@ -75,26 +75,26 @@ public:
     /// Write access to the maximum bound of this range.
     ///
     /// \return The maximum bound.
-    GM_HOST_DEVICE inline {{ rangeType.elementType.className }}& Max()
+    GM_HOST_DEVICE inline {{ valueType.elementType.className }}& Max()
     {
         return m_max;
     }
 
-{% if rangeType.elementType.isScalar and rangeType.elementType.className == "int" %}
+{% if valueType.elementType.isScalar and valueType.elementType.className == "int" %}
     // --------------------------------------------------------------------- //
     /// \name Range iteration.
     // --------------------------------------------------------------------- //
 
     /// \class iterator
     ///
-    /// Iterator class for the range {{ rangeType.className }}.
+    /// Iterator class for the range {{ valueType.className }}.
     class iterator final
     {
     public:
         /// Iterator construction, with the current position.
         ///
         /// \param i_current The position to initialize this iterator to.
-        inline iterator( const {{ rangeType.elementType.className }}& i_current )
+        inline iterator( const {{ valueType.elementType.className }}& i_current )
             : m_currentValue( i_current )
         {
         }
@@ -106,7 +106,7 @@ public:
         }
 
         /// De-reference this iterator, returning the value.
-        inline const {{ rangeType.elementType.className }}& operator*() const
+        inline const {{ valueType.elementType.className }}& operator*() const
         {
             return m_currentValue;
         }
@@ -119,7 +119,7 @@ public:
         }
 
     private:
-        {{ rangeType.elementType.className }} m_currentValue;
+        {{ valueType.elementType.className }} m_currentValue;
     };
 
     /// Get the iterator with the position at the \em beginning of the range.
@@ -133,14 +133,14 @@ public:
     {
         return iterator( m_max );
     }
-{% elif rangeType.elementType.isVector and rangeType.elementType.elementType.className == "int" %}
+{% elif valueType.elementType.isVector and valueType.elementType.elementType.className == "int" %}
     // --------------------------------------------------------------------- //
     /// \name Range iteration.
     // --------------------------------------------------------------------- //
 
     /// \class iterator
     ///
-    /// Iterator class for the range {{ rangeType.className }}.
+    /// Iterator class for the range {{ valueType.className }}.
     class iterator final
     {
     public:
@@ -150,9 +150,9 @@ public:
         /// \param i_min the minimum bounds of the range.
         /// \param i_max the maximum bounds of the range.
         inline iterator(
-            const {{ rangeType.elementType.className }}& i_current,
-            const {{ rangeType.elementType.className }}& i_min,
-            const {{ rangeType.elementType.className }}& i_max
+            const {{ valueType.elementType.className }}& i_current,
+            const {{ valueType.elementType.className }}& i_min,
+            const {{ valueType.elementType.className }}& i_max
         )
             : m_currentValue( i_current )
             , m_min( i_min )
@@ -167,7 +167,7 @@ public:
         }
 
         /// De-reference this iterator, returning the value.
-        inline const {{ rangeType.elementType.className }}& operator*() const
+        inline const {{ valueType.elementType.className }}& operator*() const
         {
             return m_currentValue;
         }
@@ -175,7 +175,7 @@ public:
         /// Increment this iterator forwards.
         inline const iterator& operator++()
         {
-{% for componentIndex in range(rangeType.elementType.elementSize) -%}
+{% for componentIndex in range(valueType.elementType.elementSize) -%}
 {%- if componentIndex == 0 -%}
             if (
 {%- else -%}
@@ -202,9 +202,9 @@ public:
         }
 
     private:
-        {{ rangeType.elementType.className }} m_currentValue;
-        {{ rangeType.elementType.className }} m_min;
-        {{ rangeType.elementType.className }} m_max;
+        {{ valueType.elementType.className }} m_currentValue;
+        {{ valueType.elementType.className }} m_min;
+        {{ valueType.elementType.className }} m_max;
     };
 
     /// Get the iterator with the position at the \em beginning of the range.
@@ -232,14 +232,14 @@ public:
     inline std::string GetString( const std::string& i_classPrefix = std::string() ) const
     {
         std::stringstream ss;
-        ss << i_classPrefix << "{{ rangeType.className }}( ";
-{%- if rangeType.elementType.isScalar %}
+        ss << i_classPrefix << "{{ valueType.className }}( ";
+{%- if valueType.elementType.isScalar %}
         ss << m_min;
 {%- else -%}
         ss << m_min.GetString( i_classPrefix );
 {%- endif -%}
         ss << ", ";
-{%- if rangeType.elementType.isScalar -%}
+{%- if valueType.elementType.isScalar -%}
         ss << m_max;
 {%- else -%}
         ss << m_max.GetString( i_classPrefix );
@@ -250,13 +250,13 @@ public:
 
 private:
     // Min bound member.
-{%- if rangeType.elementType.isScalar %}
-    {{ rangeType.elementType.className }} m_min = std::numeric_limits< {{ rangeType.elementType.className }} >::max();
-{%- elif rangeType.elementType.isVector %}
-    {{ rangeType.elementType.className }} m_min = {{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-        std::numeric_limits< {{ rangeType.elementType.elementType.className }} >::max()
-{%- if index + 1 < rangeType.elementType.elementSize -%}
+{%- if valueType.elementType.isScalar %}
+    {{ valueType.elementType.className }} m_min = std::numeric_limits< {{ valueType.elementType.className }} >::max();
+{%- elif valueType.elementType.isVector %}
+    {{ valueType.elementType.className }} m_min = {{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+        std::numeric_limits< {{ valueType.elementType.elementType.className }} >::max()
+{%- if index + 1 < valueType.elementType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
@@ -264,13 +264,13 @@ private:
 {% endif %}
 
     // Max bound member.
-{%- if rangeType.elementType.isScalar %}
-    {{ rangeType.elementType.className }} m_max = std::numeric_limits< {{ rangeType.elementType.className }} >::min();
-{%- elif rangeType.elementType.isVector %}
-    {{ rangeType.elementType.className }} m_max = {{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-        std::numeric_limits< {{ rangeType.elementType.elementType.className }} >::min()
-{%- if index + 1 < rangeType.elementType.elementSize -%}
+{%- if valueType.elementType.isScalar %}
+    {{ valueType.elementType.className }} m_max = std::numeric_limits< {{ valueType.elementType.className }} >::min();
+{%- elif valueType.elementType.isVector %}
+    {{ valueType.elementType.className }} m_max = {{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+        std::numeric_limits< {{ valueType.elementType.elementType.className }} >::min()
+{%- if index + 1 < valueType.elementType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
@@ -285,7 +285,7 @@ private:
 /// \param i_value the source composite value type.
 ///
 /// \return the output stream.
-inline std::ostream& operator<<( std::ostream& o_outputStream, const {{ rangeType.className }}& i_value )
+inline std::ostream& operator<<( std::ostream& o_outputStream, const {{ valueType.className }}& i_value )
 {
     o_outputStream << i_value.GetString();
     return o_outputStream;

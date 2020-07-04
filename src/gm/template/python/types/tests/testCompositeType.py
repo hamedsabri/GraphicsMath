@@ -1,16 +1,16 @@
 import unittest
 import gm
 
-class Test{{ compositeType.className }}(unittest.TestCase):
+class Test{{ valueType.className }}(unittest.TestCase):
 
     def testDefaultInitialization(self):
-        gm.{{ compositeType.className }}()
+        gm.{{ valueType.className }}()
 
     def testElementInitialization(self):
-        gm.{{ compositeType.className }}(
-{%- for index in range(compositeType.elementSize) -%}
-            gm.{{ compositeType.elements[ index ].type.className }}()
-{%- if index + 1 < compositeType.elementSize -%}
+        gm.{{ valueType.className }}(
+{%- for index in range(valueType.elementSize) -%}
+            gm.{{ valueType.elements[ index ].type.className }}()
+{%- if index + 1 < valueType.elementSize -%}
         ,{{ " " }}
 {%- endif -%}
 {%- endfor -%}

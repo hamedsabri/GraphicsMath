@@ -1,15 +1,15 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl_bind.h>
 
-#include <gm/types/{{ arrayType.headerFileName }}>
+#include <gm/types/{{ valueType.headerFileName }}>
 
-// Python bindings for {{ arrayType.className }}.
+// Python bindings for {{ valueType.className }}.
 
 GM_NS_USING
 
-PYBIND11_MAKE_OPAQUE( {{ arrayType.className }} );
+PYBIND11_MAKE_OPAQUE( {{ valueType.className }} );
 
-void Bind{{ arrayType.className }}( pybind11::module& o_module )
+void Bind{{ valueType.className }}( pybind11::module& o_module )
 {
-    pybind11::bind_vector< {{ arrayType.className }} >(o_module, "{{ arrayType.className }}");
+    pybind11::bind_vector< {{ valueType.className }} >(o_module, "{{ valueType.className }}");
 }

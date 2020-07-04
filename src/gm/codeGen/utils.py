@@ -8,7 +8,12 @@ import subprocess
 import math
 import logging
 
-from jinja2 import Environment, Template, StrictUndefined
+from jinja2 import (
+    Environment,
+    Template,
+    StrictUndefined,
+    FileSystemLoader,
+)
 
 """
 Name of the code generation template directory.
@@ -29,7 +34,10 @@ CPP_HEADER_EXT = ".h"
 """
 Global jinja2 environment.
 """
-JINJA2_ENVIRONMENT = Environment(undefined=StrictUndefined)
+JINJA2_ENVIRONMENT = Environment(
+    undefined=StrictUndefined,
+    loader=FileSystemLoader(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", TEMPLATE_DIR))),
+)
 
 """
 Global logger

@@ -1,15 +1,15 @@
 #pragma once
 
-/// \file {{ compositeType.headerFileName }}
+/// \file {{ valueType.headerFileName }}
 /// \ingroup gm_types_composite
 
 #include <sstream>
-{% for include in compositeType.extraIncludes -%}
+{% for include in valueType.extraIncludes -%}
 #include {{ include }}
 {% endfor %}
 
 #include <gm/gm.h>
-{% for element in compositeType.elements -%}
+{% for element in valueType.elements -%}
 {% if element.type.isVector or element.type.isComposite -%}
 #include <gm/types/{{ element.type.headerFileName }}>
 {%- endif %}
@@ -17,40 +17,40 @@
 
 GM_NS_OPEN
 
-/// \class {{ compositeType.className }}
+/// \class {{ valueType.className }}
 /// \ingroup gm_types_composite
 ///
 /// Class definition of a composite type with named elements:
-{% for element in compositeType.elements -%}
+{% for element in valueType.elements -%}
 /// - {{ element.name }} (\ref {{ element.type.className }})
 {% endfor -%}
-class {{ compositeType.className }} final
+class {{ valueType.className }} final
 {
 public:
     /// Default constructor.
-    GM_HOST_DEVICE constexpr inline {{ compositeType.className }}()  = default;
+    GM_HOST_DEVICE constexpr inline {{ valueType.className }}()  = default;
 
     /// Element-wise constructor.
-    GM_HOST_DEVICE explicit constexpr inline {{ compositeType.className }}(
-{% for index in range(compositeType.elementSize) -%}
-        const {{ compositeType.elements[ index ].type.className }}& i_{{ compositeType.elements[ index ].name }}
-{%- if index + 1 < compositeType.elementSize -%}
+    GM_HOST_DEVICE explicit constexpr inline {{ valueType.className }}(
+{% for index in range(valueType.elementSize) -%}
+        const {{ valueType.elements[ index ].type.className }}& i_{{ valueType.elements[ index ].name }}
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     )
-{% for index in range(compositeType.elementSize) -%}
-{%- if index + 1 < compositeType.elementSize -%}
+{% for index in range(valueType.elementSize) -%}
+{%- if index + 1 < valueType.elementSize -%}
         :
 {%- else -%}
         ,
 {%- endif -%}
-        m_{{ compositeType.elements[ index ].name }}( i_{{ compositeType.elements[ index ].name }} )
+        m_{{ valueType.elements[ index ].name }}( i_{{ valueType.elements[ index ].name }} )
 {%- endfor %}
     {
     }
 
-{% for element in compositeType.elements %}
+{% for element in valueType.elements %}
     /// Const accessor for "{{ element.name }}".
     GM_HOST_DEVICE inline const {{ element.type.className }}& {{ element.accessorName }}() const
     {
@@ -72,14 +72,14 @@ public:
     inline std::string GetString( const std::string& i_classPrefix=std::string() ) const
     {
         std::stringstream ss;
-        ss << i_classPrefix << "{{ compositeType.className }}( ";
-{%- for index in range(compositeType.elementSize) -%}
-{%- if compositeType.elements[ index ].type.isVector or compositeType.elements[ index ].type.isComposite %}
-        ss << m_{{ compositeType.elements[ index ].name }}.GetString( i_classPrefix );
-{%- elif compositeType.elements[ index ].type.isScalar %}
-        ss << m_{{ compositeType.elements[ index ].name }};
+        ss << i_classPrefix << "{{ valueType.className }}( ";
+{%- for index in range(valueType.elementSize) -%}
+{%- if valueType.elements[ index ].type.isVector or valueType.elements[ index ].type.isComposite %}
+        ss << m_{{ valueType.elements[ index ].name }}.GetString( i_classPrefix );
+{%- elif valueType.elements[ index ].type.isScalar %}
+        ss << m_{{ valueType.elements[ index ].name }};
 {%- endif %}
-{%- if index + 1 < compositeType.elementSize -%}
+{%- if index + 1 < valueType.elementSize -%}
         ss << ", ";
 {%- endif %}
 {%- endfor %}
@@ -89,7 +89,7 @@ public:
 
 private:
     /// Element members.
-{% for element in compositeType.elements -%}
+{% for element in valueType.elements -%}
     {{ element.type.className }} m_{{ element.name }}
 {%- if element.defaultValue -%}
     = {{ element.defaultValue }}
@@ -105,7 +105,7 @@ private:
 /// \param i_composite the source composite value type.
 ///
 /// \return the output stream.
-inline std::ostream& operator<<( std::ostream& o_outputStream, const {{ compositeType.className }}& i_composite )
+inline std::ostream& operator<<( std::ostream& o_outputStream, const {{ valueType.className }}& i_composite )
 {
     o_outputStream << i_composite.GetString();
     return o_outputStream;

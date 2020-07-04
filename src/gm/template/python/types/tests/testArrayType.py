@@ -1,18 +1,18 @@
 import unittest
 import gm
 
-class Test{{ arrayType.className }}(unittest.TestCase):
+class Test{{ valueType.className }}(unittest.TestCase):
 
     def testDefaultInitialization(self):
-        gm.{{ arrayType.className }}()
+        gm.{{ valueType.className }}()
 
     def testListInitialization(self):
-        gm.{{ arrayType.className }}([
+        gm.{{ valueType.className }}([
 {%- for index in range(5) -%}
-{%- if arrayType.elementType.isScalar -%}
-            {{ arrayType.elementType.className }}()
+{%- if valueType.elementType.isScalar -%}
+            {{ valueType.elementType.className }}()
 {%- else -%}
-            gm.{{ arrayType.elementType.className }}()
+            gm.{{ valueType.elementType.className }}()
 {%- endif -%}
 {%- if index + 1 < 5 -%}
         ,{{ " " }}

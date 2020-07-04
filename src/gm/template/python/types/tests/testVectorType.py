@@ -1,40 +1,40 @@
 import unittest
 import gm
 
-class Test{{ vectorType.className }}(unittest.TestCase):
+class Test{{ valueType.className }}(unittest.TestCase):
 
     def testDefaultInitialization(self):
-        gm.{{ vectorType.className }}()
+        gm.{{ valueType.className }}()
 
     def testElementInitialization(self):
-        gm.{{ vectorType.className }}(
-{%- for index in range(vectorType.elementSize) -%}
-    {{ vectorType.PyValue(index * 2) }}
-{%- if index + 1 < vectorType.elementSize -%}
+        gm.{{ valueType.className }}(
+{%- for index in range(valueType.elementSize) -%}
+    {{ valueType.PyValue(index * 2) }}
+{%- if index + 1 < valueType.elementSize -%}
         ,{{ " " }}
 {%- endif -%}
 {%- endfor -%}
         )
 
     def testElementReadAccess(self):
-        {{ vectorType.varName }} = gm.{{ vectorType.className }}(
-{%- for index in range(vectorType.elementSize) -%}
-    {{ vectorType.PyValue(index * 2) }}
-{%- if index + 1 < vectorType.elementSize -%}
+        {{ valueType.varName }} = gm.{{ valueType.className }}(
+{%- for index in range(valueType.elementSize) -%}
+    {{ valueType.PyValue(index * 2) }}
+{%- if index + 1 < valueType.elementSize -%}
         ,{{ " " }}
 {%- endif -%}
 {%- endfor -%}
         )
-{%- for index in range(vectorType.elementSize) %}
-        self.assertAlmostEqual({{ vectorType.varName }}[ {{ index }} ], {{ vectorType.PyValue(index * 2) }})
+{%- for index in range(valueType.elementSize) %}
+        self.assertAlmostEqual({{ valueType.varName }}[ {{ index }} ], {{ valueType.PyValue(index * 2) }})
 {%- endfor %}
 
     def testElementWriteAccess(self):
-        {{ vectorType.varName }} = gm.{{ vectorType.className }}()
-{%- for index in range(vectorType.elementSize) %}
-        {{ vectorType.varName }}[ {{ index }} ] = {{ vectorType.PyValue(index * 2) }};
+        {{ valueType.varName }} = gm.{{ valueType.className }}()
+{%- for index in range(valueType.elementSize) %}
+        {{ valueType.varName }}[ {{ index }} ] = {{ valueType.PyValue(index * 2) }};
 {%- endfor -%}
-{%- for index in range(vectorType.elementSize) %}
-        self.assertAlmostEqual({{ vectorType.varName }}[ {{ index }} ], {{ vectorType.PyValue(index * 2) }})
+{%- for index in range(valueType.elementSize) %}
+        self.assertAlmostEqual({{ valueType.varName }}[ {{ index }} ], {{ valueType.PyValue(index * 2) }})
 {%- endfor %}
 

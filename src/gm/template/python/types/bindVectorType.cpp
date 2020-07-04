@@ -1,35 +1,35 @@
 #include <pybind11/pybind11.h>
 
-#include <gm/types/{{ vectorType.headerFileName }}>
+#include <gm/types/{{ valueType.headerFileName }}>
 
-// Python bindings for {{ vectorType.className }}.
+// Python bindings for {{ valueType.className }}.
 
 GM_NS_USING
 
-void Bind{{ vectorType.className }}( pybind11::module& o_module )
+void Bind{{ valueType.className }}( pybind11::module& o_module )
 {
-    pybind11::class_< {{ vectorType.className }} > cls( o_module, "{{ vectorType.className }}" );
+    pybind11::class_< {{ valueType.className }} > cls( o_module, "{{ valueType.className }}" );
 
     // Default initializer.
     cls.def( pybind11::init<>() );
 
     // Per-element initializer.
     cls.def( pybind11::init<
-{%- for index in range(vectorType.elementSize) -%}
-        const {{ vectorType.elementType.className }}&
-{%- if index + 1 < vectorType.elementSize -%}
+{%- for index in range(valueType.elementSize) -%}
+        const {{ valueType.elementType.className }}&
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     >() );
 
     // Object representation.
-    cls.def( "__repr__", []( const {{ vectorType.className }}& i_vector ) {
+    cls.def( "__repr__", []( const {{ valueType.className }}& i_vector ) {
         return pybind11::str( i_vector.GetString( "gm." ) );
     } );
 
     // Element indexed read access.
-    cls.def( "__getitem__", []( const {{ vectorType.className }}& i_vector, size_t i_index ) {
+    cls.def( "__getitem__", []( const {{ valueType.className }}& i_vector, size_t i_index ) {
         if ( i_vector.GetElementSize() <= i_index )
         {
             throw pybind11::index_error();
@@ -39,9 +39,9 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
     } );
 
     // Element indexed write access.
-    cls.def( "__setitem__", []( {{ vectorType.className }}& o_vector,
+    cls.def( "__setitem__", []( {{ valueType.className }}& o_vector,
                                 size_t i_index,
-                                {{ vectorType.elementType.className }} i_value ) {
+                                {{ valueType.elementType.className }} i_value ) {
         if ( o_vector.GetElementSize() <= i_index )
         {
             throw pybind11::index_error();
@@ -50,9 +50,9 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
         o_vector[ i_index ] = i_value;
     } );
 
-{% if vectorType.shape|length == 2 -%}
+{% if valueType.shape|length == 2 -%}
     // Matrix row-column indexed element read access.
-    cls.def( "__getitem__", []( const {{ vectorType.className }}& i_matrix, pybind11::tuple i_index ) {
+    cls.def( "__getitem__", []( const {{ valueType.className }}& i_matrix, pybind11::tuple i_index ) {
         if ( i_index.size() != 2 )
         {
             throw pybind11::index_error();
@@ -60,7 +60,7 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
 
         size_t row = i_index[0].cast< size_t >();
         size_t col = i_index[1].cast< size_t >();
-        if ( row >= {{ vectorType.shape[0] }} || col >= {{ vectorType.shape[1] }} )
+        if ( row >= {{ valueType.shape[0] }} || col >= {{ valueType.shape[1] }} )
         {
             throw pybind11::index_error();
         }
@@ -69,9 +69,9 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
     } );
 
     // Matrix row-column indexed element write access.
-    cls.def( "__setitem__", []( {{ vectorType.className }}& o_matrix,
+    cls.def( "__setitem__", []( {{ valueType.className }}& o_matrix,
                                 pybind11::tuple i_index,
-                                {{ vectorType.elementType.className }} i_value ) {
+                                {{ valueType.elementType.className }} i_value ) {
         if ( i_index.size() != 2 )
         {
             throw pybind11::index_error();
@@ -79,7 +79,7 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
 
         size_t row = i_index[0].cast< size_t >();
         size_t col = i_index[1].cast< size_t >();
-        if ( row >= {{ vectorType.shape[0] }} || col >= {{ vectorType.shape[1] }} )
+        if ( row >= {{ valueType.shape[0] }} || col >= {{ valueType.shape[1] }} )
         {
             throw pybind11::index_error();
         }
@@ -89,34 +89,34 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
 {%- endif %}
 
     // Vector addition.
-    cls.def( "__add__", []( const {{ vectorType.className }}& i_lhs,
-                            const {{ vectorType.className }}& i_rhs ) {
+    cls.def( "__add__", []( const {{ valueType.className }}& i_lhs,
+                            const {{ valueType.className }}& i_rhs ) {
         return i_lhs + i_rhs;
     } );
 
     // Vector subtraction.
-    cls.def( "__sub__", []( const {{ vectorType.className }}& i_lhs,
-                            const {{ vectorType.className }}& i_rhs ) {
+    cls.def( "__sub__", []( const {{ valueType.className }}& i_lhs,
+                            const {{ valueType.className }}& i_rhs ) {
         return i_lhs - i_rhs;
     } );
 
     // Vector-scalar Multiplication.
-    cls.def( "__mul__", []( const {{ vectorType.className }}& i_lhs,
-                            {{ vectorType.elementType.className }} i_rhs ) {
+    cls.def( "__mul__", []( const {{ valueType.className }}& i_lhs,
+                            {{ valueType.elementType.className }} i_rhs ) {
         return i_lhs * i_rhs;
     } );
 
     // Scalar-vector Multiplication.
-    cls.def( "__rmul__", []( const {{ vectorType.className }}& i_rhs,
-                             {{ vectorType.elementType.className }} i_lhs ) {
+    cls.def( "__rmul__", []( const {{ valueType.className }}& i_rhs,
+                             {{ valueType.elementType.className }} i_lhs ) {
         return i_lhs * i_rhs;
     } );
 
 
     // Vector-scalar Division.
-    cls.def( "__div__", []( const {{ vectorType.className }}& i_lhs,
-                            {{ vectorType.elementType.className }} i_rhs ) {
-        if ( i_rhs == {{ vectorType.CppValue( 0 ) }} )
+    cls.def( "__div__", []( const {{ valueType.className }}& i_lhs,
+                            {{ valueType.elementType.className }} i_rhs ) {
+        if ( i_rhs == {{ valueType.CppValue( 0 ) }} )
         {
             // TODO throw pybind11::zero_division_error();
             throw pybind11::value_error();
@@ -125,19 +125,19 @@ void Bind{{ vectorType.className }}( pybind11::module& o_module )
     } );
 
     // Unary negation.
-    cls.def( "__neg__", []( const {{ vectorType.className }}& i_vector ) {
+    cls.def( "__neg__", []( const {{ valueType.className }}& i_vector ) {
         return -i_vector;
     } );
 
     // Equality.
-    cls.def( "__eq__", []( const {{ vectorType.className }}& i_lhs,
-                           const {{ vectorType.className }}& i_rhs ) {
+    cls.def( "__eq__", []( const {{ valueType.className }}& i_lhs,
+                           const {{ valueType.className }}& i_rhs ) {
         return i_lhs == i_rhs;
     } );
 
     // Element size.
-    cls.def( "GetElementSize", &{{ vectorType.className }}::GetElementSize );
+    cls.def( "GetElementSize", &{{ valueType.className }}::GetElementSize );
 
     // Check for nans.
-    cls.def( "HasNans", &{{ vectorType.className }}::HasNans );
+    cls.def( "HasNans", &{{ valueType.className }}::HasNans );
 }

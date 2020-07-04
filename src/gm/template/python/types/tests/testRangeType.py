@@ -1,18 +1,18 @@
 import unittest
 import gm
 
-class Test{{ rangeType.className }}(unittest.TestCase):
+class Test{{ valueType.className }}(unittest.TestCase):
 
     def testDefaultInitialization(self):
-        gm.{{ rangeType.className }}()
+        gm.{{ valueType.className }}()
 
     def testMinMaxInitialization(self):
-        gm.{{ rangeType.className }}(
-{%- if rangeType.elementType.isScalar -%}
-            {{ rangeType.elementType.className }}(),
-            {{ rangeType.elementType.className }}(),
+        gm.{{ valueType.className }}(
+{%- if valueType.elementType.isScalar -%}
+            {{ valueType.elementType.className }}(),
+            {{ valueType.elementType.className }}(),
 {%- else -%}
-            gm.{{ rangeType.elementType.className }}(),
-            gm.{{ rangeType.elementType.className }}(),
+            gm.{{ valueType.elementType.className }}(),
+            gm.{{ valueType.elementType.className }}(),
 {%- endif -%}
         )

@@ -1,6 +1,6 @@
 #pragma once
 
-/// \file {{ vectorType.headerFileName }}
+/// \file {{ valueType.headerFileName }}
 /// \ingroup gm_types_vector
 
 #include <cmath>
@@ -9,44 +9,44 @@
 
 #include <gm/gm.h>
 #include <gm/base/assert.h>
-{% if vectorType.elementType.className != "int" -%}
+{% if valueType.elementType.className != "int" -%}
 #include <gm/base/almost.h>
 {%- endif %}
 
 GM_NS_OPEN
 
-/// \class {{ vectorType.className }}
+/// \class {{ valueType.className }}
 /// \ingroup gm_types_vector
 ///
-/// Class definition of a {{ vectorType.varName }} with {{ vectorType.elementSize }} {{ vectorType.elementType.className }} elements.
-class {{ vectorType.className }} final
+/// Class definition of a {{ valueType.varName }} with {{ valueType.elementSize }} {{ valueType.elementType.className }} elements.
+class {{ valueType.className }} final
 {
 public:
     /// \typedef ElementType
     ///
-    /// Convenience type definition of \ref {{ vectorType.className }}'s elements.
-    using ElementType = {{ vectorType.elementType.className }};
+    /// Convenience type definition of \ref {{ valueType.className }}'s elements.
+    using ElementType = {{ valueType.elementType.className }};
 
     // --------------------------------------------------------------------- //
     /// \name Construction
     // --------------------------------------------------------------------- //
 
     /// Default constructor, initializing all of the element values to 0.
-    GM_HOST_DEVICE constexpr inline {{ vectorType.className }}()  = default;
+    GM_HOST_DEVICE constexpr inline {{ valueType.className }}()  = default;
 
     /// Element-wise constructor.
-    GM_HOST_DEVICE explicit constexpr inline {{ vectorType.className }}(
-{% for index in range(vectorType.elementSize) -%}
-        const {{ vectorType.elementType.className }}& i_element{{ index }}
-{%- if index + 1 < vectorType.elementSize -%}
+    GM_HOST_DEVICE explicit constexpr inline {{ valueType.className }}(
+{% for index in range(valueType.elementSize) -%}
+        const {{ valueType.elementType.className }}& i_element{{ index }}
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     )
         : m_elements{
-{% for index in range(vectorType.elementSize) -%}
+{% for index in range(valueType.elementSize) -%}
         i_element{{ index }}
-{%- if index + 1 < vectorType.elementSize -%}
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
@@ -63,13 +63,13 @@ public:
     ///
     /// \param i_index index of the element.
     ///
-    /// \pre \p i_index must be less than {{ vectorType.elementSize }}.
+    /// \pre \p i_index must be less than {{ valueType.elementSize }}.
     ///
     /// \return mutable element value.
-    GM_HOST_DEVICE inline {{ vectorType.elementType.className }}& operator[]( size_t i_index )
+    GM_HOST_DEVICE inline {{ valueType.elementType.className }}& operator[]( size_t i_index )
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_index < {{ vectorType.elementSize }} );
+        GM_ASSERT( i_index < {{ valueType.elementSize }} );
         return m_elements[ i_index ];
     }
 
@@ -77,63 +77,63 @@ public:
     ///
     /// \param i_index index of the element.
     ///
-    /// \pre \p i_index must be less than {{ vectorType.elementSize }}.
+    /// \pre \p i_index must be less than {{ valueType.elementSize }}.
     ///
     /// \return immutable element value.
-    GM_HOST_DEVICE inline const {{ vectorType.elementType.className }}& operator[]( size_t i_index ) const
+    GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& operator[]( size_t i_index ) const
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_index < {{ vectorType.elementSize }} );
+        GM_ASSERT( i_index < {{ valueType.elementSize }} );
         return m_elements[ i_index ];
     }
 
-{% if vectorType.shape|length == 2 -%}
+{% if valueType.shape|length == 2 -%}
     /// Matrix element read-access.
-    GM_HOST_DEVICE inline const {{ vectorType.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
+    GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
     {
-        return m_elements[ i_row * {{ vectorType.shape[ 0 ] }} + i_column ];
+        return m_elements[ i_row * {{ valueType.shape[ 0 ] }} + i_column ];
     }
 {%- endif %}
 
 
-{% if vectorType.shape|length == 2 -%}
+{% if valueType.shape|length == 2 -%}
     /// Matrix element write-access.
-    GM_HOST_DEVICE inline {{ vectorType.elementType.className }}& operator()( size_t i_row, size_t i_column )
+    GM_HOST_DEVICE inline {{ valueType.elementType.className }}& operator()( size_t i_row, size_t i_column )
     {
-        return m_elements[ i_row * {{ vectorType.shape[ 0 ] }} + i_column ];
+        return m_elements[ i_row * {{ valueType.shape[ 0 ] }} + i_column ];
     }
 {%- endif %}
 
-{% if vectorType.shape|length == 1 and vectorType.elementSize <= 4 -%}
+{% if valueType.shape|length == 1 and valueType.elementSize <= 4 -%}
     /// X component accessor for the first element.
-    GM_HOST_DEVICE inline {{ vectorType.elementType.className }} X() const
+    GM_HOST_DEVICE inline {{ valueType.elementType.className }} X() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
     }
 {%- endif %}
 
-{% if vectorType.shape|length == 1 and vectorType.elementSize >= 2 and vectorType.elementSize <= 4 -%}
+{% if valueType.shape|length == 1 and valueType.elementSize >= 2 and valueType.elementSize <= 4 -%}
     /// Y component accessor for the second element.
-    GM_HOST_DEVICE inline {{ vectorType.elementType.className }} Y() const
+    GM_HOST_DEVICE inline {{ valueType.elementType.className }} Y() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 1 ];
     }
 {%- endif %}
 
-{% if vectorType.shape|length == 1 and vectorType.elementSize >= 3 and vectorType.elementSize <= 4 -%}
+{% if valueType.shape|length == 1 and valueType.elementSize >= 3 and valueType.elementSize <= 4 -%}
     /// Z component accessor for the third element.
-    GM_HOST_DEVICE inline {{ vectorType.elementType.className }} Z() const
+    GM_HOST_DEVICE inline {{ valueType.elementType.className }} Z() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 2 ];
     }
 {%- endif %}
 
-{% if vectorType.shape|length == 1 and vectorType.elementSize == 4 %}
+{% if valueType.shape|length == 1 and valueType.elementSize == 4 %}
     /// W component accessor for the fourth element.
-    GM_HOST_DEVICE inline {{ vectorType.elementType.className }} W() const
+    GM_HOST_DEVICE inline {{ valueType.elementType.className }} W() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 3 ];
@@ -149,13 +149,13 @@ public:
     /// Corresponding elements of the current vector and \p i_vector are added to form a new vector.
     ///
     /// \return the new vector.
-    GM_HOST_DEVICE inline {{ vectorType.className }} operator+( const {{ vectorType.className }}& i_vector ) const
+    GM_HOST_DEVICE inline {{ valueType.className }} operator+( const {{ valueType.className }}& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
-        return {{ vectorType.className }}(
-{% for index in range(vectorType.elementSize) -%}
+        return {{ valueType.className }}(
+{% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] + i_vector.m_elements[ {{ index }} ]
-{%- if index + 1 < vectorType.elementSize -%}
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif %}
 {%- endfor %}
@@ -163,23 +163,23 @@ public:
     }
 
     /// Element-wise vector addition assignment.
-    GM_HOST_DEVICE inline {{ vectorType.className }}& operator+=( const {{ vectorType.className }}& i_vector )
+    GM_HOST_DEVICE inline {{ valueType.className }}& operator+=( const {{ valueType.className }}& i_vector )
     {
         GM_ASSERT( !HasNans() );
-{% for index in range(vectorType.elementSize) -%}
+{% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] += i_vector.m_elements[ {{ index }} ];
 {%- endfor %}
         return *this;
     }
 
     /// Vector subtraction.
-    GM_HOST_DEVICE inline {{ vectorType.className }} operator-( const {{ vectorType.className }}& i_vector ) const
+    GM_HOST_DEVICE inline {{ valueType.className }} operator-( const {{ valueType.className }}& i_vector ) const
     {
         GM_ASSERT( !HasNans() );
-        return {{ vectorType.className }}(
-{% for index in range(vectorType.elementSize) -%}
+        return {{ valueType.className }}(
+{% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] - i_vector.m_elements[ {{ index }} ]
-{%- if index + 1 < vectorType.elementSize -%}
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif %}
 {%- endfor %}
@@ -187,44 +187,44 @@ public:
     }
 
     /// Vector subtraction assignment.
-    GM_HOST_DEVICE inline {{ vectorType.className }}& operator-=( const {{ vectorType.className }}& i_vector )
+    GM_HOST_DEVICE inline {{ valueType.className }}& operator-=( const {{ valueType.className }}& i_vector )
     {
         GM_ASSERT( !HasNans() );
-{% for index in range(vectorType.elementSize) -%}
+{% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] -= i_vector.m_elements[ {{ index }} ];
 {%- endfor %}
         return *this;
     }
 
     /// Scalar multiplication assignment.
-    GM_HOST_DEVICE inline {{ vectorType.className }}& operator*=( const {{ vectorType.elementType.className }}& i_scalar )
+    GM_HOST_DEVICE inline {{ valueType.className }}& operator*=( const {{ valueType.elementType.className }}& i_scalar )
     {
         GM_ASSERT( !HasNans() );
-{% for index in range(vectorType.elementSize) -%}
+{% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] *= i_scalar;
 {%- endfor %}
         return *this;
     }
 
     /// Scalar division.
-    GM_HOST_DEVICE inline {{ vectorType.className }} operator/( const {{ vectorType.elementType.className }}& i_scalar ) const
+    GM_HOST_DEVICE inline {{ valueType.className }} operator/( const {{ valueType.elementType.className }}& i_scalar ) const
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_scalar != {{ vectorType.CppValue(0) }} );
-{% if vectorType.elementType == "float" or vectorType.elementType == "double" -%}
-        {{ vectorType.elementType.className }} reciprocal = {{ vectorType.CppValue(1) }} / i_scalar;
-        return {{ vectorType.className }}(
-{% for index in range(vectorType.elementSize) -%}
+        GM_ASSERT( i_scalar != {{ valueType.CppValue(0) }} );
+{% if valueType.elementType == "float" or valueType.elementType == "double" -%}
+        {{ valueType.elementType.className }} reciprocal = {{ valueType.CppValue(1) }} / i_scalar;
+        return {{ valueType.className }}(
+{% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] * reciprocal
-{%- if index + 1 < vectorType.elementSize -%}
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif %}
 {%- endfor %}
 {%- else -%}
-        return {{ vectorType.className }}(
-{% for index in range(vectorType.elementSize) -%}
+        return {{ valueType.className }}(
+{% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] / i_scalar
-{%- if index + 1 < vectorType.elementSize -%}
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif %}
 {%- endfor %}
@@ -233,17 +233,17 @@ public:
     }
 
     /// Scalar division assignment.
-    GM_HOST_DEVICE inline {{ vectorType.className }}& operator/=( const {{ vectorType.elementType.className }}& i_scalar )
+    GM_HOST_DEVICE inline {{ valueType.className }}& operator/=( const {{ valueType.elementType.className }}& i_scalar )
     {
         GM_ASSERT( !HasNans() );
-        GM_ASSERT( i_scalar != {{ vectorType.CppValue(0) }} );
-{% if vectorType.elementType == "float" or vectorType.elementType == "double" -%}
-        {{ vectorType.elementType.className }} reciprocal = {{ vectorType.CppValue(1) }} / i_scalar;
-{% for index in range(vectorType.elementSize) -%}
+        GM_ASSERT( i_scalar != {{ valueType.CppValue(0) }} );
+{% if valueType.elementType == "float" or valueType.elementType == "double" -%}
+        {{ valueType.elementType.className }} reciprocal = {{ valueType.CppValue(1) }} / i_scalar;
+{% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] *= reciprocal;
 {%- endfor %}
 {%- else -%}
-{% for index in range(vectorType.elementSize) -%}
+{% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] /= i_scalar;
 {%- endfor %}
 {%- endif %}
@@ -251,13 +251,13 @@ public:
     }
 
     /// Unary negation.
-    GM_HOST_DEVICE inline {{ vectorType.className }} operator-() const
+    GM_HOST_DEVICE inline {{ valueType.className }} operator-() const
     {
         GM_ASSERT( !HasNans() );
-        return {{ vectorType.className }}(
-{% for index in range(vectorType.elementSize) -%}
+        return {{ valueType.className }}(
+{% for index in range(valueType.elementSize) -%}
         -m_elements[ {{ index }} ]
-{%- if index + 1 < vectorType.elementSize -%}
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif %}
 {%- endfor %}
@@ -269,16 +269,16 @@ public:
     // --------------------------------------------------------------------- //
 
     /// Comparison operator
-    GM_HOST_DEVICE inline bool operator==( const {{vectorType.className}}& i_vector ) const
+    GM_HOST_DEVICE inline bool operator==( const {{valueType.className}}& i_vector ) const
     {
         return
-{% for index in range(vectorType.elementSize) -%}
-{% if vectorType.elementType.className == "int" -%}
+{% for index in range(valueType.elementSize) -%}
+{% if valueType.elementType.className == "int" -%}
         m_elements[ {{ index }} ] == i_vector.m_elements[ {{ index }} ]
 {%- else -%}
         AlmostEqual( m_elements[ {{ index }} ], i_vector.m_elements[ {{ index }} ] )
 {%- endif %}
-{%- if index + 1 < vectorType.elementSize -%}
+{%- if index + 1 < valueType.elementSize -%}
         &&
 {% endif %}
 {%- endfor -%}
@@ -286,7 +286,7 @@ public:
     }
 
     /// Not equal operator
-    GM_HOST_DEVICE inline bool operator!=( const {{vectorType.className}}& i_vector ) const
+    GM_HOST_DEVICE inline bool operator!=( const {{valueType.className}}& i_vector ) const
     {
         return !( (*this) == i_vector );
     }
@@ -298,7 +298,7 @@ public:
     /// Get the number of elements in this vector.
     GM_HOST_DEVICE inline static size_t GetElementSize()
     {
-        return {{ vectorType.elementSize }};
+        return {{ valueType.elementSize }};
     }
 
     // --------------------------------------------------------------------- //
@@ -309,9 +309,9 @@ public:
     GM_HOST_DEVICE inline bool HasNans() const
     {
         return
-{% for index in range(vectorType.elementSize) -%}
+{% for index in range(valueType.elementSize) -%}
         std::isnan( m_elements[ {{ index }} ] )
-{%- if index + 1 < vectorType.elementSize -%}
+{%- if index + 1 < valueType.elementSize -%}
         ||
 {%- endif %}
 {%- endfor %}
@@ -326,22 +326,22 @@ public:
     inline std::string GetString( const std::string& i_classPrefix=std::string() ) const
     {
         std::stringstream ss;
-        ss << i_classPrefix << "{{ vectorType.className }}( ";
-{%- if vectorType.shape|length == 2 -%}
-{%- for index in range(vectorType.elementSize) -%}
-{%- if index % vectorType.shape[0] == 0 -%}
+        ss << i_classPrefix << "{{ valueType.className }}( ";
+{%- if valueType.shape|length == 2 -%}
+{%- for index in range(valueType.elementSize) -%}
+{%- if index % valueType.shape[0] == 0 -%}
         ss << "\n    ";
 {%- endif -%}
         ss << m_elements[ {{ index }} ];
-{%- if index + 1 < vectorType.elementSize -%}
+{%- if index + 1 < valueType.elementSize -%}
         ss << ", ";
 {%- endif -%}
 {%- endfor -%}
         ss << "\n)";
 {%- else -%}
-{%- for index in range(vectorType.elementSize) -%}
+{%- for index in range(valueType.elementSize) -%}
         ss << m_elements[ {{ index }} ];
-{%- if index + 1 < vectorType.elementSize -%}
+{%- if index + 1 < valueType.elementSize -%}
         ss << ", ";
 {%- endif -%}
 {%- endfor -%}
@@ -351,10 +351,10 @@ public:
     }
 
 private:
-    {{ vectorType.elementType.className }} m_elements[ {{ vectorType.elementSize }} ] = {
-{%- for index in range(vectorType.elementSize) -%}
-        {{ vectorType.CppValue(0) }}
-{%- if index + 1 < vectorType.elementSize -%}
+    {{ valueType.elementType.className }} m_elements[ {{ valueType.elementSize }} ] = {
+{%- for index in range(valueType.elementSize) -%}
+        {{ valueType.CppValue(0) }}
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif %}
 {%- endfor %}
@@ -362,13 +362,13 @@ private:
 };
 
 /// Vector-scalar multiplication.
-GM_HOST_DEVICE inline {{ vectorType.className }} operator*( const {{ vectorType.className }}& i_vector, const {{ vectorType.elementType.className }}& i_scalar )
+GM_HOST_DEVICE inline {{ valueType.className }} operator*( const {{ valueType.className }}& i_vector, const {{ valueType.elementType.className }}& i_scalar )
 {
     GM_ASSERT( !i_vector.HasNans() );
-    return {{ vectorType.className }}(
-{% for index in range(vectorType.elementSize) -%}
+    return {{ valueType.className }}(
+{% for index in range(valueType.elementSize) -%}
     i_vector[ {{ index }} ] * i_scalar
-{%- if index + 1 < vectorType.elementSize -%}
+{%- if index + 1 < valueType.elementSize -%}
     ,
 {%- endif %}
 {%- endfor %}
@@ -376,13 +376,13 @@ GM_HOST_DEVICE inline {{ vectorType.className }} operator*( const {{ vectorType.
 }
 
 /// Scalar-vector multiplication.
-GM_HOST_DEVICE inline {{ vectorType.className }} operator*( const {{ vectorType.elementType.className }}& i_scalar, const {{ vectorType.className }}& i_vector )
+GM_HOST_DEVICE inline {{ valueType.className }} operator*( const {{ valueType.elementType.className }}& i_scalar, const {{ valueType.className }}& i_vector )
 {
     GM_ASSERT( !i_vector.HasNans() );
-    return {{ vectorType.className }}(
-{% for index in range(vectorType.elementSize) -%}
+    return {{ valueType.className }}(
+{% for index in range(valueType.elementSize) -%}
     i_vector[ {{ index }} ] * i_scalar
-{%- if index + 1 < vectorType.elementSize -%}
+{%- if index + 1 < valueType.elementSize -%}
     ,
 {%- endif %}
 {%- endfor %}
@@ -396,7 +396,7 @@ GM_HOST_DEVICE inline {{ vectorType.className }} operator*( const {{ vectorType.
 /// \param i_vector the source vector value type.
 ///
 /// \return the output stream.
-inline std::ostream& operator<<( std::ostream& o_outputStream, const {{ vectorType.className }}& i_vector )
+inline std::ostream& operator<<( std::ostream& o_outputStream, const {{ valueType.className }}& i_vector )
 {
     o_outputStream << i_vector.GetString();
     return o_outputStream;

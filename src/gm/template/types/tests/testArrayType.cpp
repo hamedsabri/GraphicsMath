@@ -1,9 +1,9 @@
 #include <catch2/catch.hpp>
 
-#include <gm/types/{{ arrayType.headerFileName }}>
+#include <gm/types/{{ valueType.headerFileName }}>
 
-TEST_CASE( "{{ arrayType.className }}_DefaultConstructor" )
+TEST_CASE( "{{ valueType.className }}_DefaultConstructor" )
 {
-    gm::{{ arrayType.className }} {{ arrayType.varName }};
-    CHECK( {{ arrayType.varName }}.size() == 0 );
+    gm::{{ valueType.className }} {{ valueType.varName }};
+    CHECK( {{ valueType.varName }}.size() == 0 );
 }

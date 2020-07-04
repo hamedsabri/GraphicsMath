@@ -1,22 +1,17 @@
-#pragma once
+{% extends "types/baseType.h" %}
 
-/// \file {{ arrayType.headerFileName }}
-/// \ingroup gm_types_array
-
+{% block includes %}
 #include <vector>
 
-#include <gm/gm.h>
-
-{% if arrayType.elementType.isVector %}
-#include <gm/types/{{ arrayType.elementType.headerFileName }}>
+{% if valueType.elementType.isVector %}
+#include <gm/types/{{ valueType.elementType.headerFileName }}>
 {%- endif %}
+{% endblock %}
 
-GM_NS_OPEN
-
-/// \typedef {{ arrayType.className }}
-/// \ingroup gm_types_array
+{% block body %}
+/// \typedef {{ valueType.className }}
+/// \ingroup gm_types_{{ valueType.CATEGORY }}
 ///
-/// Type definition of an array of \ref {{ arrayType.elementType.className }}.
-using {{ arrayType.className }} = std::vector< {{ arrayType.elementType.className }} >;
-
-GM_NS_CLOSE
+/// Type definition of an array of \ref {{ valueType.elementType.className }}.
+using {{ valueType.className }} = std::vector< {{ valueType.elementType.className }} >;
+{% endblock %}

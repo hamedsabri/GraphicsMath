@@ -145,10 +145,6 @@ def GenerateTypes():
     filePaths = []
     valueTypes = ( VECTOR_TYPES + RANGE_TYPES + ARRAY_TYPES )
     for valueType in valueTypes:
-        kwargs = {
-            ("{category}Type".format(category=valueType.CATEGORY)) : valueType,
-        }
-
         # C++ source code.
         filePaths.append(
             GenerateCode(
@@ -156,7 +152,7 @@ def GenerateTypes():
                     category=valueType.CATEGORY,
                 )),
                 os.path.join(TYPES_DIR, valueType.headerFileName),
-                **kwargs
+                valueType=valueType,
             )
         )
 
@@ -171,7 +167,7 @@ def GenerateTypes():
                     TESTS_DIR,
                     "test{className}.cpp".format(className=valueType.className),
                 ),
-                **kwargs
+                valueType=valueType,
             )
         )
 
@@ -186,7 +182,7 @@ def GenerateTypes():
                     TYPES_DIR,
                     "bind{className}.cpp".format(className=valueType.className),
                 ),
-                **kwargs
+                valueType=valueType,
             )
         )
 
@@ -202,7 +198,7 @@ def GenerateTypes():
                     TESTS_DIR,
                     "test{className}.py".format(className=valueType.className),
                 ),
-                **kwargs
+                valueType=valueType,
             )
         )
 

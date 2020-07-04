@@ -1,33 +1,33 @@
 #include <catch2/catch.hpp>
 
-#include <gm/types/{{ rangeType.headerFileName }}>
-#include <gm/types/{{ rangeType.headerFileName.replace("Range", "Array") }}>
+#include <gm/types/{{ valueType.headerFileName }}>
+#include <gm/types/{{ valueType.headerFileName.replace("Range", "Array") }}>
 
-TEST_CASE( "{{ rangeType.className }}_DefaultConstructor" )
+TEST_CASE( "{{ valueType.className }}_DefaultConstructor" )
 {
-    gm::{{ rangeType.className }} {{ rangeType.varName }};
-    CHECK( {{ rangeType.varName }}.Min() ==
-{%- if rangeType.elementType.isScalar -%}
-           std::numeric_limits< {{ rangeType.elementType.className }} >::max()
-{%- elif rangeType.elementType.isVector %}
-           gm::{{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-        std::numeric_limits< {{ rangeType.elementType.elementType.className }} >::max()
-{%- if index + 1 < rangeType.elementType.elementSize -%}
+    gm::{{ valueType.className }} {{ valueType.varName }};
+    CHECK( {{ valueType.varName }}.Min() ==
+{%- if valueType.elementType.isScalar -%}
+           std::numeric_limits< {{ valueType.elementType.className }} >::max()
+{%- elif valueType.elementType.isVector %}
+           gm::{{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+        std::numeric_limits< {{ valueType.elementType.elementType.className }} >::max()
+{%- if index + 1 < valueType.elementType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor -%}
     )
 {%- endif -%}
     );
-    CHECK( {{ rangeType.varName }}.Max() ==
-{%- if rangeType.elementType.isScalar -%}
-           std::numeric_limits< {{ rangeType.elementType.className }} >::min()
-{%- elif rangeType.elementType.isVector %}
-           gm::{{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-        std::numeric_limits< {{ rangeType.elementType.elementType.className }} >::min()
-{%- if index + 1 < rangeType.elementType.elementSize -%}
+    CHECK( {{ valueType.varName }}.Max() ==
+{%- if valueType.elementType.isScalar -%}
+           std::numeric_limits< {{ valueType.elementType.className }} >::min()
+{%- elif valueType.elementType.isVector %}
+           gm::{{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+        std::numeric_limits< {{ valueType.elementType.elementType.className }} >::min()
+{%- if index + 1 < valueType.elementType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor -%}
@@ -36,52 +36,52 @@ TEST_CASE( "{{ rangeType.className }}_DefaultConstructor" )
     );
 }
 
-TEST_CASE( "{{ rangeType.className }}_MinMaxConstructor" )
+TEST_CASE( "{{ valueType.className }}_MinMaxConstructor" )
 {
-    gm::{{ rangeType.className }} {{ rangeType.varName }}(
-{%- if rangeType.elementType.isScalar -%}
-            {{ rangeType.CppValue( -1 ) }},
-            {{ rangeType.CppValue( 1 ) }}
-{%- elif rangeType.elementType.isVector %}
-           gm::{{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-            {{ rangeType.CppValue( -1 ) }}
-{%- if index + 1 < rangeType.elementType.elementSize -%}
+    gm::{{ valueType.className }} {{ valueType.varName }}(
+{%- if valueType.elementType.isScalar -%}
+            {{ valueType.CppValue( -1 ) }},
+            {{ valueType.CppValue( 1 ) }}
+{%- elif valueType.elementType.isVector %}
+           gm::{{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+            {{ valueType.CppValue( -1 ) }}
+{%- if index + 1 < valueType.elementType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor -%}
-    ), gm::{{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-            {{ rangeType.CppValue( 1 ) }}
-{%- if index + 1 < rangeType.elementType.elementSize -%}
-        ,
-{%- endif -%}
-{%- endfor -%}
-    )
-{%- endif -%}
-    );
-    CHECK( {{ rangeType.varName }}.Min() ==
-{%- if rangeType.elementType.isScalar -%}
-            {{ rangeType.CppValue( -1 ) }}
-{%- elif rangeType.elementType.isVector %}
-           gm::{{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-            {{ rangeType.CppValue( -1 ) }}
-{%- if index + 1 < rangeType.elementType.elementSize -%}
+    ), gm::{{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+            {{ valueType.CppValue( 1 ) }}
+{%- if index + 1 < valueType.elementType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor -%}
     )
 {%- endif -%}
     );
-    CHECK( {{ rangeType.varName }}.Max() ==
-{%- if rangeType.elementType.isScalar -%}
-            {{ rangeType.CppValue( 1 ) }}
-{%- elif rangeType.elementType.isVector %}
-           gm::{{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-            {{ rangeType.CppValue( 1 ) }}
-{%- if index + 1 < rangeType.elementType.elementSize -%}
+    CHECK( {{ valueType.varName }}.Min() ==
+{%- if valueType.elementType.isScalar -%}
+            {{ valueType.CppValue( -1 ) }}
+{%- elif valueType.elementType.isVector %}
+           gm::{{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+            {{ valueType.CppValue( -1 ) }}
+{%- if index + 1 < valueType.elementType.elementSize -%}
+        ,
+{%- endif -%}
+{%- endfor -%}
+    )
+{%- endif -%}
+    );
+    CHECK( {{ valueType.varName }}.Max() ==
+{%- if valueType.elementType.isScalar -%}
+            {{ valueType.CppValue( 1 ) }}
+{%- elif valueType.elementType.isVector %}
+           gm::{{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+            {{ valueType.CppValue( 1 ) }}
+{%- if index + 1 < valueType.elementType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor -%}
@@ -90,31 +90,31 @@ TEST_CASE( "{{ rangeType.className }}_MinMaxConstructor" )
     );
 }
 
-TEST_CASE( "{{ rangeType.className }}_MinAccessor" )
+TEST_CASE( "{{ valueType.className }}_MinAccessor" )
 {
-    gm::{{ rangeType.className }} {{ rangeType.varName }};
-    {{ rangeType.varName }}.Min() =
-{%- if rangeType.elementType.isScalar -%}
-            {{ rangeType.CppValue( -1 ) }}
-{%- elif rangeType.elementType.isVector %}
-           gm::{{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-            {{ rangeType.CppValue( -1 ) }}
-{%- if index + 1 < rangeType.elementType.elementSize -%}
+    gm::{{ valueType.className }} {{ valueType.varName }};
+    {{ valueType.varName }}.Min() =
+{%- if valueType.elementType.isScalar -%}
+            {{ valueType.CppValue( -1 ) }}
+{%- elif valueType.elementType.isVector %}
+           gm::{{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+            {{ valueType.CppValue( -1 ) }}
+{%- if index + 1 < valueType.elementType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor -%}
     )
 {%- endif -%}
     ;
-    CHECK( {{ rangeType.varName }}.Min() ==
-{%- if rangeType.elementType.isScalar -%}
-            {{ rangeType.CppValue( -1 ) }}
-{%- elif rangeType.elementType.isVector %}
-           gm::{{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-            {{ rangeType.CppValue( -1 ) }}
-{%- if index + 1 < rangeType.elementType.elementSize -%}
+    CHECK( {{ valueType.varName }}.Min() ==
+{%- if valueType.elementType.isScalar -%}
+            {{ valueType.CppValue( -1 ) }}
+{%- elif valueType.elementType.isVector %}
+           gm::{{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+            {{ valueType.CppValue( -1 ) }}
+{%- if index + 1 < valueType.elementType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor -%}
@@ -123,31 +123,31 @@ TEST_CASE( "{{ rangeType.className }}_MinAccessor" )
     );
 }
 
-TEST_CASE( "{{ rangeType.className }}_MaxAccessor" )
+TEST_CASE( "{{ valueType.className }}_MaxAccessor" )
 {
-    gm::{{ rangeType.className }} {{ rangeType.varName }};
-    {{ rangeType.varName }}.Max() =
-{%- if rangeType.elementType.isScalar -%}
-            {{ rangeType.CppValue( 1 ) }}
-{%- elif rangeType.elementType.isVector %}
-           gm::{{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-            {{ rangeType.CppValue( 1 ) }}
-{%- if index + 1 < rangeType.elementType.elementSize -%}
+    gm::{{ valueType.className }} {{ valueType.varName }};
+    {{ valueType.varName }}.Max() =
+{%- if valueType.elementType.isScalar -%}
+            {{ valueType.CppValue( 1 ) }}
+{%- elif valueType.elementType.isVector %}
+           gm::{{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+            {{ valueType.CppValue( 1 ) }}
+{%- if index + 1 < valueType.elementType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor -%}
     )
 {%- endif -%}
     ;
-    CHECK( {{ rangeType.varName }}.Max() ==
-{%- if rangeType.elementType.isScalar -%}
-            {{ rangeType.CppValue( 1 ) }}
-{%- elif rangeType.elementType.isVector %}
-           gm::{{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-            {{ rangeType.CppValue( 1 ) }}
-{%- if index + 1 < rangeType.elementType.elementSize -%}
+    CHECK( {{ valueType.varName }}.Max() ==
+{%- if valueType.elementType.isScalar -%}
+            {{ valueType.CppValue( 1 ) }}
+{%- elif valueType.elementType.isVector %}
+           gm::{{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+            {{ valueType.CppValue( 1 ) }}
+{%- if index + 1 < valueType.elementType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor -%}
@@ -156,19 +156,19 @@ TEST_CASE( "{{ rangeType.className }}_MaxAccessor" )
     );
 }
 
-{% if rangeType.elementType.isScalar and rangeType.elementType.className == "int" %}
-TEST_CASE( "{{ rangeType.className }}_RangeIteration" )
+{% if valueType.elementType.isScalar and valueType.elementType.className == "int" %}
+TEST_CASE( "{{ valueType.className }}_RangeIteration" )
 {
-    gm::{{ rangeType.className }} range( {{ rangeType.CppValue( -3 ) }}, {{ rangeType.CppValue( 3 ) }} );
-    gm::{{ rangeType.className.replace("Range", "Array") }} array;
-    for ( const {{ rangeType.elementType.className }}& value : range )
+    gm::{{ valueType.className }} range( {{ valueType.CppValue( -3 ) }}, {{ valueType.CppValue( 3 ) }} );
+    gm::{{ valueType.className.replace("Range", "Array") }} array;
+    for ( const {{ valueType.elementType.className }}& value : range )
     {
         array.push_back( value );
     }
 
-    gm::{{ rangeType.className.replace("Range", "Array") }} expectedArray = {
+    gm::{{ valueType.className.replace("Range", "Array") }} expectedArray = {
 {% for index in range(-3, 3) -%}
-        {{ rangeType.CppValue( index ) }}
+        {{ valueType.CppValue( index ) }}
 {%- if index + 1 < 3 -%}
         ,
 {%- endif -%}
@@ -176,53 +176,53 @@ TEST_CASE( "{{ rangeType.className }}_RangeIteration" )
     };
     CHECK( array == expectedArray );
 }
-{% elif rangeType.elementType.isVector and rangeType.elementType.elementType.className == "int" %}
-TEST_CASE( "{{ rangeType.className }}_RangeIteration" )
+{% elif valueType.elementType.isVector and valueType.elementType.elementType.className == "int" %}
+TEST_CASE( "{{ valueType.className }}_RangeIteration" )
 {
-    gm::{{ rangeType.className }} range(
-           gm::{{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-            {{ rangeType.CppValue( -2 ) }}
-{%- if index + 1 < rangeType.elementType.elementSize -%}
+    gm::{{ valueType.className }} range(
+           gm::{{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+            {{ valueType.CppValue( -2 ) }}
+{%- if index + 1 < valueType.elementType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor -%}
-    ), gm::{{ rangeType.elementType.className }}(
-{% for index in range(rangeType.elementType.elementSize) -%}
-            {{ rangeType.CppValue( 4 ) }}
-{%- if index + 1 < rangeType.elementType.elementSize -%}
+    ), gm::{{ valueType.elementType.className }}(
+{% for index in range(valueType.elementType.elementSize) -%}
+            {{ valueType.CppValue( 4 ) }}
+{%- if index + 1 < valueType.elementType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor -%}
     )
     );
-    gm::{{ rangeType.className.replace("Range", "Array") }} array;
-    for ( const gm::{{ rangeType.elementType.className }}& value : range )
+    gm::{{ valueType.className.replace("Range", "Array") }} array;
+    for ( const gm::{{ valueType.elementType.className }}& value : range )
     {
         array.push_back( value );
     }
 
-    gm::{{ rangeType.className.replace("Range", "Array") }} expectedArray = {
-{% if rangeType.elementType.elementSize == 2 -%}
+    gm::{{ valueType.className.replace("Range", "Array") }} expectedArray = {
+{% if valueType.elementType.elementSize == 2 -%}
 {% for y in range(-2, 4) -%}
 {% for x in range(-2, 4) -%}
-        gm::{{ rangeType.elementType.className }}(
-            {{ rangeType.CppValue( x ) }},
-            {{ rangeType.CppValue( y ) }}
+        gm::{{ valueType.elementType.className }}(
+            {{ valueType.CppValue( x ) }},
+            {{ valueType.CppValue( y ) }}
         )
 {%- if x != 4 - 1 or y != 4 - 1 -%}
         ,
 {%- endif -%}
 {%- endfor -%}
 {%- endfor -%}
-{%- elif rangeType.elementType.elementSize == 3 -%}
+{%- elif valueType.elementType.elementSize == 3 -%}
 {% for z in range(-2, 4) -%}
 {% for y in range(-2, 4) -%}
 {% for x in range(-2, 4) -%}
-        gm::{{ rangeType.elementType.className }}(
-            {{ rangeType.CppValue( x ) }},
-            {{ rangeType.CppValue( y ) }},
-            {{ rangeType.CppValue( z ) }}
+        gm::{{ valueType.elementType.className }}(
+            {{ valueType.CppValue( x ) }},
+            {{ valueType.CppValue( y ) }},
+            {{ valueType.CppValue( z ) }}
         )
 {%- if x != 4 - 1 or y != 4 - 1 or z != 4 -%}
         ,
@@ -230,16 +230,16 @@ TEST_CASE( "{{ rangeType.className }}_RangeIteration" )
 {%- endfor -%}
 {%- endfor -%}
 {%- endfor -%}
-{%- elif rangeType.elementType.elementSize == 4 -%}
+{%- elif valueType.elementType.elementSize == 4 -%}
 {% for w in range(-2, 4) -%}
 {% for z in range(-2, 4) -%}
 {% for y in range(-2, 4) -%}
 {% for x in range(-2, 4) -%}
-        gm::{{ rangeType.elementType.className }}(
-            {{ rangeType.CppValue( x ) }},
-            {{ rangeType.CppValue( y ) }},
-            {{ rangeType.CppValue( z ) }},
-            {{ rangeType.CppValue( w ) }}
+        gm::{{ valueType.elementType.className }}(
+            {{ valueType.CppValue( x ) }},
+            {{ valueType.CppValue( y ) }},
+            {{ valueType.CppValue( z ) }},
+            {{ valueType.CppValue( w ) }}
         )
 {%- if x != 4 - 1 or y != 4 - 1 or z != 4 or w != 4 -%}
         ,
