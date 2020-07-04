@@ -6,21 +6,58 @@ import os
 import shlex
 import subprocess
 import math
+import logging
 
 from jinja2 import Environment, Template, StrictUndefined
 
-# Name of the codegen template directory.
+"""
+Name of the code generation template directory.
+"""
 TEMPLATE_DIR = "template"
 
-# Python source file extension.
+"""
+Python source file extension.
+"""
 PY_SOURCE_EXT = ".py"
 
-# CPP file extension(s).
+"""
+CPP file extension(s).
+"""
 CPP_SOURCE_EXT = ".cpp"
 CPP_HEADER_EXT = ".h"
 
-# Global jinja2 environment.
+"""
+Global jinja2 environment.
+"""
 JINJA2_ENVIRONMENT = Environment(undefined=StrictUndefined)
+
+"""
+Global logger
+"""
+LOGGER = logging.getLogger("gm")
+
+class Style:
+    """
+    Style is a collection of ANSI escape sequences for styling text printed in the console.
+    """
+    HEADER = '\033[95m'
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    END = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
+def PrintMessage(message):
+    """
+    Print a message in the console.
+
+    Args:
+        message (str): message to print.
+    """
+    print(Style.GREEN + Style.BOLD + message + Style.END)
 
 
 def GetFileExt(filePath):
@@ -44,13 +81,23 @@ def LowerCamelCase(upperCamelCaseStr):
     return upperCamelCaseStr[0].lower() + upperCamelCaseStr[1:]
 
 
-def RunCommand(command):
+def RunCommand(command, expectedCode=0):
     """
     Run the ``command`` by forking a subprocess.
+
+    Args:
+        command (str): The command to run.
+        expectedCode (int): Expected return code of the process.
     """
-    print("Running command {}".format(command))
-    process = subprocess.Popen(shlex.split(command))
-    process.wait()
+    LOGGER.info("Running command {}".format(command))
+    process = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    stdout, _ = process.communicate()
+    if process.returncode != expectedCode:
+        LOGGER.error(stdout)
+        raise RuntimeError("Expected return code {expectedCode} != {returnCode}".format(
+            expectedCode=expectedCode,
+            returnCode=process.returncode,
+        ))
 
 
 def WriteFile(filePath, content):
@@ -61,7 +108,7 @@ def WriteFile(filePath, content):
         filePath (str): path to write to.
         content (str): content to write.
     """
-    print("Generated {!r}".format(filePath))
+    LOGGER.info("Generated {!r}".format(filePath))
     with open(filePath, "w") as f:
         f.write(content)
 

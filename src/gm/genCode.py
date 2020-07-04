@@ -13,6 +13,7 @@ from codeGen.utils import (
     FormatCode,
     LowerCamelCase,
     UpperCamelCase,
+    PrintMessage,
 )
 
 from codeGen.types import (
@@ -139,6 +140,7 @@ def GenerateTypes():
         )
     """
     # TODO Generate composite types.
+    PrintMessage("Generating types...")
 
     filePaths = []
     valueTypes = ( VECTOR_TYPES + RANGE_TYPES + ARRAY_TYPES )
@@ -218,6 +220,8 @@ def GenerateFunctions():
     Returns:
         list: file paths to the generated files.
     """
+    PrintMessage("Generating functions...")
+
     # Unary operations.
     unaryOps = []
     for valueType in [ScalarType(FLOAT),] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
@@ -536,6 +540,7 @@ if __name__ == "__main__":
     filePaths += GenerateFunctions()
 
     # Generate python module.
+    PrintMessage("Generating python module...")
     filePaths.append(
         GenerateCode(
             os.path.join(PYTHON_DIR, "module.cpp"),
@@ -547,4 +552,5 @@ if __name__ == "__main__":
     )
 
     # Format all the code to standard.
+    PrintMessage("Formatting code...")
     FormatCode(filePaths)
