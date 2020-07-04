@@ -1,4 +1,4 @@
-{% extends "types/baseType.h" %}
+{% extends "types/typeBase.h" %}
 
 {% block includes %}
 #include <cmath>
@@ -12,7 +12,6 @@
 {% endblock %}
 
 {% block body %}
-
 /// \class {{ valueType.className }}
 /// \ingroup gm_types_{{ valueType.CATEGORY }}
 ///

@@ -14,4 +14,3 @@ GM_NS_OPEN
 {% endblock %}
 
 GM_NS_CLOSE
-

@@ -1,4 +1,4 @@
-{% extends "types/baseType.h" %}
+{% extends "types/typeBase.h" %}
 
 {% block includes %}
 {% if valueType.elementType.isVector %}
