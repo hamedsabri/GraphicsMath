@@ -34,11 +34,11 @@ void BindVec3iArray( pybind11::module& );
 void BindVec4iArray( pybind11::module& );
 
 // Function Declarations.
-void BindNormalize( pybind11::module& );
 void BindLinearInterpolation( pybind11::module& );
+void BindNormalize( pybind11::module& );
 void BindMin( pybind11::module& );
 void BindAbs( pybind11::module& );
-void BindIsIdentity( pybind11::module& );
+void BindDegrees( pybind11::module& );
 void BindMax( pybind11::module& );
 void BindFloor( pybind11::module& );
 void BindTranspose( pybind11::module& );
@@ -56,7 +56,7 @@ void BindRaySphereIntersection( pybind11::module& );
 void BindMatrixProduct( pybind11::module& );
 void BindRayPosition( pybind11::module& );
 void BindQuadraticRoots( pybind11::module& );
-void BindDegrees( pybind11::module& );
+void BindIsIdentity( pybind11::module& );
 
 PYBIND11_MODULE( gm, o_module )
 {
@@ -92,11 +92,11 @@ PYBIND11_MODULE( gm, o_module )
     BindVec4iArray( o_module );
 
     // Functions.
-    BindNormalize( o_module );
     BindLinearInterpolation( o_module );
+    BindNormalize( o_module );
     BindMin( o_module );
     BindAbs( o_module );
-    BindIsIdentity( o_module );
+    BindDegrees( o_module );
     BindMax( o_module );
     BindFloor( o_module );
     BindTranspose( o_module );
@@ -114,5 +114,5 @@ PYBIND11_MODULE( gm, o_module )
     BindMatrixProduct( o_module );
     BindRayPosition( o_module );
     BindQuadraticRoots( o_module );
-    BindDegrees( o_module );
+    BindIsIdentity( o_module );
 }

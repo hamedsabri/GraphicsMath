@@ -34,6 +34,7 @@ from codeGen.functions import (
     FunctionInterface,
     FunctionArg,
     Mutability,
+    FunctionCategory,
 )
 
 
@@ -95,9 +96,7 @@ VECTOR_TYPES = sorted(
 """
 RANGE_TYPES is the fixed, global set of range-based types (min, max) to generate code for.
 """
-RANGE_TYPES = [
-    RangeType(scalarType) for scalarType in NUMERIC_SCALAR_TYPES
-] + [
+RANGE_TYPES = [RangeType(scalarType) for scalarType in NUMERIC_SCALAR_TYPES] + [
     RangeType(vectorType) for vectorType in VECTOR_TYPES if len(vectorType.shape) == 1
 ]
 
@@ -105,9 +104,7 @@ RANGE_TYPES = [
 """
 ARRAY_TYPES is the fixed, global set of array-based value types to generate code for.
 """
-ARRAY_TYPES = [
-    ArrayType(scalarType) for scalarType in SCALAR_TYPES
-] + [
+ARRAY_TYPES = [ArrayType(scalarType) for scalarType in SCALAR_TYPES] + [
     ArrayType(vectorType) for vectorType in VECTOR_TYPES
 ]
 
@@ -127,6 +124,7 @@ FUNCTIONS = {}
 # Code generation for types.
 #
 
+
 def GenerateTypes():
     """
     Top-level entry point for generating all data type source files.
@@ -143,14 +141,14 @@ def GenerateTypes():
     PrintMessage("Generating types...")
 
     filePaths = []
-    valueTypes = ( VECTOR_TYPES + RANGE_TYPES + ARRAY_TYPES )
+    valueTypes = VECTOR_TYPES + RANGE_TYPES + ARRAY_TYPES
     for valueType in valueTypes:
         # C++ source code.
         filePaths.append(
             GenerateCode(
-                os.path.join(TYPES_DIR, "{category}Type.h".format(
-                    category=valueType.CATEGORY,
-                )),
+                os.path.join(
+                    TYPES_DIR, "{category}Type.h".format(category=valueType.CATEGORY,)
+                ),
                 os.path.join(TYPES_DIR, valueType.headerFileName),
                 valueType=valueType,
             )
@@ -159,9 +157,13 @@ def GenerateTypes():
         # Cpp tests.
         filePaths.append(
             GenerateCode(
-                os.path.join(TYPES_DIR, TESTS_DIR, "test{category}Type.cpp".format(
-                    category=UpperCamelCase(valueType.CATEGORY),
-                )),
+                os.path.join(
+                    TYPES_DIR,
+                    TESTS_DIR,
+                    "test{category}Type.cpp".format(
+                        category=UpperCamelCase(valueType.CATEGORY),
+                    ),
+                ),
                 os.path.join(
                     TYPES_DIR,
                     TESTS_DIR,
@@ -174,9 +176,13 @@ def GenerateTypes():
         # Python bindings.
         filePaths.append(
             GenerateCode(
-                os.path.join(PYTHON_DIR, TYPES_DIR, "bind{category}Type.cpp".format(
-                    category=UpperCamelCase(valueType.CATEGORY),
-                )),
+                os.path.join(
+                    PYTHON_DIR,
+                    TYPES_DIR,
+                    "bind{category}Type.cpp".format(
+                        category=UpperCamelCase(valueType.CATEGORY),
+                    ),
+                ),
                 os.path.join(
                     PYTHON_DIR,
                     TYPES_DIR,
@@ -189,9 +195,14 @@ def GenerateTypes():
         # Tests for python bindings.
         filePaths.append(
             GenerateCode(
-                os.path.join(PYTHON_DIR, TYPES_DIR, TESTS_DIR, "test{category}Type.py".format(
-                    category=UpperCamelCase(valueType.CATEGORY),
-                )),
+                os.path.join(
+                    PYTHON_DIR,
+                    TYPES_DIR,
+                    TESTS_DIR,
+                    "test{category}Type.py".format(
+                        category=UpperCamelCase(valueType.CATEGORY),
+                    ),
+                ),
                 os.path.join(
                     PYTHON_DIR,
                     TYPES_DIR,
@@ -205,10 +216,6 @@ def GenerateTypes():
     return filePaths, valueTypes
 
 
-#
-# Code generation for functions.
-#
-
 def GenerateFunctions():
     """
     Generate code for all of the functions.
@@ -220,7 +227,9 @@ def GenerateFunctions():
 
     # Unary operations.
     unaryOps = []
-    for valueType in [ScalarType(FLOAT),] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
+    for valueType in (
+        [ScalarType(FLOAT),] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES
+    ):
         unaryOps.append(
             FunctionInterface(
                 arguments=[FunctionArg("value", valueType, Mutability.Const),],
@@ -322,7 +331,11 @@ def GenerateFunctions():
         setVectorTransformOps.append(
             FunctionInterface(
                 arguments=[
-                    FunctionArg("vector", VectorType((matrixType.shape[0] - 1,), matrixType.elementType), Mutability.Const),
+                    FunctionArg(
+                        "vector",
+                        VectorType((matrixType.shape[0] - 1,), matrixType.elementType),
+                        Mutability.Const,
+                    ),
                     FunctionArg("matrix", matrixType, Mutability.Mutable),
                 ],
             )
@@ -356,7 +369,9 @@ def GenerateFunctions():
 
     # Interpolation operators.
     interpolationOps = []
-    for valueType in [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT:
+    for valueType in (
+        [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT
+    ):
         arguments = [
             FunctionArg("source", valueType, Mutability.Const),
             FunctionArg("target", valueType, Mutability.Const),
@@ -364,23 +379,24 @@ def GenerateFunctions():
         if valueType.isScalar:
             arguments.append(FunctionArg("weight", valueType, Mutability.Const))
         else:
-            assert(valueType.isVector)
-            arguments.append(FunctionArg("weight", valueType.elementType, Mutability.Const))
+            assert valueType.isVector
+            arguments.append(
+                FunctionArg("weight", valueType.elementType, Mutability.Const)
+            )
 
         interpolationOps.append(
-            FunctionInterface(
-                arguments=arguments,
-                returnType=valueType,
-            )
+            FunctionInterface(arguments=arguments, returnType=valueType,)
         )
 
     # Map operators.
     mapOps = []
-    for valueType in [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT:
+    for valueType in (
+        [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT
+    ):
         if valueType.isScalar:
             rangeValueType = RangeType(valueType)
         else:
-            assert(valueType.isVector)
+            assert valueType.isVector
             rangeValueType = RangeType(valueType.elementType)
 
         arguments = [
@@ -389,15 +405,13 @@ def GenerateFunctions():
             FunctionArg("targetRange", rangeValueType, Mutability.Const),
         ]
 
-        mapOps.append(
-            FunctionInterface(
-                arguments=arguments,
-                returnType=valueType,
-            )
-        )
+        mapOps.append(FunctionInterface(arguments=arguments, returnType=valueType,))
 
     rayOps = []
-    for valueType in (VectorType((2,), ScalarType(FLOAT)), VectorType((3,), ScalarType(FLOAT)),):
+    for valueType in (
+        VectorType((2,), ScalarType(FLOAT)),
+        VectorType((3,), ScalarType(FLOAT)),
+    ):
         rayOps.append(
             FunctionInterface(
                 arguments=[
@@ -417,7 +431,9 @@ def GenerateFunctions():
                     FunctionArg("a", valueType, Mutability.Const),
                     FunctionArg("b", valueType, Mutability.Const),
                     FunctionArg("c", valueType, Mutability.Const),
-                    FunctionArg("roots", VectorType((2,), valueType), Mutability.Mutable),
+                    FunctionArg(
+                        "roots", VectorType((2,), valueType), Mutability.Mutable
+                    ),
                 ],
                 returnType=ScalarType(INT),
             )
@@ -429,33 +445,64 @@ def GenerateFunctions():
             FunctionInterface(
                 arguments=[
                     FunctionArg("sphereOrigin", valueType, Mutability.Const),
-                    FunctionArg("sphereRadius", valueType.elementType, Mutability.Const),
+                    FunctionArg(
+                        "sphereRadius", valueType.elementType, Mutability.Const
+                    ),
                     FunctionArg("rayOrigin", valueType, Mutability.Const),
                     FunctionArg("rayDirection", valueType, Mutability.Const),
-                    FunctionArg("intersections", VectorType((2,), valueType.elementType), Mutability.Mutable),
+                    FunctionArg(
+                        "intersections",
+                        VectorType((2,), valueType.elementType),
+                        Mutability.Mutable,
+                    ),
                 ],
                 returnType=ScalarType(INT),
             )
         )
 
     functionGroups = [
-        FunctionGroup(["floor", "ceil", "abs",], interfaces=unaryOps),
-        FunctionGroup(["min", "max",], interfaces=binaryComparisonOps,),
-        FunctionGroup(["isIdentity"], interfaces=checkMatrixOps,),
-        FunctionGroup(["setIdentity"], interfaces=setMatrixOps,),
-        FunctionGroup(["transpose"], interfaces=matrixUnaryOps,),
-        FunctionGroup(["matrixProduct"], interfaces=matrixBinaryOps,),
-        FunctionGroup(["normalize",], interfaces=vectorOps,),
-        FunctionGroup(["length", "lengthSquared",], interfaces=vectorReductionOps,),
-        FunctionGroup(["dotProduct"], interfaces=vectorProductOps,),
-        FunctionGroup(["degrees", "radians",], interfaces=angleOps,),
-        FunctionGroup(["distance"], interfaces=pointReductionOps,),
-        FunctionGroup(["setTranslate", "setScale",], interfaces=setVectorTransformOps,),
-        FunctionGroup(["linearInterpolation",], interfaces=interpolationOps,),
-        FunctionGroup(["linearMap",], interfaces=mapOps,),
-        FunctionGroup(["quadraticRoots",], interfaces=quadraticOps,),
-        FunctionGroup(["rayPosition",], interfaces=rayOps,),
-        FunctionGroup(["raySphereIntersection",], interfaces=raySphereIntersectionOps,),
+        # Basic.
+        FunctionGroup(["floor", "ceil", "abs",], unaryOps, FunctionCategory.BASIC),
+        FunctionGroup(["min", "max",], binaryComparisonOps, FunctionCategory.BASIC),
+        FunctionGroup(["quadraticRoots",], quadraticOps, FunctionCategory.BASIC),
+        FunctionGroup(["degrees", "radians",], angleOps, FunctionCategory.BASIC),
+
+        # Interpolation.
+        FunctionGroup(
+            ["linearInterpolation",], interpolationOps, FunctionCategory.INTERPOLATION
+        ),
+        FunctionGroup(["linearMap",], mapOps, FunctionCategory.INTERPOLATION),
+
+        # Linear algebra.
+        FunctionGroup(["isIdentity"], checkMatrixOps, FunctionCategory.LINEAR_ALGEBRA),
+        FunctionGroup(["setIdentity"], setMatrixOps, FunctionCategory.LINEAR_ALGEBRA),
+        FunctionGroup(["transpose"], matrixUnaryOps, FunctionCategory.LINEAR_ALGEBRA),
+        FunctionGroup(
+            ["matrixProduct"], matrixBinaryOps, FunctionCategory.LINEAR_ALGEBRA
+        ),
+        FunctionGroup(["normalize",], vectorOps, FunctionCategory.LINEAR_ALGEBRA),
+        FunctionGroup(
+            ["length", "lengthSquared",],
+            vectorReductionOps,
+            FunctionCategory.LINEAR_ALGEBRA,
+        ),
+        FunctionGroup(
+            ["dotProduct"], vectorProductOps, FunctionCategory.LINEAR_ALGEBRA
+        ),
+        FunctionGroup(["distance"], pointReductionOps, FunctionCategory.LINEAR_ALGEBRA),
+        FunctionGroup(
+            ["setTranslate", "setScale",],
+            setVectorTransformOps,
+            FunctionCategory.LINEAR_ALGEBRA,
+        ),
+
+        # Ray tracing
+        FunctionGroup(["rayPosition",], rayOps, FunctionCategory.RAY_TRACING),
+        FunctionGroup(
+            ["raySphereIntersection",],
+            raySphereIntersectionOps,
+            FunctionCategory.RAY_TRACING,
+        ),
     ]
 
     # Generate code.

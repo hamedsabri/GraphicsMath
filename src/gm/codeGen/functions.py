@@ -6,6 +6,17 @@ from utils import UpperCamelCase
 from collections import OrderedDict
 
 
+class FunctionCategory:
+    """
+    Categories of functions.
+    """
+
+    BASIC = "basic"
+    INTERPOLATION = "interpolation"
+    LINEAR_ALGEBRA = "linearAlgebra"
+    RAY_TRACING = "rayTracing"
+
+
 class Mutability:
     """
     Describes the mutability of a function argument.
@@ -161,11 +172,13 @@ class Function:
         name (str): name of the function.
         interfaces (list): list of interfaces which describe the different variations of
             arguments and return types.
+        category (str): named category that this function belongs to.
     """
 
-    def __init__(self, name, interfaces):
+    def __init__(self, name, interfaces, category):
         self._name = name
         self.interfaces = interfaces
+        self.category = category
 
     @property
     def headerFileName(self):
@@ -201,8 +214,8 @@ class FunctionGroup:
     Group of functions which share a common code-generation context.
     """
 
-    def __init__(self, functionNames, interfaces):
+    def __init__(self, functionNames, interfaces, category):
         self.functions = []
         for name in functionNames:
-            function = Function(name, interfaces)
+            function = Function(name, interfaces, category)
             self.functions.append(function)

@@ -1,30 +1,24 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_basic
-///
+{%- block fileDoc -%}
 /// Find the absolute value of two input values, defined as the magnitude of a real number without its sign.
 ///
 /// If the value type is a vector, the absolute value will be performed on each element.
+{%- endblock %}
 
-#include <gm/gm.h>
-
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{% endif -%}
-{%- endfor %}
-
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
 #include <algorithm>
+{% endblock %}
 
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
 /// Find the absolute value of the input \p {{ interface.ArgName("value") }}.
-/// \ingroup gm_functions_basic
+/// \ingroup gm_functions_{{ function.category }}
 ///
-/// \return the absolute value of the input.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+/// \return The absolute value of the input.
+{{- functionUtils.signature(function, interface) -}}
 {
 {% if interface.Arg("value").type.isScalar -%}
     return std::abs( {{ interface.ArgName("value") }} );
@@ -40,5 +34,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
 {%- endif %}
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}

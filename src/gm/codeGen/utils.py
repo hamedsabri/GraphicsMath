@@ -36,7 +36,9 @@ Global jinja2 environment.
 """
 JINJA2_ENVIRONMENT = Environment(
     undefined=StrictUndefined,
-    loader=FileSystemLoader(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", TEMPLATE_DIR))),
+    loader=FileSystemLoader(
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", TEMPLATE_DIR))
+    ),
 )
 
 """
@@ -44,18 +46,20 @@ Global logger
 """
 LOGGER = logging.getLogger("gm")
 
+
 class Style:
     """
     Style is a collection of ANSI escape sequences for styling text printed in the console.
     """
-    HEADER = '\033[95m'
-    BLUE = '\033[94m'
-    GREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    END = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+
+    HEADER = "\033[95m"
+    BLUE = "\033[94m"
+    GREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    END = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
 
 
 def PrintMessage(message):
@@ -98,14 +102,17 @@ def RunCommand(command, expectedCode=0):
         expectedCode (int): Expected return code of the process.
     """
     LOGGER.info("Running command {}".format(command))
-    process = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    process = subprocess.Popen(
+        shlex.split(command), stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+    )
     stdout, _ = process.communicate()
     if process.returncode != expectedCode:
         LOGGER.error(stdout)
-        raise RuntimeError("Expected return code {expectedCode} != {returnCode}".format(
-            expectedCode=expectedCode,
-            returnCode=process.returncode,
-        ))
+        raise RuntimeError(
+            "Expected return code {expectedCode} != {returnCode}".format(
+                expectedCode=expectedCode, returnCode=process.returncode,
+            )
+        )
 
 
 def WriteFile(filePath, content):

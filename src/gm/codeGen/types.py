@@ -33,6 +33,7 @@ class ValueType:
     ValueType instances are used throughout the code generation templates, for both
     C++ and python sources, and for both types and functions.
     """
+
     CATEGORY = None
 
     @property
@@ -142,6 +143,7 @@ class ScalarType(ValueType):
     Class members:
         CATEGORY (str): The named category of all scalar value types.
     """
+
     CATEGORY = "scalar"
 
     def __init__(self, typeName):
@@ -283,6 +285,7 @@ class VectorType(ElementContainerType):
     Class members:
         CATEGORY (str): The named category of all vector value types.
     """
+
     CATEGORY = "vector"
 
     def __init__(self, shape, elementType):
@@ -380,6 +383,7 @@ class RangeType(ElementContainerType):
     Class members:
         CATEGORY (str): The named category of all Range value types.
     """
+
     CATEGORY = "range"
 
     def __init__(self, elementType):
@@ -441,6 +445,7 @@ class ArrayType(ElementContainerType):
     Class members:
         CATEGORY (str): The named category of all Array value types.
     """
+
     CATEGORY = "array"
 
     def __init__(self, elementType):
@@ -533,6 +538,7 @@ class CompositeType(ValueType):
     Class members:
         CATEGORY (str): The named category of all Composite value types.
     """
+
     CATEGORY = "composite"
 
     def __init__(self, name, elements, extraIncludes=None):

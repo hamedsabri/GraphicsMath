@@ -1,27 +1,24 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-///
+{%- block fileDoc -%}
 /// Ceil the input value, by rounding upwards to the nearest integral value.
 /// If the value type is a vector, the ceil will be performed element-wise.
+{%- endblock %}
 
-#include <gm/gm.h>
-
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{% endif -%}
-{%- endfor %}
-
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
 #include <cmath>
+{% endblock %}
 
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
-/// Ceil the input \ref {{ interface.ArgClass("value") }} \p {{ interface.ArgName("value") }} and return it.
+/// Ceil the input \ref {{ interface.ArgClass("value") }} \p {{ interface.ArgName("value") }},
+/// rounding upwards to the nearest integral value.
+/// \ingroup gm_functions_{{ function.category }}
 ///
-/// \return the rounded input value.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+/// \return The upward rounded input value.
+{{- functionUtils.signature(function, interface) -}}
 {
 {% if interface.Arg("value").type.isScalar -%}
     return std::ceil( {{ interface.ArgName("value") }} );
@@ -37,5 +34,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
 {%- endif %}
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}
