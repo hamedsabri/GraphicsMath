@@ -17,7 +17,7 @@ GM_NS_OPEN
 /// \class IntRange
 /// \ingroup gm_types_range
 ///
-/// Class definition for a minimum, maximum range of int(s).
+/// Class definition for a bounded range of int(s).
 class IntRange final
 {
 public:

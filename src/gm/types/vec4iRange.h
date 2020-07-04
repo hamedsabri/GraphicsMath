@@ -19,7 +19,7 @@ GM_NS_OPEN
 /// \class Vec4iRange
 /// \ingroup gm_types_range
 ///
-/// Class definition for a minimum, maximum range of Vec4i(s).
+/// Class definition for a bounded range of Vec4i(s).
 class Vec4iRange final
 {
 public:

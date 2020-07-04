@@ -17,7 +17,7 @@ GM_NS_OPEN
 /// \class {{ rangeType.className }}
 /// \ingroup gm_types_range
 ///
-/// Class definition for a minimum, maximum range of {{ rangeType.elementType.className }}(s).
+/// Class definition for a bounded range of {{ rangeType.elementType.className }}(s).
 class {{ rangeType.className }} final
 {
 public:

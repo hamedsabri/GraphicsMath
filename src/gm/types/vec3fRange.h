@@ -19,7 +19,7 @@ GM_NS_OPEN
 /// \class Vec3fRange
 /// \ingroup gm_types_range
 ///
-/// Class definition for a minimum, maximum range of Vec3f(s).
+/// Class definition for a bounded range of Vec3f(s).
 class Vec3fRange final
 {
 public:

@@ -19,7 +19,7 @@ GM_NS_OPEN
 /// \class Vec2fRange
 /// \ingroup gm_types_range
 ///
-/// Class definition for a minimum, maximum range of Vec2f(s).
+/// Class definition for a bounded range of Vec2f(s).
 class Vec2fRange final
 {
 public:

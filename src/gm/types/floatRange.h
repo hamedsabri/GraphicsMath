@@ -17,7 +17,7 @@ GM_NS_OPEN
 /// \class FloatRange
 /// \ingroup gm_types_range
 ///
-/// Class definition for a minimum, maximum range of float(s).
+/// Class definition for a bounded range of float(s).
 class FloatRange final
 {
 public:
