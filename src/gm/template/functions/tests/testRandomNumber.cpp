@@ -13,7 +13,7 @@ TEST_CASE( "{{ function.name }}_{{ interface.returnType.className }}" )
         gm::RandomNumber( {{ interface.ArgType("range").varName }} );
     CHECK( {{ interface.returnType.varName }} >=
            {{ interface.ArgType("range").varName }}.Min() );
-    CHECK( {{ interface.returnType.varName }} <=
+    CHECK( {{ interface.returnType.varName }} <
            {{ interface.ArgType("range").varName }}.Max() );
 }
 {% endfor %}

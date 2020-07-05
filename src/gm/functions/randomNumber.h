@@ -7,9 +7,9 @@
 /// \file functions/randomNumber.h
 /// \ingroup gm_functions_basic
 ///
-/// Random number generation.
+/// Thread-safe random number generation.
 ///
-/// Generate a random number within a numeric scalar range.
+/// Uniformly generate a random number within a numeric range.
 
 #include <gm/gm.h>
 
@@ -52,7 +52,7 @@ GM_HOST_DEVICE inline int RandomNumber( const IntRange& i_range )
 {
     GM_ASSERT( i_range.Min() != i_range.Max() );
     static thread_local std::mt19937     generator;
-    std::uniform_int_distribution< int > distribution( i_range.Min(), i_range.Max() );
+    std::uniform_int_distribution< int > distribution( i_range.Min(), i_range.Max() - 1 );
     return distribution( generator );
 }
 

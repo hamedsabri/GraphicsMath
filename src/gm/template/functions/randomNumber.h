@@ -2,9 +2,9 @@
 {% import "functions/functionUtils.h" as functionUtils %}
 
 {%- block fileDoc -%}
-/// Random number generation.
+/// Thread-safe random number generation.
 ///
-/// Generate a random number within a numeric scalar range.
+/// Uniformly generate a random number within a numeric range.
 {%- endblock %}
 
 {% block includes %}
@@ -38,6 +38,9 @@
     < {{ interface.ArgType("range").elementType.className }} > distribution(
         {{ interface.ArgName("range") }}.Min(),
         {{ interface.ArgName("range") }}.Max()
+{%- if interface.ArgType("range").elementType.className == "int" -%}
+        - {{ interface.ArgType("range").CppValue( 1 ) }}
+{%- endif -%}
     );
     return distribution( generator );
 }
