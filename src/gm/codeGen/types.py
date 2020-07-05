@@ -514,7 +514,7 @@ class CompositeElement:
         defaultValue (str): string, encoding C++ code that will be assigned to element member variable.
     """
 
-    def __init__(self, name, type, defaultValue):
+    def __init__(self, name, type, defaultValue=None):
         self.name = name
         self.type = type
         self.defaultValue = defaultValue
@@ -544,22 +544,30 @@ class CompositeType(ValueType):
     def __init__(self, name, elements, extraIncludes=None):
         for element in elements:
             assert isinstance(element.type, ValueType)
-        self._name = name
+        self.name = name
         self.elements = elements
         self.elementSize = len(self.elements)
         self.extraIncludes = extraIncludes or []
 
     def __hash__(self):
-        return hash((self._name, self.elements))
+        return hash((self.name, self.elements))
 
     @property
     def className(self):
-        return UpperCamelCase(self._name)
+        return UpperCamelCase(self.name)
 
     @property
     def headerFileName(self):
-        return "{name}.h".format(name=LowerCamelCase(self._name),)
+        return "{name}.h".format(name=LowerCamelCase(self.name),)
 
     @property
     def isComposite(self):
         return True
+
+    @property
+    def varName(self):
+        """
+        Returns:
+            str: variable name for this value type.
+        """
+        return self.name

@@ -32,6 +32,7 @@ void BindVec4fArray( pybind11::module& );
 void BindVec2iArray( pybind11::module& );
 void BindVec3iArray( pybind11::module& );
 void BindVec4iArray( pybind11::module& );
+void BindRay( pybind11::module& );
 
 // Function Declarations.
 void BindLinearInterpolation( pybind11::module& );
@@ -92,6 +93,7 @@ PYBIND11_MODULE( gm, o_module )
     BindVec2iArray( o_module );
     BindVec3iArray( o_module );
     BindVec4iArray( o_module );
+    BindRay( o_module );
 
     // Functions.
     BindLinearInterpolation( o_module );

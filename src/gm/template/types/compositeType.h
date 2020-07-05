@@ -25,6 +25,10 @@
 class {{ valueType.className }} final
 {
 public:
+    // --------------------------------------------------------------------- //
+    /// \name Construction
+    // --------------------------------------------------------------------- //
+
     /// Default constructor.
     GM_HOST_DEVICE constexpr inline {{ valueType.className }}()  = default;
 
@@ -48,6 +52,10 @@ public:
     {
     }
 
+    // --------------------------------------------------------------------- //
+    /// \name Element access
+    // --------------------------------------------------------------------- //
+
 {% for element in valueType.elements %}
     /// Const accessor for "{{ element.name }}".
     GM_HOST_DEVICE inline const {{ element.type.className }}& {{ element.accessorName }}() const
@@ -61,6 +69,10 @@ public:
         return m_{{ element.name }};
     }
 {% endfor %}
+
+    // --------------------------------------------------------------------- //
+    /// \name Debug
+    // --------------------------------------------------------------------- //
 
     /// Get the string representation.  For debugging purposes.
     ///
@@ -86,7 +98,7 @@ public:
     }
 
 private:
-    /// Element members.
+    // Element members.
 {% for element in valueType.elements -%}
     {{ element.type.className }} m_{{ element.name }}
 {%- if element.defaultValue -%}

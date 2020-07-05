@@ -124,6 +124,23 @@ FUNCTIONS = {}
 # Code generation for types.
 #
 
+def PopulateCompositeTypes():
+    """
+    Populate the COMPOSITE_TYPES dictionary.
+    """
+    compositeTypes = [
+        CompositeType(
+            "ray",
+            [
+                CompositeElement("origin", VectorType((3,), ScalarType(FLOAT))),
+                CompositeElement("direction", VectorType((3,), ScalarType(FLOAT))),
+            ],
+        ),
+    ]
+
+    for compositeType in compositeTypes:
+        COMPOSITE_TYPES[compositeType.name] = compositeType
+
 
 def GenerateTypes():
     """
@@ -140,8 +157,10 @@ def GenerateTypes():
     # TODO Generate composite types.
     PrintMessage("Generating types...")
 
+    PopulateCompositeTypes()
+
     filePaths = []
-    valueTypes = VECTOR_TYPES + RANGE_TYPES + ARRAY_TYPES
+    valueTypes = VECTOR_TYPES + RANGE_TYPES + ARRAY_TYPES + COMPOSITE_TYPES.values()
     for valueType in valueTypes:
         # C++ source code.
         filePaths.append(
