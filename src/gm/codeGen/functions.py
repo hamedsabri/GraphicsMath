@@ -83,10 +83,7 @@ class FunctionInterface:
         Returns:
             str: the c return type.
         """
-        if self._returnType:
-            return self._returnType.className
-        else:
-            return "void"
+        return self._returnType
 
     @property
     def typedArgs(self):

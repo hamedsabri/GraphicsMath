@@ -12,7 +12,7 @@ void Bind{{ function.name }}( pybind11::module& o_module )
     o_module.def( "{{ function.name }}",
         []( {{ interface.typedArgs }} )
         {
-            {%- if interface.returnType != "void" -%}
+            {%- if interface.returnType -%}
             return{{ " " }}
             {%- endif -%}
             {{ function.name }}( {{ interface.namedArgs }} );

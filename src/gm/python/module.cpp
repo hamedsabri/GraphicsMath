@@ -39,6 +39,7 @@ void BindNormalize( pybind11::module& );
 void BindMin( pybind11::module& );
 void BindAbs( pybind11::module& );
 void BindDegrees( pybind11::module& );
+void BindRandomNumber( pybind11::module& );
 void BindMax( pybind11::module& );
 void BindFloor( pybind11::module& );
 void BindTranspose( pybind11::module& );
@@ -97,6 +98,7 @@ PYBIND11_MODULE( gm, o_module )
     BindMin( o_module );
     BindAbs( o_module );
     BindDegrees( o_module );
+    BindRandomNumber( o_module );
     BindMax( o_module );
     BindFloor( o_module );
     BindTranspose( o_module );

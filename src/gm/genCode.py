@@ -249,7 +249,6 @@ def GenerateFunctions():
                 returnType=valueType,
             )
         )
-
     # Vector product(s).
     vectorProductOps = []
     for vectorType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
@@ -460,12 +459,24 @@ def GenerateFunctions():
             )
         )
 
+    # Random number generation.
+    randomOps = []
+    for valueType in NUMERIC_SCALAR_TYPES:
+        randomOps.append(
+            FunctionInterface(
+                arguments=[FunctionArg("range", RangeType(valueType), Mutability.Const),],
+                returnType=valueType,
+            )
+        )
+
+
     functionGroups = [
         # Basic.
         FunctionGroup(["floor", "ceil", "abs",], unaryOps, FunctionCategory.BASIC),
         FunctionGroup(["min", "max",], binaryComparisonOps, FunctionCategory.BASIC),
         FunctionGroup(["quadraticRoots",], quadraticOps, FunctionCategory.BASIC),
         FunctionGroup(["degrees", "radians",], angleOps, FunctionCategory.BASIC),
+        FunctionGroup(["randomNumber",], randomOps, FunctionCategory.BASIC),
 
         # Interpolation.
         FunctionGroup(
