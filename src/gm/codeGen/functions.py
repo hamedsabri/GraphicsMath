@@ -12,7 +12,6 @@ class FunctionCategory:
     """
 
     BASIC = "basic"
-    INTERPOLATION = "interpolation"
     LINEAR_ALGEBRA = "linearAlgebra"
     RAY_TRACING = "rayTracing"
 

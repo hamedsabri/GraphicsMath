@@ -81,10 +81,6 @@ The GraphicsMath project is hosted on GitHub: https://github.com/moddyz/Graphics
 \ingroup GM_functions
 \brief Basic math operators such as absolute value, floor, min, max, and angle unit conversion.
 
-\defgroup gm_functions_interpolation Interpolation operators
-\ingroup GM_functions
-\brief Interpolation operators for producing new data sets.
-
 \defgroup gm_functions_linearAlgebra Linear algebra operators
 \ingroup GM_functions
 \brief Linear algebra operators operating on vectors and matrices.

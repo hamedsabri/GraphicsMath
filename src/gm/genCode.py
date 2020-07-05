@@ -406,6 +406,23 @@ def GenerateFunctions():
 
         mapOps.append(FunctionInterface(arguments=arguments, returnType=valueType,))
 
+    # Map operators.
+    clampOps = []
+    for valueType in (NUMERIC_SCALAR_TYPES + VECTOR_TYPES):
+        if valueType.isScalar:
+            rangeValueType = RangeType(valueType)
+        else:
+            assert valueType.isVector
+            rangeValueType = RangeType(valueType.elementType)
+
+        arguments = [
+            FunctionArg("value", valueType, Mutability.Const),
+            FunctionArg("range", rangeValueType, Mutability.Const),
+        ]
+
+        clampOps.append(FunctionInterface(arguments=arguments, returnType=valueType,))
+
+
     rayOps = []
     for valueType in (
         VectorType((2,), ScalarType(FLOAT)),
@@ -477,12 +494,11 @@ def GenerateFunctions():
         FunctionGroup(["quadraticRoots",], quadraticOps, FunctionCategory.BASIC),
         FunctionGroup(["degrees", "radians",], angleOps, FunctionCategory.BASIC),
         FunctionGroup(["randomNumber",], randomOps, FunctionCategory.BASIC),
-
-        # Interpolation.
         FunctionGroup(
-            ["linearInterpolation",], interpolationOps, FunctionCategory.INTERPOLATION
+            ["linearInterpolation",], interpolationOps, FunctionCategory.BASIC
         ),
-        FunctionGroup(["linearMap",], mapOps, FunctionCategory.INTERPOLATION),
+        FunctionGroup(["linearMap",], mapOps, FunctionCategory.BASIC),
+        FunctionGroup(["clamp",], clampOps, FunctionCategory.BASIC),
 
         # Linear algebra.
         FunctionGroup(["isIdentity"], checkMatrixOps, FunctionCategory.LINEAR_ALGEBRA),

@@ -52,6 +52,7 @@ void BindRadians( pybind11::module& );
 void BindLength( pybind11::module& );
 void BindSetIdentity( pybind11::module& );
 void BindLinearMap( pybind11::module& );
+void BindClamp( pybind11::module& );
 void BindLengthSquared( pybind11::module& );
 void BindRaySphereIntersection( pybind11::module& );
 void BindMatrixProduct( pybind11::module& );
@@ -111,6 +112,7 @@ PYBIND11_MODULE( gm, o_module )
     BindLength( o_module );
     BindSetIdentity( o_module );
     BindLinearMap( o_module );
+    BindClamp( o_module );
     BindLengthSquared( o_module );
     BindRaySphereIntersection( o_module );
     BindMatrixProduct( o_module );
