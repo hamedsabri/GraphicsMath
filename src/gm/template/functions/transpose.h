@@ -1,8 +1,7 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_linearAlgebra
-///
+{%- block fileDoc -%}
 /// Matrix transpose.
 ///
 /// Roughly speaking, transposing a matrix flips it across its main diagonal.
@@ -10,23 +9,21 @@
 /// Or, more precisely:
 /// - the rows of the original matrix become the columns of the transposed matrix.
 /// - for each entry specified by (i, j) in the original matrix, the corresponding entryin the transposed resides in (j, i).
+{%- endblock %}
 
-#include <gm/gm.h>
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
+{% endblock %}
 
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{%- endif %}
-{% endfor %}
-
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
 /// Transpose the input matrix \p {{ interface.ArgName("matrix") }}.
-/// \ingroup gm_functions_linearAlgebra
+/// \ingroup gm_functions_{{ function.category }}
 ///
-/// \return the transposed matrix.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+/// \param {{ interface.ArgName("matrix") }} The input matrix to transpose.
+///
+/// \return Transposed matrix.
+{{- functionUtils.signature(function, interface) -}}
 {
     return {{ interface.ArgType("matrix").className }}(
 {% for row in range(interface.ArgType("matrix").shape[0]) -%}
@@ -40,5 +37,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
     );
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}

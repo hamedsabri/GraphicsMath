@@ -1,8 +1,7 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_rayTracing
-///
+{%- block fileDoc -%}
 /// Position along a ray.
 ///
 /// Computed as the scalar \em multiplication of a \b direction vector \em added to a point \b origin.
@@ -15,22 +14,17 @@
 /// \f[ O=\textnormal{Ray origin vector}    \f]
 /// \f[ t=\textnormal{Magnitude scalar}     \f]
 /// \f[ D=\textnormal{Ray direction vector} \f]
+{%- endblock %}
 
-#include <gm/gm.h>
-
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{% endif -%}
-{%- endfor %}
-
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
 #include <gm/functions/length.h>
+{% endblock %}
 
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
-/// \ingroup gm_functions_rayTracing
 /// Compute the position along a ray by scalar magnitude \p {{ interface.ArgName("magnitude") }}.
+/// \ingroup gm_functions_{{ function.category }}
 ///
 /// \pre \p {{ interface.ArgName("direction") }} must be a normalized vector.
 ///
@@ -41,7 +35,7 @@ GM_NS_OPEN
 /// \param {{ interface.ArgName("magnitude") }} The magnitude to project the ray.
 ///
 /// \return the position along the curve.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+{{- functionUtils.signature(function, interface) -}}
 {
     GM_ASSERT_MSG( Length( {{ interface.ArgName("direction") }} ) ==
                    {{ interface.ArgType("direction").CppValue( 1 ) }},
@@ -50,5 +44,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
            ( {{ interface.ArgName("direction") }} * {{ interface.ArgName("magnitude") }} );
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}

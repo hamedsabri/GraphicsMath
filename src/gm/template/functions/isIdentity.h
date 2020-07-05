@@ -1,26 +1,24 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_linearAlgebra
-///
+{%- block fileDoc -%}
 /// Check if the input matrix is the identity matrix.
+{%- endblock %}
 
-#include <gm/gm.h>
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
+{% endblock %}
 
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{%- endif %}
-{% endfor %}
-
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
 /// Check if the matrix \p {{ interface.ArgName("matrix") }} is the identity matrix.
-/// \ingroup gm_functions_linearAlgebra
+/// \ingroup gm_functions_{{ function.category }}
 ///
-/// \return true if \p {{ interface.ArgName("matrix") }} is the identity matrix.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+/// \param {{ interface.ArgName("matrix") }} Input matrix.
+///
+/// \retval true If \p {{ interface.ArgName("matrix") }} is the identity matrix.
+/// \retval false If \p {{ interface.ArgName("matrix") }} is not the identity matrix.
+{{- functionUtils.signature(function, interface) -}}
 {
     return
 {% for row in range(interface.Arg("matrix").type.shape[0]) -%}
@@ -38,5 +36,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
     ;
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}

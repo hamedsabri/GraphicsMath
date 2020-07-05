@@ -1,29 +1,26 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_basic
-///
+{%- block fileDoc -%}
 /// Find the minimum of two input values.
-/// If the value type is a vector, the minimum will be performed element-wise.
+/// If the value type is a vector, the minimum will be computed per-element.
+{%- endblock %}
 
-#include <gm/gm.h>
-
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{% endif -%}
-{%- endfor %}
-
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
 #include <algorithm>
+{% endblock %}
 
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
 /// Find the minimum from the inputs \p {{ interface.ArgName("valueA") }} and \p {{ interface.ArgName("valueB") }}.
-/// \ingroup gm_functions_basic
+/// \ingroup gm_functions_{{ function.category }}
 ///
-/// \return the minimum of the inputs.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+/// \param {{ interface.ArgName("valueA") }} The first value to compare.
+/// \param {{ interface.ArgName("valueB") }} The second value to compare.
+///
+/// \return The minimum of the two inputs.
+{{- functionUtils.signature(function, interface) -}}
 {
 {% if interface.Arg("valueA").type.isScalar -%}
     return std::min( {{ interface.ArgName("valueA") }}, {{ interface.ArgName("valueB") }} );
@@ -39,5 +36,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
 {%- endif %}
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}

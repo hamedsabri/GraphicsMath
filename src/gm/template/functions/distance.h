@@ -18,7 +18,7 @@
 /// \ingroup gm_functions_{{ function.category }}
 ///
 /// \return The distance between the two points.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+{{- functionUtils.signature(function, interface) -}}
 {
     return Length( {{ interface.ArgName("pointA") }} - {{ interface.ArgName("pointB") }} );
 }

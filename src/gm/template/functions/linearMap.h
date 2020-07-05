@@ -1,8 +1,7 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_interpolation
-///
+{%- block fileDoc -%}
 /// Linear mapping.
 ///
 /// Map a value from a source range into a target range, such the ratio of the respective values within
@@ -14,20 +13,16 @@
 /// \f[ T_v=\textnormal{Target value} \f]
 /// \f[ T_0,T_1=\textnormal{Target range} \f]
 /// \f[ R=\frac{T_1-T_0}{S_1-S_0}=\textnormal{Ratio of the target to source range} \f]
+{%- endblock %}
 
-#include <gm/gm.h>
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
+{% endblock %}
 
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{% endif -%}
-{%- endfor %}
-
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
 /// Linearly maps a source value in range \p {{ interface.ArgName("sourceRange") }} into the range \p {{ interface.ArgName("targetRange") }}.
-/// \ingroup gm_functions_interpolation
+/// \ingroup gm_functions_{{ function.category }}
 ///
 /// \param {{ interface.ArgName("sourceValue") }} Value to map from the source range.
 /// \param {{ interface.ArgName("sourceRange") }} Source value range to map from.
@@ -36,7 +31,7 @@ GM_NS_OPEN
 /// \pre \p {{ interface.ArgName("sourceRange") }}'s min and max values cannot be equal.
 ///
 /// \return Linearly mapped target value.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+{{- functionUtils.signature(function, interface) -}}
 {
     GM_ASSERT( {{ interface.ArgName("sourceRange") }}.Min() !=
                {{ interface.ArgName("sourceRange") }}.Max() );
@@ -58,5 +53,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
 {%- endif %}
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}

@@ -1,34 +1,29 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_linearAlgebra
-///
+{%- block fileDoc -%}
 /// Compute the length squared of a vector, defined as the <em>sum of the squares</em> of <em>each vector element</em>.
 ///
 /// Can also be represented as the dot product (see \ref functions/dotProduct.h) of the vector with itself.
+{%- endblock %}
 
-#include <gm/gm.h>
-
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{%- endif %}
-{% endfor %}
-
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
 #include <gm/functions/dotProduct.h>
+{% endblock %}
 
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
 /// Compute the length squared of the vector \p {{ interface.ArgName("vector") }}.
-/// \ingroup gm_functions_linearAlgebra
+/// \ingroup gm_functions_{{ function.category }}
+///
+/// \param {{ interface.ArgName("vector") }} The input vector.
 ///
 /// \return the length squared of the vector.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+{{- functionUtils.signature(function, interface) -}}
 {
     return DotProduct( {{ interface.ArgName("vector") }},
                        {{ interface.ArgName("vector") }} );
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}

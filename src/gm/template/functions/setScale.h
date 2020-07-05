@@ -1,24 +1,32 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_linearAlgebra
+{%- block fileDoc -%}
+/// Set a scaling transform on a transformation matrix.
 ///
-/// Set scale on a transformation matrix.
+/// The scale vector \f$S=(S_x,S_y,S_z)\f$ set on a \p 4 by \p 4 identity matrix \f$I\f$ will produce:
+/// \f[
+/// \begin{bmatrix}
+/// S_x    & 0      & 0       & 0      \\
+/// 0      & S_y    & 0       & 0      \\
+/// 0      & 0      & S_z     & 0      \\
+/// 0      & 0      & 0       & 1
+/// \end{bmatrix}
+/// \f]
+{%- endblock %}
 
-#include <gm/gm.h>
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
+{% endblock %}
 
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{%- endif %}
-{% endfor %}
-
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
 /// Set the scale \p {{ interface.ArgName("vector") }} onto the transformation matrix \p {{ interface.ArgName("matrix") }}.
-/// \ingroup gm_functions_linearAlgebra
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+/// \ingroup gm_functions_{{ function.category }}
+///
+/// \param {{ interface.ArgName("vector") }} Scale vector.
+/// \param {{ interface.ArgName("matrix") }} Transformation matrix.
+{{- functionUtils.signature(function, interface) -}}
 {
 {% for row in range(interface.ArgType("matrix").shape[0]) -%}
 {% for col in range(interface.ArgType("matrix").shape[1]) -%}
@@ -29,5 +37,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
 {%- endfor -%}
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}

@@ -1,8 +1,7 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_linearAlgebra
-///
+{%- block fileDoc -%}
 /// Set the \em identity matrix \f$I\f$, defined as the neutral element with respect to matrix multiplication:
 /// \f[ AI=A\f]
 /// \f[ A=\textnormal{Any matrix} \f]
@@ -19,24 +18,19 @@
 /// 0      &        & \cdots  & 0      & 1
 /// \end{bmatrix}
 /// \f]
-///
+{%- endblock %}
 
-#include <gm/gm.h>
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
+{% endblock %}
 
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{%- endif %}
-{% endfor %}
-
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
 /// Set the identity matrix onto \p {{ interface.ArgName("matrix") }}.
-/// \ingroup gm_functions_linearAlgebra
+/// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("matrix") }} the matrix to set to the identity.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+/// \param {{ interface.ArgName("matrix") }} The matrix to set as the identity.
+{{- functionUtils.signature(function, interface) -}}
 {
     {{ interface.ArgName("matrix") }} = {{ interface.ArgClass("matrix") }}(
 {% for row in range(interface.Arg("matrix").type.shape[0]) -%}
@@ -54,5 +48,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
     );
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}

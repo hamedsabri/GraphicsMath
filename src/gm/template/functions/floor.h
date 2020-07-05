@@ -1,29 +1,25 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_basic
-///
+{%- block fileDoc -%}
 /// Floor the input value, by rounding downwards, returning the largest integral number less than the input.
 /// If the value type is a vector, the floor will be performed element-wise.
+{%- endblock %}
 
-#include <gm/gm.h>
-
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{% endif -%}
-{%- endfor %}
-
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
 #include <cmath>
+{% endblock %}
 
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
 /// Floor the input \ref {{ interface.ArgClass("value") }} \p {{ interface.ArgName("value") }} and return it.
-/// \ingroup gm_functions_basic
+/// \ingroup gm_functions_{{ function.category }}
 ///
-/// \return the floored input value.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+/// \param {{ interface.ArgName("value") }} Value to floor.
+///
+/// \return Floored input value.
+{{- functionUtils.signature(function, interface) -}}
 {
 {% if interface.Arg("value").type.isScalar -%}
     return std::floor( {{ interface.ArgName("value") }} );
@@ -39,5 +35,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
 {%- endif %}
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}

@@ -1,32 +1,31 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_linearAlgebra
-///
-/// Dot product, or scalar product between two <em>equal-length</em> vectors.
+{%- block fileDoc -%}
+/// Dot product, or inner product between two <em>equal-length</em> vectors.
 ///
 /// The corresponding elements of the two vector(s) are multipled, and the products reduced via summation,
 /// into a single value.
 ///
 /// This operation can be geometrically represented as the magnitudes between the vectors and the cosine of
 /// the angle between them.
+{%- endblock %}
 
-#include <gm/gm.h>
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
+{% endblock %}
 
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{% endif -%}
-{%- endfor %}
-
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
-/// Compute the dot product of two \ref {{ interface.ArgClass("lhs") }}, \p i_lhs and \p i_rhs, and return the result.
-/// \ingroup gm_functions_linearAlgebra
+/// Compute the dot product of two \ref {{ interface.ArgClass("lhs") }}, \p {{ interface.ArgName("lhs") }}
+/// and \p {{ interface.ArgName("lhs") }}, and return the result.
+/// \ingroup gm_functions_{{ function.category }}
 ///
-/// \return computed dot product.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+/// \param {{ interface.ArgName("lhs") }} Left hand side vector.
+/// \param {{ interface.ArgName("rhs") }} Right hand side vector.
+///
+/// \return Dot product of the two vectors.
+{{- functionUtils.signature(function, interface) -}}
 {
     return
 {% for index in range(interface.Arg("lhs").type.elementSize) -%}
@@ -38,5 +37,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
     ;
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}

@@ -1,8 +1,7 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_rayTracing
-///
+{%- block fileDoc -%}
 /// Ray sphere intersection test.
 ///
 /// Computes the intersection points between a ray and a sphere.
@@ -47,28 +46,22 @@
 /// \f$c=(O-C)^2-R^2\f$.
 ///
 /// The roots can be solved, forming the magnitudes which will produce the points of intersection.
+{%- endblock %}
 
-#include <gm/gm.h>
-
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
 #include <gm/base/assert.h>
-
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{%- endif %}
-{% endfor %}
-
 #include <gm/functions/dotProduct.h>
 #include <gm/functions/quadraticRoots.h>
 #ifdef GM_DEBUG
 #include <gm/functions/length.h>
 #endif
+{% endblock %}
 
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
-/// \ingroup gm_functions_rayTracing
-/// Find the intersection(s) between a ray and a sphere.
+/// Compute the intersection(s) between a ray and an implicit sphere.
+/// \ingroup gm_functions_{{ function.category }}
 ///
 /// The points of intersection can be computed from the intersection magnitudes
 /// \p {{ interface.ArgName("intersections") }} /// via \ref RayPosition.
@@ -93,10 +86,11 @@ GM_NS_OPEN
 /// \param {{ interface.ArgName("intersections") }} The magnitudes of the intersections with respect to the ray.
 ///
 /// \return The number of times the ray intersections the sphere.
+///
 /// \retval 0 The ray does not intersect the sphere at all.
 /// \retval 1 The ray intersects the surface of the sphere exactly.
 /// \retval 2 the ray intersects through the volume of the sphere.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+{{- functionUtils.signature(function, interface) -}}
 {
     GM_ASSERT_MSG( Length( {{ interface.ArgName("rayDirection") }} ) ==
                    {{ interface.ArgType("rayDirection").CppValue( 1 ) }},
@@ -169,6 +163,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
     }
 }
 {% endfor %}
-
-GM_NS_CLOSE
-
+{% endblock %}

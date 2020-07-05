@@ -1,8 +1,7 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_linearAlgebra
-///
+{%- block fileDoc -%}
 /// Matrix multiplication.
 ///
 /// Mathematically described as the composition of two linear maps.
@@ -12,24 +11,23 @@
 ///
 /// Each entry (i, j) in the matrix product AB can be computed as the dot (or inner) product of the \em i'th
 /// row vector of A and the \em j'th column vector of B.
+{%- endblock %}
 
-#include <gm/gm.h>
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
+{% endblock %}
 
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{%- endif %}
-{% endfor %}
-
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
 /// Multiply input matrices \p {{ interface.ArgName("lhs") }} and \p {{ interface.ArgName("rhs") }}
 /// to produce their matrix product.
-/// \ingroup gm_functions_linearAlgebra
+/// \ingroup gm_functions_{{ function.category }}
 ///
-/// \return the matrix product.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+/// \param {{ interface.ArgName("lhs") }} Left hand side matrix.
+/// \param {{ interface.ArgName("rhs") }} Right hand side matrix.
+///
+/// \return The matrix product.
+{{- functionUtils.signature(function, interface) -}}
 {
     return {{ interface.ArgType("lhs").className }}(
 {%- for row in range(interface.ArgType("lhs").shape[0] ) -%}
@@ -47,5 +45,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
     );
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}

@@ -1,37 +1,31 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_linearAlgebra
-///
+{%- block fileDoc -%}
 /// Vector normalization.
 ///
 /// The computation divides each of its elements by the vector length/magnitude.  The normalized vector is defined as a unit vector.
+{%- endblock %}
 
-#include <gm/gm.h>
-
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
 #include <gm/base/assert.h>
-
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{%- endif %}
-{% endfor %}
-
 #include <gm/functions/length.h>
+{% endblock %}
 
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
 /// Compute the normalised vector from the input vector \p {{ interface.ArgName("vector") }}.
-/// \ingroup gm_functions_linearAlgebra
+/// \ingroup gm_functions_{{ function.category }}
 ///
-/// \return the normalised vector.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+/// \param {{ interface.ArgName("vector") }} Input vector.
+///
+/// \return Normalised vector.
+{{- functionUtils.signature(function, interface) -}}
 {
     {{ interface.ArgType("vector").elementType.className }} length = Length( {{ interface.ArgName("vector") }} );
     GM_ASSERT( length != {{ interface.ArgType("vector").CppValue( 0 ) }} );
     return {{ interface.ArgName("vector") }} / length;
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}

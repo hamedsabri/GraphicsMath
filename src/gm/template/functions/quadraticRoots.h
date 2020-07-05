@@ -1,8 +1,7 @@
-#pragma once
+{% extends "functions/functionBase.h" %}
+{% import "functions/functionUtils.h" as functionUtils %}
 
-/// \file functions/{{ function.headerFileName }}
-/// \ingroup gm_functions_basic
-///
+{%- block fileDoc -%}
 /// Solve for the roots of a quadratic equation of the form \f$ax^2+bx+c=0\f$
 ///
 /// In other words, find the \em intersections of the parabolic function \f$f(x)=ax^2+bx+c\f$ and the X-axis.
@@ -12,22 +11,17 @@
 /// \f$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\f$
 ///
 /// Such that \f$x\f$ yields the root(s), if any.
+{%- endblock %}
 
-#include <gm/gm.h>
-
+{% block includes %}
+{{ functionUtils.typeIncludes(function) }}
 #include <gm/base/assert.h>
+{% endblock %}
 
-{% for type in function.types -%}
-{%- if not type.isScalar -%}
-#include <gm/types/{{ type.headerFileName }}>
-{%- endif %}
-{% endfor %}
-
-GM_NS_OPEN
-
+{% block body %}
 {% for interface in function.interfaces %}
 /// Solve for the roots of a quadratic equation.
-/// \ingroup gm_functions_basic
+/// \ingroup gm_functions_{{ function.category }}
 ///
 /// \param {{ interface.ArgName("a") }} The \f$a\f$ co-efficient.
 /// \param {{ interface.ArgName("b") }} The \f$b\f$ co-efficient.
@@ -39,7 +33,7 @@ GM_NS_OPEN
 /// \retval 0 No roots.
 /// \retval 1 A single intersection by the vertex of the parabola.
 /// \retval 2 Two symmetrical intersections with respect to the vertex.
-GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interface.typedArgs }} )
+{{- functionUtils.signature(function, interface) -}}
 {
     GM_ASSERT( {{ interface.ArgName("a") }} != {{ interface.ArgType("a").CppValue(0) }} );
 
@@ -72,5 +66,4 @@ GM_HOST_DEVICE inline {{ interface.returnType }} {{ function.name }}( {{ interfa
     }
 }
 {% endfor %}
-
-GM_NS_CLOSE
+{% endblock %}
