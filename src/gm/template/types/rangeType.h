@@ -18,6 +18,11 @@
 class {{ valueType.className }} final
 {
 public:
+    /// \typedef ValueType
+    ///
+    /// Convenience type definition of \ref {{ valueType.className }}'s elemental value type.
+    using ValueType = {{ valueType.elementType.className }};
+
     // --------------------------------------------------------------------- //
     /// \name Construction
     // --------------------------------------------------------------------- //
