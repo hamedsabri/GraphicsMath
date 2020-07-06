@@ -9,4 +9,6 @@
 TEST_CASE( "Ray_DefaultConstructor" )
 {
     gm::Ray ray;
+    CHECK( ray.Origin() == gm::Vec3f() );
+    CHECK( ray.Direction() == gm::Vec3f() );
 }
