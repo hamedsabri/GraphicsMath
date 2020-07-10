@@ -128,16 +128,7 @@ def PopulateCompositeTypes():
     """
     Populate the COMPOSITE_TYPES dictionary.
     """
-    compositeTypes = [
-        CompositeType(
-            "ray",
-            [
-                CompositeElement("origin", VectorType((3,), ScalarType(FLOAT))),
-                CompositeElement("direction", VectorType((3,), ScalarType(FLOAT))),
-            ],
-        ),
-    ]
-
+    compositeTypes = []
     for compositeType in compositeTypes:
         COMPOSITE_TYPES[compositeType.name] = compositeType
 
