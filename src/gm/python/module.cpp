@@ -5,14 +5,14 @@
 #include <pybind11/pybind11.h>
 
 // Type Declarations.
-void BindMat3f( pybind11::module& );
-void BindMat4f( pybind11::module& );
 void BindVec2f( pybind11::module& );
 void BindVec3f( pybind11::module& );
 void BindVec4f( pybind11::module& );
 void BindVec2i( pybind11::module& );
 void BindVec3i( pybind11::module& );
 void BindVec4i( pybind11::module& );
+void BindMat3f( pybind11::module& );
+void BindMat4f( pybind11::module& );
 void BindFloatRange( pybind11::module& );
 void BindIntRange( pybind11::module& );
 void BindVec2fRange( pybind11::module& );
@@ -24,14 +24,14 @@ void BindVec4iRange( pybind11::module& );
 void BindFloatArray( pybind11::module& );
 void BindIntArray( pybind11::module& );
 void BindBoolArray( pybind11::module& );
-void BindMat3fArray( pybind11::module& );
-void BindMat4fArray( pybind11::module& );
 void BindVec2fArray( pybind11::module& );
 void BindVec3fArray( pybind11::module& );
 void BindVec4fArray( pybind11::module& );
 void BindVec2iArray( pybind11::module& );
 void BindVec3iArray( pybind11::module& );
 void BindVec4iArray( pybind11::module& );
+void BindMat3fArray( pybind11::module& );
+void BindMat4fArray( pybind11::module& );
 
 // Function Declarations.
 void BindLinearInterpolation( pybind11::module& );
@@ -66,14 +66,14 @@ PYBIND11_MODULE( gm, o_module )
     o_module.doc() = "GraphicsMath python module.";
 
     // Types.
-    BindMat3f( o_module );
-    BindMat4f( o_module );
     BindVec2f( o_module );
     BindVec3f( o_module );
     BindVec4f( o_module );
     BindVec2i( o_module );
     BindVec3i( o_module );
     BindVec4i( o_module );
+    BindMat3f( o_module );
+    BindMat4f( o_module );
     BindFloatRange( o_module );
     BindIntRange( o_module );
     BindVec2fRange( o_module );
@@ -85,14 +85,14 @@ PYBIND11_MODULE( gm, o_module )
     BindFloatArray( o_module );
     BindIntArray( o_module );
     BindBoolArray( o_module );
-    BindMat3fArray( o_module );
-    BindMat4fArray( o_module );
     BindVec2fArray( o_module );
     BindVec3fArray( o_module );
     BindVec4fArray( o_module );
     BindVec2iArray( o_module );
     BindVec3iArray( o_module );
     BindVec4iArray( o_module );
+    BindMat3fArray( o_module );
+    BindMat4fArray( o_module );
 
     // Functions.
     BindLinearInterpolation( o_module );

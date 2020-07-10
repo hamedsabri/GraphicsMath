@@ -24,54 +24,6 @@ TEST_CASE( "Clamp_int_lessThanMin" )
     CHECK( intValClamped == intValExpected );
 }
 
-TEST_CASE( "Clamp_Mat3f_lessThanMin" )
-{
-    gm::Mat3f      matrix( -15.0f, -15.0f, -15.0f, -15.0f, -15.0f, -15.0f, -15.0f, -15.0f, -15.0f );
-    gm::FloatRange range( -10.0f, 10.0f );
-    gm::Mat3f      matrixClamped = gm::Clamp( matrix, range );
-    gm::Mat3f      matrixExpected( -10.0f, -10.0f, -10.0f, -10.0f, -10.0f, -10.0f, -10.0f, -10.0f, -10.0f );
-    CHECK( matrixClamped == matrixExpected );
-}
-
-TEST_CASE( "Clamp_Mat4f_lessThanMin" )
-{
-    gm::Mat4f      matrix( -15.0f,
-                      -15.0f,
-                      -15.0f,
-                      -15.0f,
-                      -15.0f,
-                      -15.0f,
-                      -15.0f,
-                      -15.0f,
-                      -15.0f,
-                      -15.0f,
-                      -15.0f,
-                      -15.0f,
-                      -15.0f,
-                      -15.0f,
-                      -15.0f,
-                      -15.0f );
-    gm::FloatRange range( -10.0f, 10.0f );
-    gm::Mat4f      matrixClamped = gm::Clamp( matrix, range );
-    gm::Mat4f      matrixExpected( -10.0f,
-                              -10.0f,
-                              -10.0f,
-                              -10.0f,
-                              -10.0f,
-                              -10.0f,
-                              -10.0f,
-                              -10.0f,
-                              -10.0f,
-                              -10.0f,
-                              -10.0f,
-                              -10.0f,
-                              -10.0f,
-                              -10.0f,
-                              -10.0f,
-                              -10.0f );
-    CHECK( matrixClamped == matrixExpected );
-}
-
 TEST_CASE( "Clamp_Vec2f_lessThanMin" )
 {
     gm::Vec2f      vector( -15.0f, -15.0f );
@@ -126,6 +78,54 @@ TEST_CASE( "Clamp_Vec4i_lessThanMin" )
     CHECK( vectorClamped == vectorExpected );
 }
 
+TEST_CASE( "Clamp_Mat3f_lessThanMin" )
+{
+    gm::Mat3f      matrix( -15.0f, -15.0f, -15.0f, -15.0f, -15.0f, -15.0f, -15.0f, -15.0f, -15.0f );
+    gm::FloatRange range( -10.0f, 10.0f );
+    gm::Mat3f      matrixClamped = gm::Clamp( matrix, range );
+    gm::Mat3f      matrixExpected( -10.0f, -10.0f, -10.0f, -10.0f, -10.0f, -10.0f, -10.0f, -10.0f, -10.0f );
+    CHECK( matrixClamped == matrixExpected );
+}
+
+TEST_CASE( "Clamp_Mat4f_lessThanMin" )
+{
+    gm::Mat4f      matrix( -15.0f,
+                      -15.0f,
+                      -15.0f,
+                      -15.0f,
+                      -15.0f,
+                      -15.0f,
+                      -15.0f,
+                      -15.0f,
+                      -15.0f,
+                      -15.0f,
+                      -15.0f,
+                      -15.0f,
+                      -15.0f,
+                      -15.0f,
+                      -15.0f,
+                      -15.0f );
+    gm::FloatRange range( -10.0f, 10.0f );
+    gm::Mat4f      matrixClamped = gm::Clamp( matrix, range );
+    gm::Mat4f      matrixExpected( -10.0f,
+                              -10.0f,
+                              -10.0f,
+                              -10.0f,
+                              -10.0f,
+                              -10.0f,
+                              -10.0f,
+                              -10.0f,
+                              -10.0f,
+                              -10.0f,
+                              -10.0f,
+                              -10.0f,
+                              -10.0f,
+                              -10.0f,
+                              -10.0f,
+                              -10.0f );
+    CHECK( matrixClamped == matrixExpected );
+}
+
 TEST_CASE( "Clamp_float_greaterThanMax" )
 {
     float          floatVal = 15.0f;
@@ -142,54 +142,6 @@ TEST_CASE( "Clamp_int_greaterThanMax" )
     int          intValClamped  = gm::Clamp( intVal, range );
     int          intValExpected = 10;
     CHECK( intValClamped == intValExpected );
-}
-
-TEST_CASE( "Clamp_Mat3f_greaterThanMax" )
-{
-    gm::Mat3f      matrix( 15.0f, 15.0f, 15.0f, 15.0f, 15.0f, 15.0f, 15.0f, 15.0f, 15.0f );
-    gm::FloatRange range( -10.0f, 10.0f );
-    gm::Mat3f      matrixClamped = gm::Clamp( matrix, range );
-    gm::Mat3f      matrixExpected( 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f );
-    CHECK( matrixClamped == matrixExpected );
-}
-
-TEST_CASE( "Clamp_Mat4f_greaterThanMax" )
-{
-    gm::Mat4f      matrix( 15.0f,
-                      15.0f,
-                      15.0f,
-                      15.0f,
-                      15.0f,
-                      15.0f,
-                      15.0f,
-                      15.0f,
-                      15.0f,
-                      15.0f,
-                      15.0f,
-                      15.0f,
-                      15.0f,
-                      15.0f,
-                      15.0f,
-                      15.0f );
-    gm::FloatRange range( -10.0f, 10.0f );
-    gm::Mat4f      matrixClamped = gm::Clamp( matrix, range );
-    gm::Mat4f      matrixExpected( 10.0f,
-                              10.0f,
-                              10.0f,
-                              10.0f,
-                              10.0f,
-                              10.0f,
-                              10.0f,
-                              10.0f,
-                              10.0f,
-                              10.0f,
-                              10.0f,
-                              10.0f,
-                              10.0f,
-                              10.0f,
-                              10.0f,
-                              10.0f );
-    CHECK( matrixClamped == matrixExpected );
 }
 
 TEST_CASE( "Clamp_Vec2f_greaterThanMax" )
@@ -246,6 +198,54 @@ TEST_CASE( "Clamp_Vec4i_greaterThanMax" )
     CHECK( vectorClamped == vectorExpected );
 }
 
+TEST_CASE( "Clamp_Mat3f_greaterThanMax" )
+{
+    gm::Mat3f      matrix( 15.0f, 15.0f, 15.0f, 15.0f, 15.0f, 15.0f, 15.0f, 15.0f, 15.0f );
+    gm::FloatRange range( -10.0f, 10.0f );
+    gm::Mat3f      matrixClamped = gm::Clamp( matrix, range );
+    gm::Mat3f      matrixExpected( 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f );
+    CHECK( matrixClamped == matrixExpected );
+}
+
+TEST_CASE( "Clamp_Mat4f_greaterThanMax" )
+{
+    gm::Mat4f      matrix( 15.0f,
+                      15.0f,
+                      15.0f,
+                      15.0f,
+                      15.0f,
+                      15.0f,
+                      15.0f,
+                      15.0f,
+                      15.0f,
+                      15.0f,
+                      15.0f,
+                      15.0f,
+                      15.0f,
+                      15.0f,
+                      15.0f,
+                      15.0f );
+    gm::FloatRange range( -10.0f, 10.0f );
+    gm::Mat4f      matrixClamped = gm::Clamp( matrix, range );
+    gm::Mat4f      matrixExpected( 10.0f,
+                              10.0f,
+                              10.0f,
+                              10.0f,
+                              10.0f,
+                              10.0f,
+                              10.0f,
+                              10.0f,
+                              10.0f,
+                              10.0f,
+                              10.0f,
+                              10.0f,
+                              10.0f,
+                              10.0f,
+                              10.0f,
+                              10.0f );
+    CHECK( matrixClamped == matrixExpected );
+}
+
 TEST_CASE( "Clamp_float_withinRange" )
 {
     float          floatVal = 5.0f;
@@ -262,39 +262,6 @@ TEST_CASE( "Clamp_int_withinRange" )
     int          intValClamped  = gm::Clamp( intVal, range );
     int          intValExpected = 5;
     CHECK( intValClamped == intValExpected );
-}
-
-TEST_CASE( "Clamp_Mat3f_withinRange" )
-{
-    gm::Mat3f      matrix( 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f );
-    gm::FloatRange range( -10.0f, 10.0f );
-    gm::Mat3f      matrixClamped = gm::Clamp( matrix, range );
-    gm::Mat3f      matrixExpected( 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f );
-    CHECK( matrixClamped == matrixExpected );
-}
-
-TEST_CASE( "Clamp_Mat4f_withinRange" )
-{
-    gm::Mat4f matrix( 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f );
-    gm::FloatRange range( -10.0f, 10.0f );
-    gm::Mat4f      matrixClamped = gm::Clamp( matrix, range );
-    gm::Mat4f      matrixExpected( 5.0f,
-                              5.0f,
-                              5.0f,
-                              5.0f,
-                              5.0f,
-                              5.0f,
-                              5.0f,
-                              5.0f,
-                              5.0f,
-                              5.0f,
-                              5.0f,
-                              5.0f,
-                              5.0f,
-                              5.0f,
-                              5.0f,
-                              5.0f );
-    CHECK( matrixClamped == matrixExpected );
 }
 
 TEST_CASE( "Clamp_Vec2f_withinRange" )
@@ -349,4 +316,37 @@ TEST_CASE( "Clamp_Vec4i_withinRange" )
     gm::Vec4i    vectorClamped = gm::Clamp( vector, range );
     gm::Vec4i    vectorExpected( 5, 5, 5, 5 );
     CHECK( vectorClamped == vectorExpected );
+}
+
+TEST_CASE( "Clamp_Mat3f_withinRange" )
+{
+    gm::Mat3f      matrix( 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f );
+    gm::FloatRange range( -10.0f, 10.0f );
+    gm::Mat3f      matrixClamped = gm::Clamp( matrix, range );
+    gm::Mat3f      matrixExpected( 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f );
+    CHECK( matrixClamped == matrixExpected );
+}
+
+TEST_CASE( "Clamp_Mat4f_withinRange" )
+{
+    gm::Mat4f matrix( 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f );
+    gm::FloatRange range( -10.0f, 10.0f );
+    gm::Mat4f      matrixClamped = gm::Clamp( matrix, range );
+    gm::Mat4f      matrixExpected( 5.0f,
+                              5.0f,
+                              5.0f,
+                              5.0f,
+                              5.0f,
+                              5.0f,
+                              5.0f,
+                              5.0f,
+                              5.0f,
+                              5.0f,
+                              5.0f,
+                              5.0f,
+                              5.0f,
+                              5.0f,
+                              5.0f,
+                              5.0f );
+    CHECK( matrixClamped == matrixExpected );
 }

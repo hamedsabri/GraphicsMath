@@ -37,26 +37,6 @@ TEST_CASE( "Max_bool_bool" )
     };
 }
 
-TEST_CASE( "Max_Mat3f_Mat3f" )
-{
-    gm::Mat3f valueA;
-    gm::Mat3f valueB;
-    BENCHMARK( "Max" )
-    {
-        return gm::Max( valueA, valueB );
-    };
-}
-
-TEST_CASE( "Max_Mat4f_Mat4f" )
-{
-    gm::Mat4f valueA;
-    gm::Mat4f valueB;
-    BENCHMARK( "Max" )
-    {
-        return gm::Max( valueA, valueB );
-    };
-}
-
 TEST_CASE( "Max_Vec2f_Vec2f" )
 {
     gm::Vec2f valueA;
@@ -111,6 +91,26 @@ TEST_CASE( "Max_Vec4i_Vec4i" )
 {
     gm::Vec4i valueA;
     gm::Vec4i valueB;
+    BENCHMARK( "Max" )
+    {
+        return gm::Max( valueA, valueB );
+    };
+}
+
+TEST_CASE( "Max_Mat3f_Mat3f" )
+{
+    gm::Mat3f valueA;
+    gm::Mat3f valueB;
+    BENCHMARK( "Max" )
+    {
+        return gm::Max( valueA, valueB );
+    };
+}
+
+TEST_CASE( "Max_Mat4f_Mat4f" )
+{
+    gm::Mat4f valueA;
+    gm::Mat4f valueB;
     BENCHMARK( "Max" )
     {
         return gm::Max( valueA, valueB );

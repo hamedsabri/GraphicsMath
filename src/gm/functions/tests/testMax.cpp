@@ -30,6 +30,66 @@ TEST_CASE( "Max_bool" )
     CHECK( boolValMax == Approx( true ) );
 }
 
+TEST_CASE( "Max_Vec2f" )
+{
+    gm::Vec2f vectorA( 0.0f, 2.333f );
+    gm::Vec2f vectorB( 0.0f, 1.333f );
+    gm::Vec2f vectorMax = gm::Max( vectorA, vectorB );
+    CHECK( vectorMax[ 0 ] == Approx( 0.0f ) );
+    CHECK( vectorMax[ 1 ] == Approx( 2.333f ) );
+}
+
+TEST_CASE( "Max_Vec3f" )
+{
+    gm::Vec3f vectorA( 0.0f, 2.333f, 4.666f );
+    gm::Vec3f vectorB( 0.0f, 1.333f, 2.666f );
+    gm::Vec3f vectorMax = gm::Max( vectorA, vectorB );
+    CHECK( vectorMax[ 0 ] == Approx( 0.0f ) );
+    CHECK( vectorMax[ 1 ] == Approx( 2.333f ) );
+    CHECK( vectorMax[ 2 ] == Approx( 4.666f ) );
+}
+
+TEST_CASE( "Max_Vec4f" )
+{
+    gm::Vec4f vectorA( 0.0f, 2.333f, 4.666f, 6.999f );
+    gm::Vec4f vectorB( 0.0f, 1.333f, 2.666f, 3.999f );
+    gm::Vec4f vectorMax = gm::Max( vectorA, vectorB );
+    CHECK( vectorMax[ 0 ] == Approx( 0.0f ) );
+    CHECK( vectorMax[ 1 ] == Approx( 2.333f ) );
+    CHECK( vectorMax[ 2 ] == Approx( 4.666f ) );
+    CHECK( vectorMax[ 3 ] == Approx( 6.999f ) );
+}
+
+TEST_CASE( "Max_Vec2i" )
+{
+    gm::Vec2i vectorA( 0, 2 );
+    gm::Vec2i vectorB( 0, 1 );
+    gm::Vec2i vectorMax = gm::Max( vectorA, vectorB );
+    CHECK( vectorMax[ 0 ] == Approx( 0 ) );
+    CHECK( vectorMax[ 1 ] == Approx( 2 ) );
+}
+
+TEST_CASE( "Max_Vec3i" )
+{
+    gm::Vec3i vectorA( 0, 2, 4 );
+    gm::Vec3i vectorB( 0, 1, 2 );
+    gm::Vec3i vectorMax = gm::Max( vectorA, vectorB );
+    CHECK( vectorMax[ 0 ] == Approx( 0 ) );
+    CHECK( vectorMax[ 1 ] == Approx( 2 ) );
+    CHECK( vectorMax[ 2 ] == Approx( 4 ) );
+}
+
+TEST_CASE( "Max_Vec4i" )
+{
+    gm::Vec4i vectorA( 0, 2, 4, 6 );
+    gm::Vec4i vectorB( 0, 1, 2, 3 );
+    gm::Vec4i vectorMax = gm::Max( vectorA, vectorB );
+    CHECK( vectorMax[ 0 ] == Approx( 0 ) );
+    CHECK( vectorMax[ 1 ] == Approx( 2 ) );
+    CHECK( vectorMax[ 2 ] == Approx( 4 ) );
+    CHECK( vectorMax[ 3 ] == Approx( 6 ) );
+}
+
 TEST_CASE( "Max_Mat3f" )
 {
     gm::Mat3f matrixA( 0.0f, 2.333f, 4.666f, 6.999f, 9.332f, 11.665f, 13.998f, 16.331f, 18.664f );
@@ -97,64 +157,4 @@ TEST_CASE( "Max_Mat4f" )
     CHECK( matrixMax[ 13 ] == Approx( 30.329f ) );
     CHECK( matrixMax[ 14 ] == Approx( 32.662f ) );
     CHECK( matrixMax[ 15 ] == Approx( 34.995f ) );
-}
-
-TEST_CASE( "Max_Vec2f" )
-{
-    gm::Vec2f vectorA( 0.0f, 2.333f );
-    gm::Vec2f vectorB( 0.0f, 1.333f );
-    gm::Vec2f vectorMax = gm::Max( vectorA, vectorB );
-    CHECK( vectorMax[ 0 ] == Approx( 0.0f ) );
-    CHECK( vectorMax[ 1 ] == Approx( 2.333f ) );
-}
-
-TEST_CASE( "Max_Vec3f" )
-{
-    gm::Vec3f vectorA( 0.0f, 2.333f, 4.666f );
-    gm::Vec3f vectorB( 0.0f, 1.333f, 2.666f );
-    gm::Vec3f vectorMax = gm::Max( vectorA, vectorB );
-    CHECK( vectorMax[ 0 ] == Approx( 0.0f ) );
-    CHECK( vectorMax[ 1 ] == Approx( 2.333f ) );
-    CHECK( vectorMax[ 2 ] == Approx( 4.666f ) );
-}
-
-TEST_CASE( "Max_Vec4f" )
-{
-    gm::Vec4f vectorA( 0.0f, 2.333f, 4.666f, 6.999f );
-    gm::Vec4f vectorB( 0.0f, 1.333f, 2.666f, 3.999f );
-    gm::Vec4f vectorMax = gm::Max( vectorA, vectorB );
-    CHECK( vectorMax[ 0 ] == Approx( 0.0f ) );
-    CHECK( vectorMax[ 1 ] == Approx( 2.333f ) );
-    CHECK( vectorMax[ 2 ] == Approx( 4.666f ) );
-    CHECK( vectorMax[ 3 ] == Approx( 6.999f ) );
-}
-
-TEST_CASE( "Max_Vec2i" )
-{
-    gm::Vec2i vectorA( 0, 2 );
-    gm::Vec2i vectorB( 0, 1 );
-    gm::Vec2i vectorMax = gm::Max( vectorA, vectorB );
-    CHECK( vectorMax[ 0 ] == Approx( 0 ) );
-    CHECK( vectorMax[ 1 ] == Approx( 2 ) );
-}
-
-TEST_CASE( "Max_Vec3i" )
-{
-    gm::Vec3i vectorA( 0, 2, 4 );
-    gm::Vec3i vectorB( 0, 1, 2 );
-    gm::Vec3i vectorMax = gm::Max( vectorA, vectorB );
-    CHECK( vectorMax[ 0 ] == Approx( 0 ) );
-    CHECK( vectorMax[ 1 ] == Approx( 2 ) );
-    CHECK( vectorMax[ 2 ] == Approx( 4 ) );
-}
-
-TEST_CASE( "Max_Vec4i" )
-{
-    gm::Vec4i vectorA( 0, 2, 4, 6 );
-    gm::Vec4i vectorB( 0, 1, 2, 3 );
-    gm::Vec4i vectorMax = gm::Max( vectorA, vectorB );
-    CHECK( vectorMax[ 0 ] == Approx( 0 ) );
-    CHECK( vectorMax[ 1 ] == Approx( 2 ) );
-    CHECK( vectorMax[ 2 ] == Approx( 4 ) );
-    CHECK( vectorMax[ 3 ] == Approx( 6 ) );
 }

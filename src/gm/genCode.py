@@ -89,9 +89,7 @@ SINGLE_INDEX_VECTOR_TYPES_INT = [
     VectorType((4,), ScalarType(INT)),
 ]
 
-VECTOR_TYPES = sorted(
-    SINGLE_INDEX_VECTOR_TYPES_FLOAT + SINGLE_INDEX_VECTOR_TYPES_INT + MATRIX_TYPES
-)
+VECTOR_TYPES = SINGLE_INDEX_VECTOR_TYPES_FLOAT + SINGLE_INDEX_VECTOR_TYPES_INT + MATRIX_TYPES
 
 """
 RANGE_TYPES is the fixed, global set of range-based types (min, max) to generate code for.

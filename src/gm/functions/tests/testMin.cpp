@@ -30,6 +30,66 @@ TEST_CASE( "Min_bool" )
     CHECK( boolValMin == Approx( true ) );
 }
 
+TEST_CASE( "Min_Vec2f" )
+{
+    gm::Vec2f vectorA( 0.0f, 2.333f );
+    gm::Vec2f vectorB( 0.0f, 1.333f );
+    gm::Vec2f vectorMin = gm::Min( vectorA, vectorB );
+    CHECK( vectorMin[ 0 ] == Approx( 0.0f ) );
+    CHECK( vectorMin[ 1 ] == Approx( 1.333f ) );
+}
+
+TEST_CASE( "Min_Vec3f" )
+{
+    gm::Vec3f vectorA( 0.0f, 2.333f, 4.666f );
+    gm::Vec3f vectorB( 0.0f, 1.333f, 2.666f );
+    gm::Vec3f vectorMin = gm::Min( vectorA, vectorB );
+    CHECK( vectorMin[ 0 ] == Approx( 0.0f ) );
+    CHECK( vectorMin[ 1 ] == Approx( 1.333f ) );
+    CHECK( vectorMin[ 2 ] == Approx( 2.666f ) );
+}
+
+TEST_CASE( "Min_Vec4f" )
+{
+    gm::Vec4f vectorA( 0.0f, 2.333f, 4.666f, 6.999f );
+    gm::Vec4f vectorB( 0.0f, 1.333f, 2.666f, 3.999f );
+    gm::Vec4f vectorMin = gm::Min( vectorA, vectorB );
+    CHECK( vectorMin[ 0 ] == Approx( 0.0f ) );
+    CHECK( vectorMin[ 1 ] == Approx( 1.333f ) );
+    CHECK( vectorMin[ 2 ] == Approx( 2.666f ) );
+    CHECK( vectorMin[ 3 ] == Approx( 3.999f ) );
+}
+
+TEST_CASE( "Min_Vec2i" )
+{
+    gm::Vec2i vectorA( 0, 2 );
+    gm::Vec2i vectorB( 0, 1 );
+    gm::Vec2i vectorMin = gm::Min( vectorA, vectorB );
+    CHECK( vectorMin[ 0 ] == Approx( 0 ) );
+    CHECK( vectorMin[ 1 ] == Approx( 1 ) );
+}
+
+TEST_CASE( "Min_Vec3i" )
+{
+    gm::Vec3i vectorA( 0, 2, 4 );
+    gm::Vec3i vectorB( 0, 1, 2 );
+    gm::Vec3i vectorMin = gm::Min( vectorA, vectorB );
+    CHECK( vectorMin[ 0 ] == Approx( 0 ) );
+    CHECK( vectorMin[ 1 ] == Approx( 1 ) );
+    CHECK( vectorMin[ 2 ] == Approx( 2 ) );
+}
+
+TEST_CASE( "Min_Vec4i" )
+{
+    gm::Vec4i vectorA( 0, 2, 4, 6 );
+    gm::Vec4i vectorB( 0, 1, 2, 3 );
+    gm::Vec4i vectorMin = gm::Min( vectorA, vectorB );
+    CHECK( vectorMin[ 0 ] == Approx( 0 ) );
+    CHECK( vectorMin[ 1 ] == Approx( 1 ) );
+    CHECK( vectorMin[ 2 ] == Approx( 2 ) );
+    CHECK( vectorMin[ 3 ] == Approx( 3 ) );
+}
+
 TEST_CASE( "Min_Mat3f" )
 {
     gm::Mat3f matrixA( 0.0f, 2.333f, 4.666f, 6.999f, 9.332f, 11.665f, 13.998f, 16.331f, 18.664f );
@@ -97,64 +157,4 @@ TEST_CASE( "Min_Mat4f" )
     CHECK( matrixMin[ 13 ] == Approx( 17.329f ) );
     CHECK( matrixMin[ 14 ] == Approx( 18.662f ) );
     CHECK( matrixMin[ 15 ] == Approx( 19.995f ) );
-}
-
-TEST_CASE( "Min_Vec2f" )
-{
-    gm::Vec2f vectorA( 0.0f, 2.333f );
-    gm::Vec2f vectorB( 0.0f, 1.333f );
-    gm::Vec2f vectorMin = gm::Min( vectorA, vectorB );
-    CHECK( vectorMin[ 0 ] == Approx( 0.0f ) );
-    CHECK( vectorMin[ 1 ] == Approx( 1.333f ) );
-}
-
-TEST_CASE( "Min_Vec3f" )
-{
-    gm::Vec3f vectorA( 0.0f, 2.333f, 4.666f );
-    gm::Vec3f vectorB( 0.0f, 1.333f, 2.666f );
-    gm::Vec3f vectorMin = gm::Min( vectorA, vectorB );
-    CHECK( vectorMin[ 0 ] == Approx( 0.0f ) );
-    CHECK( vectorMin[ 1 ] == Approx( 1.333f ) );
-    CHECK( vectorMin[ 2 ] == Approx( 2.666f ) );
-}
-
-TEST_CASE( "Min_Vec4f" )
-{
-    gm::Vec4f vectorA( 0.0f, 2.333f, 4.666f, 6.999f );
-    gm::Vec4f vectorB( 0.0f, 1.333f, 2.666f, 3.999f );
-    gm::Vec4f vectorMin = gm::Min( vectorA, vectorB );
-    CHECK( vectorMin[ 0 ] == Approx( 0.0f ) );
-    CHECK( vectorMin[ 1 ] == Approx( 1.333f ) );
-    CHECK( vectorMin[ 2 ] == Approx( 2.666f ) );
-    CHECK( vectorMin[ 3 ] == Approx( 3.999f ) );
-}
-
-TEST_CASE( "Min_Vec2i" )
-{
-    gm::Vec2i vectorA( 0, 2 );
-    gm::Vec2i vectorB( 0, 1 );
-    gm::Vec2i vectorMin = gm::Min( vectorA, vectorB );
-    CHECK( vectorMin[ 0 ] == Approx( 0 ) );
-    CHECK( vectorMin[ 1 ] == Approx( 1 ) );
-}
-
-TEST_CASE( "Min_Vec3i" )
-{
-    gm::Vec3i vectorA( 0, 2, 4 );
-    gm::Vec3i vectorB( 0, 1, 2 );
-    gm::Vec3i vectorMin = gm::Min( vectorA, vectorB );
-    CHECK( vectorMin[ 0 ] == Approx( 0 ) );
-    CHECK( vectorMin[ 1 ] == Approx( 1 ) );
-    CHECK( vectorMin[ 2 ] == Approx( 2 ) );
-}
-
-TEST_CASE( "Min_Vec4i" )
-{
-    gm::Vec4i vectorA( 0, 2, 4, 6 );
-    gm::Vec4i vectorB( 0, 1, 2, 3 );
-    gm::Vec4i vectorMin = gm::Min( vectorA, vectorB );
-    CHECK( vectorMin[ 0 ] == Approx( 0 ) );
-    CHECK( vectorMin[ 1 ] == Approx( 1 ) );
-    CHECK( vectorMin[ 2 ] == Approx( 2 ) );
-    CHECK( vectorMin[ 3 ] == Approx( 3 ) );
 }
