@@ -268,6 +268,7 @@ def GenerateFunctions():
                 returnType=valueType,
             )
         )
+
     # Vector product(s).
     vectorProductOps = []
     for vectorType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
@@ -278,6 +279,19 @@ def GenerateFunctions():
                     FunctionArg("rhs", vectorType, Mutability.Const),
                 ],
                 returnType=vectorType.elementType,
+            )
+        )
+
+    # Cross product.
+    crossProductOps = []
+    for vectorType in (VectorType((3,), ScalarType(FLOAT)),):
+        crossProductOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("lhs", vectorType, Mutability.Const),
+                    FunctionArg("rhs", vectorType, Mutability.Const),
+                ],
+                returnType=vectorType,
             )
         )
 
@@ -533,7 +547,10 @@ def GenerateFunctions():
             FunctionCategory.LINEAR_ALGEBRA,
         ),
         FunctionGroup(
-            ["dotProduct"], vectorProductOps, FunctionCategory.LINEAR_ALGEBRA
+            ["dotProduct",], vectorProductOps, FunctionCategory.LINEAR_ALGEBRA
+        ),
+        FunctionGroup(
+            ["crossProduct",], crossProductOps, FunctionCategory.LINEAR_ALGEBRA
         ),
         FunctionGroup(["distance"], pointReductionOps, FunctionCategory.LINEAR_ALGEBRA),
         FunctionGroup(
