@@ -18,7 +18,7 @@
 {% block body %}
 {% for interface in function.interfaces %}
 /// Compute the dot product of two \ref {{ interface.ArgClass("lhs") }}, \p {{ interface.ArgName("lhs") }}
-/// and \p {{ interface.ArgName("lhs") }}, and return the result.
+/// and \p {{ interface.ArgName("rhs") }}, and return the result.
 /// \ingroup gm_functions_{{ function.category }}
 ///
 /// \param {{ interface.ArgName("lhs") }} Left hand side vector.
