@@ -41,6 +41,30 @@ TEST_CASE( "Vec4fRange_MaxAccessor" )
     CHECK( range.Max() == gm::Vec4f( 1.0f, 1.0f, 1.0f, 1.0f ) );
 }
 
+TEST_CASE( "Vec4fRange_EqualityComparison" )
+{
+    CHECK( gm::Vec4fRange( gm::Vec4f( 2.0f, 2.0f, 2.0f, 2.0f ), gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ) ) ==
+           gm::Vec4fRange( gm::Vec4f( 2.0f, 2.0f, 2.0f, 2.0f ), gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ) ) );
+    CHECK( !( gm::Vec4fRange( gm::Vec4f( 2.0f, 2.0f, 2.0f, 2.0f ), gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ) ) ==
+              gm::Vec4fRange( gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ), gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ) ) ) );
+}
+
+TEST_CASE( "Vec4fRange_InequalityComparison" )
+{
+    CHECK( gm::Vec4fRange( gm::Vec4f( 2.0f, 2.0f, 2.0f, 2.0f ), gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ) ) !=
+           gm::Vec4fRange( gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ), gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ) ) );
+    CHECK( !( gm::Vec4fRange( gm::Vec4f( 2.0f, 2.0f, 2.0f, 2.0f ), gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ) ) !=
+              gm::Vec4fRange( gm::Vec4f( 2.0f, 2.0f, 2.0f, 2.0f ), gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ) ) ) );
+}
+
+TEST_CASE( "Vec4fRange_IsEmpty" )
+{
+    CHECK( gm::Vec4fRange( gm::Vec4f( 2.0f, 2.0f, 2.0f, 2.0f ), gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ) ).IsEmpty() );
+    CHECK(
+        !gm::Vec4fRange( gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ), gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ) ).IsEmpty() );
+    CHECK( !gm::Vec4fRange( gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ), gm::Vec4f( 2.0f, 2.0f, 2.0f, 2.0f ) ).IsEmpty() );
+}
+
 TEST_CASE( "Vec4fRange_ContainsElement" )
 {
     gm::Vec4fRange range(

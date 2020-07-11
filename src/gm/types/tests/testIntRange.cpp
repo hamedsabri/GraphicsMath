@@ -35,6 +35,25 @@ TEST_CASE( "IntRange_MaxAccessor" )
     CHECK( range.Max() == 1 );
 }
 
+TEST_CASE( "IntRange_EqualityComparison" )
+{
+    CHECK( gm::IntRange( 2, -2 ) == gm::IntRange( 2, -2 ) );
+    CHECK( !( gm::IntRange( 2, -2 ) == gm::IntRange( -2, -2 ) ) );
+}
+
+TEST_CASE( "IntRange_InequalityComparison" )
+{
+    CHECK( gm::IntRange( 2, -2 ) != gm::IntRange( -2, -2 ) );
+    CHECK( !( gm::IntRange( 2, -2 ) != gm::IntRange( 2, -2 ) ) );
+}
+
+TEST_CASE( "IntRange_IsEmpty" )
+{
+    CHECK( gm::IntRange( 2, -2 ).IsEmpty() );
+    CHECK( !gm::IntRange( -2, -2 ).IsEmpty() );
+    CHECK( !gm::IntRange( -2, 2 ).IsEmpty() );
+}
+
 TEST_CASE( "IntRange_ContainsElement" )
 {
     gm::IntRange range(

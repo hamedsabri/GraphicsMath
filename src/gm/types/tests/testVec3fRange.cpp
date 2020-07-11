@@ -39,6 +39,29 @@ TEST_CASE( "Vec3fRange_MaxAccessor" )
     CHECK( range.Max() == gm::Vec3f( 1.0f, 1.0f, 1.0f ) );
 }
 
+TEST_CASE( "Vec3fRange_EqualityComparison" )
+{
+    CHECK( gm::Vec3fRange( gm::Vec3f( 2.0f, 2.0f, 2.0f ), gm::Vec3f( -2.0f, -2.0f, -2.0f ) ) ==
+           gm::Vec3fRange( gm::Vec3f( 2.0f, 2.0f, 2.0f ), gm::Vec3f( -2.0f, -2.0f, -2.0f ) ) );
+    CHECK( !( gm::Vec3fRange( gm::Vec3f( 2.0f, 2.0f, 2.0f ), gm::Vec3f( -2.0f, -2.0f, -2.0f ) ) ==
+              gm::Vec3fRange( gm::Vec3f( -2.0f, -2.0f, -2.0f ), gm::Vec3f( -2.0f, -2.0f, -2.0f ) ) ) );
+}
+
+TEST_CASE( "Vec3fRange_InequalityComparison" )
+{
+    CHECK( gm::Vec3fRange( gm::Vec3f( 2.0f, 2.0f, 2.0f ), gm::Vec3f( -2.0f, -2.0f, -2.0f ) ) !=
+           gm::Vec3fRange( gm::Vec3f( -2.0f, -2.0f, -2.0f ), gm::Vec3f( -2.0f, -2.0f, -2.0f ) ) );
+    CHECK( !( gm::Vec3fRange( gm::Vec3f( 2.0f, 2.0f, 2.0f ), gm::Vec3f( -2.0f, -2.0f, -2.0f ) ) !=
+              gm::Vec3fRange( gm::Vec3f( 2.0f, 2.0f, 2.0f ), gm::Vec3f( -2.0f, -2.0f, -2.0f ) ) ) );
+}
+
+TEST_CASE( "Vec3fRange_IsEmpty" )
+{
+    CHECK( gm::Vec3fRange( gm::Vec3f( 2.0f, 2.0f, 2.0f ), gm::Vec3f( -2.0f, -2.0f, -2.0f ) ).IsEmpty() );
+    CHECK( !gm::Vec3fRange( gm::Vec3f( -2.0f, -2.0f, -2.0f ), gm::Vec3f( -2.0f, -2.0f, -2.0f ) ).IsEmpty() );
+    CHECK( !gm::Vec3fRange( gm::Vec3f( -2.0f, -2.0f, -2.0f ), gm::Vec3f( 2.0f, 2.0f, 2.0f ) ).IsEmpty() );
+}
+
 TEST_CASE( "Vec3fRange_ContainsElement" )
 {
     gm::Vec3fRange range(

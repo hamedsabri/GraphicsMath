@@ -5,6 +5,10 @@
 #include <gm/types/{{ valueType.elementType.headerFileName }}>
 {%- endif %}
 
+{% if valueType.elementType.className != "int" -%}
+#include <gm/base/almost.h>
+{%- endif %}
+
 #include <limits>
 #include <sstream>
 {% endblock %}
@@ -80,6 +84,59 @@ public:
     GM_HOST_DEVICE inline {{ valueType.elementType.className }}& Max()
     {
         return m_max;
+    }
+
+    // --------------------------------------------------------------------- //
+    /// \name Comparison
+    // --------------------------------------------------------------------- //
+
+    /// Equality comparison against \p i_range.
+    ///
+    /// \param i_range The range to compare against.
+    ///
+    /// \retval true If this range is equal to \p i_range.
+    /// \retval false If this range is not equal to \p i_range.
+    GM_HOST_DEVICE inline bool operator==( const {{valueType.className}}& i_range ) const
+    {
+{% if valueType.elementType.isScalar and valueType.elementType.className == "float" -%}
+        return AlmostEqual( Min(), i_range.Min() ) && AlmostEqual( Min(), i_range.Min() );
+{% else -%}
+        return Min() == i_range.Min() && Max() == i_range.Max();
+{%- endif -%}
+    }
+
+    /// Non-equality comparison against \p i_range.
+    ///
+    /// \param i_range The range to compare against.
+    ///
+    /// \retval true If this range is not equal to \p i_range.
+    /// \retval false If this range is equal to \p i_range.
+    GM_HOST_DEVICE inline bool operator!=( const {{ valueType.className }}& i_range ) const
+    {
+        return !( (*this) == i_range );
+    }
+
+    /// Check if this range is empty.
+    ///
+    /// A range is empty if any of the components in the minimum is greater
+    /// than the maximum.
+    ///
+    /// \retval true If this range is empty.
+    /// \retval false If this range is non-empty.
+    GM_HOST_DEVICE inline bool IsEmpty() const
+    {
+{% if valueType.elementType.isScalar -%}
+        return Min() > Max();
+{% elif valueType.elementType.isVector -%}
+        return
+{%- for index in range(valueType.elementType.elementSize) %}
+        Min()[ {{ index }} ] > Max()[ {{ index }} ]
+{%- if index + 1 < valueType.elementType.elementSize -%}
+        ||
+{%- endif -%}
+{%- endfor %}
+        ;
+{%- endif -%}
     }
 
     // --------------------------------------------------------------------- //

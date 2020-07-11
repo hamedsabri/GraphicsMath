@@ -35,6 +35,25 @@ TEST_CASE( "FloatRange_MaxAccessor" )
     CHECK( range.Max() == 1.0f );
 }
 
+TEST_CASE( "FloatRange_EqualityComparison" )
+{
+    CHECK( gm::FloatRange( 2.0f, -2.0f ) == gm::FloatRange( 2.0f, -2.0f ) );
+    CHECK( !( gm::FloatRange( 2.0f, -2.0f ) == gm::FloatRange( -2.0f, -2.0f ) ) );
+}
+
+TEST_CASE( "FloatRange_InequalityComparison" )
+{
+    CHECK( gm::FloatRange( 2.0f, -2.0f ) != gm::FloatRange( -2.0f, -2.0f ) );
+    CHECK( !( gm::FloatRange( 2.0f, -2.0f ) != gm::FloatRange( 2.0f, -2.0f ) ) );
+}
+
+TEST_CASE( "FloatRange_IsEmpty" )
+{
+    CHECK( gm::FloatRange( 2.0f, -2.0f ).IsEmpty() );
+    CHECK( !gm::FloatRange( -2.0f, -2.0f ).IsEmpty() );
+    CHECK( !gm::FloatRange( -2.0f, 2.0f ).IsEmpty() );
+}
+
 TEST_CASE( "FloatRange_ContainsElement" )
 {
     gm::FloatRange range(

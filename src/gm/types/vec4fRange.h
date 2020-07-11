@@ -11,6 +11,8 @@
 
 #include <gm/types/vec4f.h>
 
+#include <gm/base/almost.h>
+
 #include <limits>
 #include <sstream>
 
@@ -82,6 +84,44 @@ public:
     GM_HOST_DEVICE inline Vec4f& Max()
     {
         return m_max;
+    }
+
+    // --------------------------------------------------------------------- //
+    /// \name Comparison
+    // --------------------------------------------------------------------- //
+
+    /// Equality comparison against \p i_range.
+    ///
+    /// \param i_range The range to compare against.
+    ///
+    /// \retval true If this range is equal to \p i_range.
+    /// \retval false If this range is not equal to \p i_range.
+    GM_HOST_DEVICE inline bool operator==( const Vec4fRange& i_range ) const
+    {
+        return Min() == i_range.Min() && Max() == i_range.Max();
+    }
+
+    /// Non-equality comparison against \p i_range.
+    ///
+    /// \param i_range The range to compare against.
+    ///
+    /// \retval true If this range is not equal to \p i_range.
+    /// \retval false If this range is equal to \p i_range.
+    GM_HOST_DEVICE inline bool operator!=( const Vec4fRange& i_range ) const
+    {
+        return !( ( *this ) == i_range );
+    }
+
+    /// Check if this range is empty.
+    ///
+    /// A range is empty if any of the components in the minimum is greater
+    /// than the maximum.
+    ///
+    /// \retval true If this range is empty.
+    /// \retval false If this range is non-empty.
+    GM_HOST_DEVICE inline bool IsEmpty() const
+    {
+        return Min()[ 0 ] > Max()[ 0 ] || Min()[ 1 ] > Max()[ 1 ] || Min()[ 2 ] > Max()[ 2 ] || Min()[ 3 ] > Max()[ 3 ];
     }
 
     // --------------------------------------------------------------------- //

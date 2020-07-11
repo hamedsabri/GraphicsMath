@@ -39,6 +39,29 @@ TEST_CASE( "Vec3iRange_MaxAccessor" )
     CHECK( range.Max() == gm::Vec3i( 1, 1, 1 ) );
 }
 
+TEST_CASE( "Vec3iRange_EqualityComparison" )
+{
+    CHECK( gm::Vec3iRange( gm::Vec3i( 2, 2, 2 ), gm::Vec3i( -2, -2, -2 ) ) ==
+           gm::Vec3iRange( gm::Vec3i( 2, 2, 2 ), gm::Vec3i( -2, -2, -2 ) ) );
+    CHECK( !( gm::Vec3iRange( gm::Vec3i( 2, 2, 2 ), gm::Vec3i( -2, -2, -2 ) ) ==
+              gm::Vec3iRange( gm::Vec3i( -2, -2, -2 ), gm::Vec3i( -2, -2, -2 ) ) ) );
+}
+
+TEST_CASE( "Vec3iRange_InequalityComparison" )
+{
+    CHECK( gm::Vec3iRange( gm::Vec3i( 2, 2, 2 ), gm::Vec3i( -2, -2, -2 ) ) !=
+           gm::Vec3iRange( gm::Vec3i( -2, -2, -2 ), gm::Vec3i( -2, -2, -2 ) ) );
+    CHECK( !( gm::Vec3iRange( gm::Vec3i( 2, 2, 2 ), gm::Vec3i( -2, -2, -2 ) ) !=
+              gm::Vec3iRange( gm::Vec3i( 2, 2, 2 ), gm::Vec3i( -2, -2, -2 ) ) ) );
+}
+
+TEST_CASE( "Vec3iRange_IsEmpty" )
+{
+    CHECK( gm::Vec3iRange( gm::Vec3i( 2, 2, 2 ), gm::Vec3i( -2, -2, -2 ) ).IsEmpty() );
+    CHECK( !gm::Vec3iRange( gm::Vec3i( -2, -2, -2 ), gm::Vec3i( -2, -2, -2 ) ).IsEmpty() );
+    CHECK( !gm::Vec3iRange( gm::Vec3i( -2, -2, -2 ), gm::Vec3i( 2, 2, 2 ) ).IsEmpty() );
+}
+
 TEST_CASE( "Vec3iRange_ContainsElement" )
 {
     gm::Vec3iRange range(

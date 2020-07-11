@@ -3,29 +3,7 @@
 #include <gm/types/{{ valueType.headerFileName }}>
 #include <gm/types/{{ valueType.headerFileName.replace("Range", "Array") }}>
 
-{# Utility macro to generate an element value for a range type #}
-{% macro GenRangeElement( valueType, value ) %}
-{%- if valueType.elementType.isScalar -%}
-    {{ valueType.CppValue( value ) }}
-{%- elif valueType.elementType.isVector -%}
-    gm::{{ valueType.elementType.className }}(
-{%- for index in range(valueType.elementType.elementSize) -%}
-    {{ valueType.elementType.CppValue( value ) }}
-{%- if index + 1 < valueType.elementType.elementSize -%}
-        ,
-{%- endif -%}
-{%- endfor -%}
-    )
-{%- endif -%}
-{% endmacro %}
-
-{# Utility macro to generate a range value #}
-{% macro GenRange( valueType, minValue, maxValue ) %}
-    gm::{{ valueType.className }}(
-        {{- GenRangeElement( valueType, minValue ) -}},
-        {{- GenRangeElement( valueType, maxValue ) -}}
-    )
-{% endmacro %}
+{% import "types/typeUtils.h" as typeUtils %}
 
 TEST_CASE( "{{ valueType.className }}_DefaultConstructor" )
 {
@@ -63,52 +41,71 @@ TEST_CASE( "{{ valueType.className }}_DefaultConstructor" )
 TEST_CASE( "{{ valueType.className }}_MinMaxConstructor" )
 {
     gm::{{ valueType.className }} {{ valueType.varName }}(
-        {{ GenRangeElement( valueType, -1 ) }},
-        {{ GenRangeElement( valueType, 1 ) }}
+        {{ typeUtils.GenRangeElement( valueType, -1 ) }},
+        {{ typeUtils.GenRangeElement( valueType, 1 ) }}
     );
-    CHECK( {{ valueType.varName }}.Min() == {{ GenRangeElement( valueType, -1 ) }} );
-    CHECK( {{ valueType.varName }}.Max() == {{ GenRangeElement( valueType, 1 ) }} );
+    CHECK( {{ valueType.varName }}.Min() == {{ typeUtils.GenRangeElement( valueType, -1 ) }} );
+    CHECK( {{ valueType.varName }}.Max() == {{ typeUtils.GenRangeElement( valueType, 1 ) }} );
 }
 
 TEST_CASE( "{{ valueType.className }}_MinAccessor" )
 {
     gm::{{ valueType.className }} {{ valueType.varName }};
-    {{ valueType.varName }}.Min() = {{ GenRangeElement( valueType, -1 ) }};
-    CHECK( {{ valueType.varName }}.Min() == {{ GenRangeElement( valueType, -1 ) }} );
+    {{ valueType.varName }}.Min() = {{ typeUtils.GenRangeElement( valueType, -1 ) }};
+    CHECK( {{ valueType.varName }}.Min() == {{ typeUtils.GenRangeElement( valueType, -1 ) }} );
 }
 
 TEST_CASE( "{{ valueType.className }}_MaxAccessor" )
 {
     gm::{{ valueType.className }} {{ valueType.varName }};
-    {{ valueType.varName }}.Max() = {{ GenRangeElement( valueType, 1 ) }};
-    CHECK( {{ valueType.varName }}.Max() == {{ GenRangeElement( valueType, 1 ) }} );
+    {{ valueType.varName }}.Max() = {{ typeUtils.GenRangeElement( valueType, 1 ) }};
+    CHECK( {{ valueType.varName }}.Max() == {{ typeUtils.GenRangeElement( valueType, 1 ) }} );
+}
+
+TEST_CASE( "{{ valueType.className }}_EqualityComparison" )
+{
+    CHECK( {{ typeUtils.GenRange( valueType, 2, -2 ) }} == {{ typeUtils.GenRange( valueType, 2, -2 ) }} );
+    CHECK( !( {{ typeUtils.GenRange( valueType, 2, -2 ) }} == {{ typeUtils.GenRange( valueType, -2, -2 ) }} ) );
+}
+
+TEST_CASE( "{{ valueType.className }}_InequalityComparison" )
+{
+    CHECK( {{ typeUtils.GenRange( valueType, 2, -2 ) }} != {{ typeUtils.GenRange( valueType, -2, -2 ) }} );
+    CHECK( !( {{ typeUtils.GenRange( valueType, 2, -2 ) }} != {{ typeUtils.GenRange( valueType, 2, -2 ) }} ) );
+}
+
+TEST_CASE( "{{ valueType.className }}_IsEmpty" )
+{
+    CHECK( {{ typeUtils.GenRange( valueType, 2, -2 ) }}.IsEmpty() );
+    CHECK( !{{ typeUtils.GenRange( valueType, -2, -2 ) }}.IsEmpty() );
+    CHECK( !{{ typeUtils.GenRange( valueType, -2, 2 ) }}.IsEmpty() );
 }
 
 TEST_CASE( "{{ valueType.className }}_ContainsElement" )
 {
     gm::{{ valueType.className }} {{ valueType.varName }}(
-        /* min */ {{ GenRangeElement( valueType, -2 ) }},
-        /* max */ {{ GenRangeElement( valueType, 4 ) }}
+        /* min */ {{ typeUtils.GenRangeElement( valueType, -2 ) }},
+        /* max */ {{ typeUtils.GenRangeElement( valueType, 4 ) }}
     );
-    CHECK( {{ valueType.varName }}.Contains( {{ GenRangeElement( valueType, -2 ) }} ) );
-    CHECK( {{ valueType.varName }}.Contains( {{ GenRangeElement( valueType, -0 ) }} ) );
-    CHECK( {{ valueType.varName }}.Contains( {{ GenRangeElement( valueType, 4 ) }} ) );
-    CHECK( !{{ valueType.varName }}.Contains( {{ GenRangeElement( valueType, -3 ) }} ) );
-    CHECK( !{{ valueType.varName }}.Contains( {{ GenRangeElement( valueType, 5 ) }} ) );
+    CHECK( {{ valueType.varName }}.Contains( {{ typeUtils.GenRangeElement( valueType, -2 ) }} ) );
+    CHECK( {{ valueType.varName }}.Contains( {{ typeUtils.GenRangeElement( valueType, -0 ) }} ) );
+    CHECK( {{ valueType.varName }}.Contains( {{ typeUtils.GenRangeElement( valueType, 4 ) }} ) );
+    CHECK( !{{ valueType.varName }}.Contains( {{ typeUtils.GenRangeElement( valueType, -3 ) }} ) );
+    CHECK( !{{ valueType.varName }}.Contains( {{ typeUtils.GenRangeElement( valueType, 5 ) }} ) );
 }
 
 TEST_CASE( "{{ valueType.className }}_ContainsRange" )
 {
     gm::{{ valueType.className }} {{ valueType.varName }}(
-        /* min */ {{ GenRangeElement( valueType, -2 ) }},
-        /* max */ {{ GenRangeElement( valueType, 4 ) }}
+        /* min */ {{ typeUtils.GenRangeElement( valueType, -2 ) }},
+        /* max */ {{ typeUtils.GenRangeElement( valueType, 4 ) }}
     );
-    CHECK( {{ valueType.varName }}.Contains( {{ GenRange( valueType, -2, 3 ) }} ) );
-    CHECK( {{ valueType.varName }}.Contains( {{ GenRange( valueType, -1, 2 ) }} ) );
-    CHECK( !{{ valueType.varName }}.Contains( {{ GenRange( valueType, -3, 2 ) }} ) );
-    CHECK( !{{ valueType.varName }}.Contains( {{ GenRange( valueType, -1, 5 ) }} ) );
-    CHECK( !{{ valueType.varName }}.Contains( {{ GenRange( valueType, 7, 10 ) }} ) );
-    CHECK( !{{ valueType.varName }}.Contains( {{ GenRange( valueType, -5, -4 ) }} ) );
+    CHECK( {{ valueType.varName }}.Contains( {{ typeUtils.GenRange( valueType, -2, 3 ) }} ) );
+    CHECK( {{ valueType.varName }}.Contains( {{ typeUtils.GenRange( valueType, -1, 2 ) }} ) );
+    CHECK( !{{ valueType.varName }}.Contains( {{ typeUtils.GenRange( valueType, -3, 2 ) }} ) );
+    CHECK( !{{ valueType.varName }}.Contains( {{ typeUtils.GenRange( valueType, -1, 5 ) }} ) );
+    CHECK( !{{ valueType.varName }}.Contains( {{ typeUtils.GenRange( valueType, 7, 10 ) }} ) );
+    CHECK( !{{ valueType.varName }}.Contains( {{ typeUtils.GenRange( valueType, -5, -4 ) }} ) );
 }
 
 {% if valueType.elementType.isScalar and valueType.elementType.className == "int" %}
