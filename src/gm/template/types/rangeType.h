@@ -35,8 +35,8 @@ public:
 
     /// Explicit constructor for initializing a minimum maximum range.
     ///
-    /// \param i_min Minimum bounds.
-    /// \param i_max Maximum bounds.
+    /// \param i_min Minimum.
+    /// \param i_max Maximum.
     GM_HOST_DEVICE constexpr explicit inline {{ valueType.className }}(
         const {{ valueType.elementType.className }}& i_min,
         const {{ valueType.elementType.className }}& i_max
@@ -80,6 +80,46 @@ public:
     GM_HOST_DEVICE inline {{ valueType.elementType.className }}& Max()
     {
         return m_max;
+    }
+
+    // --------------------------------------------------------------------- //
+    /// \name Containment
+    // --------------------------------------------------------------------- //
+
+    /// Check that \p i_value is inside the current range, inclusive of the both the
+    /// min and max.
+    ///
+    /// \param i_value The value to test for inclusiveness within this range.
+    ///
+    /// \retval true If \p i_value is inside the current range.
+    /// \retval false If \p i_value is outisde the current range.
+    GM_HOST_DEVICE inline bool Contains( const {{ valueType.elementType.className }}& i_value ) const
+    {
+{% if valueType.elementType.isScalar -%}
+        return i_value >= Min() && i_value <= Max();
+{% elif valueType.elementType.isVector -%}
+        return
+{%- for index in range(valueType.elementType.elementSize) %}
+        i_value[ {{ index }} ] >= Min()[ {{ index }} ] && i_value[ {{ index }} ] <= Max()[ {{ index }} ]
+{%- if index + 1 < valueType.elementType.elementSize -%}
+        &&
+{%- endif -%}
+{%- endfor %}
+        ;
+{%- endif -%}
+    }
+
+    /// Check that \p i_range is \em completely within the current range, as in, the \em min
+    /// and \em max of \p i_range are \em both inclusive of the both the min and max
+    /// of the current range..
+    ///
+    /// \param i_range The range to test for complete inclusiveness within this range.
+    ///
+    /// \retval true If \p i_range is \em completely inside the current range.
+    /// \retval false If \p i_range is \em completely outisde the current range.
+    GM_HOST_DEVICE inline bool Contains( const {{ valueType.className }}& i_range ) const
+    {
+        return Contains( i_range.Min() ) && Contains( i_range.Max() );
     }
 
 {% if valueType.elementType.isScalar and valueType.elementType.className == "int" %}
@@ -149,8 +189,8 @@ public:
         /// Iterator construction, with the current position.
         ///
         /// \param i_current The position to initialize this iterator to.
-        /// \param i_min the minimum bounds of the range.
-        /// \param i_max the maximum bounds of the range.
+        /// \param i_min the minimum of the range.
+        /// \param i_max the maximum of the range.
         inline iterator(
             const {{ valueType.elementType.className }}& i_current,
             const {{ valueType.elementType.className }}& i_min,

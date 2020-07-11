@@ -35,6 +35,31 @@ TEST_CASE( "Vec2iRange_MaxAccessor" )
     CHECK( range.Max() == gm::Vec2i( 1, 1 ) );
 }
 
+TEST_CASE( "Vec2iRange_ContainsElement" )
+{
+    gm::Vec2iRange range(
+        /* min */ gm::Vec2i( -2, -2 ),
+        /* max */ gm::Vec2i( 4, 4 ) );
+    CHECK( range.Contains( gm::Vec2i( -2, -2 ) ) );
+    CHECK( range.Contains( gm::Vec2i( 0, 0 ) ) );
+    CHECK( range.Contains( gm::Vec2i( 4, 4 ) ) );
+    CHECK( !range.Contains( gm::Vec2i( -3, -3 ) ) );
+    CHECK( !range.Contains( gm::Vec2i( 5, 5 ) ) );
+}
+
+TEST_CASE( "Vec2iRange_ContainsRange" )
+{
+    gm::Vec2iRange range(
+        /* min */ gm::Vec2i( -2, -2 ),
+        /* max */ gm::Vec2i( 4, 4 ) );
+    CHECK( range.Contains( gm::Vec2iRange( gm::Vec2i( -2, -2 ), gm::Vec2i( 3, 3 ) ) ) );
+    CHECK( range.Contains( gm::Vec2iRange( gm::Vec2i( -1, -1 ), gm::Vec2i( 2, 2 ) ) ) );
+    CHECK( !range.Contains( gm::Vec2iRange( gm::Vec2i( -3, -3 ), gm::Vec2i( 2, 2 ) ) ) );
+    CHECK( !range.Contains( gm::Vec2iRange( gm::Vec2i( -1, -1 ), gm::Vec2i( 5, 5 ) ) ) );
+    CHECK( !range.Contains( gm::Vec2iRange( gm::Vec2i( 7, 7 ), gm::Vec2i( 10, 10 ) ) ) );
+    CHECK( !range.Contains( gm::Vec2iRange( gm::Vec2i( -5, -5 ), gm::Vec2i( -4, -4 ) ) ) );
+}
+
 TEST_CASE( "Vec2iRange_RangeIteration" )
 {
     gm::Vec2iRange range( gm::Vec2i( -2, -2 ), gm::Vec2i( 4, 4 ) );
