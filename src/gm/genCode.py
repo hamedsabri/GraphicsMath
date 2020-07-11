@@ -461,6 +461,18 @@ def GenerateFunctions():
             )
         )
 
+    rangeOps = []
+    for valueType in RANGE_TYPES:
+        rangeOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("lhs", valueType, Mutability.Const),
+                    FunctionArg("rhs", valueType, Mutability.Const),
+                ],
+                returnType=valueType,
+            )
+        )
+
     quadraticOps = []
     for valueType in (ScalarType(FLOAT),):
         quadraticOps.append(
@@ -521,6 +533,7 @@ def GenerateFunctions():
         ),
         FunctionGroup(["linearMap",], mapOps, FunctionCategory.BASIC),
         FunctionGroup(["clamp",], clampOps, FunctionCategory.BASIC),
+        FunctionGroup(["intersection",], rangeOps, FunctionCategory.BASIC),
 
         # Linear algebra.
         FunctionGroup(["isIdentity"], checkMatrixOps, FunctionCategory.LINEAR_ALGEBRA),

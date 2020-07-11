@@ -47,6 +47,7 @@ void BindTranspose( pybind11::module& );
 void BindSetScale( pybind11::module& );
 void BindCeil( pybind11::module& );
 void BindDotProduct( pybind11::module& );
+void BindIntersection( pybind11::module& );
 void BindSetTranslate( pybind11::module& );
 void BindDistance( pybind11::module& );
 void BindRadians( pybind11::module& );
@@ -108,6 +109,7 @@ PYBIND11_MODULE( gm, o_module )
     BindSetScale( o_module );
     BindCeil( o_module );
     BindDotProduct( o_module );
+    BindIntersection( o_module );
     BindSetTranslate( o_module );
     BindDistance( o_module );
     BindRadians( o_module );
