@@ -27,6 +27,21 @@
 /// \return The expanded {{ category }}.
 {{- functionUtils.signature(function, interface) -}}
 {
+    bool leftEmpty = {{ lhs }}.IsEmpty();
+    bool rightEmpty = {{ rhs }}.IsEmpty();
+    if ( leftEmpty && rightEmpty )
+    {
+        return {{ interface.returnType.className }}();
+    }
+    else if ( leftEmpty )
+    {
+        return {{ rhs }};
+    }
+    else if ( rightEmpty )
+    {
+        return {{ lhs }};
+    }
+
     return {{ interface.returnType.className }}(
         Min( {{ lhs }}.Min(), {{ rhs }}.Min() ),
         Max( {{ lhs }}.Max(), {{ rhs }}.Max() )

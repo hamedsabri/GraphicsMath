@@ -35,6 +35,21 @@ GM_NS_OPEN
 /// \return The expanded range.
 GM_HOST_DEVICE inline FloatRange Expand( const FloatRange& i_lhs, const FloatRange& i_rhs )
 {
+    bool leftEmpty  = i_lhs.IsEmpty();
+    bool rightEmpty = i_rhs.IsEmpty();
+    if ( leftEmpty && rightEmpty )
+    {
+        return FloatRange();
+    }
+    else if ( leftEmpty )
+    {
+        return i_rhs;
+    }
+    else if ( rightEmpty )
+    {
+        return i_lhs;
+    }
+
     return FloatRange( Min( i_lhs.Min(), i_rhs.Min() ), Max( i_lhs.Max(), i_rhs.Max() ) );
 }
 
@@ -46,6 +61,21 @@ GM_HOST_DEVICE inline FloatRange Expand( const FloatRange& i_lhs, const FloatRan
 /// \return The expanded range.
 GM_HOST_DEVICE inline IntRange Expand( const IntRange& i_lhs, const IntRange& i_rhs )
 {
+    bool leftEmpty  = i_lhs.IsEmpty();
+    bool rightEmpty = i_rhs.IsEmpty();
+    if ( leftEmpty && rightEmpty )
+    {
+        return IntRange();
+    }
+    else if ( leftEmpty )
+    {
+        return i_rhs;
+    }
+    else if ( rightEmpty )
+    {
+        return i_lhs;
+    }
+
     return IntRange( Min( i_lhs.Min(), i_rhs.Min() ), Max( i_lhs.Max(), i_rhs.Max() ) );
 }
 
@@ -57,6 +87,21 @@ GM_HOST_DEVICE inline IntRange Expand( const IntRange& i_lhs, const IntRange& i_
 /// \return The expanded range.
 GM_HOST_DEVICE inline Vec2fRange Expand( const Vec2fRange& i_lhs, const Vec2fRange& i_rhs )
 {
+    bool leftEmpty  = i_lhs.IsEmpty();
+    bool rightEmpty = i_rhs.IsEmpty();
+    if ( leftEmpty && rightEmpty )
+    {
+        return Vec2fRange();
+    }
+    else if ( leftEmpty )
+    {
+        return i_rhs;
+    }
+    else if ( rightEmpty )
+    {
+        return i_lhs;
+    }
+
     return Vec2fRange( Min( i_lhs.Min(), i_rhs.Min() ), Max( i_lhs.Max(), i_rhs.Max() ) );
 }
 
@@ -68,6 +113,21 @@ GM_HOST_DEVICE inline Vec2fRange Expand( const Vec2fRange& i_lhs, const Vec2fRan
 /// \return The expanded range.
 GM_HOST_DEVICE inline Vec3fRange Expand( const Vec3fRange& i_lhs, const Vec3fRange& i_rhs )
 {
+    bool leftEmpty  = i_lhs.IsEmpty();
+    bool rightEmpty = i_rhs.IsEmpty();
+    if ( leftEmpty && rightEmpty )
+    {
+        return Vec3fRange();
+    }
+    else if ( leftEmpty )
+    {
+        return i_rhs;
+    }
+    else if ( rightEmpty )
+    {
+        return i_lhs;
+    }
+
     return Vec3fRange( Min( i_lhs.Min(), i_rhs.Min() ), Max( i_lhs.Max(), i_rhs.Max() ) );
 }
 
@@ -79,6 +139,21 @@ GM_HOST_DEVICE inline Vec3fRange Expand( const Vec3fRange& i_lhs, const Vec3fRan
 /// \return The expanded range.
 GM_HOST_DEVICE inline Vec4fRange Expand( const Vec4fRange& i_lhs, const Vec4fRange& i_rhs )
 {
+    bool leftEmpty  = i_lhs.IsEmpty();
+    bool rightEmpty = i_rhs.IsEmpty();
+    if ( leftEmpty && rightEmpty )
+    {
+        return Vec4fRange();
+    }
+    else if ( leftEmpty )
+    {
+        return i_rhs;
+    }
+    else if ( rightEmpty )
+    {
+        return i_lhs;
+    }
+
     return Vec4fRange( Min( i_lhs.Min(), i_rhs.Min() ), Max( i_lhs.Max(), i_rhs.Max() ) );
 }
 
@@ -90,6 +165,21 @@ GM_HOST_DEVICE inline Vec4fRange Expand( const Vec4fRange& i_lhs, const Vec4fRan
 /// \return The expanded range.
 GM_HOST_DEVICE inline Vec2iRange Expand( const Vec2iRange& i_lhs, const Vec2iRange& i_rhs )
 {
+    bool leftEmpty  = i_lhs.IsEmpty();
+    bool rightEmpty = i_rhs.IsEmpty();
+    if ( leftEmpty && rightEmpty )
+    {
+        return Vec2iRange();
+    }
+    else if ( leftEmpty )
+    {
+        return i_rhs;
+    }
+    else if ( rightEmpty )
+    {
+        return i_lhs;
+    }
+
     return Vec2iRange( Min( i_lhs.Min(), i_rhs.Min() ), Max( i_lhs.Max(), i_rhs.Max() ) );
 }
 
@@ -101,6 +191,21 @@ GM_HOST_DEVICE inline Vec2iRange Expand( const Vec2iRange& i_lhs, const Vec2iRan
 /// \return The expanded range.
 GM_HOST_DEVICE inline Vec3iRange Expand( const Vec3iRange& i_lhs, const Vec3iRange& i_rhs )
 {
+    bool leftEmpty  = i_lhs.IsEmpty();
+    bool rightEmpty = i_rhs.IsEmpty();
+    if ( leftEmpty && rightEmpty )
+    {
+        return Vec3iRange();
+    }
+    else if ( leftEmpty )
+    {
+        return i_rhs;
+    }
+    else if ( rightEmpty )
+    {
+        return i_lhs;
+    }
+
     return Vec3iRange( Min( i_lhs.Min(), i_rhs.Min() ), Max( i_lhs.Max(), i_rhs.Max() ) );
 }
 
@@ -112,6 +217,21 @@ GM_HOST_DEVICE inline Vec3iRange Expand( const Vec3iRange& i_lhs, const Vec3iRan
 /// \return The expanded range.
 GM_HOST_DEVICE inline Vec4iRange Expand( const Vec4iRange& i_lhs, const Vec4iRange& i_rhs )
 {
+    bool leftEmpty  = i_lhs.IsEmpty();
+    bool rightEmpty = i_rhs.IsEmpty();
+    if ( leftEmpty && rightEmpty )
+    {
+        return Vec4iRange();
+    }
+    else if ( leftEmpty )
+    {
+        return i_rhs;
+    }
+    else if ( rightEmpty )
+    {
+        return i_lhs;
+    }
+
     return Vec4iRange( Min( i_lhs.Min(), i_rhs.Min() ), Max( i_lhs.Max(), i_rhs.Max() ) );
 }
 

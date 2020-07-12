@@ -8,6 +8,7 @@
 {% set rangeType = interface.ArgType("lhs") %}
 TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("lhs") }}" )
 {
+    // Expand with non-empty ranges.
     CHECK( gm::{{ function.name }}(
         {{- typeUtils.GenRange( rangeType, -2, 4 ) -}},
         {{- typeUtils.GenRange( rangeType, -3, -1 ) -}}
@@ -16,5 +17,21 @@ TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("lhs") }}" )
         {{- typeUtils.GenRange( rangeType, -2, 2 ) -}},
         {{- typeUtils.GenRange( rangeType, -1, 1 ) -}}
     ) == {{- typeUtils.GenRange( rangeType, -2, 2 ) -}} );
+
+    // Expand with one empty range.
+    CHECK( gm::{{ function.name }}(
+        {{- typeUtils.GenRange( rangeType, -2, 2 ) -}},
+        {{- typeUtils.GenRange( rangeType, 1, -1 ) -}}
+    ) == {{- typeUtils.GenRange( rangeType, -2, 2 ) -}} );
+    CHECK( gm::{{ function.name }}(
+        {{- typeUtils.GenRange( rangeType, 2, -2 ) -}},
+        {{- typeUtils.GenRange( rangeType, -1, 1 ) -}}
+    ) == {{- typeUtils.GenRange( rangeType, -1, 1 ) -}} );
+
+    // Expand with two empty ranges.
+    CHECK( gm::{{ function.name }}(
+        {{- typeUtils.GenRange( rangeType, 2, -2 ) -}},
+        {{- typeUtils.GenRange( rangeType, 1, -1 ) -}}
+    ).IsEmpty() );
 }
 {% endfor %}
