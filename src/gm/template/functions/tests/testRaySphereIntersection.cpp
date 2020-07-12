@@ -1,11 +1,7 @@
-//
-// This file is auto-generated, please do not modify directly!
-//
-
 #include <catch2/catch.hpp>
 
 #include <gm/functions/normalize.h>
-#include <gm/functions/raySphereIntersection.h>
+#include <gm/functions/{{ function.headerFileName }}>
 
 TEST_CASE( "RaySphereIntersection_float" )
 {

@@ -74,7 +74,7 @@
 ///                                 rayDirection,
 ///                                 intersections ) == 2 )
 /// {
-///     gm::Vec3f firstIntersectionPoint = gm::RayPosition( rayOrigin, rayDirection, intersections[ 0 ] );
+///     gm::Vec3f firstIntersectionPoint = gm::RayPosition( rayOrigin, rayDirection, intersections.Min() );
 ///     // ...
 /// }
 /// \endcode
@@ -83,7 +83,7 @@
 /// \param {{ interface.ArgName("sphereRadius") }} The radius of the sphere.
 /// \param {{ interface.ArgName("rayOrigin") }} The origin of the ray.
 /// \param {{ interface.ArgName("rayDirection") }} The direction of the ray.
-/// \param {{ interface.ArgName("intersections") }} The magnitudes of the intersections with respect to the ray.
+/// \param {{ interface.ArgName("intersections") }} The ray magnitudes of the intersections.
 ///
 /// \return The number of times the ray intersections the sphere.
 ///
@@ -104,12 +104,15 @@
               {{ interface.ArgName("sphereRadius") }} * {{ interface.ArgName("sphereRadius") }};
 
     // Solve for quadratic roots.
+    Vec2f roots;
     int numRoots = QuadraticRoots(
         a,
         b,
         c,
-        {{ interface.ArgName("intersections") }}
+        roots
     );
+    o_intersections.Min() = roots[ 0 ];
+    o_intersections.Max() = roots[ 1 ];
 
     // Check for number of roots (number of intersections).
     // The conditionals are ordered in terms of likeliness to occur.
@@ -123,16 +126,16 @@
         // Two intersections.
 
         // Store the intersection farther from the ray origin in the second root.
-        if ( {{ interface.ArgName("intersections") }}[ 0 ] > {{ interface.ArgName("intersections") }}[ 1 ] )
+        if ( {{ interface.ArgName("intersections") }}.Min() > {{ interface.ArgName("intersections") }}.Max() )
         {
-            std::swap( {{ interface.ArgName("intersections") }}[ 0 ], {{ interface.ArgName("intersections") }}[ 1 ] );
+            std::swap( {{ interface.ArgName("intersections") }}.Max(), {{ interface.ArgName("intersections") }}.Max() );
         }
 
         // Root negative check, as to not intersect with objects behind the ray direction.
-        if ( {{ interface.ArgName("intersections") }}[ 0 ] < 0 )
+        if ( {{ interface.ArgName("intersections") }}.Min() < 0 )
         {
-            {{ interface.ArgName("intersections") }}[ 0 ] = {{ interface.ArgName("intersections") }}[ 1 ];
-            if ( {{ interface.ArgName("intersections") }}[ 0 ] < 0 )
+            {{ interface.ArgName("intersections") }}.Min() = {{ interface.ArgName("intersections") }}.Max();
+            if ( {{ interface.ArgName("intersections") }}.Min() < 0 )
             {
                 // Both roots are negative, count it as no intersection.
                 return 0;
@@ -151,7 +154,7 @@
     {
         // A single intersection.
 
-        if ( {{ interface.ArgName("intersections") }}[ 0 ] < 0 )
+        if ( {{ interface.ArgName("intersections") }}.Min() < 0 )
         {
             // Do not intersect with spheres opposite of the ray direction.
             return 0;

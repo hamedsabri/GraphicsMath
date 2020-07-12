@@ -501,7 +501,7 @@ def GenerateFunctions():
                     FunctionArg("rayDirection", valueType, Mutability.Const),
                     FunctionArg(
                         "intersections",
-                        VectorType((2,), valueType.elementType),
+                        RangeType(valueType.elementType),
                         Mutability.Mutable,
                     ),
                 ],
