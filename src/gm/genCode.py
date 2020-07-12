@@ -549,7 +549,7 @@ def GenerateFunctions():
         ),
         FunctionGroup(["linearMap",], mapOps, FunctionCategory.BASIC),
         FunctionGroup(["clamp",], clampOps, FunctionCategory.BASIC),
-        FunctionGroup(["intersection",], rangeOps, FunctionCategory.BASIC),
+        FunctionGroup(["intersection", "expand"], rangeOps, FunctionCategory.BASIC),
 
         # Linear algebra.
         FunctionGroup(["isIdentity"], checkMatrixOps, FunctionCategory.LINEAR_ALGEBRA),
