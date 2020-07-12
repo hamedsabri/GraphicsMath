@@ -444,7 +444,6 @@ def GenerateFunctions():
 
         clampOps.append(FunctionInterface(arguments=arguments, returnType=valueType,))
 
-
     rayOps = []
     for valueType in (
         VectorType((2,), ScalarType(FLOAT)),
@@ -510,6 +509,24 @@ def GenerateFunctions():
             )
         )
 
+    rayAABBIntersectionOps = []
+    for valueType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
+        rayAABBIntersectionOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("rayOrigin", valueType, Mutability.Const),
+                    FunctionArg("rayDirection", valueType, Mutability.Const),
+                    FunctionArg("aabb", RangeType(valueType), Mutability.Const),
+                    FunctionArg(
+                        "intersections",
+                        RangeType(valueType.elementType),
+                        Mutability.Mutable,
+                    ),
+                ],
+                returnType=ScalarType(BOOL),
+            )
+        )
+
     # Random number generation.
     randomOps = []
     for valueType in NUMERIC_SCALAR_TYPES:
@@ -519,7 +536,6 @@ def GenerateFunctions():
                 returnType=valueType,
             )
         )
-
 
     functionGroups = [
         # Basic.
@@ -566,6 +582,11 @@ def GenerateFunctions():
         FunctionGroup(
             ["raySphereIntersection",],
             raySphereIntersectionOps,
+            FunctionCategory.RAY_TRACING,
+        ),
+        FunctionGroup(
+            ["rayAABBIntersection",],
+            rayAABBIntersectionOps,
             FunctionCategory.RAY_TRACING,
         ),
     ]
