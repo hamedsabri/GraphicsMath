@@ -29,6 +29,11 @@ GM_NS_OPEN
 
 /// Compute the expanded range of \p i_lhs and \p i_rhs.
 ///
+/// There are three special scenarios for handling empty input ranges:
+/// - If i_lhs and i_rhs are both empty, an empty range is returned.
+/// - If i_lhs is empty, but not i_rhs, i_rhs is returned.
+/// - If i_rhs is empty, but not i_lhs, i_lhs is returned.
+///
 /// \param i_lhs The first range.
 /// \param i_rhs The second range.
 ///
@@ -54,6 +59,11 @@ GM_HOST_DEVICE inline FloatRange Expand( const FloatRange& i_lhs, const FloatRan
 }
 
 /// Compute the expanded range of \p i_lhs and \p i_rhs.
+///
+/// There are three special scenarios for handling empty input ranges:
+/// - If i_lhs and i_rhs are both empty, an empty range is returned.
+/// - If i_lhs is empty, but not i_rhs, i_rhs is returned.
+/// - If i_rhs is empty, but not i_lhs, i_lhs is returned.
 ///
 /// \param i_lhs The first range.
 /// \param i_rhs The second range.
@@ -81,6 +91,11 @@ GM_HOST_DEVICE inline IntRange Expand( const IntRange& i_lhs, const IntRange& i_
 
 /// Compute the expanded range of \p i_lhs and \p i_rhs.
 ///
+/// There are three special scenarios for handling empty input ranges:
+/// - If i_lhs and i_rhs are both empty, an empty range is returned.
+/// - If i_lhs is empty, but not i_rhs, i_rhs is returned.
+/// - If i_rhs is empty, but not i_lhs, i_lhs is returned.
+///
 /// \param i_lhs The first range.
 /// \param i_rhs The second range.
 ///
@@ -106,6 +121,11 @@ GM_HOST_DEVICE inline Vec2fRange Expand( const Vec2fRange& i_lhs, const Vec2fRan
 }
 
 /// Compute the expanded range of \p i_lhs and \p i_rhs.
+///
+/// There are three special scenarios for handling empty input ranges:
+/// - If i_lhs and i_rhs are both empty, an empty range is returned.
+/// - If i_lhs is empty, but not i_rhs, i_rhs is returned.
+/// - If i_rhs is empty, but not i_lhs, i_lhs is returned.
 ///
 /// \param i_lhs The first range.
 /// \param i_rhs The second range.
@@ -133,6 +153,11 @@ GM_HOST_DEVICE inline Vec3fRange Expand( const Vec3fRange& i_lhs, const Vec3fRan
 
 /// Compute the expanded range of \p i_lhs and \p i_rhs.
 ///
+/// There are three special scenarios for handling empty input ranges:
+/// - If i_lhs and i_rhs are both empty, an empty range is returned.
+/// - If i_lhs is empty, but not i_rhs, i_rhs is returned.
+/// - If i_rhs is empty, but not i_lhs, i_lhs is returned.
+///
 /// \param i_lhs The first range.
 /// \param i_rhs The second range.
 ///
@@ -158,6 +183,11 @@ GM_HOST_DEVICE inline Vec4fRange Expand( const Vec4fRange& i_lhs, const Vec4fRan
 }
 
 /// Compute the expanded range of \p i_lhs and \p i_rhs.
+///
+/// There are three special scenarios for handling empty input ranges:
+/// - If i_lhs and i_rhs are both empty, an empty range is returned.
+/// - If i_lhs is empty, but not i_rhs, i_rhs is returned.
+/// - If i_rhs is empty, but not i_lhs, i_lhs is returned.
 ///
 /// \param i_lhs The first range.
 /// \param i_rhs The second range.
@@ -185,6 +215,11 @@ GM_HOST_DEVICE inline Vec2iRange Expand( const Vec2iRange& i_lhs, const Vec2iRan
 
 /// Compute the expanded range of \p i_lhs and \p i_rhs.
 ///
+/// There are three special scenarios for handling empty input ranges:
+/// - If i_lhs and i_rhs are both empty, an empty range is returned.
+/// - If i_lhs is empty, but not i_rhs, i_rhs is returned.
+/// - If i_rhs is empty, but not i_lhs, i_lhs is returned.
+///
 /// \param i_lhs The first range.
 /// \param i_rhs The second range.
 ///
@@ -210,6 +245,11 @@ GM_HOST_DEVICE inline Vec3iRange Expand( const Vec3iRange& i_lhs, const Vec3iRan
 }
 
 /// Compute the expanded range of \p i_lhs and \p i_rhs.
+///
+/// There are three special scenarios for handling empty input ranges:
+/// - If i_lhs and i_rhs are both empty, an empty range is returned.
+/// - If i_lhs is empty, but not i_rhs, i_rhs is returned.
+/// - If i_rhs is empty, but not i_lhs, i_lhs is returned.
 ///
 /// \param i_lhs The first range.
 /// \param i_rhs The second range.
