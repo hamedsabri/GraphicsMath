@@ -12,7 +12,7 @@ TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("aabb") }}" )
     gm::{{ interface.ArgClass("aabb") }} aabb =
         {{- typeUtils.GenRange( interface.ArgType("aabb"), -2, 2 ) -}};
 
-{%- for scaleFactor in [-1, 1] -%}
+{% for scaleFactor in [-1, 1] -%}
     // -------------------------------------------------------------------------
     // Test values with applied scaling factor of {{ scaleFactor }}.
     // -------------------------------------------------------------------------
@@ -90,6 +90,6 @@ TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("aabb") }}" )
             /* intersections */ intersections )
         );
     }
-{%- endfor -%}
+{%- endfor %}
 }
 {% endfor %}

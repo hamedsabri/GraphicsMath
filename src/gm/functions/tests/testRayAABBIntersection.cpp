@@ -10,9 +10,9 @@
 TEST_CASE( "RayAABBIntersection_Vec2fRange" )
 {
     // Bounding volume.
-    gm::Vec2fRange aabb = gm::Vec2fRange(
-        gm::Vec2f( -2.0f, -2.0f ),
-        gm::Vec2f( 2.0f, 2.0f ) ); // -------------------------------------------------------------------------
+    gm::Vec2fRange aabb = gm::Vec2fRange( gm::Vec2f( -2.0f, -2.0f ), gm::Vec2f( 2.0f, 2.0f ) );
+
+    // -------------------------------------------------------------------------
     // Test values with applied scaling factor of -1.
     // -------------------------------------------------------------------------
 
@@ -158,9 +158,9 @@ TEST_CASE( "RayAABBIntersection_Vec2fRange" )
 TEST_CASE( "RayAABBIntersection_Vec3fRange" )
 {
     // Bounding volume.
-    gm::Vec3fRange aabb = gm::Vec3fRange(
-        gm::Vec3f( -2.0f, -2.0f, -2.0f ),
-        gm::Vec3f( 2.0f, 2.0f, 2.0f ) ); // -------------------------------------------------------------------------
+    gm::Vec3fRange aabb = gm::Vec3fRange( gm::Vec3f( -2.0f, -2.0f, -2.0f ), gm::Vec3f( 2.0f, 2.0f, 2.0f ) );
+
+    // -------------------------------------------------------------------------
     // Test values with applied scaling factor of -1.
     // -------------------------------------------------------------------------
 
@@ -306,12 +306,10 @@ TEST_CASE( "RayAABBIntersection_Vec3fRange" )
 TEST_CASE( "RayAABBIntersection_Vec4fRange" )
 {
     // Bounding volume.
-    gm::Vec4fRange aabb = gm::Vec4fRange(
-        gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ),
-        gm::Vec4f( 2.0f,
-                   2.0f,
-                   2.0f,
-                   2.0f ) ); // -------------------------------------------------------------------------
+    gm::Vec4fRange aabb =
+        gm::Vec4fRange( gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ), gm::Vec4f( 2.0f, 2.0f, 2.0f, 2.0f ) );
+
+    // -------------------------------------------------------------------------
     // Test values with applied scaling factor of -1.
     // -------------------------------------------------------------------------
 
