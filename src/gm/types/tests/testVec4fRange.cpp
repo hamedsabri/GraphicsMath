@@ -64,34 +64,3 @@ TEST_CASE( "Vec4fRange_IsEmpty" )
         !gm::Vec4fRange( gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ), gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ) ).IsEmpty() );
     CHECK( !gm::Vec4fRange( gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ), gm::Vec4f( 2.0f, 2.0f, 2.0f, 2.0f ) ).IsEmpty() );
 }
-
-TEST_CASE( "Vec4fRange_ContainsElement" )
-{
-    gm::Vec4fRange range(
-        /* min */ gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ),
-        /* max */ gm::Vec4f( 4.0f, 4.0f, 4.0f, 4.0f ) );
-    CHECK( range.Contains( gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ) ) );
-    CHECK( range.Contains( gm::Vec4f( 0.0f, 0.0f, 0.0f, 0.0f ) ) );
-    CHECK( range.Contains( gm::Vec4f( 4.0f, 4.0f, 4.0f, 4.0f ) ) );
-    CHECK( !range.Contains( gm::Vec4f( -3.0f, -3.0f, -3.0f, -3.0f ) ) );
-    CHECK( !range.Contains( gm::Vec4f( 5.0f, 5.0f, 5.0f, 5.0f ) ) );
-}
-
-TEST_CASE( "Vec4fRange_ContainsRange" )
-{
-    gm::Vec4fRange range(
-        /* min */ gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ),
-        /* max */ gm::Vec4f( 4.0f, 4.0f, 4.0f, 4.0f ) );
-    CHECK( range.Contains(
-        gm::Vec4fRange( gm::Vec4f( -2.0f, -2.0f, -2.0f, -2.0f ), gm::Vec4f( 3.0f, 3.0f, 3.0f, 3.0f ) ) ) );
-    CHECK( range.Contains(
-        gm::Vec4fRange( gm::Vec4f( -1.0f, -1.0f, -1.0f, -1.0f ), gm::Vec4f( 2.0f, 2.0f, 2.0f, 2.0f ) ) ) );
-    CHECK( !range.Contains(
-        gm::Vec4fRange( gm::Vec4f( -3.0f, -3.0f, -3.0f, -3.0f ), gm::Vec4f( 2.0f, 2.0f, 2.0f, 2.0f ) ) ) );
-    CHECK( !range.Contains(
-        gm::Vec4fRange( gm::Vec4f( -1.0f, -1.0f, -1.0f, -1.0f ), gm::Vec4f( 5.0f, 5.0f, 5.0f, 5.0f ) ) ) );
-    CHECK( !range.Contains(
-        gm::Vec4fRange( gm::Vec4f( 7.0f, 7.0f, 7.0f, 7.0f ), gm::Vec4f( 10.0f, 10.0f, 10.0f, 10.0f ) ) ) );
-    CHECK( !range.Contains(
-        gm::Vec4fRange( gm::Vec4f( -5.0f, -5.0f, -5.0f, -5.0f ), gm::Vec4f( -4.0f, -4.0f, -4.0f, -4.0f ) ) ) );
-}

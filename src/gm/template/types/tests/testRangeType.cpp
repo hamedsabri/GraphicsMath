@@ -81,33 +81,6 @@ TEST_CASE( "{{ valueType.className }}_IsEmpty" )
     CHECK( !{{ typeUtils.GenRange( valueType, -2, 2 ) }}.IsEmpty() );
 }
 
-TEST_CASE( "{{ valueType.className }}_ContainsElement" )
-{
-    gm::{{ valueType.className }} {{ valueType.varName }}(
-        /* min */ {{ typeUtils.GenRangeElement( valueType, -2 ) }},
-        /* max */ {{ typeUtils.GenRangeElement( valueType, 4 ) }}
-    );
-    CHECK( {{ valueType.varName }}.Contains( {{ typeUtils.GenRangeElement( valueType, -2 ) }} ) );
-    CHECK( {{ valueType.varName }}.Contains( {{ typeUtils.GenRangeElement( valueType, -0 ) }} ) );
-    CHECK( {{ valueType.varName }}.Contains( {{ typeUtils.GenRangeElement( valueType, 4 ) }} ) );
-    CHECK( !{{ valueType.varName }}.Contains( {{ typeUtils.GenRangeElement( valueType, -3 ) }} ) );
-    CHECK( !{{ valueType.varName }}.Contains( {{ typeUtils.GenRangeElement( valueType, 5 ) }} ) );
-}
-
-TEST_CASE( "{{ valueType.className }}_ContainsRange" )
-{
-    gm::{{ valueType.className }} {{ valueType.varName }}(
-        /* min */ {{ typeUtils.GenRangeElement( valueType, -2 ) }},
-        /* max */ {{ typeUtils.GenRangeElement( valueType, 4 ) }}
-    );
-    CHECK( {{ valueType.varName }}.Contains( {{ typeUtils.GenRange( valueType, -2, 3 ) }} ) );
-    CHECK( {{ valueType.varName }}.Contains( {{ typeUtils.GenRange( valueType, -1, 2 ) }} ) );
-    CHECK( !{{ valueType.varName }}.Contains( {{ typeUtils.GenRange( valueType, -3, 2 ) }} ) );
-    CHECK( !{{ valueType.varName }}.Contains( {{ typeUtils.GenRange( valueType, -1, 5 ) }} ) );
-    CHECK( !{{ valueType.varName }}.Contains( {{ typeUtils.GenRange( valueType, 7, 10 ) }} ) );
-    CHECK( !{{ valueType.varName }}.Contains( {{ typeUtils.GenRange( valueType, -5, -4 ) }} ) );
-}
-
 {% if valueType.elementType.isScalar and valueType.elementType.className == "int" %}
 TEST_CASE( "{{ valueType.className }}_RangeIteration" )
 {

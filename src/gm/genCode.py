@@ -472,6 +472,30 @@ def GenerateFunctions():
             )
         )
 
+    containerOps = []
+    for valueType in RANGE_TYPES:
+        # Element in container test.
+        containerOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("container", valueType, Mutability.Const),
+                    FunctionArg("containee", valueType.elementType, Mutability.Const),
+                ],
+                returnType=ScalarType(BOOL),
+            )
+        )
+
+        # Container in container test.
+        containerOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("container", valueType, Mutability.Const),
+                    FunctionArg("containee", valueType, Mutability.Const),
+                ],
+                returnType=ScalarType(BOOL),
+            )
+        )
+
     quadraticOps = []
     for valueType in (ScalarType(FLOAT),):
         quadraticOps.append(
@@ -550,6 +574,7 @@ def GenerateFunctions():
         FunctionGroup(["linearMap",], mapOps, FunctionCategory.BASIC),
         FunctionGroup(["clamp",], clampOps, FunctionCategory.BASIC),
         FunctionGroup(["intersection", "expand"], rangeOps, FunctionCategory.BASIC),
+        FunctionGroup(["contains"], containerOps, FunctionCategory.BASIC),
 
         # Linear algebra.
         FunctionGroup(["isIdentity"], checkMatrixOps, FunctionCategory.LINEAR_ALGEBRA),

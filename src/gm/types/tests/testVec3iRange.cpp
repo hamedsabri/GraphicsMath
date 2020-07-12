@@ -62,31 +62,6 @@ TEST_CASE( "Vec3iRange_IsEmpty" )
     CHECK( !gm::Vec3iRange( gm::Vec3i( -2, -2, -2 ), gm::Vec3i( 2, 2, 2 ) ).IsEmpty() );
 }
 
-TEST_CASE( "Vec3iRange_ContainsElement" )
-{
-    gm::Vec3iRange range(
-        /* min */ gm::Vec3i( -2, -2, -2 ),
-        /* max */ gm::Vec3i( 4, 4, 4 ) );
-    CHECK( range.Contains( gm::Vec3i( -2, -2, -2 ) ) );
-    CHECK( range.Contains( gm::Vec3i( 0, 0, 0 ) ) );
-    CHECK( range.Contains( gm::Vec3i( 4, 4, 4 ) ) );
-    CHECK( !range.Contains( gm::Vec3i( -3, -3, -3 ) ) );
-    CHECK( !range.Contains( gm::Vec3i( 5, 5, 5 ) ) );
-}
-
-TEST_CASE( "Vec3iRange_ContainsRange" )
-{
-    gm::Vec3iRange range(
-        /* min */ gm::Vec3i( -2, -2, -2 ),
-        /* max */ gm::Vec3i( 4, 4, 4 ) );
-    CHECK( range.Contains( gm::Vec3iRange( gm::Vec3i( -2, -2, -2 ), gm::Vec3i( 3, 3, 3 ) ) ) );
-    CHECK( range.Contains( gm::Vec3iRange( gm::Vec3i( -1, -1, -1 ), gm::Vec3i( 2, 2, 2 ) ) ) );
-    CHECK( !range.Contains( gm::Vec3iRange( gm::Vec3i( -3, -3, -3 ), gm::Vec3i( 2, 2, 2 ) ) ) );
-    CHECK( !range.Contains( gm::Vec3iRange( gm::Vec3i( -1, -1, -1 ), gm::Vec3i( 5, 5, 5 ) ) ) );
-    CHECK( !range.Contains( gm::Vec3iRange( gm::Vec3i( 7, 7, 7 ), gm::Vec3i( 10, 10, 10 ) ) ) );
-    CHECK( !range.Contains( gm::Vec3iRange( gm::Vec3i( -5, -5, -5 ), gm::Vec3i( -4, -4, -4 ) ) ) );
-}
-
 TEST_CASE( "Vec3iRange_RangeIteration" )
 {
     gm::Vec3iRange range( gm::Vec3i( -2, -2, -2 ), gm::Vec3i( 4, 4, 4 ) );

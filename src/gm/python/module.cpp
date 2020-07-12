@@ -37,6 +37,7 @@ void BindMat4fArray( pybind11::module& );
 void BindLinearInterpolation( pybind11::module& );
 void BindNormalize( pybind11::module& );
 void BindMin( pybind11::module& );
+void BindContains( pybind11::module& );
 void BindAbs( pybind11::module& );
 void BindDegrees( pybind11::module& );
 void BindRandomNumber( pybind11::module& );
@@ -101,6 +102,7 @@ PYBIND11_MODULE( gm, o_module )
     BindLinearInterpolation( o_module );
     BindNormalize( o_module );
     BindMin( o_module );
+    BindContains( o_module );
     BindAbs( o_module );
     BindDegrees( o_module );
     BindRandomNumber( o_module );

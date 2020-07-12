@@ -54,31 +54,6 @@ TEST_CASE( "IntRange_IsEmpty" )
     CHECK( !gm::IntRange( -2, 2 ).IsEmpty() );
 }
 
-TEST_CASE( "IntRange_ContainsElement" )
-{
-    gm::IntRange range(
-        /* min */ -2,
-        /* max */ 4 );
-    CHECK( range.Contains( -2 ) );
-    CHECK( range.Contains( 0 ) );
-    CHECK( range.Contains( 4 ) );
-    CHECK( !range.Contains( -3 ) );
-    CHECK( !range.Contains( 5 ) );
-}
-
-TEST_CASE( "IntRange_ContainsRange" )
-{
-    gm::IntRange range(
-        /* min */ -2,
-        /* max */ 4 );
-    CHECK( range.Contains( gm::IntRange( -2, 3 ) ) );
-    CHECK( range.Contains( gm::IntRange( -1, 2 ) ) );
-    CHECK( !range.Contains( gm::IntRange( -3, 2 ) ) );
-    CHECK( !range.Contains( gm::IntRange( -1, 5 ) ) );
-    CHECK( !range.Contains( gm::IntRange( 7, 10 ) ) );
-    CHECK( !range.Contains( gm::IntRange( -5, -4 ) ) );
-}
-
 TEST_CASE( "IntRange_RangeIteration" )
 {
     gm::IntRange range( -3, 3 );
