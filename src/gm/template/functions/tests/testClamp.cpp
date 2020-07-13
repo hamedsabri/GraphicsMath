@@ -9,17 +9,18 @@
 {% set value                = interface.ArgName("value") %}
 {% set valueType            = interface.ArgType("value") %}
 {% set valueClass           = interface.ArgClass("value") %}
+{% set rangeType            = interface.ArgType("range") %}
 {% set namespacedValueClass = valueType.namespacedClassName %}
 TEST_CASE( "{{ function.name }}_{{ valueClass }}_{{ testCaseName }}" )
 {
     {{ namespacedValueClass }} {{ valueType.varName }} = {{ typeUtils.GenUniformValue(valueType, inputScalar) }};
-    gm::{{ interface.ArgClass("range") }} {{ interface.ArgType("range").varName }}(
-        {{ interface.ArgType("range").CppValue(-10) }},
-        {{ interface.ArgType("range").CppValue(10) }}
+    gm::{{ interface.ArgClass("range") }} {{ rangeType.varName }}(
+        {{ rangeType.CppValue(-10) }},
+        {{ rangeType.CppValue(10) }}
     );
     {{ namespacedValueClass }} {{ valueType.varName }}Clamped = gm::{{ function.name }}(
         {{ valueType.varName }},
-        {{ interface.ArgType("range").varName }}
+        {{ rangeType.varName }}
     );
     {{ namespacedValueClass }} {{ valueType.varName }}Expected =
         {{ typeUtils.GenUniformValue(valueType, expectedScalar) }};
