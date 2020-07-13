@@ -21,17 +21,20 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Set the translation \p {{ interface.ArgName("vector") }} onto the transformation matrix \p {{ interface.ArgName("matrix") }}.
+{% set vector     = interface.ArgName("vector") %}
+{% set matrix     = interface.ArgName("matrix") %}
+{% set matrixType = interface.ArgType("matrix") %}
+/// Set the translation \p {{ vector }} onto the transformation matrix \p {{ matrix }}.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("vector") }} Translate vector.
-/// \param {{ interface.ArgName("matrix") }} Transformation matrix.
+/// \param {{ vector }} Translate vector.
+/// \param {{ matrix }} Transformation matrix.
 {{- functionUtils.signature(function, interface) -}}
 {
-{% for row in range(interface.ArgType("matrix").shape[0]) -%}
-{% for col in range(interface.ArgType("matrix").shape[1]) -%}
-{% if row + 1 < interface.ArgType("matrix").shape[0] and col + 1 == interface.ArgType("matrix").shape[1] -%}
-    {{ interface.ArgName("matrix") }}( {{ row }}, {{ col }} ) = {{ interface.ArgName("vector") }}[ {{ row }} ];
+{% for row in range(matrixType.shape[0]) -%}
+{% for col in range(matrixType.shape[1]) -%}
+{% if row + 1 < matrixType.shape[0] and col + 1 == matrixType.shape[1] -%}
+    {{ matrix }}( {{ row }}, {{ col }} ) = {{ vector }}[ {{ row }} ];
 {%- endif %}
 {%- endfor -%}
 {%- endfor -%}

@@ -11,7 +11,7 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-{% set matrix = interface.ArgName("matrix") %}
+{% set matrix     = interface.ArgName("matrix") %}
 {% set matrixType = interface.ArgType("matrix") %}
 /// Check if the matrix \p {{ interface.ArgName("matrix") }} is the identity matrix.
 /// \ingroup gm_functions_{{ function.category }}

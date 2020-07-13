@@ -26,21 +26,23 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Set the identity matrix onto \p {{ interface.ArgName("matrix") }}.
+{% set matrix     = interface.ArgName("matrix") %}
+{% set matrixType = interface.ArgType("matrix") %}
+/// Set the identity matrix onto \p {{ matrix }}.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("matrix") }} The matrix to set as the identity.
+/// \param {{ matrix }} The matrix to set as the identity.
 {{- functionUtils.signature(function, interface) -}}
 {
-    {{ interface.ArgName("matrix") }} = {{ interface.ArgClass("matrix") }}(
-{% for row in range(interface.Arg("matrix").type.shape[0]) -%}
-{% for col in range(interface.Arg("matrix").type.shape[1]) -%}
+    {{ matrix }} = {{ interface.ArgClass("matrix") }}(
+{% for row in range(matrixType.shape[0]) -%}
+{% for col in range(matrixType.shape[1]) -%}
 {% if row == col -%}
-    {{ interface.Arg("matrix").type.CppValue( 1 ) }}
+    {{ matrixType.CppValue( 1 ) }}
 {%- else -%}
-    {{ interface.Arg("matrix").type.CppValue( 0 ) }}
+    {{ matrixType.CppValue( 0 ) }}
 {%- endif %}
-{% if row + 1 < interface.Arg("matrix").type.shape[0] or col + 1 < interface.Arg("matrix").type.shape[ 1 ] -%}
+{% if row + 1 < matrixType.shape[0] or col + 1 < matrixType.shape[ 1 ] -%}
     ,
 {%- endif %}
 {%- endfor -%}

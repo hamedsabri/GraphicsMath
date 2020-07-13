@@ -19,29 +19,32 @@
 {% block includes %}
 {{ functionUtils.typeIncludes(function) }}
 #include <gm/functions/length.h>
+#include <gm/base/almost.h>
 {% endblock %}
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Compute the position along a ray by scalar magnitude \p {{ interface.ArgName("magnitude") }}.
+{% set origin    = interface.ArgName("origin") %}
+{% set direction = interface.ArgName("direction") %}
+{% set magnitude = interface.ArgName("magnitude") %}
+/// Compute the position along a ray by scalar magnitude \p {{ magnitude }}.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \pre \p {{ interface.ArgName("direction") }} must be a normalized vector.
+/// \pre \p {{ direction }} must be a normalized vector.
 ///
 /// \sa \ref Normalize for vector normalization.
 ///
-/// \param {{ interface.ArgName("origin") }} The origin of the ray.
-/// \param {{ interface.ArgName("direction") }} The direction of the ray.
-/// \param {{ interface.ArgName("magnitude") }} The magnitude to project the ray.
+/// \param {{ origin }} The origin of the ray.
+/// \param {{ direction }} The direction of the ray.
+/// \param {{ magnitude }} The magnitude to project the ray.
 ///
 /// \return the position along the curve.
 {{- functionUtils.signature(function, interface) -}}
 {
-    GM_ASSERT_MSG( Length( {{ interface.ArgName("direction") }} ) ==
-                   {{ interface.ArgType("direction").CppValue( 1 ) }},
-                   "Direction {{ interface.ArgName("direction") }} is not normalised!" );
-    return {{ interface.ArgName("origin") }} +
-           ( {{ interface.ArgName("direction") }} * {{ interface.ArgName("magnitude") }} );
+    GM_ASSERT_MSG( AlmostEqual( Length( {{ direction }} ),
+                                {{ interface.ArgType("direction").CppValue( 1 ) }} ),
+                   "Direction {{ direction }} is not normalised!" );
+    return {{ origin }} + ( {{ direction }} * {{ magnitude }} );
 }
 {% endfor %}
 {% endblock %}

@@ -17,19 +17,21 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Transpose the input matrix \p {{ interface.ArgName("matrix") }}.
+{% set matrix     = interface.ArgName("matrix") %}
+{% set matrixType = interface.ArgType("matrix") %}
+/// Transpose the input matrix \p {{ matrix }}.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("matrix") }} The input matrix to transpose.
+/// \param {{ matrix }} The input matrix to transpose.
 ///
 /// \return Transposed matrix.
 {{- functionUtils.signature(function, interface) -}}
 {
-    return {{ interface.ArgType("matrix").className }}(
-{% for row in range(interface.ArgType("matrix").shape[0]) -%}
-{% for col in range(interface.ArgType("matrix").shape[1]) -%}
-    {{ interface.ArgName("matrix") }}( {{ col }}, {{ row }} )
-{% if row + 1 < interface.ArgType("matrix").shape[0] or col + 1 < interface.ArgType("matrix").shape[ 1 ] -%}
+    return {{ matrixType.className }}(
+{% for row in range(matrixType.shape[0]) -%}
+{% for col in range(matrixType.shape[1]) -%}
+    {{ matrix }}( {{ col }}, {{ row }} )
+{% if row + 1 < matrixType.shape[0] or col + 1 < matrixType.shape[ 1 ] -%}
     ,
 {%- endif %}
 {%- endfor -%}

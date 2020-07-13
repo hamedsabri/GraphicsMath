@@ -60,11 +60,17 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
+{% set sphereOrigin      = interface.ArgName("sphereOrigin") %}
+{% set sphereRadius      = interface.ArgName("sphereRadius") %}
+{% set rayOrigin         = interface.ArgName("rayOrigin") %}
+{% set rayDirection      = interface.ArgName("rayDirection") %}
+{% set rayDirectionType  = interface.ArgType("rayDirection") %}
+{% set intersections     = interface.ArgName("intersections") %}
 /// Compute the intersection(s) between a ray and an implicit sphere.
 /// \ingroup gm_functions_{{ function.category }}
 ///
 /// The points of intersection can be computed from the intersection magnitudes
-/// \p {{ interface.ArgName("intersections") }} /// via \ref RayPosition.
+/// \p {{ intersections }} /// via \ref RayPosition.
 ///
 /// Example usage:
 /// \code{.cpp}
@@ -79,11 +85,11 @@
 /// }
 /// \endcode
 ///
-/// \param {{ interface.ArgName("sphereOrigin") }} The origin or center of the sphere.
-/// \param {{ interface.ArgName("sphereRadius") }} The radius of the sphere.
-/// \param {{ interface.ArgName("rayOrigin") }} The origin of the ray.
-/// \param {{ interface.ArgName("rayDirection") }} The direction of the ray.
-/// \param {{ interface.ArgName("intersections") }} The ray magnitudes of the intersections.
+/// \param {{ sphereOrigin }} The origin or center of the sphere.
+/// \param {{ sphereRadius }} The radius of the sphere.
+/// \param {{ rayOrigin }} The origin of the ray.
+/// \param {{ rayDirection }} The direction of the ray.
+/// \param {{ intersections }} The ray magnitudes of the intersections.
 ///
 /// \return The number of times the ray intersections the sphere.
 ///
@@ -92,25 +98,18 @@
 /// \retval 2 the ray intersects through the volume of the sphere.
 {{- functionUtils.signature(function, interface) -}}
 {
-    GM_ASSERT_MSG( Length( {{ interface.ArgName("rayDirection") }} ) ==
-                   {{ interface.ArgType("rayDirection").CppValue( 1 ) }},
-                   "Direction {{ interface.ArgName("rayDirection") }} is not normalised!" );
+    GM_ASSERT_MSG( Length( {{ rayDirection }} ) == {{ rayDirectionType.CppValue( 1 ) }},
+                   "Direction {{ rayDirection }} is not normalised!" );
 
     // Compute quadratic co-efficients
-    Vec3f originDiff = {{ interface.ArgName("rayOrigin") }} - {{ interface.ArgName("sphereOrigin") }};
-    float a = DotProduct( {{ interface.ArgName("rayDirection") }}, {{ interface.ArgName("rayDirection") }} );
-    float b = 2.0f * DotProduct( {{ interface.ArgName("rayDirection") }}, originDiff );
-    float c = DotProduct( originDiff, originDiff ) -
-              {{ interface.ArgName("sphereRadius") }} * {{ interface.ArgName("sphereRadius") }};
+    Vec3f originDiff = {{ rayOrigin }} - {{ sphereOrigin }};
+    float a = DotProduct( {{ rayDirection }}, {{ rayDirection }} );
+    float b = 2.0f * DotProduct( {{ rayDirection }}, originDiff );
+    float c = DotProduct( originDiff, originDiff ) - {{ sphereRadius }} * {{ sphereRadius }};
 
     // Solve for quadratic roots.
     Vec2f roots;
-    int numRoots = QuadraticRoots(
-        a,
-        b,
-        c,
-        roots
-    );
+    int numRoots = QuadraticRoots( a, b, c, roots );
     o_intersections.Min() = roots[ 0 ];
     o_intersections.Max() = roots[ 1 ];
 
@@ -126,16 +125,16 @@
         // Two intersections.
 
         // Store the intersection farther from the ray origin in the second root.
-        if ( {{ interface.ArgName("intersections") }}.Min() > {{ interface.ArgName("intersections") }}.Max() )
+        if ( {{ intersections }}.Min() > {{ intersections }}.Max() )
         {
-            std::swap( {{ interface.ArgName("intersections") }}.Max(), {{ interface.ArgName("intersections") }}.Max() );
+            std::swap( {{ intersections }}.Max(), {{ intersections }}.Max() );
         }
 
         // Root negative check, as to not intersect with objects behind the ray direction.
-        if ( {{ interface.ArgName("intersections") }}.Min() < 0 )
+        if ( {{ intersections }}.Min() < 0 )
         {
-            {{ interface.ArgName("intersections") }}.Min() = {{ interface.ArgName("intersections") }}.Max();
-            if ( {{ interface.ArgName("intersections") }}.Min() < 0 )
+            {{ intersections }}.Min() = {{ intersections }}.Max();
+            if ( {{ intersections }}.Min() < 0 )
             {
                 // Both roots are negative, count it as no intersection.
                 return 0;
@@ -154,7 +153,7 @@
     {
         // A single intersection.
 
-        if ( {{ interface.ArgName("intersections") }}.Min() < 0 )
+        if ( {{ intersections }}.Min() < 0 )
         {
             // Do not intersect with spheres opposite of the ray direction.
             return 0;

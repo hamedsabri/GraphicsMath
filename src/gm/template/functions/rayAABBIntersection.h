@@ -51,56 +51,56 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
+{% set rayOrigin         = interface.ArgName("rayOrigin") %}
+{% set rayDirection      = interface.ArgName("rayDirection") %}
+{% set rayDirectionType  = interface.ArgType("rayDirection") %}
+{% set aabb              = interface.ArgName("aabb") %}
+{% set intersections     = interface.ArgName("intersections") %}
 /// Check if a ray intersects a axis-aligned bounding box (AABB).
 ///
-/// \param {{ interface.ArgName("rayOrigin") }} The origin of the ray.
-/// \param {{ interface.ArgName("rayDirection") }} The direction of the ray.
-/// \param {{ interface.ArgName("aabb") }} The axis-aligned bounding box.
-/// \param {{ interface.ArgName("intersections") }} The output ray magnitudes intersecting the AABB.
-/// If there are no intersections, then {{ interface.ArgName("intersections") }} will be undefined.
+/// \param {{ rayOrigin }} The origin of the ray.
+/// \param {{ rayDirection }} The direction of the ray.
+/// \param {{ aabb }} The axis-aligned bounding box.
+/// \param {{ intersections }} The output ray magnitudes intersecting the AABB.
+/// If there are no intersections, then {{ intersections }} will be undefined.
 ///
 /// \retval true The ray intersects the AABB.
 /// \retval false The ray does not intersect the AABB.
 {{- functionUtils.signature(function, interface) -}}
 {
-    GM_ASSERT_MSG( AlmostEqual( Length( {{ interface.ArgName("rayDirection") }} ),
-                                {{ interface.ArgType("rayDirection").CppValue( 1 ) }} ),
-                   "Direction {{ interface.ArgName("rayDirection") }} is not normalised!" );
+    GM_ASSERT_MSG( AlmostEqual( Length( {{ rayDirection }} ),
+                                {{ rayDirectionType.CppValue( 1 ) }} ),
+                   "Direction {{ rayDirection }} is not normalised!" );
 
     // Initialize intersection magnitudes to ray limits.
-    {{ interface.ArgName("intersections") }}.Min() = 0.0f;
-    {{ interface.ArgName("intersections") }}.Max() =
+    {{ intersections }}.Min() = 0.0f;
+    {{ intersections }}.Max() =
         std::numeric_limits< {{ interface.ArgType("intersections").elementType.className }} >::max();
 
-{% for axis in range(interface.ArgType("rayDirection").elementSize) -%}
+{% for axis in range(rayDirectionType.elementSize) -%}
     // Compute local minimum & maximum magnitudes for axis {{ axis }}, to intersect (find overlap)
     // against other axis.
     {
-        {{ interface.ArgType("rayDirection").elementType.className }} inverseAxisDir =
-            {{ interface.ArgType("rayDirection").elementType.CppValue(1.0) }} /
-            {{ interface.ArgName("rayDirection") }}[ {{ axis }} ];
+        {{ rayDirectionType.elementType.className }} inverseAxisDir =
+            {{ rayDirectionType.elementType.CppValue(1.0) }} /
+            {{ rayDirection }}[ {{ axis }} ];
 
         gm::{{ interface.ArgClass("intersections") }} axisIntersections(
-            ( {{ interface.ArgName("aabb") }}.Min()[ {{ axis }} ] -
-              {{ interface.ArgName("rayOrigin") }}[ {{ axis }} ] ) * inverseAxisDir,
-            ( {{ interface.ArgName("aabb") }}.Max()[ {{ axis }} ] -
-              {{ interface.ArgName("rayOrigin") }}[ {{ axis }} ] ) * inverseAxisDir
+            ( {{ aabb }}.Min()[ {{ axis }} ] - {{ rayOrigin }}[ {{ axis }} ] ) * inverseAxisDir,
+            ( {{ aabb }}.Max()[ {{ axis }} ] - {{ rayOrigin }}[ {{ axis }} ] ) * inverseAxisDir
         );
 
         // Handle negative ray direction on this particular axis.
-        if ( inverseAxisDir < {{ interface.ArgType("rayDirection").elementType.CppValue(0) }} )
+        if ( inverseAxisDir < {{ rayDirectionType.elementType.CppValue(0) }} )
         {
             std::swap( axisIntersections.Min(), axisIntersections.Max() );
         }
 
         // Find the intersection of the local axis and global magnitudes.  This "narrows" the bounded region.
-        {{ interface.ArgName("intersections") }} = gm::Intersection(
-            {{ interface.ArgName("intersections") }},
-            axisIntersections
-        );
+        {{ intersections }} = gm::Intersection( {{ intersections }}, axisIntersections );
 
         // If there is no overlap, then intersections will be empty.
-        if ( {{ interface.ArgName("intersections") }}.IsEmpty() )
+        if ( {{ intersections }}.IsEmpty() )
         {
             return false;
         }
