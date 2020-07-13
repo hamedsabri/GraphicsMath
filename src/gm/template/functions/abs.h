@@ -14,19 +14,21 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Find the absolute value of the input \p {{ interface.ArgName("value") }}.
+{% set value = interface.ArgName("value") %}
+{% set valueType = interface.ArgType("value") %}
+/// Find the absolute value of the input \p {{ value }}.
 /// \ingroup gm_functions_{{ function.category }}
 ///
 /// \return The absolute value of the input.
 {{- functionUtils.signature(function, interface) -}}
 {
-{% if interface.Arg("value").type.isScalar -%}
-    return std::abs( {{ interface.ArgName("value") }} );
-{%- elif interface.Arg("value").type.isVector -%}
+{% if valueType.isScalar -%}
+    return std::abs( {{ value }} );
+{%- elif valueType.isVector -%}
     return {{ interface.ArgClass("value") }}(
-{%- for index in range(interface.Arg("value").type.elementSize) %}
-        std::abs( {{ interface.ArgName("value") }}[ {{ index }} ] )
-{%- if index + 1 < interface.Arg("value").type.elementSize -%}
+{%- for index in range(valueType.elementSize) %}
+        std::abs( {{ value }}[ {{ index }} ] )
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
