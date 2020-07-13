@@ -12,15 +12,16 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Converts angle \p {{ interface.ArgName("angle") }} from radians to degrees.
+{% set angle     = interface.ArgName("angle") %}
+{% set angleType = interface.ArgType("angle") %}
+/// Converts angle \p {{ angle }} from radians to degrees.
 /// \ingroup gm_functions_{{ function.category }}
 ///
 /// \return The angle in units of degrees.
 {{- functionUtils.signature(function, interface) -}}
 {
-    constexpr {{ interface.ArgType("angle").className }} radiansToDegreesRatio =
-        {{ interface.ArgType("angle").CppValue(180) }} / GM_PI;
-    return {{ interface.ArgName("angle") }} * radiansToDegreesRatio;
+    constexpr {{ angleType.className }} radiansToDegreesRatio = {{ angleType.CppValue(180) }} / GM_PI;
+    return {{ angle }} * radiansToDegreesRatio;
 }
 {% endfor %}
 {% endblock %}

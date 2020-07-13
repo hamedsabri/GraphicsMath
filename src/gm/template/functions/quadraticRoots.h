@@ -20,13 +20,17 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
+{% set coefficientA = interface.ArgName("a") %}
+{% set coefficientB = interface.ArgName("b") %}
+{% set coefficientC = interface.ArgName("c") %}
+{% set roots        = interface.ArgName("roots") %}
 /// Solve for the roots of a quadratic equation.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("a") }} The \f$a\f$ co-efficient.
-/// \param {{ interface.ArgName("b") }} The \f$b\f$ co-efficient.
-/// \param {{ interface.ArgName("c") }} The \f$c\f$ co-efficient.
-/// \param {{ interface.ArgName("roots") }} the roots, or solutions.  The first element is only defined if the number of roots is \p 1 or \p 2.  The second element is only defined if the number of roots is \p 2.
+/// \param {{ coefficientA }} The \f$a\f$ co-efficient.
+/// \param {{ coefficientB }} The \f$b\f$ co-efficient.
+/// \param {{ coefficientC }} The \f$c\f$ co-efficient.
+/// \param {{ roots }} the roots, or solutions.  The first element is only defined if the number of roots is \p 1 or \p 2.  The second element is only defined if the number of roots is \p 2.
 ///
 /// \return The number of roots for the quadratic equation.
 ///
@@ -35,10 +39,10 @@
 /// \retval 2 Two symmetrical intersections with respect to the vertex.
 {{- functionUtils.signature(function, interface) -}}
 {
-    GM_ASSERT( {{ interface.ArgName("a") }} != {{ interface.ArgType("a").CppValue(0) }} );
+    GM_ASSERT( {{ coefficientA }} != {{ interface.ArgType("a").CppValue(0) }} );
 
-    float discriminant = ( {{ interface.ArgName("b") }} * {{ interface.ArgName("b") }} ) -
-                         ( 4.0f * {{ interface.ArgName("a") }} * {{ interface.ArgName("c") }} );
+    float discriminant = ( {{ coefficientB }} * {{ coefficientB }} ) -
+                         ( 4.0f * {{ coefficientA }} * {{ coefficientC }} );
     if ( discriminant < 0.0f )
     {
         // No intersections.
@@ -47,13 +51,13 @@
     else if ( discriminant > 0.0f )
     {
         // Two roots.
-        float reciprocal = 1.0f / ( 2.0f * {{ interface.ArgName("a") }} );
-        {{ interface.ArgName("roots") }}[ 0 ] = ( -{{ interface.ArgName("b") }} + sqrt( discriminant ) ) * reciprocal;
-        {{ interface.ArgName("roots") }}[ 1 ] = ( -{{ interface.ArgName("b") }} - sqrt( discriminant ) ) * reciprocal;
+        float reciprocal = 1.0f / ( 2.0f * {{ coefficientA }} );
+        {{ roots }}[ 0 ] = ( -{{ coefficientB }} + sqrt( discriminant ) ) * reciprocal;
+        {{ roots }}[ 1 ] = ( -{{ coefficientB }} - sqrt( discriminant ) ) * reciprocal;
         // Make the smaller root appear first.
-        if ( {{ interface.ArgName("roots") }}[ 0 ] > {{ interface.ArgName("roots") }}[ 1 ] )
+        if ( {{ roots }}[ 0 ] > {{ roots }}[ 1 ] )
         {
-            std::swap( {{ interface.ArgName("roots") }}[ 0 ], {{ interface.ArgName("roots") }}[ 1 ] );
+            std::swap( {{ roots }}[ 0 ], {{ roots }}[ 1 ] );
         }
 
         return 2;
@@ -61,7 +65,7 @@
     else
     {
         // A single root.
-        {{ interface.ArgName("roots") }}[ 0 ] = -{{ interface.ArgName("b") }} / ( 2.0f * {{ interface.ArgName("a") }} );
+        {{ roots }}[ 0 ] = -{{ coefficientB }} / ( 2.0f * {{ coefficientA }} );
         return 1;
     }
 }

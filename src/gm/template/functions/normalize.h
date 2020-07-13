@@ -15,17 +15,19 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Compute the normalised vector from the input vector \p {{ interface.ArgName("vector") }}.
+{% set vector = interface.ArgName("vector") %}
+{% set vectorType = interface.ArgType("vector") %}
+/// Compute the normalised vector from the input vector \p {{ vector }}.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("vector") }} Input vector.
+/// \param {{ vector }} Input vector.
 ///
 /// \return Normalised vector.
 {{- functionUtils.signature(function, interface) -}}
 {
-    {{ interface.ArgType("vector").elementType.className }} length = Length( {{ interface.ArgName("vector") }} );
-    GM_ASSERT( length != {{ interface.ArgType("vector").CppValue( 0 ) }} );
-    return {{ interface.ArgName("vector") }} / length;
+    {{ vectorType.elementType.className }} length = Length( {{ vector }} );
+    GM_ASSERT( length != {{ vectorType.CppValue( 0 ) }} );
+    return {{ vector }} / length;
 }
 {% endfor %}
 {% endblock %}

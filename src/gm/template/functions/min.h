@@ -13,21 +13,23 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Find the minimum from the inputs \p {{ interface.ArgName("valueA") }} and \p {{ interface.ArgName("valueB") }}.
+{% set valueA = interface.ArgName("valueA") %}
+{% set valueB = interface.ArgName("valueB") %}
+/// Find the minimum from the inputs \p {{ valueA }} and \p {{ valueB }}.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("valueA") }} The first value to compare.
-/// \param {{ interface.ArgName("valueB") }} The second value to compare.
+/// \param {{ valueA }} The first value to compare.
+/// \param {{ valueB }} The second value to compare.
 ///
 /// \return The minimum of the two inputs.
 {{- functionUtils.signature(function, interface) -}}
 {
 {% if interface.Arg("valueA").type.isScalar -%}
-    return std::min( {{ interface.ArgName("valueA") }}, {{ interface.ArgName("valueB") }} );
+    return std::min( {{ valueA }}, {{ valueB }} );
 {%- elif interface.Arg("valueA").type.isVector -%}
     return {{ interface.ArgClass("valueA") }}(
 {%- for index in range(interface.Arg("valueA").type.elementSize) %}
-        std::min( {{ interface.ArgName("valueA") }}[ {{ index }} ], {{ interface.ArgName("valueB") }}[ {{ index }} ] )
+        std::min( {{ valueA }}[ {{ index }} ], {{ valueB }}[ {{ index }} ] )
 {%- if index + 1 < interface.Arg("valueA").type.elementSize -%}
         ,
 {%- endif -%}

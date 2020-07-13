@@ -19,24 +19,27 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Multiply input matrices \p {{ interface.ArgName("lhs") }} and \p {{ interface.ArgName("rhs") }}
+{% set lhs = interface.ArgName("lhs") %}
+{% set rhs = interface.ArgName("rhs") %}
+{% set matrixType = interface.ArgType("lhs") %}
+/// Multiply input matrices \p {{ lhs }} and \p {{ rhs }}
 /// to produce their matrix product.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("lhs") }} Left hand side matrix.
-/// \param {{ interface.ArgName("rhs") }} Right hand side matrix.
+/// \param {{ lhs }} Left hand side matrix.
+/// \param {{ rhs }} Right hand side matrix.
 ///
 /// \return The matrix product.
 {{- functionUtils.signature(function, interface) -}}
 {
-    return {{ interface.ArgType("lhs").className }}(
-{%- for row in range(interface.ArgType("lhs").shape[0] ) -%}
-{%- for col in range(interface.ArgType("lhs").shape[1] ) -%}
-{%- for index in range( interface.ArgType("lhs").shape[0] ) -%}
-    {{ interface.ArgName("lhs") }}( {{ row }}, {{ index }} ) * {{ interface.ArgName("rhs") }}( {{ index }}, {{ col }} )
-{%- if index + 1 < interface.ArgType("lhs").shape[0] -%}
+    return {{ matrixType.className }}(
+{%- for row in range(matrixType.shape[0] ) -%}
+{%- for col in range(matrixType.shape[1] ) -%}
+{%- for index in range( matrixType.shape[0] ) -%}
+    {{ lhs }}( {{ row }}, {{ index }} ) * {{ rhs }}( {{ index }}, {{ col }} )
+{%- if index + 1 < matrixType.shape[0] -%}
     +
-{%- elif (index + 1 == interface.ArgType("lhs").shape[1]) and (row + 1 < interface.ArgType("lhs").shape[0] or col + 1 < interface.ArgType("lhs").shape[1])-%}
+{%- elif (index + 1 == matrixType.shape[1]) and (row + 1 < matrixType.shape[0] or col + 1 < matrixType.shape[1])-%}
     ,
 {%- endif -%}
 {%- endfor -%}
