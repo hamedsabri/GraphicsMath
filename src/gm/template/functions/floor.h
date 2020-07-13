@@ -13,21 +13,23 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Floor the input \ref {{ interface.ArgClass("value") }} \p {{ interface.ArgName("value") }} and return it.
+{% set value = interface.ArgName("value") %}
+{% set valueType = interface.ArgType("value") %}
+/// Floor the input \ref {{ interface.ArgClass("value") }} \p {{ value }} and return it.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("value") }} Value to floor.
+/// \param {{ value }} Value to floor.
 ///
 /// \return Floored input value.
 {{- functionUtils.signature(function, interface) -}}
 {
-{% if interface.Arg("value").type.isScalar -%}
-    return std::floor( {{ interface.ArgName("value") }} );
-{%- elif interface.Arg("value").type.isVector -%}
+{% if valueType.isScalar -%}
+    return std::floor( {{ value }} );
+{%- elif valueType.isVector -%}
     return {{ interface.ArgClass("value") }}(
-{%- for index in range(interface.Arg("value").type.elementSize) %}
-        std::floor( {{ interface.ArgName("value") }}[ {{ index }} ] )
-{%- if index + 1 < interface.Arg("value").type.elementSize -%}
+{%- for index in range(valueType.elementSize) %}
+        std::floor( {{ value }}[ {{ index }} ] )
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}

@@ -14,16 +14,16 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Compute the length squared of the vector \p {{ interface.ArgName("vector") }}.
+{% set vector = interface.ArgName("vector") %}
+/// Compute the length squared of the vector \p {{ vector }}.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("vector") }} The input vector.
+/// \param {{ vector }} The input vector.
 ///
 /// \return the length squared of the vector.
 {{- functionUtils.signature(function, interface) -}}
 {
-    return DotProduct( {{ interface.ArgName("vector") }},
-                       {{ interface.ArgName("vector") }} );
+    return DotProduct( {{ vector }}, {{ vector }} );
 }
 {% endfor %}
 {% endblock %}

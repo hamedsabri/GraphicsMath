@@ -19,22 +19,25 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Linearly interpolate between \p {{ interface.ArgName("source") }} and \p {{ interface.ArgName("target") }}, with weight \p {{ interface.ArgName("weight") }}.
+{% set source = interface.ArgName("source") %}
+{% set target = interface.ArgName("target") %}
+{% set weight = interface.ArgName("weight") %}
+/// Linearly interpolate between \p {{ source }} and \p {{ target }}, with weight \p {{ weight }}.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("source") }} Source value to interpolate from.
-/// \param {{ interface.ArgName("target") }} Target value to interpolate to.
-/// \param {{ interface.ArgName("weight") }} Describes the percentage of \p {{ interface.ArgName("target") }} in the final, interpolated value.
+/// \param {{ source }} Source value to interpolate from.
+/// \param {{ target }} Target value to interpolate to.
+/// \param {{ weight }} Describes the percentage of \p {{ target }} in the final, interpolated value.
 ///
-/// \pre \p {{ interface.ArgName("weight") }} must be in the range of [0,1].
+/// \pre \p {{ weight }} must be in the range of [0,1].
 ///
 /// \return Linearly interpolated value.
 {{- functionUtils.signature(function, interface) -}}
 {
-    GM_ASSERT_MSG( {{ interface.ArgName("weight") }} >= 0.0f && {{ interface.ArgName("weight") }} <= 1.0f,
-                   "Expected {{ interface.ArgName("weight") }} between [0,1], got %f\n",
-                   {{ interface.ArgName("weight") }} );
-    return ( ( 1.0f - {{ interface.ArgName("weight") }} ) * {{ interface.ArgName("source") }} ) + ( {{ interface.ArgName("weight") }} * {{ interface.ArgName("target") }} );
+    GM_ASSERT_MSG( {{ weight }} >= 0.0f && {{ weight }} <= 1.0f,
+                   "Expected {{ weight }} between [0,1], got %f\n",
+                   {{ weight }} );
+    return ( ( 1.0f - {{ weight }} ) * {{ source }} ) + ( {{ weight }} * {{ target }} );
 }
 {% endfor %}
 {% endblock %}

@@ -11,6 +11,8 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
+{% set matrix = interface.ArgName("matrix") %}
+{% set matrixType = interface.ArgType("matrix") %}
 /// Check if the matrix \p {{ interface.ArgName("matrix") }} is the identity matrix.
 /// \ingroup gm_functions_{{ function.category }}
 ///
@@ -21,14 +23,14 @@
 {{- functionUtils.signature(function, interface) -}}
 {
     return
-{% for row in range(interface.Arg("matrix").type.shape[0]) -%}
-{% for col in range(interface.Arg("matrix").type.shape[1]) -%}
+{% for row in range(matrixType.shape[0]) -%}
+{% for col in range(matrixType.shape[1]) -%}
 {% if row == col -%}
-    {{ interface.ArgName("matrix") }}( {{ row }}, {{ col }} ) == {{ interface.Arg("matrix").type.CppValue( 1 ) }}
+    {{ matrix }}( {{ row }}, {{ col }} ) == {{ matrixType.CppValue(1) }}
 {%- else -%}
-    {{ interface.ArgName("matrix") }}( {{ row }}, {{ col }} ) == {{ interface.Arg("matrix").type.CppValue( 0 ) }}
+    {{ matrix }}( {{ row }}, {{ col }} ) == {{ matrixType.CppValue(0) }}
 {%- endif %}
-{% if row + 1 < interface.Arg("matrix").type.shape[0] or col + 1 < interface.Arg("matrix").type.shape[ 1 ] -%}
+{% if row + 1 < matrixType.shape[0] or col + 1 < matrixType.shape[1] -%}
     &&
 {%- endif %}
 {%- endfor -%}
