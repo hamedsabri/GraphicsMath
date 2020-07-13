@@ -32,7 +32,8 @@
 {% elif containeeType.isVector -%}
         return
 {%- for index in range(containeeType.elementSize) %}
-        {{ containee }}[ {{ index }} ] >= {{ container }}.Min()[ {{ index }} ] && {{ containee }}[ {{ index }} ] <= {{ container }}.Max()[ {{ index }} ]
+        {{ containee }}[ {{ index }} ] >= {{ container }}.Min()[ {{ index }} ] &&
+        {{ containee }}[ {{ index }} ] <= {{ container }}.Max()[ {{ index }} ]
 {%- if index + 1 < containeeType.elementSize -%}
         &&
 {%- endif -%}

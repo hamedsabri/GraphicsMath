@@ -17,20 +17,23 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Compute the dot product of two \ref {{ interface.ArgClass("lhs") }}, \p {{ interface.ArgName("lhs") }}
-/// and \p {{ interface.ArgName("rhs") }}, and return the result.
+{% set lhs = interface.ArgName("lhs") %}
+{% set rhs = interface.ArgName("rhs") %}
+{% set vectorType = interface.ArgType("lhs") %}
+/// Compute the dot product of two \ref {{ interface.ArgClass("lhs") }}, \p {{ lhs }}
+/// and \p {{ rhs }}, and return the result.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("lhs") }} Left hand side vector.
-/// \param {{ interface.ArgName("rhs") }} Right hand side vector.
+/// \param {{ lhs }} Left hand side vector.
+/// \param {{ rhs }} Right hand side vector.
 ///
 /// \return Dot product of the two vectors.
 {{- functionUtils.signature(function, interface) -}}
 {
     return
-{% for index in range(interface.Arg("lhs").type.elementSize) -%}
-    {{ interface.ArgName("lhs") }}[ {{ index }} ] * {{ interface.ArgName("rhs") }}[ {{ index }} ]
-{%- if index + 1 < interface.Arg("lhs").type.elementSize -%}
+{% for index in range(vectorType.elementSize) -%}
+    {{ lhs }}[ {{ index }} ] * {{ rhs }}[ {{ index }} ]
+{%- if index + 1 < vectorType.elementSize -%}
         +
 {%- endif -%}
 {%- endfor -%}

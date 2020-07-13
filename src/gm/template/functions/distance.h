@@ -14,13 +14,15 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Compute the distance of between points \p {{ interface.ArgName("pointA") }} and \p {{ interface.ArgName("pointB") }}.
+{% set pointA = interface.ArgName("pointA") %}
+{% set pointB = interface.ArgName("pointB") %}
+/// Compute the distance of between points \p {{ pointA }} and \p {{ pointB }}.
 /// \ingroup gm_functions_{{ function.category }}
 ///
 /// \return The distance between the two points.
 {{- functionUtils.signature(function, interface) -}}
 {
-    return Length( {{ interface.ArgName("pointA") }} - {{ interface.ArgName("pointB") }} );
+    return Length( {{ pointA }} - {{ pointB }} );
 }
 {% endfor %}
 {% endblock %}

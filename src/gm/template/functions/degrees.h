@@ -18,7 +18,8 @@
 /// \return The angle in units of degrees.
 {{- functionUtils.signature(function, interface) -}}
 {
-    constexpr {{ interface.ArgType("angle").className }} radiansToDegreesRatio = {{ interface.ArgType("angle").CppValue(180) }} / GM_PI;
+    constexpr {{ interface.ArgType("angle").className }} radiansToDegreesRatio =
+        {{ interface.ArgType("angle").CppValue(180) }} / GM_PI;
     return {{ interface.ArgName("angle") }} * radiansToDegreesRatio;
 }
 {% endfor %}

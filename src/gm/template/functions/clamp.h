@@ -15,33 +15,36 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Clamp the value \p {{ interface.ArgName("value") }} with into the range {{ interface.ArgName("range") }}.
+{% set value = interface.ArgName("value") %}
+{% set valueType = interface.ArgType("value") %}
+{% set rangeArg = interface.ArgName("range") %}
+/// Clamp the value \p {{ value }} with into the range {{ rangeArg }}.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("value") }} Value to clamp.
-/// \param {{ interface.ArgName("range") }} Range to clamp the value into.
+/// \param {{ value }} Value to clamp.
+/// \param {{ rangeArg }} Range to clamp the value into.
 ///
 /// \return Clamped value.
 {{- functionUtils.signature(function, interface) -}}
 {
-{% if interface.Arg("value").type.isScalar -%}
-    if ( {{ interface.ArgName("range") }}.Min() > {{ interface.ArgName("value") }} )
+{% if valueType.isScalar -%}
+    if ( {{ rangeArg }}.Min() > {{ value }} )
     {
-        return {{ interface.ArgName("range") }}.Min();
+        return {{ rangeArg }}.Min();
     }
-    else if ( {{ interface.ArgName("range") }}.Max() < {{ interface.ArgName("value") }} )
+    else if ( {{ rangeArg }}.Max() < {{ value }} )
     {
-        return {{ interface.ArgName("range") }}.Max();
+        return {{ rangeArg }}.Max();
     }
     else
     {
-        return {{ interface.ArgName("value") }};
+        return {{ value }};
     }
 {% else -%}
     return {{ interface.ArgClass("value") }}(
-{%- for index in range(interface.Arg("value").type.elementSize) %}
-        {{ function.name }}( {{ interface.ArgName("value") }}[ {{ index }} ], {{ interface.ArgName("range") }} )
-{%- if index + 1 < interface.Arg("value").type.elementSize -%}
+{%- for index in range(valueType.elementSize) %}
+        {{ function.name }}( {{ value }}[ {{ index }} ], {{ rangeArg }} )
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}

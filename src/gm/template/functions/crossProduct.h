@@ -14,23 +14,22 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Compute the cross product of two \ref {{ interface.ArgClass("lhs") }}, \p {{ interface.ArgName("lhs") }}
-/// and \p {{ interface.ArgName("rhs") }}, and return the result.
+{% set lhs = interface.ArgName("lhs") %}
+{% set rhs = interface.ArgName("rhs") %}
+/// Compute the cross product of two \ref {{ interface.ArgClass("lhs") }}, \p {{ lhs }}
+/// and \p {{ rhs }}, and return the result.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ interface.ArgName("lhs") }} Left hand side vector.
-/// \param {{ interface.ArgName("rhs") }} Right hand side vector.
+/// \param {{ lhs }} Left hand side vector.
+/// \param {{ rhs }} Right hand side vector.
 ///
 /// \return Cross product of the two vectors.
 {{- functionUtils.signature(function, interface) -}}
 {
     return {{ interface.ArgClass("lhs") }}(
-        ( {{ interface.ArgName("lhs" ) }}[ 1 ] * {{ interface.ArgName("rhs") }}[ 2 ] -
-          {{ interface.ArgName("lhs" ) }}[ 2 ] * {{ interface.ArgName("rhs") }}[ 1 ] ),
-        ( {{ interface.ArgName("lhs" ) }}[ 2 ] * {{ interface.ArgName("rhs") }}[ 0 ] -
-          {{ interface.ArgName("lhs" ) }}[ 0 ] * {{ interface.ArgName("rhs") }}[ 2 ] ),
-        ( {{ interface.ArgName("lhs" ) }}[ 0 ] * {{ interface.ArgName("rhs") }}[ 1 ] -
-          {{ interface.ArgName("lhs" ) }}[ 1 ] * {{ interface.ArgName("rhs") }}[ 0 ] )
+        ( {{ lhs }}[ 1 ] * {{ rhs }}[ 2 ] - {{ lhs }}[ 2 ] * {{ rhs }}[ 1 ] ),
+        ( {{ lhs }}[ 2 ] * {{ rhs }}[ 0 ] - {{ lhs }}[ 0 ] * {{ rhs }}[ 2 ] ),
+        ( {{ lhs }}[ 0 ] * {{ rhs }}[ 1 ] - {{ lhs }}[ 1 ] * {{ rhs }}[ 0 ] )
     );
 }
 {% endfor %}
