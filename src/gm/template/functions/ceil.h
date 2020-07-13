@@ -13,20 +13,22 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-/// Ceil the input \ref {{ interface.ArgClass("value") }} \p {{ interface.ArgName("value") }},
+{% set value = interface.ArgName("value") %}
+{% set valueType = interface.ArgType("value") %}
+/// Ceil the input \ref {{ interface.ArgClass("value") }} \p {{ value }},
 /// rounding upwards to the nearest integral value.
 /// \ingroup gm_functions_{{ function.category }}
 ///
 /// \return The upward rounded input value.
 {{- functionUtils.signature(function, interface) -}}
 {
-{% if interface.Arg("value").type.isScalar -%}
-    return std::ceil( {{ interface.ArgName("value") }} );
-{%- elif interface.Arg("value").type.isVector -%}
+{% if valueType.isScalar -%}
+    return std::ceil( {{ value }} );
+{%- elif valueType.isVector -%}
     return {{ interface.ArgClass("value") }}(
-{%- for index in range(interface.Arg("value").type.elementSize) %}
-        std::ceil( {{ interface.ArgName("value") }}[ {{ index }} ] )
-{%- if index + 1 < interface.Arg("value").type.elementSize -%}
+{%- for index in range(valueType.elementSize) %}
+        std::ceil( {{ value }}[ {{ index }} ] )
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
