@@ -3,35 +3,38 @@
 #include <gm/functions/{{ function.headerFileName }}>
 
 {% for interface in function.interfaces %}
-TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("value") }}" )
+{% set value = interface.ArgName("value") %}
+{% set valueType = interface.ArgType("value") %}
+{% set valueClass = interface.ArgClass("value") %}
+TEST_CASE( "{{ function.name }}_{{ valueClass }}" )
 {
-{%- if interface.Arg("value").type.isScalar -%}
-    {{ interface.ArgClass("value") }} {{ interface.ArgType("value").varName }} =
-        {{ interface.Arg("value").type.CppValue(2.333) }};
-{%- elif interface.Arg("value").type.isVector -%}
-    gm::{{ interface.ArgClass("value") }} {{ interface.ArgType("value").varName }}(
-{% for index in range(interface.Arg("value").type.elementSize) -%}
-    {{ interface.Arg("value").type.CppValue(index * 2.333) }}
-{%- if index + 1 < interface.Arg("value").type.elementSize -%}
+{%- if valueType.isScalar -%}
+    {{ valueClass }} {{ valueType.varName }} =
+        {{ valueType.CppValue(2.333) }};
+{%- elif valueType.isVector -%}
+    gm::{{ valueClass }} {{ valueType.varName }}(
+{% for index in range(valueType.elementSize) -%}
+    {{ valueType.CppValue(index * 2.333) }}
+{%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif -%}
 {%- endfor %}
     );
 {%- endif %}
 
-{%- if not interface.Arg("value").type.isScalar -%}
+{%- if not valueType.isScalar -%}
     gm::
 {%- endif -%}
-    {{ interface.ArgClass("value") }} {{ interface.ArgType("value").varName }}Ceiled =
-        gm::{{ function.name }}( {{ interface.ArgType("value").varName }} );
+    {{ valueClass }} {{ valueType.varName }}Ceiled =
+        gm::{{ function.name }}( {{ valueType.varName }} );
 
-{%- if interface.Arg("value").type.isScalar -%}
-    CHECK( {{ interface.ArgType("value").varName }}Ceiled
-           == Approx( {{ interface.Arg("value").type.CppValue( math.ceil(2.333) ) }} ));
-{%- elif interface.Arg("value").type.isVector -%}
-{% for index in range(interface.Arg("value").type.elementSize) -%}
-    CHECK( {{ interface.ArgType("value").varName }}Ceiled[ {{ index }} ]
-           == Approx( {{ interface.Arg("value").type.CppValue( math.ceil(index * 2.333) ) }} ));
+{%- if valueType.isScalar -%}
+    CHECK( {{ valueType.varName }}Ceiled
+           == Approx( {{ valueType.CppValue( math.ceil(2.333) ) }} ));
+{%- elif valueType.isVector -%}
+{% for index in range(valueType.elementSize) -%}
+    CHECK( {{ valueType.varName }}Ceiled[ {{ index }} ]
+           == Approx( {{ valueType.CppValue( math.ceil(index * 2.333) ) }} ));
 {%- endfor %}
 {%- endif %}
 }
