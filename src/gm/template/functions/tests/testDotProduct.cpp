@@ -2,32 +2,23 @@
 
 #include <gm/functions/{{ function.headerFileName }}>
 
+{% import "types/typeUtils.h" as typeUtils %}
+
 {% for interface in function.interfaces %}
-TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("lhs") }}" )
+{% set vectorType            = interface.ArgType("lhs") %}
+{% set vectorClass           = interface.ArgClass("lhs") %}
+{% set namespacedVectorClass = vectorType.namespacedClassName %}
+TEST_CASE( "{{ function.name }}_{{ vectorClass }}" )
 {
-    gm::{{ interface.ArgClass("lhs") }} {{ interface.ArgType("lhs").varName }}A(
-{% for index in range(interface.Arg("lhs").type.elementSize) -%}
-    {{ interface.Arg("lhs").type.CppValue(index) }}
-{%- if index + 1 < interface.Arg("lhs").type.elementSize -%}
-        ,
-{%- endif -%}
-{%- endfor %}
-    );
-    gm::{{ interface.ArgClass("lhs") }} {{ interface.ArgType("lhs").varName }}B(
-{% for index in range(interface.Arg("lhs").type.elementSize) -%}
-    {{ interface.Arg("lhs").type.CppValue(index * 5) }}
-{%- if index + 1 < interface.Arg("lhs").type.elementSize -%}
-        ,
-{%- endif -%}
-{%- endfor %}
-    );
-    CHECK( gm::{{ function.name }}( {{ interface.ArgType("lhs").varName }}A, {{ interface.ArgType("lhs").varName }}B )
-{% if interface.Arg("lhs").type.elementSize == 2 -%}
-           == {{ interface.Arg("lhs").type.CppValue(5) }}
-{% elif interface.Arg("lhs").type.elementSize == 3 -%}
-           == {{ interface.Arg("lhs").type.CppValue(25) }}
-{% elif interface.Arg("lhs").type.elementSize == 4 -%}
-           == {{ interface.Arg("lhs").type.CppValue(70) }}
+    {{ namespacedVectorClass }} {{ vectorType.varName }}A = {{ typeUtils.GenRisingValue(vectorType, 1) }};
+    {{ namespacedVectorClass }} {{ vectorType.varName }}B = {{ typeUtils.GenRisingValue(vectorType, 5) }};
+    CHECK( gm::{{ function.name }}( {{ vectorType.varName }}A, {{ vectorType.varName }}B )
+{% if vectorType.elementSize == 2 -%}
+           == {{ vectorType.CppValue(5) }}
+{% elif vectorType.elementSize == 3 -%}
+           == {{ vectorType.CppValue(25) }}
+{% elif vectorType.elementSize == 4 -%}
+           == {{ vectorType.CppValue(70) }}
 {%- endif -%}
     );
 }

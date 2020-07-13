@@ -17,6 +17,25 @@
 {% endmacro %}
 
 {#
+    Utility macro to generate a scalar or vector with increasing element values which are the function
+    of its element index multiplied by a factor.
+#}
+{% macro GenRisingValue(valueType, value) %}
+{%- if valueType.isScalar -%}
+    {{ valueType.CppValue( value ) }}
+{%- elif valueType.isVector -%}
+    gm::{{ valueType.className }}(
+{%- for index in range(valueType.elementSize) -%}
+    {{ valueType.CppValue( value * index ) }}
+{%- if index + 1 < valueType.elementSize -%}
+        ,
+{%- endif -%}
+{%- endfor -%}
+    )
+{%- endif -%}
+{% endmacro %}
+
+{#
    Utility macro to generate a scalar or vector with a specified leading element value,
    with other elements zeroed.
 #}
