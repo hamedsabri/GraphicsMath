@@ -17,6 +17,25 @@ void BindFloatRange( pybind11::module& o_module )
     // Default initializer.
     cls.def( pybind11::init<>() );
 
+    // Object representation.
+    cls.def( "__repr__", []( const FloatRange& i_range ) { return pybind11::str( i_range.GetString( "gm." ) ); } );
+
     // Minimum maximum initializer.
     cls.def( pybind11::init< const float&, const float& >() );
+
+    // Property getter/setter for the minimum bounds.
+    cls.def_property(
+        "min",
+        pybind11::cpp_function( []( FloatRange& i_range ) -> float& { return i_range.Min(); },
+                                pybind11::return_value_policy::reference_internal ),
+        pybind11::cpp_function( []( FloatRange& o_range, const float& i_min ) { o_range.Min() = i_min; } ),
+        "Property getter / setter for the minimum." );
+
+    // Property getter/setter for the maximum bounds.
+    cls.def_property(
+        "max",
+        pybind11::cpp_function( []( FloatRange& i_range ) -> float& { return i_range.Max(); },
+                                pybind11::return_value_policy::reference_internal ),
+        pybind11::cpp_function( []( FloatRange& o_range, const float& i_max ) { o_range.Max() = i_max; } ),
+        "Property getter / setter for the minimum." );
 }
