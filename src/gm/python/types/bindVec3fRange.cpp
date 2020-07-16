@@ -37,5 +37,5 @@ void BindVec3fRange( pybind11::module& o_module )
         pybind11::cpp_function( []( Vec3fRange& i_range ) -> Vec3f& { return i_range.Max(); },
                                 pybind11::return_value_policy::reference_internal ),
         pybind11::cpp_function( []( Vec3fRange& o_range, const Vec3f& i_max ) { o_range.Max() = i_max; } ),
-        "Property getter / setter for the minimum." );
+        "Property getter / setter for the maximum." );
 }

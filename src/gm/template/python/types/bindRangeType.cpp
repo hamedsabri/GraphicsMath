@@ -57,6 +57,6 @@ void Bind{{ valueType.className }}( pybind11::module& o_module )
                o_range.Max() = i_max;
             }
         ),
-        "Property getter / setter for the minimum."
+        "Property getter / setter for the maximum."
     );
 }

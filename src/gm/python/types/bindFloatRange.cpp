@@ -37,5 +37,5 @@ void BindFloatRange( pybind11::module& o_module )
         pybind11::cpp_function( []( FloatRange& i_range ) -> float& { return i_range.Max(); },
                                 pybind11::return_value_policy::reference_internal ),
         pybind11::cpp_function( []( FloatRange& o_range, const float& i_max ) { o_range.Max() = i_max; } ),
-        "Property getter / setter for the minimum." );
+        "Property getter / setter for the maximum." );
 }
