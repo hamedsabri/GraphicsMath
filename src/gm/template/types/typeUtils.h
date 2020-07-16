@@ -1,7 +1,7 @@
 {#
     Utility macro to generate a scalar or vector with uniform element values
 #}
-{% macro GenUniformValue(valueType, value) %}
+{% macro GenUniformSequence(valueType, value) %}
 {%- if valueType.isScalar -%}
     {{ valueType.CppValue( value ) }}
 {%- elif valueType.isVector -%}
@@ -62,7 +62,7 @@
     Utility macro to generate an element value for a range type
 #}
 {% macro GenRangeElement(rangeType, value) %}
-{{- GenUniformValue(rangeType.elementType, value) -}}
+{{- GenUniformSequence(rangeType.elementType, value) -}}
 {% endmacro %}
 
 {#

@@ -13,7 +13,7 @@
 {% set namespacedValueClass = valueType.namespacedClassName %}
 TEST_CASE( "{{ function.name }}_{{ valueClass }}_{{ testCaseName }}" )
 {
-    {{ namespacedValueClass }} {{ valueType.varName }} = {{ typeUtils.GenUniformValue(valueType, inputScalar) }};
+    {{ namespacedValueClass }} {{ valueType.varName }} = {{ typeUtils.GenUniformSequence(valueType, inputScalar) }};
     gm::{{ interface.ArgClass("range") }} {{ rangeType.varName }}(
         {{ rangeType.CppValue(-10) }},
         {{ rangeType.CppValue(10) }}
@@ -23,7 +23,7 @@ TEST_CASE( "{{ function.name }}_{{ valueClass }}_{{ testCaseName }}" )
         {{ rangeType.varName }}
     );
     {{ namespacedValueClass }} {{ valueType.varName }}Expected =
-        {{ typeUtils.GenUniformValue(valueType, expectedScalar) }};
+        {{ typeUtils.GenUniformSequence(valueType, expectedScalar) }};
     CHECK( {{ valueType.varName }}Clamped == {{ valueType.varName }}Expected );
 }
 {% endfor %}

@@ -9,10 +9,10 @@
 {% set namespacedValueClass = valueType.namespacedClassName %}
 TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("value00") }}" )
 {
-    {{ namespacedValueClass }} value00 = {{ typeUtils.GenUniformValue(valueType, 0) }};
-    {{ namespacedValueClass }} value01 = {{ typeUtils.GenUniformValue(valueType, 2) }};
-    {{ namespacedValueClass }} value10 = {{ typeUtils.GenUniformValue(valueType, 3) }};
-    {{ namespacedValueClass }} value11 = {{ typeUtils.GenUniformValue(valueType, 5) }};
+    {{ namespacedValueClass }} value00 = {{ typeUtils.GenUniformSequence(valueType, 0) }};
+    {{ namespacedValueClass }} value01 = {{ typeUtils.GenUniformSequence(valueType, 2) }};
+    {{ namespacedValueClass }} value10 = {{ typeUtils.GenUniformSequence(valueType, 3) }};
+    {{ namespacedValueClass }} value11 = {{ typeUtils.GenUniformSequence(valueType, 5) }};
 
     {{ namespacedValueClass }} result = gm::{{ function.name }}(
         value00,
@@ -23,6 +23,6 @@ TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("value00") }}" )
         /* weightY */ 0.5
     );
 
-    CHECK( result == {{ typeUtils.GenUniformValue(valueType, 2.5) }} );
+    CHECK( result == {{ typeUtils.GenUniformSequence(valueType, 2.5) }} );
 }
 {% endfor %}

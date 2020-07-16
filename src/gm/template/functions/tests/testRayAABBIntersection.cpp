@@ -25,8 +25,8 @@ TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("aabb") }}" )
     {
         gm::{{ interface.ArgClass("intersections") }} intersections;
         CHECK( gm::{{ function.name }}(
-            /* rayOrigin */ {{- typeUtils.GenUniformValue(interface.ArgType("rayOrigin"), -4 * scaleFactor) -}},
-            /* rayDirection */ gm::Normalize( {{- typeUtils.GenUniformValue(interface.ArgType("rayDirection"), 1 * scaleFactor) -}} ),
+            /* rayOrigin */ {{- typeUtils.GenUniformSequence(interface.ArgType("rayOrigin"), -4 * scaleFactor) -}},
+            /* rayDirection */ gm::Normalize( {{- typeUtils.GenUniformSequence(interface.ArgType("rayDirection"), 1 * scaleFactor) -}} ),
             /* aabb */ aabb,
             /* intersections */ intersections )
         );
@@ -37,7 +37,7 @@ TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("aabb") }}" )
         gm::{{ interface.ArgClass("intersections") }} intersections;
         CHECK( gm::{{ function.name }}(
             /* rayOrigin */ {{- typeUtils.GenLeadingValue(interface.ArgType("rayOrigin"), -1 * scaleFactor) -}},
-            /* rayDirection */ gm::Normalize( {{- typeUtils.GenUniformValue(interface.ArgType("rayDirection"), 1 * scaleFactor) -}} ),
+            /* rayDirection */ gm::Normalize( {{- typeUtils.GenUniformSequence(interface.ArgType("rayDirection"), 1 * scaleFactor) -}} ),
             /* aabb */ aabb,
             /* intersections */ intersections )
         );
@@ -48,7 +48,7 @@ TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("aabb") }}" )
         gm::{{ interface.ArgClass("intersections") }} intersections;
         CHECK( gm::{{ function.name }}(
             /* rayOrigin */ {{- typeUtils.GenLeadingValue(interface.ArgType("rayOrigin"), -4 * scaleFactor) -}},
-            /* rayDirection */ gm::Normalize( {{- typeUtils.GenUniformValue(interface.ArgType("rayDirection"), 1 * scaleFactor) -}} ),
+            /* rayDirection */ gm::Normalize( {{- typeUtils.GenUniformSequence(interface.ArgType("rayDirection"), 1 * scaleFactor) -}} ),
             /* aabb */ aabb,
             /* intersections */ intersections )
         );
@@ -59,7 +59,7 @@ TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("aabb") }}" )
         gm::{{ interface.ArgClass("intersections") }} intersections;
         CHECK( !gm::{{ function.name }}(
             /* rayOrigin */ {{- typeUtils.GenLeadingValue(interface.ArgType("rayOrigin"), -5 * scaleFactor) -}},
-            /* rayDirection */ gm::Normalize( {{- typeUtils.GenUniformValue(interface.ArgType("rayDirection"), 1 * scaleFactor) -}} ),
+            /* rayDirection */ gm::Normalize( {{- typeUtils.GenUniformSequence(interface.ArgType("rayDirection"), 1 * scaleFactor) -}} ),
             /* aabb */ aabb,
             /* intersections */ intersections )
         );
@@ -84,7 +84,7 @@ TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("aabb") }}" )
     {
         gm::{{ interface.ArgClass("intersections") }} intersections;
         CHECK( !gm::{{ function.name }}(
-            /* rayOrigin */ {{- typeUtils.GenUniformValue(interface.ArgType("rayOrigin"), -4 * scaleFactor) -}},
+            /* rayOrigin */ {{- typeUtils.GenUniformSequence(interface.ArgType("rayOrigin"), -4 * scaleFactor) -}},
             /* rayDirection */ {{- typeUtils.GenLeadingValue(interface.ArgType("rayDirection"), 1 * scaleFactor) -}},
             /* aabb */ aabb,
             /* intersections */ intersections )
