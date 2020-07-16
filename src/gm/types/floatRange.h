@@ -126,6 +126,14 @@ public:
     /// \name Debug
     // --------------------------------------------------------------------- //
 
+    /// Check if the min or max contain NaN values.
+    ///
+    /// \return If this range has NaN values.
+    GM_HOST_DEVICE inline bool HasNans() const
+    {
+        return std::isnan( Min() ) || std::isnan( Max() );
+    }
+
     /// Get the string representation.  For debugging purposes.
     ///
     /// \param i_classPrefix optional string to prefix class tokens.
