@@ -40,6 +40,7 @@ void BindMin( pybind11::module& );
 void BindContains( pybind11::module& );
 void BindAbs( pybind11::module& );
 void BindDegrees( pybind11::module& );
+void BindBilinearInterpolation( pybind11::module& );
 void BindRandomNumber( pybind11::module& );
 void BindCrossProduct( pybind11::module& );
 void BindSetTranslate( pybind11::module& );
@@ -105,6 +106,7 @@ PYBIND11_MODULE( gm, o_module )
     BindContains( o_module );
     BindAbs( o_module );
     BindDegrees( o_module );
+    BindBilinearInterpolation( o_module );
     BindRandomNumber( o_module );
     BindCrossProduct( o_module );
     BindSetTranslate( o_module );

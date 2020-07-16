@@ -389,7 +389,7 @@ def GenerateFunctions():
         )
 
     # Interpolation operators.
-    interpolationOps = []
+    linearInterpolationOps = []
     for valueType in (
         [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT
     ):
@@ -405,7 +405,33 @@ def GenerateFunctions():
                 FunctionArg("weight", valueType.elementType, Mutability.Const)
             )
 
-        interpolationOps.append(
+        linearInterpolationOps.append(
+            FunctionInterface(arguments=arguments, returnType=valueType,)
+        )
+
+    bilinearInterpolationOps = []
+    for valueType in (
+        [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT
+    ):
+        arguments = [
+            FunctionArg("value00", valueType, Mutability.Const),
+            FunctionArg("value01", valueType, Mutability.Const),
+            FunctionArg("value10", valueType, Mutability.Const),
+            FunctionArg("value11", valueType, Mutability.Const),
+        ]
+        if valueType.isScalar:
+            arguments.append(FunctionArg("weightX", valueType, Mutability.Const))
+            arguments.append(FunctionArg("weightY", valueType, Mutability.Const))
+        else:
+            assert valueType.isVector
+            arguments.append(
+                FunctionArg("weightX", valueType.elementType, Mutability.Const)
+            )
+            arguments.append(
+                FunctionArg("weightY", valueType.elementType, Mutability.Const)
+            )
+
+        bilinearInterpolationOps.append(
             FunctionInterface(arguments=arguments, returnType=valueType,)
         )
 
@@ -569,7 +595,10 @@ def GenerateFunctions():
         FunctionGroup(["degrees", "radians",], angleOps, FunctionCategory.BASIC),
         FunctionGroup(["randomNumber",], randomOps, FunctionCategory.BASIC),
         FunctionGroup(
-            ["linearInterpolation",], interpolationOps, FunctionCategory.BASIC
+            ["linearInterpolation",], linearInterpolationOps, FunctionCategory.BASIC
+        ),
+        FunctionGroup(
+            ["bilinearInterpolation",], bilinearInterpolationOps, FunctionCategory.BASIC
         ),
         FunctionGroup(["linearMap",], mapOps, FunctionCategory.BASIC),
         FunctionGroup(["clamp",], clampOps, FunctionCategory.BASIC),
