@@ -41,25 +41,25 @@ TEST_CASE( "{{ valueType.className }}_DefaultConstructor" )
 TEST_CASE( "{{ valueType.className }}_MinMaxConstructor" )
 {
     gm::{{ valueType.className }} {{ valueType.varName }}(
-        {{ typeUtils.GenRangeElement( valueType, -1 ) }},
-        {{ typeUtils.GenRangeElement( valueType, 1 ) }}
+        {{ typeUtils.GenUniformSequence( valueType.elementType, -1 ) }},
+        {{ typeUtils.GenUniformSequence( valueType.elementType, 1 ) }}
     );
-    CHECK( {{ valueType.varName }}.Min() == {{ typeUtils.GenRangeElement( valueType, -1 ) }} );
-    CHECK( {{ valueType.varName }}.Max() == {{ typeUtils.GenRangeElement( valueType, 1 ) }} );
+    CHECK( {{ valueType.varName }}.Min() == {{ typeUtils.GenUniformSequence( valueType.elementType, -1 ) }} );
+    CHECK( {{ valueType.varName }}.Max() == {{ typeUtils.GenUniformSequence( valueType.elementType, 1 ) }} );
 }
 
 TEST_CASE( "{{ valueType.className }}_MinAccessor" )
 {
     gm::{{ valueType.className }} {{ valueType.varName }};
-    {{ valueType.varName }}.Min() = {{ typeUtils.GenRangeElement( valueType, -1 ) }};
-    CHECK( {{ valueType.varName }}.Min() == {{ typeUtils.GenRangeElement( valueType, -1 ) }} );
+    {{ valueType.varName }}.Min() = {{ typeUtils.GenUniformSequence( valueType.elementType, -1 ) }};
+    CHECK( {{ valueType.varName }}.Min() == {{ typeUtils.GenUniformSequence( valueType.elementType, -1 ) }} );
 }
 
 TEST_CASE( "{{ valueType.className }}_MaxAccessor" )
 {
     gm::{{ valueType.className }} {{ valueType.varName }};
-    {{ valueType.varName }}.Max() = {{ typeUtils.GenRangeElement( valueType, 1 ) }};
-    CHECK( {{ valueType.varName }}.Max() == {{ typeUtils.GenRangeElement( valueType, 1 ) }} );
+    {{ valueType.varName }}.Max() = {{ typeUtils.GenUniformSequence( valueType.elementType, 1 ) }};
+    CHECK( {{ valueType.varName }}.Max() == {{ typeUtils.GenUniformSequence( valueType.elementType, 1 ) }} );
 }
 
 TEST_CASE( "{{ valueType.className }}_EqualityComparison" )

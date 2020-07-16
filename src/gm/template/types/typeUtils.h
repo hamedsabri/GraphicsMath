@@ -59,19 +59,12 @@
 {% endmacro %}
 
 {#
-    Utility macro to generate an element value for a range type
-#}
-{% macro GenRangeElement(rangeType, value) %}
-{{- GenUniformSequence(rangeType.elementType, value) -}}
-{% endmacro %}
-
-{#
     Utility macro to generate a range value
 #}
 {% macro GenRange(rangeType, minValue, maxValue) %}
     gm::{{ rangeType.className }}(
-        {{- GenRangeElement(rangeType, minValue) -}},
-        {{- GenRangeElement(rangeType, maxValue) -}}
+        {{- GenUniformSequence(rangeType.elementType, minValue) -}},
+        {{- GenUniformSequence(rangeType.elementType, maxValue) -}}
     )
 {% endmacro %}
 

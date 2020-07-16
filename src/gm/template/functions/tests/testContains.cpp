@@ -11,8 +11,8 @@ TEST_CASE( "{{ function.name }}_{{ containerType.className }}_{{ containeeType.c
 {
 {% if containeeType.isRange -%}
     gm::{{ containerType.className }} {{ containerType.varName }}(
-        /* min */ {{ typeUtils.GenRangeElement( containerType, -2 ) }},
-        /* max */ {{ typeUtils.GenRangeElement( containerType, 4 ) }}
+        /* min */ {{ typeUtils.GenUniformSequence( containerType.elementType, -2 ) }},
+        /* max */ {{ typeUtils.GenUniformSequence( containerType.elementType, 4 ) }}
     );
     CHECK( gm::Contains( {{ containerType.varName }}, {{ typeUtils.GenRange( containerType, -2, 3 ) }} ) );
     CHECK( gm::Contains( {{ containerType.varName }}, {{ typeUtils.GenRange( containerType, -1, 2 ) }} ) );
@@ -22,14 +22,14 @@ TEST_CASE( "{{ function.name }}_{{ containerType.className }}_{{ containeeType.c
     CHECK( !gm::Contains( {{ containerType.varName }}, {{ typeUtils.GenRange( containerType, -5, -4 ) }} ) );
 {%- else -%}
     gm::{{ containerType.className }} {{ containerType.varName }}(
-        /* min */ {{ typeUtils.GenRangeElement( containerType, -2 ) }},
-        /* max */ {{ typeUtils.GenRangeElement( containerType, 4 ) }}
+        /* min */ {{ typeUtils.GenUniformSequence( containerType.elementType, -2 ) }},
+        /* max */ {{ typeUtils.GenUniformSequence( containerType.elementType, 4 ) }}
     );
-    CHECK( gm::Contains( {{ containerType.varName }}, {{ typeUtils.GenRangeElement( containerType, -2 ) }} ) );
-    CHECK( gm::Contains( {{ containerType.varName }}, {{ typeUtils.GenRangeElement( containerType, -0 ) }} ) );
-    CHECK( gm::Contains( {{ containerType.varName }}, {{ typeUtils.GenRangeElement( containerType, 4 ) }} ) );
-    CHECK( !gm::Contains( {{ containerType.varName }}, {{ typeUtils.GenRangeElement( containerType, -3 ) }} ) );
-    CHECK( !gm::Contains( {{ containerType.varName }}, {{ typeUtils.GenRangeElement( containerType, 5 ) }} ) );
+    CHECK( gm::Contains( {{ containerType.varName }}, {{ typeUtils.GenUniformSequence( containerType.elementType, -2 ) }} ) );
+    CHECK( gm::Contains( {{ containerType.varName }}, {{ typeUtils.GenUniformSequence( containerType.elementType, -0 ) }} ) );
+    CHECK( gm::Contains( {{ containerType.varName }}, {{ typeUtils.GenUniformSequence( containerType.elementType, 4 ) }} ) );
+    CHECK( !gm::Contains( {{ containerType.varName }}, {{ typeUtils.GenUniformSequence( containerType.elementType, -3 ) }} ) );
+    CHECK( !gm::Contains( {{ containerType.varName }}, {{ typeUtils.GenUniformSequence( containerType.elementType, 5 ) }} ) );
 {%- endif -%}
 }
 {% endfor %}
