@@ -2,47 +2,16 @@
 
 #include <gm/functions/{{ function.headerFileName }}>
 
+{% import "types/typeUtils.h" as typeUtils %}
+
 {% for interface in function.interfaces %}
+{% set valueType            = interface.ArgType("valueA") %}
+{% set namespacedValueClass = valueType.namespacedClassName %}
 TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("valueA") }}" )
 {
-{%- if interface.Arg("valueA").type.isScalar -%}
-    {{ interface.ArgClass("valueA") }} {{ interface.ArgType("valueA").varName }}A =
-        {{ interface.Arg("valueA").type.CppValue(2.333) }};
-    {{ interface.ArgClass("valueA") }} {{ interface.ArgType("valueA").varName }}B =
-        {{ interface.Arg("valueA").type.CppValue(1.333) }};
-{%- elif interface.Arg("valueA").type.isVector -%}
-    gm::{{ interface.ArgClass("valueA") }} {{ interface.ArgType("valueA").varName }}A(
-{% for index in range(interface.Arg("valueA").type.elementSize) -%}
-    {{ interface.Arg("valueA").type.CppValue(index * 2.333) }}
-{%- if index + 1 < interface.Arg("valueA").type.elementSize -%}
-        ,
-{%- endif -%}
-{%- endfor %}
-    );
-    gm::{{ interface.ArgClass("valueB") }} {{ interface.ArgType("valueB").varName }}B(
-{% for index in range(interface.Arg("valueB").type.elementSize) -%}
-    {{ interface.Arg("valueB").type.CppValue(index * 1.333) }}
-{%- if index + 1 < interface.Arg("valueB").type.elementSize -%}
-        ,
-{%- endif -%}
-{%- endfor %}
-    );
-{%- endif %}
-
-{%- if not interface.Arg("valueA").type.isScalar -%}
-    gm::
-{%- endif -%}
-    {{ interface.ArgClass("valueA") }} {{ interface.ArgType("valueA").varName }}Max =
-        gm::{{ function.name }}( {{ interface.ArgType("valueA").varName }}A, {{ interface.ArgType("valueB").varName }}B );
-
-{%- if interface.Arg("valueA").type.isScalar -%}
-    CHECK( {{ interface.ArgType("valueA").varName }}Max
-           == Approx( {{ interface.Arg("valueA").type.CppValue( max(2.333, 1.333) ) }} ));
-{%- elif interface.Arg("valueA").type.isVector -%}
-{% for index in range(interface.Arg("valueA").type.elementSize) -%}
-    CHECK( {{ interface.ArgType("valueA").varName }}Max[ {{ index }} ]
-           == Approx( {{ interface.Arg("valueA").type.CppValue( max(index * 2.333, index * 1.333) ) }} ));
-{%- endfor %}
-{%- endif %}
+    {{ namespacedValueClass }} valueA = {{ typeUtils.GenArithmeticSequence(valueType, 1.333) }};
+    {{ namespacedValueClass }} valueB = {{ typeUtils.GenArithmeticSequence(valueType, 2.333) }};
+    CHECK( gm::{{ function.name }}( valueA, valueB ) ==
+           {{ typeUtils.GenArithmeticSequence(valueType, 2.333) }} );
 }
 {% endfor %}

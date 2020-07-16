@@ -8,86 +8,66 @@
 
 TEST_CASE( "Floor_float" )
 {
-    float floatVal        = 2.333f;
-    float floatValFloored = gm::Floor( floatVal );
-    CHECK( floatValFloored == Approx( 2.0f ) );
+    float value = 1.333f;
+    CHECK( gm::Floor( value ) == 1.0f );
 }
 
 TEST_CASE( "Floor_Vec2f" )
 {
-    gm::Vec2f vector( 0.0f, 2.333f );
-    gm::Vec2f vectorFloored = gm::Floor( vector );
-    CHECK( vectorFloored[ 0 ] == Approx( 0.0f ) );
-    CHECK( vectorFloored[ 1 ] == Approx( 2.0f ) );
+    gm::Vec2f value = gm::Vec2f( 0.0f, 1.333f );
+    CHECK( gm::Floor( value ) == gm::Vec2f( 0.0f, 1.0f ) );
 }
 
 TEST_CASE( "Floor_Vec3f" )
 {
-    gm::Vec3f vector( 0.0f, 2.333f, 4.666f );
-    gm::Vec3f vectorFloored = gm::Floor( vector );
-    CHECK( vectorFloored[ 0 ] == Approx( 0.0f ) );
-    CHECK( vectorFloored[ 1 ] == Approx( 2.0f ) );
-    CHECK( vectorFloored[ 2 ] == Approx( 4.0f ) );
+    gm::Vec3f value = gm::Vec3f( 0.0f, 1.333f, 2.666f );
+    CHECK( gm::Floor( value ) == gm::Vec3f( 0.0f, 1.0f, 2.0f ) );
 }
 
 TEST_CASE( "Floor_Vec4f" )
 {
-    gm::Vec4f vector( 0.0f, 2.333f, 4.666f, 6.999f );
-    gm::Vec4f vectorFloored = gm::Floor( vector );
-    CHECK( vectorFloored[ 0 ] == Approx( 0.0f ) );
-    CHECK( vectorFloored[ 1 ] == Approx( 2.0f ) );
-    CHECK( vectorFloored[ 2 ] == Approx( 4.0f ) );
-    CHECK( vectorFloored[ 3 ] == Approx( 6.0f ) );
+    gm::Vec4f value = gm::Vec4f( 0.0f, 1.333f, 2.666f, 3.999f );
+    CHECK( gm::Floor( value ) == gm::Vec4f( 0.0f, 1.0f, 2.0f, 3.0f ) );
 }
 
 TEST_CASE( "Floor_Mat3f" )
 {
-    gm::Mat3f matrix( 0.0f, 2.333f, 4.666f, 6.999f, 9.332f, 11.665f, 13.998f, 16.331f, 18.664f );
-    gm::Mat3f matrixFloored = gm::Floor( matrix );
-    CHECK( matrixFloored[ 0 ] == Approx( 0.0f ) );
-    CHECK( matrixFloored[ 1 ] == Approx( 2.0f ) );
-    CHECK( matrixFloored[ 2 ] == Approx( 4.0f ) );
-    CHECK( matrixFloored[ 3 ] == Approx( 6.0f ) );
-    CHECK( matrixFloored[ 4 ] == Approx( 9.0f ) );
-    CHECK( matrixFloored[ 5 ] == Approx( 11.0f ) );
-    CHECK( matrixFloored[ 6 ] == Approx( 13.0f ) );
-    CHECK( matrixFloored[ 7 ] == Approx( 16.0f ) );
-    CHECK( matrixFloored[ 8 ] == Approx( 18.0f ) );
+    gm::Mat3f value = gm::Mat3f( 0.0f, 1.333f, 2.666f, 3.999f, 5.332f, 6.665f, 7.998f, 9.331f, 10.664f );
+    CHECK( gm::Floor( value ) == gm::Mat3f( 0.0f, 1.0f, 2.0f, 3.0f, 5.0f, 6.0f, 7.0f, 9.0f, 10.0f ) );
 }
 
 TEST_CASE( "Floor_Mat4f" )
 {
-    gm::Mat4f matrix( 0.0f,
-                      2.333f,
-                      4.666f,
-                      6.999f,
-                      9.332f,
-                      11.665f,
-                      13.998f,
-                      16.331f,
-                      18.664f,
-                      20.997f,
-                      23.33f,
-                      25.663f,
-                      27.996f,
-                      30.329f,
-                      32.662f,
-                      34.995f );
-    gm::Mat4f matrixFloored = gm::Floor( matrix );
-    CHECK( matrixFloored[ 0 ] == Approx( 0.0f ) );
-    CHECK( matrixFloored[ 1 ] == Approx( 2.0f ) );
-    CHECK( matrixFloored[ 2 ] == Approx( 4.0f ) );
-    CHECK( matrixFloored[ 3 ] == Approx( 6.0f ) );
-    CHECK( matrixFloored[ 4 ] == Approx( 9.0f ) );
-    CHECK( matrixFloored[ 5 ] == Approx( 11.0f ) );
-    CHECK( matrixFloored[ 6 ] == Approx( 13.0f ) );
-    CHECK( matrixFloored[ 7 ] == Approx( 16.0f ) );
-    CHECK( matrixFloored[ 8 ] == Approx( 18.0f ) );
-    CHECK( matrixFloored[ 9 ] == Approx( 20.0f ) );
-    CHECK( matrixFloored[ 10 ] == Approx( 23.0f ) );
-    CHECK( matrixFloored[ 11 ] == Approx( 25.0f ) );
-    CHECK( matrixFloored[ 12 ] == Approx( 27.0f ) );
-    CHECK( matrixFloored[ 13 ] == Approx( 30.0f ) );
-    CHECK( matrixFloored[ 14 ] == Approx( 32.0f ) );
-    CHECK( matrixFloored[ 15 ] == Approx( 34.0f ) );
+    gm::Mat4f value = gm::Mat4f( 0.0f,
+                                 1.333f,
+                                 2.666f,
+                                 3.999f,
+                                 5.332f,
+                                 6.665f,
+                                 7.998f,
+                                 9.331f,
+                                 10.664f,
+                                 11.997f,
+                                 13.33f,
+                                 14.663f,
+                                 15.996f,
+                                 17.329f,
+                                 18.662f,
+                                 19.995f );
+    CHECK( gm::Floor( value ) == gm::Mat4f( 0.0f,
+                                            1.0f,
+                                            2.0f,
+                                            3.0f,
+                                            5.0f,
+                                            6.0f,
+                                            7.0f,
+                                            9.0f,
+                                            10.0f,
+                                            11.0f,
+                                            13.0f,
+                                            14.0f,
+                                            15.0f,
+                                            17.0f,
+                                            18.0f,
+                                            19.0f ) );
 }

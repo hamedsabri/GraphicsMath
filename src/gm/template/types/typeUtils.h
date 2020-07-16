@@ -20,13 +20,21 @@
     Utility macro to generate a scalar or vector with increasing element values which are the function
     of its element index multiplied by a factor.
 #}
-{% macro GenArithmeticSequence(valueType, value) %}
+{% macro GenArithmeticSequence(valueType, value, valueFn=None) %}
 {%- if valueType.isScalar -%}
+{%- if valueFn -%}
+    {{ valueType.CppValue( valueFn(value) ) }}
+{%- else -%}
     {{ valueType.CppValue( value ) }}
+{%- endif -%}
 {%- elif valueType.isVector -%}
     gm::{{ valueType.className }}(
 {%- for index in range(valueType.elementSize) -%}
+{%- if valueFn -%}
+    {{ valueType.CppValue( valueFn(value * index) ) }}
+{%- else -%}
     {{ valueType.CppValue( value * index ) }}
+{%- endif -%}
 {%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif -%}
