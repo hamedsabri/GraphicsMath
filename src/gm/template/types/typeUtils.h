@@ -20,7 +20,7 @@
     Utility macro to generate a scalar or vector with increasing element values which are the function
     of its element index multiplied by a factor.
 #}
-{% macro GenArithmeticSeq(valueType, value) %}
+{% macro GenArithmeticSequence(valueType, value) %}
 {%- if valueType.isScalar -%}
     {{ valueType.CppValue( value ) }}
 {%- elif valueType.isVector -%}
