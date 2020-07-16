@@ -419,19 +419,44 @@ def GenerateFunctions():
             FunctionArg("value10", valueType, Mutability.Const),
             FunctionArg("value11", valueType, Mutability.Const),
         ]
+
         if valueType.isScalar:
-            arguments.append(FunctionArg("weightX", valueType, Mutability.Const))
-            arguments.append(FunctionArg("weightY", valueType, Mutability.Const))
+            weightType = valueType
         else:
             assert valueType.isVector
-            arguments.append(
-                FunctionArg("weightX", valueType.elementType, Mutability.Const)
-            )
-            arguments.append(
-                FunctionArg("weightY", valueType.elementType, Mutability.Const)
-            )
+            weightType = valueType.elementType
+        arguments.append(FunctionArg("weightX", weightType, Mutability.Const))
+        arguments.append(FunctionArg("weightY", weightType, Mutability.Const))
 
         bilinearInterpolationOps.append(
+            FunctionInterface(arguments=arguments, returnType=valueType,)
+        )
+
+    trilinearInterpolationOps = []
+    for valueType in (
+        [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT
+    ):
+        arguments = [
+            FunctionArg("value000", valueType, Mutability.Const),
+            FunctionArg("value001", valueType, Mutability.Const),
+            FunctionArg("value010", valueType, Mutability.Const),
+            FunctionArg("value011", valueType, Mutability.Const),
+            FunctionArg("value100", valueType, Mutability.Const),
+            FunctionArg("value101", valueType, Mutability.Const),
+            FunctionArg("value110", valueType, Mutability.Const),
+            FunctionArg("value111", valueType, Mutability.Const),
+        ]
+
+        if valueType.isScalar:
+            weightType = valueType
+        else:
+            assert valueType.isVector
+            weightType = valueType.elementType
+        arguments.append(FunctionArg("weightX", weightType, Mutability.Const))
+        arguments.append(FunctionArg("weightY", weightType, Mutability.Const))
+        arguments.append(FunctionArg("weightZ", weightType, Mutability.Const))
+
+        trilinearInterpolationOps.append(
             FunctionInterface(arguments=arguments, returnType=valueType,)
         )
 
@@ -599,6 +624,9 @@ def GenerateFunctions():
         ),
         FunctionGroup(
             ["bilinearInterpolation",], bilinearInterpolationOps, FunctionCategory.BASIC
+        ),
+        FunctionGroup(
+            ["trilinearInterpolation",], trilinearInterpolationOps, FunctionCategory.BASIC
         ),
         FunctionGroup(["linearMap",], mapOps, FunctionCategory.BASIC),
         FunctionGroup(["clamp",], clampOps, FunctionCategory.BASIC),

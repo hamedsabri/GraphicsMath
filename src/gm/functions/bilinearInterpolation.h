@@ -26,7 +26,7 @@
 
 GM_NS_OPEN
 
-/// Bilinearly interpolate in a rectilinear grid.
+/// Bilinearly interpolate in a 2D rectilinear grid.
 /// \ingroup gm_functions_basic
 ///
 /// \param i_value00 The value at (0, 0).
@@ -38,7 +38,7 @@ GM_NS_OPEN
 ///
 /// \pre \p i_weightX and \p i_weightY must be in the range of [0,1].
 ///
-/// \return Linearly interpolated value.
+/// \return Bilinearly interpolated value.
 GM_HOST_DEVICE inline float BilinearInterpolation( const float& i_value00,
                                                    const float& i_value01,
                                                    const float& i_value10,
@@ -54,7 +54,7 @@ GM_HOST_DEVICE inline float BilinearInterpolation( const float& i_value00,
     return gm::LinearInterpolation( value0, value1, i_weightY );
 }
 
-/// Bilinearly interpolate in a rectilinear grid.
+/// Bilinearly interpolate in a 2D rectilinear grid.
 /// \ingroup gm_functions_basic
 ///
 /// \param i_value00 The value at (0, 0).
@@ -66,7 +66,7 @@ GM_HOST_DEVICE inline float BilinearInterpolation( const float& i_value00,
 ///
 /// \pre \p i_weightX and \p i_weightY must be in the range of [0,1].
 ///
-/// \return Linearly interpolated value.
+/// \return Bilinearly interpolated value.
 GM_HOST_DEVICE inline Mat3f BilinearInterpolation( const Mat3f& i_value00,
                                                    const Mat3f& i_value01,
                                                    const Mat3f& i_value10,
@@ -82,7 +82,7 @@ GM_HOST_DEVICE inline Mat3f BilinearInterpolation( const Mat3f& i_value00,
     return gm::LinearInterpolation( value0, value1, i_weightY );
 }
 
-/// Bilinearly interpolate in a rectilinear grid.
+/// Bilinearly interpolate in a 2D rectilinear grid.
 /// \ingroup gm_functions_basic
 ///
 /// \param i_value00 The value at (0, 0).
@@ -94,7 +94,7 @@ GM_HOST_DEVICE inline Mat3f BilinearInterpolation( const Mat3f& i_value00,
 ///
 /// \pre \p i_weightX and \p i_weightY must be in the range of [0,1].
 ///
-/// \return Linearly interpolated value.
+/// \return Bilinearly interpolated value.
 GM_HOST_DEVICE inline Mat4f BilinearInterpolation( const Mat4f& i_value00,
                                                    const Mat4f& i_value01,
                                                    const Mat4f& i_value10,
@@ -110,7 +110,7 @@ GM_HOST_DEVICE inline Mat4f BilinearInterpolation( const Mat4f& i_value00,
     return gm::LinearInterpolation( value0, value1, i_weightY );
 }
 
-/// Bilinearly interpolate in a rectilinear grid.
+/// Bilinearly interpolate in a 2D rectilinear grid.
 /// \ingroup gm_functions_basic
 ///
 /// \param i_value00 The value at (0, 0).
@@ -122,7 +122,7 @@ GM_HOST_DEVICE inline Mat4f BilinearInterpolation( const Mat4f& i_value00,
 ///
 /// \pre \p i_weightX and \p i_weightY must be in the range of [0,1].
 ///
-/// \return Linearly interpolated value.
+/// \return Bilinearly interpolated value.
 GM_HOST_DEVICE inline Vec2f BilinearInterpolation( const Vec2f& i_value00,
                                                    const Vec2f& i_value01,
                                                    const Vec2f& i_value10,
@@ -138,7 +138,7 @@ GM_HOST_DEVICE inline Vec2f BilinearInterpolation( const Vec2f& i_value00,
     return gm::LinearInterpolation( value0, value1, i_weightY );
 }
 
-/// Bilinearly interpolate in a rectilinear grid.
+/// Bilinearly interpolate in a 2D rectilinear grid.
 /// \ingroup gm_functions_basic
 ///
 /// \param i_value00 The value at (0, 0).
@@ -150,7 +150,7 @@ GM_HOST_DEVICE inline Vec2f BilinearInterpolation( const Vec2f& i_value00,
 ///
 /// \pre \p i_weightX and \p i_weightY must be in the range of [0,1].
 ///
-/// \return Linearly interpolated value.
+/// \return Bilinearly interpolated value.
 GM_HOST_DEVICE inline Vec3f BilinearInterpolation( const Vec3f& i_value00,
                                                    const Vec3f& i_value01,
                                                    const Vec3f& i_value10,
@@ -166,7 +166,7 @@ GM_HOST_DEVICE inline Vec3f BilinearInterpolation( const Vec3f& i_value00,
     return gm::LinearInterpolation( value0, value1, i_weightY );
 }
 
-/// Bilinearly interpolate in a rectilinear grid.
+/// Bilinearly interpolate in a 2D rectilinear grid.
 /// \ingroup gm_functions_basic
 ///
 /// \param i_value00 The value at (0, 0).
@@ -178,7 +178,7 @@ GM_HOST_DEVICE inline Vec3f BilinearInterpolation( const Vec3f& i_value00,
 ///
 /// \pre \p i_weightX and \p i_weightY must be in the range of [0,1].
 ///
-/// \return Linearly interpolated value.
+/// \return Bilinearly interpolated value.
 GM_HOST_DEVICE inline Vec4f BilinearInterpolation( const Vec4f& i_value00,
                                                    const Vec4f& i_value01,
                                                    const Vec4f& i_value10,

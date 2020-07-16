@@ -24,7 +24,7 @@
 {% set value11   = interface.ArgName("value11") %}
 {% set weightX   = interface.ArgName("weightX") %}
 {% set weightY   = interface.ArgName("weightY") %}
-/// Bilinearly interpolate in a rectilinear grid.
+/// Bilinearly interpolate in a 2D rectilinear grid.
 /// \ingroup gm_functions_{{ function.category }}
 ///
 /// \param {{ value00 }} The value at (0, 0).
@@ -36,7 +36,7 @@
 ///
 /// \pre \p {{ weightX }} and \p {{ weightY }} must be in the range of [0,1].
 ///
-/// \return Linearly interpolated value.
+/// \return Bilinearly interpolated value.
 {{- functionUtils.signature(function, interface) -}}
 {
     GM_ASSERT_MSG( {{ weightX }} >= 0.0f && {{ weightX }} <= 1.0f,
