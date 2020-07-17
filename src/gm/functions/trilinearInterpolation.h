@@ -61,14 +61,20 @@ GM_HOST_DEVICE inline float TrilinearInterpolation( const float& i_corner000,
                    "Expected i_weight.Z() between [0,1], got %f\n",
                    i_weight.Z() );
 
-    // Bilinearly interpolate the two sides parallel to the Z-axis of the grid.
-    float value0 =
-        gm::BilinearInterpolation( i_corner000, i_corner100, i_corner010, i_corner110, i_weight.X(), i_weight.Y() );
-    float value1 =
-        gm::BilinearInterpolation( i_corner001, i_corner101, i_corner011, i_corner111, i_weight.X(), i_weight.Y() );
+    // Bilinearly interpolate the two sides orthogonal to the Z-axis of the grid.
+    float interm0 = gm::BilinearInterpolation( i_corner000,
+                                               i_corner100,
+                                               i_corner010,
+                                               i_corner110,
+                                               gm::Vec2f( i_weight.X(), i_weight.Y() ) );
+    float interm1 = gm::BilinearInterpolation( i_corner001,
+                                               i_corner101,
+                                               i_corner011,
+                                               i_corner111,
+                                               gm::Vec2f( i_weight.X(), i_weight.Y() ) );
 
-    // Linearly interpolate the two resulting values based on the Z weight.
-    return gm::LinearInterpolation( value0, value1, i_weight.Z() );
+    // Linearly interpolate the two intermediate values based on the Z weight.
+    return gm::LinearInterpolation( interm0, interm1, i_weight.Z() );
 }
 
 /// Trilinearly interpolate in a rectilinear 3D grid.
@@ -107,14 +113,20 @@ GM_HOST_DEVICE inline Mat3f TrilinearInterpolation( const Mat3f& i_corner000,
                    "Expected i_weight.Z() between [0,1], got %f\n",
                    i_weight.Z() );
 
-    // Bilinearly interpolate the two sides parallel to the Z-axis of the grid.
-    gm::Mat3f value0 =
-        gm::BilinearInterpolation( i_corner000, i_corner100, i_corner010, i_corner110, i_weight.X(), i_weight.Y() );
-    gm::Mat3f value1 =
-        gm::BilinearInterpolation( i_corner001, i_corner101, i_corner011, i_corner111, i_weight.X(), i_weight.Y() );
+    // Bilinearly interpolate the two sides orthogonal to the Z-axis of the grid.
+    gm::Mat3f interm0 = gm::BilinearInterpolation( i_corner000,
+                                                   i_corner100,
+                                                   i_corner010,
+                                                   i_corner110,
+                                                   gm::Vec2f( i_weight.X(), i_weight.Y() ) );
+    gm::Mat3f interm1 = gm::BilinearInterpolation( i_corner001,
+                                                   i_corner101,
+                                                   i_corner011,
+                                                   i_corner111,
+                                                   gm::Vec2f( i_weight.X(), i_weight.Y() ) );
 
-    // Linearly interpolate the two resulting values based on the Z weight.
-    return gm::LinearInterpolation( value0, value1, i_weight.Z() );
+    // Linearly interpolate the two intermediate values based on the Z weight.
+    return gm::LinearInterpolation( interm0, interm1, i_weight.Z() );
 }
 
 /// Trilinearly interpolate in a rectilinear 3D grid.
@@ -153,14 +165,20 @@ GM_HOST_DEVICE inline Mat4f TrilinearInterpolation( const Mat4f& i_corner000,
                    "Expected i_weight.Z() between [0,1], got %f\n",
                    i_weight.Z() );
 
-    // Bilinearly interpolate the two sides parallel to the Z-axis of the grid.
-    gm::Mat4f value0 =
-        gm::BilinearInterpolation( i_corner000, i_corner100, i_corner010, i_corner110, i_weight.X(), i_weight.Y() );
-    gm::Mat4f value1 =
-        gm::BilinearInterpolation( i_corner001, i_corner101, i_corner011, i_corner111, i_weight.X(), i_weight.Y() );
+    // Bilinearly interpolate the two sides orthogonal to the Z-axis of the grid.
+    gm::Mat4f interm0 = gm::BilinearInterpolation( i_corner000,
+                                                   i_corner100,
+                                                   i_corner010,
+                                                   i_corner110,
+                                                   gm::Vec2f( i_weight.X(), i_weight.Y() ) );
+    gm::Mat4f interm1 = gm::BilinearInterpolation( i_corner001,
+                                                   i_corner101,
+                                                   i_corner011,
+                                                   i_corner111,
+                                                   gm::Vec2f( i_weight.X(), i_weight.Y() ) );
 
-    // Linearly interpolate the two resulting values based on the Z weight.
-    return gm::LinearInterpolation( value0, value1, i_weight.Z() );
+    // Linearly interpolate the two intermediate values based on the Z weight.
+    return gm::LinearInterpolation( interm0, interm1, i_weight.Z() );
 }
 
 /// Trilinearly interpolate in a rectilinear 3D grid.
@@ -199,14 +217,20 @@ GM_HOST_DEVICE inline Vec2f TrilinearInterpolation( const Vec2f& i_corner000,
                    "Expected i_weight.Z() between [0,1], got %f\n",
                    i_weight.Z() );
 
-    // Bilinearly interpolate the two sides parallel to the Z-axis of the grid.
-    gm::Vec2f value0 =
-        gm::BilinearInterpolation( i_corner000, i_corner100, i_corner010, i_corner110, i_weight.X(), i_weight.Y() );
-    gm::Vec2f value1 =
-        gm::BilinearInterpolation( i_corner001, i_corner101, i_corner011, i_corner111, i_weight.X(), i_weight.Y() );
+    // Bilinearly interpolate the two sides orthogonal to the Z-axis of the grid.
+    gm::Vec2f interm0 = gm::BilinearInterpolation( i_corner000,
+                                                   i_corner100,
+                                                   i_corner010,
+                                                   i_corner110,
+                                                   gm::Vec2f( i_weight.X(), i_weight.Y() ) );
+    gm::Vec2f interm1 = gm::BilinearInterpolation( i_corner001,
+                                                   i_corner101,
+                                                   i_corner011,
+                                                   i_corner111,
+                                                   gm::Vec2f( i_weight.X(), i_weight.Y() ) );
 
-    // Linearly interpolate the two resulting values based on the Z weight.
-    return gm::LinearInterpolation( value0, value1, i_weight.Z() );
+    // Linearly interpolate the two intermediate values based on the Z weight.
+    return gm::LinearInterpolation( interm0, interm1, i_weight.Z() );
 }
 
 /// Trilinearly interpolate in a rectilinear 3D grid.
@@ -245,14 +269,20 @@ GM_HOST_DEVICE inline Vec3f TrilinearInterpolation( const Vec3f& i_corner000,
                    "Expected i_weight.Z() between [0,1], got %f\n",
                    i_weight.Z() );
 
-    // Bilinearly interpolate the two sides parallel to the Z-axis of the grid.
-    gm::Vec3f value0 =
-        gm::BilinearInterpolation( i_corner000, i_corner100, i_corner010, i_corner110, i_weight.X(), i_weight.Y() );
-    gm::Vec3f value1 =
-        gm::BilinearInterpolation( i_corner001, i_corner101, i_corner011, i_corner111, i_weight.X(), i_weight.Y() );
+    // Bilinearly interpolate the two sides orthogonal to the Z-axis of the grid.
+    gm::Vec3f interm0 = gm::BilinearInterpolation( i_corner000,
+                                                   i_corner100,
+                                                   i_corner010,
+                                                   i_corner110,
+                                                   gm::Vec2f( i_weight.X(), i_weight.Y() ) );
+    gm::Vec3f interm1 = gm::BilinearInterpolation( i_corner001,
+                                                   i_corner101,
+                                                   i_corner011,
+                                                   i_corner111,
+                                                   gm::Vec2f( i_weight.X(), i_weight.Y() ) );
 
-    // Linearly interpolate the two resulting values based on the Z weight.
-    return gm::LinearInterpolation( value0, value1, i_weight.Z() );
+    // Linearly interpolate the two intermediate values based on the Z weight.
+    return gm::LinearInterpolation( interm0, interm1, i_weight.Z() );
 }
 
 /// Trilinearly interpolate in a rectilinear 3D grid.
@@ -291,14 +321,20 @@ GM_HOST_DEVICE inline Vec4f TrilinearInterpolation( const Vec4f& i_corner000,
                    "Expected i_weight.Z() between [0,1], got %f\n",
                    i_weight.Z() );
 
-    // Bilinearly interpolate the two sides parallel to the Z-axis of the grid.
-    gm::Vec4f value0 =
-        gm::BilinearInterpolation( i_corner000, i_corner100, i_corner010, i_corner110, i_weight.X(), i_weight.Y() );
-    gm::Vec4f value1 =
-        gm::BilinearInterpolation( i_corner001, i_corner101, i_corner011, i_corner111, i_weight.X(), i_weight.Y() );
+    // Bilinearly interpolate the two sides orthogonal to the Z-axis of the grid.
+    gm::Vec4f interm0 = gm::BilinearInterpolation( i_corner000,
+                                                   i_corner100,
+                                                   i_corner010,
+                                                   i_corner110,
+                                                   gm::Vec2f( i_weight.X(), i_weight.Y() ) );
+    gm::Vec4f interm1 = gm::BilinearInterpolation( i_corner001,
+                                                   i_corner101,
+                                                   i_corner011,
+                                                   i_corner111,
+                                                   gm::Vec2f( i_weight.X(), i_weight.Y() ) );
 
-    // Linearly interpolate the two resulting values based on the Z weight.
-    return gm::LinearInterpolation( value0, value1, i_weight.Z() );
+    // Linearly interpolate the two intermediate values based on the Z weight.
+    return gm::LinearInterpolation( interm0, interm1, i_weight.Z() );
 }
 
 GM_NS_CLOSE

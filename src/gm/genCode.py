@@ -414,19 +414,18 @@ def GenerateFunctions():
         [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT
     ):
         arguments = [
-            FunctionArg("value00", valueType, Mutability.Const),
-            FunctionArg("value10", valueType, Mutability.Const),
-            FunctionArg("value01", valueType, Mutability.Const),
-            FunctionArg("value11", valueType, Mutability.Const),
+            FunctionArg("corner00", valueType, Mutability.Const),
+            FunctionArg("corner10", valueType, Mutability.Const),
+            FunctionArg("corner01", valueType, Mutability.Const),
+            FunctionArg("corner11", valueType, Mutability.Const),
         ]
 
         if valueType.isScalar:
-            weightType = valueType
+            weightType = VectorType((2,), valueType)
         else:
             assert valueType.isVector
-            weightType = valueType.elementType
-        arguments.append(FunctionArg("weightX", weightType, Mutability.Const))
-        arguments.append(FunctionArg("weightY", weightType, Mutability.Const))
+            weightType = VectorType((2,), valueType.elementType)
+        arguments.append(FunctionArg("weight", weightType, Mutability.Const))
 
         bilinearInterpolationOps.append(
             FunctionInterface(arguments=arguments, returnType=valueType,)

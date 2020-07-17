@@ -54,26 +54,24 @@
                    "Expected {{ weight }}.Z() between [0,1], got %f\n",
                    {{ weight }}.Z() );
 
-    // Bilinearly interpolate the two sides parallel to the Z-axis of the grid.
-    {{ valueType.namespacedClassName }} value0 = gm::BilinearInterpolation(
+    // Bilinearly interpolate the two sides orthogonal to the Z-axis of the grid.
+    {{ valueType.namespacedClassName }} interm0 = gm::BilinearInterpolation(
         {{ corner000 }},
         {{ corner100 }},
         {{ corner010 }},
         {{ corner110 }},
-        {{ weight }}.X(),
-        {{ weight }}.Y()
+        gm::Vec2f( {{ weight }}.X(), {{ weight }}.Y() )
     );
-    {{ valueType.namespacedClassName }} value1 = gm::BilinearInterpolation(
+    {{ valueType.namespacedClassName }} interm1 = gm::BilinearInterpolation(
         {{ corner001 }},
         {{ corner101 }},
         {{ corner011 }},
         {{ corner111 }},
-        {{ weight }}.X(),
-        {{ weight }}.Y()
+        gm::Vec2f( {{ weight }}.X(), {{ weight }}.Y() )
     );
 
-    // Linearly interpolate the two resulting values based on the Z weight.
-    return gm::LinearInterpolation( value0, value1, {{ weight }}.Z() );
+    // Linearly interpolate the two intermediate values based on the Z weight.
+    return gm::LinearInterpolation( interm0, interm1, {{ weight }}.Z() );
 }
 {% endfor %}
 {% endblock %}

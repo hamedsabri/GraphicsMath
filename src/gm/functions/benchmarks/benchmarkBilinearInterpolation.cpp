@@ -7,86 +7,80 @@
 
 #include <gm/functions/bilinearInterpolation.h>
 
-TEST_CASE( "BilinearInterpolation_float_float_float_float_float_float" )
+TEST_CASE( "BilinearInterpolation_float_float_float_float_Vec2f" )
 {
-    float value00;
-    float value10;
-    float value01;
-    float value11;
-    float weightX;
-    float weightY;
+    float     corner00;
+    float     corner10;
+    float     corner01;
+    float     corner11;
+    gm::Vec2f weight;
     BENCHMARK( "BilinearInterpolation" )
     {
-        return gm::BilinearInterpolation( value00, value10, value01, value11, weightX, weightY );
+        return gm::BilinearInterpolation( corner00, corner10, corner01, corner11, weight );
     };
 }
 
-TEST_CASE( "BilinearInterpolation_Mat3f_Mat3f_Mat3f_Mat3f_float_float" )
+TEST_CASE( "BilinearInterpolation_Mat3f_Mat3f_Mat3f_Mat3f_Vec2f" )
 {
-    gm::Mat3f value00;
-    gm::Mat3f value10;
-    gm::Mat3f value01;
-    gm::Mat3f value11;
-    float     weightX;
-    float     weightY;
+    gm::Mat3f corner00;
+    gm::Mat3f corner10;
+    gm::Mat3f corner01;
+    gm::Mat3f corner11;
+    gm::Vec2f weight;
     BENCHMARK( "BilinearInterpolation" )
     {
-        return gm::BilinearInterpolation( value00, value10, value01, value11, weightX, weightY );
+        return gm::BilinearInterpolation( corner00, corner10, corner01, corner11, weight );
     };
 }
 
-TEST_CASE( "BilinearInterpolation_Mat4f_Mat4f_Mat4f_Mat4f_float_float" )
+TEST_CASE( "BilinearInterpolation_Mat4f_Mat4f_Mat4f_Mat4f_Vec2f" )
 {
-    gm::Mat4f value00;
-    gm::Mat4f value10;
-    gm::Mat4f value01;
-    gm::Mat4f value11;
-    float     weightX;
-    float     weightY;
+    gm::Mat4f corner00;
+    gm::Mat4f corner10;
+    gm::Mat4f corner01;
+    gm::Mat4f corner11;
+    gm::Vec2f weight;
     BENCHMARK( "BilinearInterpolation" )
     {
-        return gm::BilinearInterpolation( value00, value10, value01, value11, weightX, weightY );
+        return gm::BilinearInterpolation( corner00, corner10, corner01, corner11, weight );
     };
 }
 
-TEST_CASE( "BilinearInterpolation_Vec2f_Vec2f_Vec2f_Vec2f_float_float" )
+TEST_CASE( "BilinearInterpolation_Vec2f_Vec2f_Vec2f_Vec2f_Vec2f" )
 {
-    gm::Vec2f value00;
-    gm::Vec2f value10;
-    gm::Vec2f value01;
-    gm::Vec2f value11;
-    float     weightX;
-    float     weightY;
+    gm::Vec2f corner00;
+    gm::Vec2f corner10;
+    gm::Vec2f corner01;
+    gm::Vec2f corner11;
+    gm::Vec2f weight;
     BENCHMARK( "BilinearInterpolation" )
     {
-        return gm::BilinearInterpolation( value00, value10, value01, value11, weightX, weightY );
+        return gm::BilinearInterpolation( corner00, corner10, corner01, corner11, weight );
     };
 }
 
-TEST_CASE( "BilinearInterpolation_Vec3f_Vec3f_Vec3f_Vec3f_float_float" )
+TEST_CASE( "BilinearInterpolation_Vec3f_Vec3f_Vec3f_Vec3f_Vec2f" )
 {
-    gm::Vec3f value00;
-    gm::Vec3f value10;
-    gm::Vec3f value01;
-    gm::Vec3f value11;
-    float     weightX;
-    float     weightY;
+    gm::Vec3f corner00;
+    gm::Vec3f corner10;
+    gm::Vec3f corner01;
+    gm::Vec3f corner11;
+    gm::Vec2f weight;
     BENCHMARK( "BilinearInterpolation" )
     {
-        return gm::BilinearInterpolation( value00, value10, value01, value11, weightX, weightY );
+        return gm::BilinearInterpolation( corner00, corner10, corner01, corner11, weight );
     };
 }
 
-TEST_CASE( "BilinearInterpolation_Vec4f_Vec4f_Vec4f_Vec4f_float_float" )
+TEST_CASE( "BilinearInterpolation_Vec4f_Vec4f_Vec4f_Vec4f_Vec2f" )
 {
-    gm::Vec4f value00;
-    gm::Vec4f value10;
-    gm::Vec4f value01;
-    gm::Vec4f value11;
-    float     weightX;
-    float     weightY;
+    gm::Vec4f corner00;
+    gm::Vec4f corner10;
+    gm::Vec4f corner01;
+    gm::Vec4f corner11;
+    gm::Vec2f weight;
     BENCHMARK( "BilinearInterpolation" )
     {
-        return gm::BilinearInterpolation( value00, value10, value01, value11, weightX, weightY );
+        return gm::BilinearInterpolation( corner00, corner10, corner01, corner11, weight );
     };
 }

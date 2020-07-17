@@ -4,10 +4,8 @@
 {%- block fileDoc -%}
 /// Bilinear interpolation.
 ///
-/// Interpolate within a 2D rectilinear grid, bounded by 4 anchoring values, with two weights.
-///
-/// Linearly interpolating across the \em first dimension using the \em first weight will result in two values.
-/// These two values are then linearly interpolated as a function of the \em second weight.
+/// Interpolate within a 2D rectilinear grid, bounded by 4 anchoring corner points, with two weights along the
+/// two axis.
 {%- endblock %}
 
 {% block includes %}
@@ -17,38 +15,39 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-{% set valueType = interface.ArgType("value00") %}
-{% set value00   = interface.ArgName("value00") %}
-{% set value10   = interface.ArgName("value10") %}
-{% set value01   = interface.ArgName("value01") %}
-{% set value11   = interface.ArgName("value11") %}
-{% set weightX   = interface.ArgName("weightX") %}
-{% set weightY   = interface.ArgName("weightY") %}
+{% set valueType = interface.ArgType("corner00") %}
+{% set corner00  = interface.ArgName("corner00") %}
+{% set corner10  = interface.ArgName("corner10") %}
+{% set corner01  = interface.ArgName("corner01") %}
+{% set corner11  = interface.ArgName("corner11") %}
+{% set weight    = interface.ArgName("weight") %}
 /// Bilinearly interpolate in a 2D rectilinear grid.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ value00 }} The value at (0, 0).
-/// \param {{ value10 }} The value at (1, 0).
-/// \param {{ value01 }} The value at (0, 1).
-/// \param {{ value11 }} The value at (1, 1).
-/// \param {{ weightX }} The weight for linearly interpolating across the X coordinates.
-/// \param {{ weightY }} The weight for linearly interpolating across the Y coordinates.
+/// \param {{ corner00 }} The corner at (0, 0).
+/// \param {{ corner10 }} The corner at (1, 0).
+/// \param {{ corner01 }} The corner at (0, 1).
+/// \param {{ corner11 }} The corner at (1, 1).
+/// \param {{ weight }} The weights for interpolating in the X and Y axis.
 ///
-/// \pre \p {{ weightX }} and \p {{ weightY }} must be in the range of [0,1].
+/// \pre \p {{ weight }}.X() and \p {{ weight }}.Y() must be in the range of [0,1].
 ///
 /// \return Bilinearly interpolated value.
 {{- functionUtils.signature(function, interface) -}}
 {
-    GM_ASSERT_MSG( {{ weightX }} >= 0.0f && {{ weightX }} <= 1.0f,
-                   "Expected {{ weightX }} between [0,1], got %f\n",
-                   {{ weightX }} );
-    GM_ASSERT_MSG( {{ weightY }} >= 0.0f && {{ weightX }} <= 1.0f,
-                   "Expected {{ weightY }} between [0,1], got %f\n",
-                   {{ weightY }} );
+    GM_ASSERT_MSG( {{ weight }}.X() >= 0.0f && {{ weight }}.X() <= 1.0f,
+                   "Expected {{ weight }}.X() between [0,1], got %f\n",
+                   {{ weight }}.X() );
+    GM_ASSERT_MSG( {{ weight }}.Y() >= 0.0f && {{ weight }}.X() <= 1.0f,
+                   "Expected {{ weight }}.Y() between [0,1], got %f\n",
+                   {{ weight }}.Y() );
 
-    {{ valueType.namespacedClassName }} value0 = gm::LinearInterpolation( {{ value00 }}, {{ value10 }}, {{ weightX }} );
-    {{ valueType.namespacedClassName }} value1 = gm::LinearInterpolation( {{ value01 }}, {{ value11 }}, {{ weightX }} );
-    return gm::LinearInterpolation( value0, value1, {{ weightY }} );
+    // Linearly interpolate along the X axis to produce two intermediate values.
+    {{ valueType.namespacedClassName }} interm0 = gm::LinearInterpolation( {{ corner00 }}, {{ corner10 }}, {{ weight }}.X() );
+    {{ valueType.namespacedClassName }} interm1 = gm::LinearInterpolation( {{ corner01 }}, {{ corner11 }}, {{ weight }}.X() );
+
+    // Linearly interpolate the intermediate values along the Y axis.
+    return gm::LinearInterpolation( interm0, interm1, {{ weight }}.Y() );
 }
 {% endfor %}
 {% endblock %}
