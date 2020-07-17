@@ -7,176 +7,152 @@
 
 #include <gm/functions/trilinearInterpolation.h>
 
-TEST_CASE( "TrilinearInterpolation_float_float_float_float_float_float_float_float_float_float_float" )
+TEST_CASE( "TrilinearInterpolation_float_float_float_float_float_float_float_float_Vec3f" )
 {
-    float value000;
-    float value001;
-    float value010;
-    float value011;
-    float value100;
-    float value101;
-    float value110;
-    float value111;
-    float weightX;
-    float weightY;
-    float weightZ;
+    float     corner000;
+    float     corner100;
+    float     corner010;
+    float     corner110;
+    float     corner001;
+    float     corner101;
+    float     corner011;
+    float     corner111;
+    gm::Vec3f weight;
     BENCHMARK( "TrilinearInterpolation" )
     {
-        return gm::TrilinearInterpolation( value000,
-                                           value001,
-                                           value010,
-                                           value011,
-                                           value100,
-                                           value101,
-                                           value110,
-                                           value111,
-                                           weightX,
-                                           weightY,
-                                           weightZ );
+        return gm::TrilinearInterpolation( corner000,
+                                           corner100,
+                                           corner010,
+                                           corner110,
+                                           corner001,
+                                           corner101,
+                                           corner011,
+                                           corner111,
+                                           weight );
     };
 }
 
-TEST_CASE( "TrilinearInterpolation_Mat3f_Mat3f_Mat3f_Mat3f_Mat3f_Mat3f_Mat3f_Mat3f_float_float_float" )
+TEST_CASE( "TrilinearInterpolation_Mat3f_Mat3f_Mat3f_Mat3f_Mat3f_Mat3f_Mat3f_Mat3f_Vec3f" )
 {
-    gm::Mat3f value000;
-    gm::Mat3f value001;
-    gm::Mat3f value010;
-    gm::Mat3f value011;
-    gm::Mat3f value100;
-    gm::Mat3f value101;
-    gm::Mat3f value110;
-    gm::Mat3f value111;
-    float     weightX;
-    float     weightY;
-    float     weightZ;
+    gm::Mat3f corner000;
+    gm::Mat3f corner100;
+    gm::Mat3f corner010;
+    gm::Mat3f corner110;
+    gm::Mat3f corner001;
+    gm::Mat3f corner101;
+    gm::Mat3f corner011;
+    gm::Mat3f corner111;
+    gm::Vec3f weight;
     BENCHMARK( "TrilinearInterpolation" )
     {
-        return gm::TrilinearInterpolation( value000,
-                                           value001,
-                                           value010,
-                                           value011,
-                                           value100,
-                                           value101,
-                                           value110,
-                                           value111,
-                                           weightX,
-                                           weightY,
-                                           weightZ );
+        return gm::TrilinearInterpolation( corner000,
+                                           corner100,
+                                           corner010,
+                                           corner110,
+                                           corner001,
+                                           corner101,
+                                           corner011,
+                                           corner111,
+                                           weight );
     };
 }
 
-TEST_CASE( "TrilinearInterpolation_Mat4f_Mat4f_Mat4f_Mat4f_Mat4f_Mat4f_Mat4f_Mat4f_float_float_float" )
+TEST_CASE( "TrilinearInterpolation_Mat4f_Mat4f_Mat4f_Mat4f_Mat4f_Mat4f_Mat4f_Mat4f_Vec3f" )
 {
-    gm::Mat4f value000;
-    gm::Mat4f value001;
-    gm::Mat4f value010;
-    gm::Mat4f value011;
-    gm::Mat4f value100;
-    gm::Mat4f value101;
-    gm::Mat4f value110;
-    gm::Mat4f value111;
-    float     weightX;
-    float     weightY;
-    float     weightZ;
+    gm::Mat4f corner000;
+    gm::Mat4f corner100;
+    gm::Mat4f corner010;
+    gm::Mat4f corner110;
+    gm::Mat4f corner001;
+    gm::Mat4f corner101;
+    gm::Mat4f corner011;
+    gm::Mat4f corner111;
+    gm::Vec3f weight;
     BENCHMARK( "TrilinearInterpolation" )
     {
-        return gm::TrilinearInterpolation( value000,
-                                           value001,
-                                           value010,
-                                           value011,
-                                           value100,
-                                           value101,
-                                           value110,
-                                           value111,
-                                           weightX,
-                                           weightY,
-                                           weightZ );
+        return gm::TrilinearInterpolation( corner000,
+                                           corner100,
+                                           corner010,
+                                           corner110,
+                                           corner001,
+                                           corner101,
+                                           corner011,
+                                           corner111,
+                                           weight );
     };
 }
 
-TEST_CASE( "TrilinearInterpolation_Vec2f_Vec2f_Vec2f_Vec2f_Vec2f_Vec2f_Vec2f_Vec2f_float_float_float" )
+TEST_CASE( "TrilinearInterpolation_Vec2f_Vec2f_Vec2f_Vec2f_Vec2f_Vec2f_Vec2f_Vec2f_Vec3f" )
 {
-    gm::Vec2f value000;
-    gm::Vec2f value001;
-    gm::Vec2f value010;
-    gm::Vec2f value011;
-    gm::Vec2f value100;
-    gm::Vec2f value101;
-    gm::Vec2f value110;
-    gm::Vec2f value111;
-    float     weightX;
-    float     weightY;
-    float     weightZ;
+    gm::Vec2f corner000;
+    gm::Vec2f corner100;
+    gm::Vec2f corner010;
+    gm::Vec2f corner110;
+    gm::Vec2f corner001;
+    gm::Vec2f corner101;
+    gm::Vec2f corner011;
+    gm::Vec2f corner111;
+    gm::Vec3f weight;
     BENCHMARK( "TrilinearInterpolation" )
     {
-        return gm::TrilinearInterpolation( value000,
-                                           value001,
-                                           value010,
-                                           value011,
-                                           value100,
-                                           value101,
-                                           value110,
-                                           value111,
-                                           weightX,
-                                           weightY,
-                                           weightZ );
+        return gm::TrilinearInterpolation( corner000,
+                                           corner100,
+                                           corner010,
+                                           corner110,
+                                           corner001,
+                                           corner101,
+                                           corner011,
+                                           corner111,
+                                           weight );
     };
 }
 
-TEST_CASE( "TrilinearInterpolation_Vec3f_Vec3f_Vec3f_Vec3f_Vec3f_Vec3f_Vec3f_Vec3f_float_float_float" )
+TEST_CASE( "TrilinearInterpolation_Vec3f_Vec3f_Vec3f_Vec3f_Vec3f_Vec3f_Vec3f_Vec3f_Vec3f" )
 {
-    gm::Vec3f value000;
-    gm::Vec3f value001;
-    gm::Vec3f value010;
-    gm::Vec3f value011;
-    gm::Vec3f value100;
-    gm::Vec3f value101;
-    gm::Vec3f value110;
-    gm::Vec3f value111;
-    float     weightX;
-    float     weightY;
-    float     weightZ;
+    gm::Vec3f corner000;
+    gm::Vec3f corner100;
+    gm::Vec3f corner010;
+    gm::Vec3f corner110;
+    gm::Vec3f corner001;
+    gm::Vec3f corner101;
+    gm::Vec3f corner011;
+    gm::Vec3f corner111;
+    gm::Vec3f weight;
     BENCHMARK( "TrilinearInterpolation" )
     {
-        return gm::TrilinearInterpolation( value000,
-                                           value001,
-                                           value010,
-                                           value011,
-                                           value100,
-                                           value101,
-                                           value110,
-                                           value111,
-                                           weightX,
-                                           weightY,
-                                           weightZ );
+        return gm::TrilinearInterpolation( corner000,
+                                           corner100,
+                                           corner010,
+                                           corner110,
+                                           corner001,
+                                           corner101,
+                                           corner011,
+                                           corner111,
+                                           weight );
     };
 }
 
-TEST_CASE( "TrilinearInterpolation_Vec4f_Vec4f_Vec4f_Vec4f_Vec4f_Vec4f_Vec4f_Vec4f_float_float_float" )
+TEST_CASE( "TrilinearInterpolation_Vec4f_Vec4f_Vec4f_Vec4f_Vec4f_Vec4f_Vec4f_Vec4f_Vec3f" )
 {
-    gm::Vec4f value000;
-    gm::Vec4f value001;
-    gm::Vec4f value010;
-    gm::Vec4f value011;
-    gm::Vec4f value100;
-    gm::Vec4f value101;
-    gm::Vec4f value110;
-    gm::Vec4f value111;
-    float     weightX;
-    float     weightY;
-    float     weightZ;
+    gm::Vec4f corner000;
+    gm::Vec4f corner100;
+    gm::Vec4f corner010;
+    gm::Vec4f corner110;
+    gm::Vec4f corner001;
+    gm::Vec4f corner101;
+    gm::Vec4f corner011;
+    gm::Vec4f corner111;
+    gm::Vec3f weight;
     BENCHMARK( "TrilinearInterpolation" )
     {
-        return gm::TrilinearInterpolation( value000,
-                                           value001,
-                                           value010,
-                                           value011,
-                                           value100,
-                                           value101,
-                                           value110,
-                                           value111,
-                                           weightX,
-                                           weightY,
-                                           weightZ );
+        return gm::TrilinearInterpolation( corner000,
+                                           corner100,
+                                           corner010,
+                                           corner110,
+                                           corner001,
+                                           corner101,
+                                           corner011,
+                                           corner111,
+                                           weight );
     };
 }

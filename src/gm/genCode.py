@@ -437,24 +437,22 @@ def GenerateFunctions():
         [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT
     ):
         arguments = [
-            FunctionArg("value000", valueType, Mutability.Const),
-            FunctionArg("value001", valueType, Mutability.Const),
-            FunctionArg("value010", valueType, Mutability.Const),
-            FunctionArg("value011", valueType, Mutability.Const),
-            FunctionArg("value100", valueType, Mutability.Const),
-            FunctionArg("value101", valueType, Mutability.Const),
-            FunctionArg("value110", valueType, Mutability.Const),
-            FunctionArg("value111", valueType, Mutability.Const),
+            FunctionArg("corner000", valueType, Mutability.Const),
+            FunctionArg("corner100", valueType, Mutability.Const),
+            FunctionArg("corner010", valueType, Mutability.Const),
+            FunctionArg("corner110", valueType, Mutability.Const),
+            FunctionArg("corner001", valueType, Mutability.Const),
+            FunctionArg("corner101", valueType, Mutability.Const),
+            FunctionArg("corner011", valueType, Mutability.Const),
+            FunctionArg("corner111", valueType, Mutability.Const),
         ]
 
         if valueType.isScalar:
-            weightType = valueType
+            weightType = VectorType((3,), valueType)
         else:
             assert valueType.isVector
-            weightType = valueType.elementType
-        arguments.append(FunctionArg("weightX", weightType, Mutability.Const))
-        arguments.append(FunctionArg("weightY", weightType, Mutability.Const))
-        arguments.append(FunctionArg("weightZ", weightType, Mutability.Const))
+            weightType = VectorType((3,), valueType.elementType)
+        arguments.append(FunctionArg("weight", weightType, Mutability.Const))
 
         trilinearInterpolationOps.append(
             FunctionInterface(arguments=arguments, returnType=valueType,)

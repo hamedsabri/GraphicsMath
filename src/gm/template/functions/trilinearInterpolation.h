@@ -4,7 +4,7 @@
 {%- block fileDoc -%}
 /// Trilinear interpolation.
 ///
-/// Interpolate within a 3D rectilinear grid, bounded by 8 anchoring values, with 3 weights
+/// Interpolate within a 3D grid, bounded by 8 anchoring corner points, with 3 weights
 /// (one for each interpolating dimension).
 {%- endblock %}
 
@@ -16,65 +16,64 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-{% set valueType = interface.ArgType("value000") %}
-{% set value000  = interface.ArgName("value000") %}
-{% set value001  = interface.ArgName("value001") %}
-{% set value010  = interface.ArgName("value010") %}
-{% set value011  = interface.ArgName("value011") %}
-{% set value100  = interface.ArgName("value100") %}
-{% set value101  = interface.ArgName("value101") %}
-{% set value110  = interface.ArgName("value110") %}
-{% set value111  = interface.ArgName("value111") %}
-{% set weightX   = interface.ArgName("weightX") %}
-{% set weightY   = interface.ArgName("weightY") %}
-{% set weightZ   = interface.ArgName("weightZ") %}
+{% set valueType = interface.ArgType("corner000") %}
+{% set corner000 = interface.ArgName("corner000") %}
+{% set corner100 = interface.ArgName("corner100") %}
+{% set corner010 = interface.ArgName("corner010") %}
+{% set corner110 = interface.ArgName("corner110") %}
+{% set corner001 = interface.ArgName("corner001") %}
+{% set corner101 = interface.ArgName("corner101") %}
+{% set corner011 = interface.ArgName("corner011") %}
+{% set corner111 = interface.ArgName("corner111") %}
+{% set weight    = interface.ArgName("weight") %}
 /// Trilinearly interpolate in a rectilinear 3D grid.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ value000 }} The value at (0, 0, 0).
-/// \param {{ value001 }} The value at (0, 0, 1).
-/// \param {{ value010 }} The value at (0, 1, 0).
-/// \param {{ value011 }} The value at (0, 1, 1).
-/// \param {{ value100 }} The value at (1, 0, 0).
-/// \param {{ value101 }} The value at (1, 0, 1).
-/// \param {{ value110 }} The value at (1, 1, 0).
-/// \param {{ value111 }} The value at (1, 1, 1).
-/// \param {{ weightX }} The weight for linearly interpolating across the X coordinates.
-/// \param {{ weightY }} The weight for linearly interpolating across the Y coordinates.
-/// \param {{ weightZ }} The weight for linearly interpolating across the Z coordinates.
+/// \param {{ corner000 }} The \p (0, 0, 0) corner point of the grid.
+/// \param {{ corner100 }} The \p (0, 0, 1) corner point of the grid.
+/// \param {{ corner010 }} The \p (0, 1, 0) corner point of the grid.
+/// \param {{ corner110 }} The \p (0, 1, 1) corner point of the grid.
+/// \param {{ corner001 }} The \p (1, 0, 0) corner point of the grid.
+/// \param {{ corner101 }} The \p (1, 0, 1) corner point of the grid.
+/// \param {{ corner011 }} The \p (1, 1, 0) corner point of the grid.
+/// \param {{ corner111 }} The \p (1, 1, 1) corner point of the grid.
+/// \param {{ weight }} The weight for linearly interpolating across the 3 axis.
 ///
-/// \pre \p {{ weightX }}, \p {{ weightY }}, and \p {{ weightZ }} must be in the range of [0,1].
+/// \pre \p {{ weight }}.X(), \p {{ weight }}.Y(), and \p {{ weight }}.Z() must be in the range of [0,1].
 ///
 /// \return Trilinearly interpolated value.
 {{- functionUtils.signature(function, interface) -}}
 {
-    GM_ASSERT_MSG( {{ weightX }} >= 0.0f && {{ weightX }} <= 1.0f,
-                   "Expected {{ weightX }} between [0,1], got %f\n",
-                   {{ weightX }} );
-    GM_ASSERT_MSG( {{ weightY }} >= 0.0f && {{ weightX }} <= 1.0f,
-                   "Expected {{ weightY }} between [0,1], got %f\n",
-                   {{ weightY }} );
-    GM_ASSERT_MSG( {{ weightZ }} >= 0.0f && {{ weightZ }} <= 1.0f,
-                   "Expected {{ weightZ }} between [0,1], got %f\n",
-                   {{ weightZ }} );
+    GM_ASSERT_MSG( {{ weight }}.X() >= 0.0f && {{ weight }}.X() <= 1.0f,
+                   "Expected {{ weight }}.X() between [0,1], got %f\n",
+                   {{ weight }}.X() );
+    GM_ASSERT_MSG( {{ weight }}.Y() >= 0.0f && {{ weight }}.X() <= 1.0f,
+                   "Expected {{ weight }}.Y() between [0,1], got %f\n",
+                   {{ weight }}.Y() );
+    GM_ASSERT_MSG( {{ weight }}.Z() >= 0.0f && {{ weight }}.Z() <= 1.0f,
+                   "Expected {{ weight }}.Z() between [0,1], got %f\n",
+                   {{ weight }}.Z() );
 
+    // Bilinearly interpolate the two sides parallel to the Z-axis of the grid.
     {{ valueType.namespacedClassName }} value0 = gm::BilinearInterpolation(
-        {{ value000 }},
-        {{ value001 }},
-        {{ value010 }},
-        {{ value011 }},
-        {{ weightX }},
-        {{ weightY }}
+        {{ corner000 }},
+        {{ corner100 }},
+        {{ corner010 }},
+        {{ corner110 }},
+        {{ weight }}.X(),
+        {{ weight }}.Y()
     );
     {{ valueType.namespacedClassName }} value1 = gm::BilinearInterpolation(
-        {{ value100 }},
-        {{ value101 }},
-        {{ value110 }},
-        {{ value111 }},
-        {{ weightX }},
-        {{ weightY }}
+        {{ corner001 }},
+        {{ corner101 }},
+        {{ corner011 }},
+        {{ corner111 }},
+        {{ weight }}.X(),
+        {{ weight }}.Y()
     );
-    return gm::LinearInterpolation( value0, value1, {{ weightZ }} );
+
+    // Linearly interpolate the two resulting values based on the Z weight.
+    return gm::LinearInterpolation( value0, value1, {{ weight }}.Z() );
 }
 {% endfor %}
 {% endblock %}
