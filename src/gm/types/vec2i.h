@@ -75,15 +75,29 @@ public:
         return m_elements[ i_index ];
     }
 
-    /// X component accessor for the first element.
-    GM_HOST_DEVICE inline int X() const
+    /// Named const accessor for the first element.
+    GM_HOST_DEVICE inline const int& X() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
     }
 
-    /// Y component accessor for the second element.
-    GM_HOST_DEVICE inline int Y() const
+    /// Named mutable accessor for the first element.
+    GM_HOST_DEVICE inline int& X()
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 0 ];
+    }
+
+    /// Named const accessor for the second element.
+    GM_HOST_DEVICE inline const int& Y() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 1 ];
+    }
+
+    /// Named mutable accessor for the second element.
+    GM_HOST_DEVICE inline int& Y()
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 1 ];

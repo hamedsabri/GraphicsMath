@@ -102,8 +102,15 @@ public:
 {%- endif %}
 
 {% if valueType.shape|length == 1 and valueType.elementSize <= 4 -%}
-    /// X component accessor for the first element.
-    GM_HOST_DEVICE inline {{ valueType.elementType.className }} X() const
+    /// Named const accessor for the first element.
+    GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& X() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 0 ];
+    }
+
+    /// Named mutable accessor for the first element.
+    GM_HOST_DEVICE inline {{ valueType.elementType.className }}& X()
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
@@ -111,8 +118,15 @@ public:
 {%- endif %}
 
 {% if valueType.shape|length == 1 and valueType.elementSize >= 2 and valueType.elementSize <= 4 -%}
-    /// Y component accessor for the second element.
-    GM_HOST_DEVICE inline {{ valueType.elementType.className }} Y() const
+    /// Named const accessor for the second element.
+    GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& Y() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 1 ];
+    }
+
+    /// Named mutable accessor for the second element.
+    GM_HOST_DEVICE inline {{ valueType.elementType.className }}& Y()
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 1 ];
@@ -120,8 +134,15 @@ public:
 {%- endif %}
 
 {% if valueType.shape|length == 1 and valueType.elementSize >= 3 and valueType.elementSize <= 4 -%}
-    /// Z component accessor for the third element.
-    GM_HOST_DEVICE inline {{ valueType.elementType.className }} Z() const
+    /// Named const accessor for the third element.
+    GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& Z() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 2 ];
+    }
+
+    /// Named mutable accessor for the third element.
+    GM_HOST_DEVICE inline {{ valueType.elementType.className }}& Z()
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 2 ];
@@ -129,8 +150,15 @@ public:
 {%- endif %}
 
 {% if valueType.shape|length == 1 and valueType.elementSize == 4 %}
-    /// W component accessor for the fourth element.
-    GM_HOST_DEVICE inline {{ valueType.elementType.className }} W() const
+    /// Named const accessor for the fourth element.
+    GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& W() const
+    {
+        GM_ASSERT( !HasNans() );
+        return m_elements[ 3 ];
+    }
+
+    /// Named const accessor for the fourth element.
+    GM_HOST_DEVICE inline {{ valueType.elementType.className }}& W()
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 3 ];
