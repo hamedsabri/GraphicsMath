@@ -415,8 +415,8 @@ def GenerateFunctions():
     ):
         arguments = [
             FunctionArg("value00", valueType, Mutability.Const),
-            FunctionArg("value01", valueType, Mutability.Const),
             FunctionArg("value10", valueType, Mutability.Const),
+            FunctionArg("value01", valueType, Mutability.Const),
             FunctionArg("value11", valueType, Mutability.Const),
         ]
 

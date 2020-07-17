@@ -19,8 +19,8 @@
 {% for interface in function.interfaces %}
 {% set valueType = interface.ArgType("value00") %}
 {% set value00   = interface.ArgName("value00") %}
-{% set value01   = interface.ArgName("value01") %}
 {% set value10   = interface.ArgName("value10") %}
+{% set value01   = interface.ArgName("value01") %}
 {% set value11   = interface.ArgName("value11") %}
 {% set weightX   = interface.ArgName("weightX") %}
 {% set weightY   = interface.ArgName("weightY") %}
@@ -28,8 +28,8 @@
 /// \ingroup gm_functions_{{ function.category }}
 ///
 /// \param {{ value00 }} The value at (0, 0).
-/// \param {{ value01 }} The value at (0, 1).
 /// \param {{ value10 }} The value at (1, 0).
+/// \param {{ value01 }} The value at (0, 1).
 /// \param {{ value11 }} The value at (1, 1).
 /// \param {{ weightX }} The weight for linearly interpolating across the X coordinates.
 /// \param {{ weightY }} The weight for linearly interpolating across the Y coordinates.
@@ -46,8 +46,8 @@
                    "Expected {{ weightY }} between [0,1], got %f\n",
                    {{ weightY }} );
 
-    {{ valueType.namespacedClassName }} value0 = gm::LinearInterpolation( {{ value00 }}, {{ value01 }}, {{ weightX }} );
-    {{ valueType.namespacedClassName }} value1 = gm::LinearInterpolation( {{ value10 }}, {{ value11 }}, {{ weightX }} );
+    {{ valueType.namespacedClassName }} value0 = gm::LinearInterpolation( {{ value00 }}, {{ value10 }}, {{ weightX }} );
+    {{ valueType.namespacedClassName }} value1 = gm::LinearInterpolation( {{ value01 }}, {{ value11 }}, {{ weightX }} );
     return gm::LinearInterpolation( value0, value1, {{ weightY }} );
 }
 {% endfor %}
