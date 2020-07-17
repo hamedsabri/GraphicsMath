@@ -131,6 +131,65 @@ TEST_CASE( "Mat4f_ElementWriteAccess" )
     CHECK( matrix[ 15 ] == 75.0f );
 }
 
+TEST_CASE( "Mat4f_MatrixElementReadAccess" )
+{
+    gm::Mat4f matrix = gm::
+        Mat4f( 0.0f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f, 15.0f );
+    CHECK( matrix( 0, 0 ) == 0.0f );
+    CHECK( matrix( 0, 1 ) == 1.0f );
+    CHECK( matrix( 0, 2 ) == 2.0f );
+    CHECK( matrix( 0, 3 ) == 3.0f );
+    CHECK( matrix( 1, 0 ) == 4.0f );
+    CHECK( matrix( 1, 1 ) == 5.0f );
+    CHECK( matrix( 1, 2 ) == 6.0f );
+    CHECK( matrix( 1, 3 ) == 7.0f );
+    CHECK( matrix( 2, 0 ) == 8.0f );
+    CHECK( matrix( 2, 1 ) == 9.0f );
+    CHECK( matrix( 2, 2 ) == 10.0f );
+    CHECK( matrix( 2, 3 ) == 11.0f );
+    CHECK( matrix( 3, 0 ) == 12.0f );
+    CHECK( matrix( 3, 1 ) == 13.0f );
+    CHECK( matrix( 3, 2 ) == 14.0f );
+    CHECK( matrix( 3, 3 ) == 15.0f );
+}
+
+TEST_CASE( "Mat4f_MatrixElementWriteAccess" )
+{
+    gm::Mat4f matrix;
+    matrix( 0, 0 ) = 0.0f;
+    matrix( 0, 1 ) = 1.0f;
+    matrix( 0, 2 ) = 2.0f;
+    matrix( 0, 3 ) = 3.0f;
+    matrix( 1, 0 ) = 4.0f;
+    matrix( 1, 1 ) = 5.0f;
+    matrix( 1, 2 ) = 6.0f;
+    matrix( 1, 3 ) = 7.0f;
+    matrix( 2, 0 ) = 8.0f;
+    matrix( 2, 1 ) = 9.0f;
+    matrix( 2, 2 ) = 10.0f;
+    matrix( 2, 3 ) = 11.0f;
+    matrix( 3, 0 ) = 12.0f;
+    matrix( 3, 1 ) = 13.0f;
+    matrix( 3, 2 ) = 14.0f;
+    matrix( 3, 3 ) = 15.0f;
+    CHECK( matrix == gm::Mat4f( 0.0f,
+                                1.0f,
+                                2.0f,
+                                3.0f,
+                                4.0f,
+                                5.0f,
+                                6.0f,
+                                7.0f,
+                                8.0f,
+                                9.0f,
+                                10.0f,
+                                11.0f,
+                                12.0f,
+                                13.0f,
+                                14.0f,
+                                15.0f ) );
+}
+
 TEST_CASE( "Mat4f_Addition" )
 {
     gm::Mat4f matrixA = gm::Mat4f( 0.0f,

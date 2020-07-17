@@ -43,6 +43,29 @@ TEST_CASE( "{{ valueType.className }}_ElementWriteAccess" )
 {%- endfor %}
 }
 
+{% if valueType.shape|length == 2 -%}
+TEST_CASE( "{{ valueType.className }}_MatrixElementReadAccess" )
+{
+    gm::{{ valueType.className }} {{ valueType.varName }} = {{- typeUtils.GenArithmeticSequence(valueType, 1) -}};
+{% for row in range(valueType.shape[1]) -%}
+{% for col in range(valueType.shape[0]) -%}
+    CHECK( {{ valueType.varName }}( {{ row }}, {{ col }} ) == {{ valueType.CppValue(row * valueType.shape[1] + col) }} );
+{%- endfor %}
+{%- endfor %}
+}
+
+TEST_CASE( "{{ valueType.className }}_MatrixElementWriteAccess" )
+{
+    gm::{{ valueType.className }} {{ valueType.varName }};
+{% for row in range(valueType.shape[1]) -%}
+{% for col in range(valueType.shape[0]) -%}
+    {{ valueType.varName }}( {{ row }}, {{ col }} ) = {{ valueType.CppValue(row * valueType.shape[1] + col) }};
+{%- endfor %}
+{%- endfor %}
+    CHECK( {{ valueType.varName }} == {{- typeUtils.GenArithmeticSequence( valueType, 1 ) -}});
+}
+{%- endif %}
+
 TEST_CASE( "{{ valueType.className }}_Addition" )
 {
     gm::{{ valueType.className }} {{ valueType.varName }}A = {{- typeUtils.GenArithmeticSequence(valueType, 2) -}};

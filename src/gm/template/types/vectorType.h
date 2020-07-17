@@ -29,7 +29,7 @@ public:
     // --------------------------------------------------------------------- //
 
     /// Default constructor, initializing all of the element values to 0.
-    GM_HOST_DEVICE constexpr inline {{ valueType.className }}()  = default;
+    GM_HOST_DEVICE constexpr inline {{ valueType.className }}() = default;
 
     /// Element-wise constructor.
     GM_HOST_DEVICE explicit constexpr inline {{ valueType.className }}(
@@ -90,14 +90,36 @@ public:
     // --------------------------------------------------------------------- //
 
     /// Matrix element read-access.
+    ///
+    /// \param i_row Row index.
+    /// \param i_column Column index.
+    ///
+    /// \pre \p i_row must be less than {{ valueType.shape[0] }}.
+    /// \pre \p i_column must be less than {{ valueType.shape[1] }}.
+    ///
+    /// \return Element value.
     GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
     {
+        GM_ASSERT( !HasNans() );
+        GM_ASSERT( i_row < {{ valueType.shape[0] }} );
+        GM_ASSERT( i_column < {{ valueType.shape[1] }} );
         return m_elements[ i_row * {{ valueType.shape[ 0 ] }} + i_column ];
     }
 
     /// Matrix element write-access.
+    ///
+    /// \param i_row Row index.
+    /// \param i_column Column index.
+    ///
+    /// \pre \p i_row must be less than {{ valueType.shape[ 1 ] }}.
+    /// \pre \p i_column must be less than {{ valueType.shape[ 0 ] }}.
+    ///
+    /// \return Element value.
     GM_HOST_DEVICE inline {{ valueType.elementType.className }}& operator()( size_t i_row, size_t i_column )
     {
+        GM_ASSERT( !HasNans() );
+        GM_ASSERT( i_row < {{ valueType.shape[0] }} );
+        GM_ASSERT( i_column < {{ valueType.shape[1] }} );
         return m_elements[ i_row * {{ valueType.shape[ 0 ] }} + i_column ];
     }
 {%- endif %}

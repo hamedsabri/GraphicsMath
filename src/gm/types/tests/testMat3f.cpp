@@ -63,6 +63,35 @@ TEST_CASE( "Mat3f_ElementWriteAccess" )
     CHECK( matrix[ 8 ] == 40.0f );
 }
 
+TEST_CASE( "Mat3f_MatrixElementReadAccess" )
+{
+    gm::Mat3f matrix = gm::Mat3f( 0.0f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f );
+    CHECK( matrix( 0, 0 ) == 0.0f );
+    CHECK( matrix( 0, 1 ) == 1.0f );
+    CHECK( matrix( 0, 2 ) == 2.0f );
+    CHECK( matrix( 1, 0 ) == 3.0f );
+    CHECK( matrix( 1, 1 ) == 4.0f );
+    CHECK( matrix( 1, 2 ) == 5.0f );
+    CHECK( matrix( 2, 0 ) == 6.0f );
+    CHECK( matrix( 2, 1 ) == 7.0f );
+    CHECK( matrix( 2, 2 ) == 8.0f );
+}
+
+TEST_CASE( "Mat3f_MatrixElementWriteAccess" )
+{
+    gm::Mat3f matrix;
+    matrix( 0, 0 ) = 0.0f;
+    matrix( 0, 1 ) = 1.0f;
+    matrix( 0, 2 ) = 2.0f;
+    matrix( 1, 0 ) = 3.0f;
+    matrix( 1, 1 ) = 4.0f;
+    matrix( 1, 2 ) = 5.0f;
+    matrix( 2, 0 ) = 6.0f;
+    matrix( 2, 1 ) = 7.0f;
+    matrix( 2, 2 ) = 8.0f;
+    CHECK( matrix == gm::Mat3f( 0.0f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f ) );
+}
+
 TEST_CASE( "Mat3f_Addition" )
 {
     gm::Mat3f matrixA = gm::Mat3f( 0.0f, 2.0f, 4.0f, 6.0f, 8.0f, 10.0f, 12.0f, 14.0f, 16.0f );
