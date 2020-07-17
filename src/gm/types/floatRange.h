@@ -11,6 +11,7 @@
 
 #include <gm/base/almost.h>
 
+#include <cmath>
 #include <limits>
 #include <sstream>
 

@@ -9,6 +9,7 @@
 
 #include <gm/gm.h>
 
+#include <cmath>
 #include <limits>
 #include <sstream>
 

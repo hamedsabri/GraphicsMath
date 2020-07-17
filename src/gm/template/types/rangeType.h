@@ -9,6 +9,7 @@
 #include <gm/base/almost.h>
 {%- endif %}
 
+#include <cmath>
 #include <limits>
 #include <sstream>
 {% endblock %}
