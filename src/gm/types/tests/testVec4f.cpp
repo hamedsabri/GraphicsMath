@@ -48,6 +48,30 @@ TEST_CASE( "Vec4f_ElementWriteAccess" )
     CHECK( vector[ 3 ] == 15.0f );
 }
 
+TEST_CASE( "Vec4f_NamedElementXAccessor" )
+{
+    gm::Vec4f vector = gm::Vec4f( 0.0f, 1.0f, 2.0f, 3.0f );
+    CHECK( vector.X() == 0.0f );
+}
+
+TEST_CASE( "Vec4f_NamedElementYAccessor" )
+{
+    gm::Vec4f vector = gm::Vec4f( 0.0f, 1.0f, 2.0f, 3.0f );
+    CHECK( vector.Y() == 1.0f );
+}
+
+TEST_CASE( "Vec4f_NamedElementZAccessor" )
+{
+    gm::Vec4f vector = gm::Vec4f( 0.0f, 1.0f, 2.0f, 3.0f );
+    CHECK( vector.Z() == 2.0f );
+}
+
+TEST_CASE( "Vec4f_NamedElementWAccessor" )
+{
+    gm::Vec4f vector = gm::Vec4f( 0.0f, 1.0f, 2.0f, 3.0f );
+    CHECK( vector.W() == 3.0f );
+}
+
 TEST_CASE( "Vec4f_Addition" )
 {
     gm::Vec4f vectorA = gm::Vec4f( 0.0f, 2.0f, 4.0f, 6.0f );

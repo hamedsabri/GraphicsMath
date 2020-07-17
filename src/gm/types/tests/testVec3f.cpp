@@ -45,6 +45,24 @@ TEST_CASE( "Vec3f_ElementWriteAccess" )
     CHECK( vector[ 2 ] == 10.0f );
 }
 
+TEST_CASE( "Vec3f_NamedElementXAccessor" )
+{
+    gm::Vec3f vector = gm::Vec3f( 0.0f, 1.0f, 2.0f );
+    CHECK( vector.X() == 0.0f );
+}
+
+TEST_CASE( "Vec3f_NamedElementYAccessor" )
+{
+    gm::Vec3f vector = gm::Vec3f( 0.0f, 1.0f, 2.0f );
+    CHECK( vector.Y() == 1.0f );
+}
+
+TEST_CASE( "Vec3f_NamedElementZAccessor" )
+{
+    gm::Vec3f vector = gm::Vec3f( 0.0f, 1.0f, 2.0f );
+    CHECK( vector.Z() == 2.0f );
+}
+
 TEST_CASE( "Vec3f_Addition" )
 {
     gm::Vec3f vectorA = gm::Vec3f( 0.0f, 2.0f, 4.0f );

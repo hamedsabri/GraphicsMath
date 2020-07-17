@@ -45,6 +45,24 @@ TEST_CASE( "Vec3i_ElementWriteAccess" )
     CHECK( vector[ 2 ] == 10 );
 }
 
+TEST_CASE( "Vec3i_NamedElementXAccessor" )
+{
+    gm::Vec3i vector = gm::Vec3i( 0, 1, 2 );
+    CHECK( vector.X() == 0 );
+}
+
+TEST_CASE( "Vec3i_NamedElementYAccessor" )
+{
+    gm::Vec3i vector = gm::Vec3i( 0, 1, 2 );
+    CHECK( vector.Y() == 1 );
+}
+
+TEST_CASE( "Vec3i_NamedElementZAccessor" )
+{
+    gm::Vec3i vector = gm::Vec3i( 0, 1, 2 );
+    CHECK( vector.Z() == 2 );
+}
+
 TEST_CASE( "Vec3i_Addition" )
 {
     gm::Vec3i vectorA = gm::Vec3i( 0, 2, 4 );

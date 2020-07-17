@@ -66,6 +66,38 @@ TEST_CASE( "{{ valueType.className }}_MatrixElementWriteAccess" )
 }
 {%- endif %}
 
+{% if valueType.shape|length == 1 and valueType.elementSize <= 4 -%}
+TEST_CASE( "{{ valueType.className }}_NamedElementXAccessor" )
+{
+    gm::{{ valueType.className }} {{ valueType.varName }} = {{- typeUtils.GenArithmeticSequence(valueType, 1) -}};
+    CHECK( {{ valueType.varName }}.X() == {{ valueType.CppValue(0) }} );
+}
+{%- endif %}
+
+{% if valueType.shape|length == 1 and valueType.elementSize >= 2 and valueType.elementSize <= 4 -%}
+TEST_CASE( "{{ valueType.className }}_NamedElementYAccessor" )
+{
+    gm::{{ valueType.className }} {{ valueType.varName }} = {{- typeUtils.GenArithmeticSequence(valueType, 1) -}};
+    CHECK( {{ valueType.varName }}.Y() == {{ valueType.CppValue(1) }} );
+}
+{%- endif %}
+
+{% if valueType.shape|length == 1 and valueType.elementSize >= 3 and valueType.elementSize <= 4 -%}
+TEST_CASE( "{{ valueType.className }}_NamedElementZAccessor" )
+{
+    gm::{{ valueType.className }} {{ valueType.varName }} = {{- typeUtils.GenArithmeticSequence(valueType, 1) -}};
+    CHECK( {{ valueType.varName }}.Z() == {{ valueType.CppValue(2) }} );
+}
+{%- endif %}
+
+{% if valueType.shape|length == 1 and valueType.elementSize == 4 %}
+TEST_CASE( "{{ valueType.className }}_NamedElementWAccessor" )
+{
+    gm::{{ valueType.className }} {{ valueType.varName }} = {{- typeUtils.GenArithmeticSequence(valueType, 1) -}};
+    CHECK( {{ valueType.varName }}.W() == {{ valueType.CppValue(3) }} );
+}
+{%- endif %}
+
 TEST_CASE( "{{ valueType.className }}_Addition" )
 {
     gm::{{ valueType.className }} {{ valueType.varName }}A = {{- typeUtils.GenArithmeticSequence(valueType, 2) -}};
