@@ -61,7 +61,7 @@ public:
     }
 
     // --------------------------------------------------------------------- //
-    /// \name Element access
+    /// \name Indexed element access
     // --------------------------------------------------------------------- //
 
     /// Indexed element write access.
@@ -91,6 +91,10 @@ public:
         GM_ASSERT( i_index < 9 );
         return m_elements[ i_index ];
     }
+
+    // --------------------------------------------------------------------- //
+    /// \name Matrix row column indexed element access
+    // --------------------------------------------------------------------- //
 
     /// Matrix element read-access.
     GM_HOST_DEVICE inline const float& operator()( size_t i_row, size_t i_column ) const

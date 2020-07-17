@@ -53,7 +53,7 @@ public:
     }
 
     // --------------------------------------------------------------------- //
-    /// \name Element access
+    /// \name Indexed element access
     // --------------------------------------------------------------------- //
 
     /// Indexed element write access.
@@ -85,15 +85,16 @@ public:
     }
 
 {% if valueType.shape|length == 2 -%}
+    // --------------------------------------------------------------------- //
+    /// \name Matrix row column indexed element access
+    // --------------------------------------------------------------------- //
+
     /// Matrix element read-access.
     GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
     {
         return m_elements[ i_row * {{ valueType.shape[ 0 ] }} + i_column ];
     }
-{%- endif %}
 
-
-{% if valueType.shape|length == 2 -%}
     /// Matrix element write-access.
     GM_HOST_DEVICE inline {{ valueType.elementType.className }}& operator()( size_t i_row, size_t i_column )
     {
@@ -102,6 +103,10 @@ public:
 {%- endif %}
 
 {% if valueType.shape|length == 1 and valueType.elementSize <= 4 -%}
+    // --------------------------------------------------------------------- //
+    /// \name Named element access.
+    // --------------------------------------------------------------------- //
+
     /// Named const accessor for the first element.
     GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& X() const
     {

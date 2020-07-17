@@ -48,7 +48,7 @@ public:
     }
 
     // --------------------------------------------------------------------- //
-    /// \name Element access
+    /// \name Indexed element access
     // --------------------------------------------------------------------- //
 
     /// Indexed element write access.
@@ -78,6 +78,10 @@ public:
         GM_ASSERT( i_index < 4 );
         return m_elements[ i_index ];
     }
+
+    // --------------------------------------------------------------------- //
+    /// \name Named element access.
+    // --------------------------------------------------------------------- //
 
     /// Named const accessor for the first element.
     GM_HOST_DEVICE inline const float& X() const
