@@ -88,6 +88,26 @@ void Bind{{ valueType.className }}( pybind11::module& o_module )
     } );
 {%- endif %}
 
+{%- for namedElement in valueType.namedElements -%}
+    // Named {{ namedElement.accessorName }} element accessor.
+    cls.def_property( "{{ namedElement.name }}",
+        pybind11::cpp_function(
+            []( {{ valueType.className }}& i_vector ) -> {{ valueType.elementType.className }}&
+            {
+               return i_vector.{{ namedElement.accessorName }}();
+            },
+            pybind11::return_value_policy::reference_internal
+        ),
+        pybind11::cpp_function(
+            []( {{ valueType.className }}& o_vector, const {{ valueType.elementType.className }}& i_{{ namedElement.name }} )
+            {
+               o_vector.{{ namedElement.accessorName }}() = i_{{ namedElement.name }};
+            }
+        ),
+        "Named property getter / setter for the element at index {{ loop.index0 }}."
+    );
+{%- endfor %}
+
     // Vector addition.
     cls.def( "__add__", []( const {{ valueType.className }}& i_lhs,
                             const {{ valueType.className }}& i_rhs ) {

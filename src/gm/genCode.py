@@ -22,7 +22,7 @@ from codeGen.types import (
     RangeType,
     ArrayType,
     CompositeType,
-    CompositeElement,
+    NamedElement,
     INT,
     FLOAT,
     BOOL,

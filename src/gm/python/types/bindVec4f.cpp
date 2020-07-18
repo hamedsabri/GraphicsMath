@@ -43,6 +43,28 @@ void BindVec4f( pybind11::module& o_module )
         o_vector[ i_index ] = i_value;
     } );
 
+    // Named X element accessor.
+    cls.def_property( "x",
+                      pybind11::cpp_function( []( Vec4f& i_vector ) -> float& { return i_vector.X(); },
+                                              pybind11::return_value_policy::reference_internal ),
+                      pybind11::cpp_function( []( Vec4f& o_vector, const float& i_x ) { o_vector.X() = i_x; } ),
+                      "Named property getter / setter for the element at index 0." ); // Named Y element accessor.
+    cls.def_property( "y",
+                      pybind11::cpp_function( []( Vec4f& i_vector ) -> float& { return i_vector.Y(); },
+                                              pybind11::return_value_policy::reference_internal ),
+                      pybind11::cpp_function( []( Vec4f& o_vector, const float& i_y ) { o_vector.Y() = i_y; } ),
+                      "Named property getter / setter for the element at index 1." ); // Named Z element accessor.
+    cls.def_property( "z",
+                      pybind11::cpp_function( []( Vec4f& i_vector ) -> float& { return i_vector.Z(); },
+                                              pybind11::return_value_policy::reference_internal ),
+                      pybind11::cpp_function( []( Vec4f& o_vector, const float& i_z ) { o_vector.Z() = i_z; } ),
+                      "Named property getter / setter for the element at index 2." ); // Named W element accessor.
+    cls.def_property( "w",
+                      pybind11::cpp_function( []( Vec4f& i_vector ) -> float& { return i_vector.W(); },
+                                              pybind11::return_value_policy::reference_internal ),
+                      pybind11::cpp_function( []( Vec4f& o_vector, const float& i_w ) { o_vector.W() = i_w; } ),
+                      "Named property getter / setter for the element at index 3." );
+
     // Vector addition.
     cls.def( "__add__", []( const Vec4f& i_lhs, const Vec4f& i_rhs ) { return i_lhs + i_rhs; } );
 

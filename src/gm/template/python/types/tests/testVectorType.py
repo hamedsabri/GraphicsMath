@@ -54,3 +54,14 @@ class Test{{ valueType.className }}(unittest.TestCase):
 
         self.assertEqual( {{ valueType.varName }}, {{- typeUtils.GenArithmeticSequence(valueType, 1) -}})
 {%- endif %}
+
+{% for namedElement in valueType.namedElements %}
+    def testNamedElementReadAccess{{ namedElement.accessorName }}(self):
+        {{ valueType.varName }} = {{- typeUtils.GenArithmeticSequence(valueType, 1) }}
+        self.assertEqual({{ valueType.varName }}.{{ namedElement.name }}, {{ loop.index0 }})
+
+    def testNamedElementWriteAccess{{ namedElement.accessorName }}(self):
+        {{ valueType.varName }} = gm.{{ valueType.className }}()
+        {{ valueType.varName }}.{{ namedElement.name }} = {{ loop.index0 }}
+        self.assertEqual({{ valueType.varName }}[{{ loop.index0 }}], {{ loop.index0 }})
+{% endfor %}

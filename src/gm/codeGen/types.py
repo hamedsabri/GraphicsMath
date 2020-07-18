@@ -26,6 +26,30 @@ Namespace of this library.
 NAMESPACE = "gm::"
 
 
+class NamedElement:
+    """
+    NamedElement is a uniquely named child of a parent type.
+
+    This is used by:
+    - VectorType(s) to provide convenience named accessors to the index elements.
+    - CompositeType(s) to address each of its child element members.
+
+    Args:
+        name (str): is used to uniquely address this element from the parent type.
+        type (object): the data type.
+        defaultValue (str): string, encoding C++ code that will be assigned to element member variable.
+    """
+
+    def __init__(self, name, type, defaultValue=None):
+        self.name = name
+        self.type = type
+        self.defaultValue = defaultValue
+
+    @property
+    def accessorName(self):
+        return UpperCamelCase(self.name)
+
+
 class ValueType:
     """
     Abstract base class for all value types in the GraphicsMath library.
@@ -367,6 +391,24 @@ class VectorType(ElementContainerType):
         """
         return True
 
+    @property
+    def namedElements(self):
+        """
+        Returns:
+            list: List of named elements, providing convenience access to elements in this vector type.
+        """
+        # Matrices do not have named elements.
+        if self.shape == 2:
+            return []
+
+        # Only available for vector types with 4 or less elements.
+        if self.elementSize > 4:
+            return []
+
+        elementNames = ["x", "y", "z", "w"]
+        return [NamedElement(elementNames[elementIndex], self.elementType)
+                for elementIndex in range(self.elementSize)]
+
 
 class RangeType(ElementContainerType):
     """
@@ -504,26 +546,6 @@ class ArrayType(ElementContainerType):
         return True
 
 
-class CompositeElement:
-    """
-    CompositeElement is a uniquely named child of a CompositeType.
-
-    Args:
-        name (str): is used to uniquely address this element from the parent Composite type.
-        type (object): the data type.
-        defaultValue (str): string, encoding C++ code that will be assigned to element member variable.
-    """
-
-    def __init__(self, name, type, defaultValue=None):
-        self.name = name
-        self.type = type
-        self.defaultValue = defaultValue
-
-    @property
-    def accessorName(self):
-        return UpperCamelCase(self.name)
-
-
 class CompositeType(ValueType):
     """
     Code generation for an C++ composite data type.
@@ -532,7 +554,7 @@ class CompositeType(ValueType):
 
     Args:
         name (str): name of the composite type.
-        elements (list): list of CompositeElement(s).
+        elements (list): list of NamedElement(s).
         extraIncludes (list): list of extras includes to encode near the top of the source file.
 
     Class members:

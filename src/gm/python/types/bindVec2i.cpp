@@ -43,6 +43,18 @@ void BindVec2i( pybind11::module& o_module )
         o_vector[ i_index ] = i_value;
     } );
 
+    // Named X element accessor.
+    cls.def_property( "x",
+                      pybind11::cpp_function( []( Vec2i& i_vector ) -> int& { return i_vector.X(); },
+                                              pybind11::return_value_policy::reference_internal ),
+                      pybind11::cpp_function( []( Vec2i& o_vector, const int& i_x ) { o_vector.X() = i_x; } ),
+                      "Named property getter / setter for the element at index 0." ); // Named Y element accessor.
+    cls.def_property( "y",
+                      pybind11::cpp_function( []( Vec2i& i_vector ) -> int& { return i_vector.Y(); },
+                                              pybind11::return_value_policy::reference_internal ),
+                      pybind11::cpp_function( []( Vec2i& o_vector, const int& i_y ) { o_vector.Y() = i_y; } ),
+                      "Named property getter / setter for the element at index 1." );
+
     // Vector addition.
     cls.def( "__add__", []( const Vec2i& i_lhs, const Vec2i& i_rhs ) { return i_lhs + i_rhs; } );
 
