@@ -8,7 +8,28 @@ import gm
 
 class TestMat4f(unittest.TestCase):
     def testDefaultInitialization(self):
-        gm.Mat4f()
+        matrix = gm.Mat4f()
+        self.assertEqual(
+            matrix,
+            gm.Mat4f(
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+            ),
+        )
 
     def testElementInitialization(self):
         gm.Mat4f(
@@ -100,3 +121,88 @@ class TestMat4f(unittest.TestCase):
         self.assertAlmostEqual(matrix[13], 26.0)
         self.assertAlmostEqual(matrix[14], 28.0)
         self.assertAlmostEqual(matrix[15], 30.0)
+
+    def testMatrixElementReadAccess(self):
+        matrix = gm.Mat4f(
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0,
+            6.0,
+            7.0,
+            8.0,
+            9.0,
+            10.0,
+            11.0,
+            12.0,
+            13.0,
+            14.0,
+            15.0,
+        )
+
+        self.assertEqual(matrix[0, 0], 0.0)
+        self.assertEqual(matrix[0, 1], 1.0)
+        self.assertEqual(matrix[0, 2], 2.0)
+        self.assertEqual(matrix[0, 3], 3.0)
+
+        self.assertEqual(matrix[1, 0], 4.0)
+        self.assertEqual(matrix[1, 1], 5.0)
+        self.assertEqual(matrix[1, 2], 6.0)
+        self.assertEqual(matrix[1, 3], 7.0)
+
+        self.assertEqual(matrix[2, 0], 8.0)
+        self.assertEqual(matrix[2, 1], 9.0)
+        self.assertEqual(matrix[2, 2], 10.0)
+        self.assertEqual(matrix[2, 3], 11.0)
+
+        self.assertEqual(matrix[3, 0], 12.0)
+        self.assertEqual(matrix[3, 1], 13.0)
+        self.assertEqual(matrix[3, 2], 14.0)
+        self.assertEqual(matrix[3, 3], 15.0)
+
+    def testMatrixElementWriteAccess(self):
+        matrix = gm.Mat4f()
+
+        matrix[0, 0] = 0.0
+        matrix[0, 1] = 1.0
+        matrix[0, 2] = 2.0
+        matrix[0, 3] = 3.0
+
+        matrix[1, 0] = 4.0
+        matrix[1, 1] = 5.0
+        matrix[1, 2] = 6.0
+        matrix[1, 3] = 7.0
+
+        matrix[2, 0] = 8.0
+        matrix[2, 1] = 9.0
+        matrix[2, 2] = 10.0
+        matrix[2, 3] = 11.0
+
+        matrix[3, 0] = 12.0
+        matrix[3, 1] = 13.0
+        matrix[3, 2] = 14.0
+        matrix[3, 3] = 15.0
+
+        self.assertEqual(
+            matrix,
+            gm.Mat4f(
+                0.0,
+                1.0,
+                2.0,
+                3.0,
+                4.0,
+                5.0,
+                6.0,
+                7.0,
+                8.0,
+                9.0,
+                10.0,
+                11.0,
+                12.0,
+                13.0,
+                14.0,
+                15.0,
+            ),
+        )

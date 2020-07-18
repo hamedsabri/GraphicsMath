@@ -8,7 +8,8 @@ import gm
 
 class TestVec4i(unittest.TestCase):
     def testDefaultInitialization(self):
-        gm.Vec4i()
+        vector = gm.Vec4i()
+        self.assertEqual(vector, gm.Vec4i(0, 0, 0, 0))
 
     def testElementInitialization(self):
         gm.Vec4i(0, 2, 4, 6)
