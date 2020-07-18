@@ -1,13 +1,22 @@
 {#
-    Utility macro to generate a scalar or vector with uniform element values
+    C++ utility macro to generate a scalar or vector value
+    type instance with uniform element values.
 #}
-{% macro GenUniformSequence(valueType, value) %}
+{% macro GenUniformSequence(valueType, value, valueFn=None) %}
 {%- if valueType.isScalar -%}
+{%- if valueFn -%}
+    {{ valueType.CppValue(valueFn(value)) }}
+{%- else -%}
     {{ valueType.CppValue( value ) }}
+{%- endif -%}
 {%- elif valueType.isVector -%}
     gm::{{ valueType.className }}(
 {%- for index in range(valueType.elementSize) -%}
-    {{ valueType.CppValue( value ) }}
+{%- if valueFn -%}
+    {{ valueType.CppValue(valueFn(value)) }}
+{%- else -%}
+    {{ valueType.CppValue(value) }}
+{%- endif -%}
 {%- if index + 1 < valueType.elementSize -%}
         ,
 {%- endif -%}
@@ -17,21 +26,18 @@
 {% endmacro %}
 
 {#
-    Utility macro to generate a scalar or vector with increasing element values which are the function
-    of its element index multiplied by a factor.
+    C++ utility macro to generate a scalar or vector value
+    type instance with element values representing an arithmetic
+    sequence.
 #}
 {% macro GenArithmeticSequence(valueType, value, valueFn=None) %}
 {%- if valueType.isScalar -%}
-{%- if valueFn -%}
-    {{ valueType.CppValue( valueFn(value) ) }}
-{%- else -%}
-    {{ valueType.CppValue( value ) }}
-{%- endif -%}
+{{- GenUniformSequence(valueType, value, valueFn=valueFn) -}}
 {%- elif valueType.isVector -%}
     gm::{{ valueType.className }}(
 {%- for index in range(valueType.elementSize) -%}
 {%- if valueFn -%}
-    {{ valueType.CppValue( valueFn(value * index) ) }}
+    {{ valueType.CppValue(valueFn(value * index)) }}
 {%- else -%}
     {{ valueType.CppValue( value * index ) }}
 {%- endif -%}
