@@ -83,56 +83,69 @@ public:
     /// \name Named element access.
     // --------------------------------------------------------------------- //
 
-    /// Named const accessor for the first element.
+    /// Convenience named const accessor for the element at index 0.
+    ///
+    /// \return Const reference to the element at index 0.
     GM_HOST_DEVICE inline const float& X() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
     }
 
-    /// Named mutable accessor for the first element.
+    /// Convenience named mutable accessor for the element at index
+    ///
+    /// \return Mutable reference to the element at index 0.
     GM_HOST_DEVICE inline float& X()
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
     }
-
-    /// Named const accessor for the second element.
+    /// Convenience named const accessor for the element at index 1.
+    ///
+    /// \return Const reference to the element at index 1.
     GM_HOST_DEVICE inline const float& Y() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 1 ];
     }
 
-    /// Named mutable accessor for the second element.
+    /// Convenience named mutable accessor for the element at index
+    ///
+    /// \return Mutable reference to the element at index 1.
     GM_HOST_DEVICE inline float& Y()
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 1 ];
     }
-
-    /// Named const accessor for the third element.
+    /// Convenience named const accessor for the element at index 2.
+    ///
+    /// \return Const reference to the element at index 2.
     GM_HOST_DEVICE inline const float& Z() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 2 ];
     }
 
-    /// Named mutable accessor for the third element.
+    /// Convenience named mutable accessor for the element at index
+    ///
+    /// \return Mutable reference to the element at index 2.
     GM_HOST_DEVICE inline float& Z()
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 2 ];
     }
-
-    /// Named const accessor for the fourth element.
+    /// Convenience named const accessor for the element at index 3.
+    ///
+    /// \return Const reference to the element at index 3.
     GM_HOST_DEVICE inline const float& W() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 3 ];
     }
 
-    /// Named const accessor for the fourth element.
+    /// Convenience named mutable accessor for the element at index
+    ///
+    /// \return Mutable reference to the element at index 3.
     GM_HOST_DEVICE inline float& W()
     {
         GM_ASSERT( !HasNans() );

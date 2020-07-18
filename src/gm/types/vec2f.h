@@ -80,28 +80,35 @@ public:
     /// \name Named element access.
     // --------------------------------------------------------------------- //
 
-    /// Named const accessor for the first element.
+    /// Convenience named const accessor for the element at index 0.
+    ///
+    /// \return Const reference to the element at index 0.
     GM_HOST_DEVICE inline const float& X() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
     }
 
-    /// Named mutable accessor for the first element.
+    /// Convenience named mutable accessor for the element at index
+    ///
+    /// \return Mutable reference to the element at index 0.
     GM_HOST_DEVICE inline float& X()
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 0 ];
     }
-
-    /// Named const accessor for the second element.
+    /// Convenience named const accessor for the element at index 1.
+    ///
+    /// \return Const reference to the element at index 1.
     GM_HOST_DEVICE inline const float& Y() const
     {
         GM_ASSERT( !HasNans() );
         return m_elements[ 1 ];
     }
 
-    /// Named mutable accessor for the second element.
+    /// Convenience named mutable accessor for the element at index
+    ///
+    /// \return Mutable reference to the element at index 1.
     GM_HOST_DEVICE inline float& Y()
     {
         GM_ASSERT( !HasNans() );

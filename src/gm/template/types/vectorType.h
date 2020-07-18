@@ -128,69 +128,27 @@ public:
     // --------------------------------------------------------------------- //
     /// \name Named element access.
     // --------------------------------------------------------------------- //
-
-    /// Named const accessor for the first element.
-    GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& X() const
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 0 ];
-    }
-
-    /// Named mutable accessor for the first element.
-    GM_HOST_DEVICE inline {{ valueType.elementType.className }}& X()
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 0 ];
-    }
 {%- endif %}
 
-{% if valueType.shape|length == 1 and valueType.elementSize >= 2 and valueType.elementSize <= 4 -%}
-    /// Named const accessor for the second element.
-    GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& Y() const
+{% for namedElement in valueType.namedElements %}
+    /// Convenience named const accessor for the element at index {{ loop.index0 }}.
+    ///
+    /// \return Const reference to the element at index {{ loop.index0 }}.
+    GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& {{ namedElement.accessorName }}() const
     {
         GM_ASSERT( !HasNans() );
-        return m_elements[ 1 ];
+        return m_elements[ {{ loop.index0 }} ];
     }
 
-    /// Named mutable accessor for the second element.
-    GM_HOST_DEVICE inline {{ valueType.elementType.className }}& Y()
+    /// Convenience named mutable accessor for the element at index
+    ///
+    /// \return Mutable reference to the element at index {{ loop.index0 }}.
+    GM_HOST_DEVICE inline {{ valueType.elementType.className }}& {{ namedElement.accessorName }}()
     {
         GM_ASSERT( !HasNans() );
-        return m_elements[ 1 ];
+        return m_elements[ {{ loop.index0 }} ];
     }
-{%- endif %}
-
-{% if valueType.shape|length == 1 and valueType.elementSize >= 3 and valueType.elementSize <= 4 -%}
-    /// Named const accessor for the third element.
-    GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& Z() const
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 2 ];
-    }
-
-    /// Named mutable accessor for the third element.
-    GM_HOST_DEVICE inline {{ valueType.elementType.className }}& Z()
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 2 ];
-    }
-{%- endif %}
-
-{% if valueType.shape|length == 1 and valueType.elementSize == 4 %}
-    /// Named const accessor for the fourth element.
-    GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& W() const
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 3 ];
-    }
-
-    /// Named const accessor for the fourth element.
-    GM_HOST_DEVICE inline {{ valueType.elementType.className }}& W()
-    {
-        GM_ASSERT( !HasNans() );
-        return m_elements[ 3 ];
-    }
-{%- endif %}
+{%- endfor %}
 
     // --------------------------------------------------------------------- //
     /// \name Arithmetic operators
