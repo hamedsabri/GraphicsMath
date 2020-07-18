@@ -45,22 +45,41 @@ TEST_CASE( "Vec3f_ElementWriteAccess" )
     CHECK( vector[ 2 ] == 10.0f );
 }
 
-TEST_CASE( "Vec3f_NamedElementXAccessor" )
+TEST_CASE( "Vec3f_NamedElementReadAccessorX" )
 {
     gm::Vec3f vector = gm::Vec3f( 0.0f, 1.0f, 2.0f );
     CHECK( vector.X() == 0.0f );
 }
 
-TEST_CASE( "Vec3f_NamedElementYAccessor" )
+TEST_CASE( "Vec3f_NamedElementWriteAccessorX" )
+{
+    gm::Vec3f vector;
+    vector.X() = 0.0f;
+    CHECK( vector[ 0 ] == 0.0f );
+}
+TEST_CASE( "Vec3f_NamedElementReadAccessorY" )
 {
     gm::Vec3f vector = gm::Vec3f( 0.0f, 1.0f, 2.0f );
     CHECK( vector.Y() == 1.0f );
 }
 
-TEST_CASE( "Vec3f_NamedElementZAccessor" )
+TEST_CASE( "Vec3f_NamedElementWriteAccessorY" )
+{
+    gm::Vec3f vector;
+    vector.Y() = 1.0f;
+    CHECK( vector[ 1 ] == 1.0f );
+}
+TEST_CASE( "Vec3f_NamedElementReadAccessorZ" )
 {
     gm::Vec3f vector = gm::Vec3f( 0.0f, 1.0f, 2.0f );
     CHECK( vector.Z() == 2.0f );
+}
+
+TEST_CASE( "Vec3f_NamedElementWriteAccessorZ" )
+{
+    gm::Vec3f vector;
+    vector.Z() = 2.0f;
+    CHECK( vector[ 2 ] == 2.0f );
 }
 
 TEST_CASE( "Vec3f_Addition" )

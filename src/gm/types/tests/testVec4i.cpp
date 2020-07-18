@@ -48,28 +48,53 @@ TEST_CASE( "Vec4i_ElementWriteAccess" )
     CHECK( vector[ 3 ] == 15 );
 }
 
-TEST_CASE( "Vec4i_NamedElementXAccessor" )
+TEST_CASE( "Vec4i_NamedElementReadAccessorX" )
 {
     gm::Vec4i vector = gm::Vec4i( 0, 1, 2, 3 );
     CHECK( vector.X() == 0 );
 }
 
-TEST_CASE( "Vec4i_NamedElementYAccessor" )
+TEST_CASE( "Vec4i_NamedElementWriteAccessorX" )
+{
+    gm::Vec4i vector;
+    vector.X() = 0;
+    CHECK( vector[ 0 ] == 0 );
+}
+TEST_CASE( "Vec4i_NamedElementReadAccessorY" )
 {
     gm::Vec4i vector = gm::Vec4i( 0, 1, 2, 3 );
     CHECK( vector.Y() == 1 );
 }
 
-TEST_CASE( "Vec4i_NamedElementZAccessor" )
+TEST_CASE( "Vec4i_NamedElementWriteAccessorY" )
+{
+    gm::Vec4i vector;
+    vector.Y() = 1;
+    CHECK( vector[ 1 ] == 1 );
+}
+TEST_CASE( "Vec4i_NamedElementReadAccessorZ" )
 {
     gm::Vec4i vector = gm::Vec4i( 0, 1, 2, 3 );
     CHECK( vector.Z() == 2 );
 }
 
-TEST_CASE( "Vec4i_NamedElementWAccessor" )
+TEST_CASE( "Vec4i_NamedElementWriteAccessorZ" )
+{
+    gm::Vec4i vector;
+    vector.Z() = 2;
+    CHECK( vector[ 2 ] == 2 );
+}
+TEST_CASE( "Vec4i_NamedElementReadAccessorW" )
 {
     gm::Vec4i vector = gm::Vec4i( 0, 1, 2, 3 );
     CHECK( vector.W() == 3 );
+}
+
+TEST_CASE( "Vec4i_NamedElementWriteAccessorW" )
+{
+    gm::Vec4i vector;
+    vector.W() = 3;
+    CHECK( vector[ 3 ] == 3 );
 }
 
 TEST_CASE( "Vec4i_Addition" )

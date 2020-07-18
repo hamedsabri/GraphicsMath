@@ -42,16 +42,29 @@ TEST_CASE( "Vec2f_ElementWriteAccess" )
     CHECK( vector[ 1 ] == 5.0f );
 }
 
-TEST_CASE( "Vec2f_NamedElementXAccessor" )
+TEST_CASE( "Vec2f_NamedElementReadAccessorX" )
 {
     gm::Vec2f vector = gm::Vec2f( 0.0f, 1.0f );
     CHECK( vector.X() == 0.0f );
 }
 
-TEST_CASE( "Vec2f_NamedElementYAccessor" )
+TEST_CASE( "Vec2f_NamedElementWriteAccessorX" )
+{
+    gm::Vec2f vector;
+    vector.X() = 0.0f;
+    CHECK( vector[ 0 ] == 0.0f );
+}
+TEST_CASE( "Vec2f_NamedElementReadAccessorY" )
 {
     gm::Vec2f vector = gm::Vec2f( 0.0f, 1.0f );
     CHECK( vector.Y() == 1.0f );
+}
+
+TEST_CASE( "Vec2f_NamedElementWriteAccessorY" )
+{
+    gm::Vec2f vector;
+    vector.Y() = 1.0f;
+    CHECK( vector[ 1 ] == 1.0f );
 }
 
 TEST_CASE( "Vec2f_Addition" )

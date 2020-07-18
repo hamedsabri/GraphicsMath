@@ -42,16 +42,29 @@ TEST_CASE( "Vec2i_ElementWriteAccess" )
     CHECK( vector[ 1 ] == 5 );
 }
 
-TEST_CASE( "Vec2i_NamedElementXAccessor" )
+TEST_CASE( "Vec2i_NamedElementReadAccessorX" )
 {
     gm::Vec2i vector = gm::Vec2i( 0, 1 );
     CHECK( vector.X() == 0 );
 }
 
-TEST_CASE( "Vec2i_NamedElementYAccessor" )
+TEST_CASE( "Vec2i_NamedElementWriteAccessorX" )
+{
+    gm::Vec2i vector;
+    vector.X() = 0;
+    CHECK( vector[ 0 ] == 0 );
+}
+TEST_CASE( "Vec2i_NamedElementReadAccessorY" )
 {
     gm::Vec2i vector = gm::Vec2i( 0, 1 );
     CHECK( vector.Y() == 1 );
+}
+
+TEST_CASE( "Vec2i_NamedElementWriteAccessorY" )
+{
+    gm::Vec2i vector;
+    vector.Y() = 1;
+    CHECK( vector[ 1 ] == 1 );
 }
 
 TEST_CASE( "Vec2i_Addition" )
