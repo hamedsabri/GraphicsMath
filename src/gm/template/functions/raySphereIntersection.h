@@ -53,9 +53,7 @@
 #include <gm/base/assert.h>
 #include <gm/functions/dotProduct.h>
 #include <gm/functions/quadraticRoots.h>
-#ifdef GM_DEBUG
 #include <gm/functions/length.h>
-#endif
 {% endblock %}
 
 {% block body %}
@@ -98,7 +96,8 @@
 /// \retval 2 the ray intersects through the volume of the sphere.
 {{- functionUtils.signature(function, interface) -}}
 {
-    GM_ASSERT_MSG( Length( {{ rayDirection }} ) == {{ rayDirectionType.CppValue( 1 ) }},
+    GM_ASSERT_MSG( AlmostEqual( Length( {{ rayDirection }} ),
+                                {{ rayDirectionType.CppValue( 1 ) }} ),
                    "Direction {{ rayDirection }} is not normalised!" );
 
     // Compute quadratic co-efficients
@@ -133,14 +132,20 @@
         // Root negative check, as to not intersect with objects behind the ray direction.
         if ( {{ intersections }}.Min() < 0 )
         {
-            {{ intersections }}.Min() = {{ intersections }}.Max();
-            if ( {{ intersections }}.Min() < 0 )
+            if ( {{ intersections }}.Max() < 0 )
             {
                 // Both roots are negative, count it as no intersection.
                 return 0;
             }
+            else if ( Length( {{ rayOrigin }} - {{ sphereOrigin }} ) < {{ sphereRadius }} )
+            {
+                // The ray origin is INSIDE the sphere.
+                {{ intersections }}.Min() = 0.0f;
+                return 2;
+            }
             else
             {
+                {{ intersections }}.Min() = {{ intersections }}.Max();
                 return 1;
             }
         }
