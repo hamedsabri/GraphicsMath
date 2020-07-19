@@ -102,3 +102,47 @@ TEST_CASE( "LinearInterpolation_Vec4f" )
 
     CHECK( result == gm::Vec4f( 0.0f, 2.5f, 5.0f, 7.5f ) );
 }
+
+TEST_CASE( "LinearInterpolation_Vec2fRange" )
+{
+    gm::Vec2fRange source = gm::Vec2fRange( gm::Vec2f( 0.0f, 0.0f ), gm::Vec2f( 2.0f, 2.0f ) );
+    gm::Vec2fRange target = gm::Vec2fRange( gm::Vec2f( 5.0f, 5.0f ), gm::Vec2f( 7.0f, 7.0f ) );
+    gm::Vec2fRange result = gm::LinearInterpolation( source,
+                                                     target,
+                                                     /* weight */ 0.5 );
+
+    CHECK( result == gm::Vec2fRange( gm::Vec2f( 2.5f, 2.5f ), gm::Vec2f( 4.5f, 4.5f ) ) );
+}
+
+TEST_CASE( "LinearInterpolation_Vec3fRange" )
+{
+    gm::Vec3fRange source = gm::Vec3fRange( gm::Vec3f( 0.0f, 0.0f, 0.0f ), gm::Vec3f( 2.0f, 2.0f, 2.0f ) );
+    gm::Vec3fRange target = gm::Vec3fRange( gm::Vec3f( 5.0f, 5.0f, 5.0f ), gm::Vec3f( 7.0f, 7.0f, 7.0f ) );
+    gm::Vec3fRange result = gm::LinearInterpolation( source,
+                                                     target,
+                                                     /* weight */ 0.5 );
+
+    CHECK( result == gm::Vec3fRange( gm::Vec3f( 2.5f, 2.5f, 2.5f ), gm::Vec3f( 4.5f, 4.5f, 4.5f ) ) );
+}
+
+TEST_CASE( "LinearInterpolation_Vec4fRange" )
+{
+    gm::Vec4fRange source = gm::Vec4fRange( gm::Vec4f( 0.0f, 0.0f, 0.0f, 0.0f ), gm::Vec4f( 2.0f, 2.0f, 2.0f, 2.0f ) );
+    gm::Vec4fRange target = gm::Vec4fRange( gm::Vec4f( 5.0f, 5.0f, 5.0f, 5.0f ), gm::Vec4f( 7.0f, 7.0f, 7.0f, 7.0f ) );
+    gm::Vec4fRange result = gm::LinearInterpolation( source,
+                                                     target,
+                                                     /* weight */ 0.5 );
+
+    CHECK( result == gm::Vec4fRange( gm::Vec4f( 2.5f, 2.5f, 2.5f, 2.5f ), gm::Vec4f( 4.5f, 4.5f, 4.5f, 4.5f ) ) );
+}
+
+TEST_CASE( "LinearInterpolation_FloatRange" )
+{
+    gm::FloatRange source = gm::FloatRange( 0.0f, 2.0f );
+    gm::FloatRange target = gm::FloatRange( 5.0f, 7.0f );
+    gm::FloatRange result = gm::LinearInterpolation( source,
+                                                     target,
+                                                     /* weight */ 0.5 );
+
+    CHECK( result == gm::FloatRange( 2.5f, 4.5f ) );
+}

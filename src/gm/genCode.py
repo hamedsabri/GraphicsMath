@@ -98,6 +98,10 @@ RANGE_TYPES = [RangeType(scalarType) for scalarType in NUMERIC_SCALAR_TYPES] + [
     RangeType(vectorType) for vectorType in VECTOR_TYPES if len(vectorType.shape) == 1
 ]
 
+RANGE_TYPES_FLOAT = [
+    RangeType(valueType) for valueType in (SINGLE_INDEX_VECTOR_TYPES_FLOAT + [ScalarType(FLOAT)])
+]
+
 
 """
 ARRAY_TYPES is the fixed, global set of array-based value types to generate code for.
@@ -391,20 +395,22 @@ def GenerateFunctions():
     # Interpolation operators.
     linearInterpolationOps = []
     for valueType in (
-        [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT
+        [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT + RANGE_TYPES_FLOAT
     ):
         arguments = [
             FunctionArg("source", valueType, Mutability.Const),
             FunctionArg("target", valueType, Mutability.Const),
         ]
-        if valueType.isScalar:
-            arguments.append(FunctionArg("weight", valueType, Mutability.Const))
-        else:
-            assert valueType.isVector
-            arguments.append(
-                FunctionArg("weight", valueType.elementType, Mutability.Const)
-            )
 
+        if valueType.isScalar:
+            weightType = valueType
+        else:
+            if valueType.elementType.isScalar:
+                weightType = valueType.elementType
+            else:
+                weightType = valueType.elementType.elementType
+
+        arguments.append(FunctionArg("weight", weightType, Mutability.Const))
         linearInterpolationOps.append(
             FunctionInterface(arguments=arguments, returnType=valueType,)
         )

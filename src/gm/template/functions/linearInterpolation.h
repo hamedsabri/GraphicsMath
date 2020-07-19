@@ -19,9 +19,10 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-{% set source = interface.ArgName("source") %}
-{% set target = interface.ArgName("target") %}
-{% set weight = interface.ArgName("weight") %}
+{% set valueType = interface.ArgType("source") %}
+{% set source    = interface.ArgName("source") %}
+{% set target    = interface.ArgName("target") %}
+{% set weight    = interface.ArgName("weight") %}
 /// Linearly interpolate between \p {{ source }} and \p {{ target }}, with weight \p {{ weight }}.
 /// \ingroup gm_functions_{{ function.category }}
 ///
@@ -37,7 +38,14 @@
     GM_ASSERT_MSG( {{ weight }} >= 0.0f && {{ weight }} <= 1.0f,
                    "Expected {{ weight }} between [0,1], got %f\n",
                    {{ weight }} );
+{% if valueType.isScalar or valueType.isVector -%}
     return ( ( 1.0f - {{ weight }} ) * {{ source }} ) + ( {{ weight }} * {{ target }} );
+{%- elif valueType.isRange -%}
+    return {{ valueType.className }}(
+        ( ( 1.0f - {{ weight }} ) * {{ source }}.Min() ) + ( {{ weight }} * {{ target }}.Min() ),
+        ( ( 1.0f - {{ weight }} ) * {{ source }}.Max() ) + ( {{ weight }} * {{ target }}.Max() )
+    );
+{%- endif %}
 }
 {% endfor %}
 {% endblock %}

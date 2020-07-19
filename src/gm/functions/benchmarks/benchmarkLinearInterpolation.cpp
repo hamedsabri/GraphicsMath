@@ -72,3 +72,47 @@ TEST_CASE( "LinearInterpolation_Vec4f_Vec4f_float" )
         return gm::LinearInterpolation( source, target, weight );
     };
 }
+
+TEST_CASE( "LinearInterpolation_Vec2fRange_Vec2fRange_float" )
+{
+    gm::Vec2fRange source;
+    gm::Vec2fRange target;
+    float          weight;
+    BENCHMARK( "LinearInterpolation" )
+    {
+        return gm::LinearInterpolation( source, target, weight );
+    };
+}
+
+TEST_CASE( "LinearInterpolation_Vec3fRange_Vec3fRange_float" )
+{
+    gm::Vec3fRange source;
+    gm::Vec3fRange target;
+    float          weight;
+    BENCHMARK( "LinearInterpolation" )
+    {
+        return gm::LinearInterpolation( source, target, weight );
+    };
+}
+
+TEST_CASE( "LinearInterpolation_Vec4fRange_Vec4fRange_float" )
+{
+    gm::Vec4fRange source;
+    gm::Vec4fRange target;
+    float          weight;
+    BENCHMARK( "LinearInterpolation" )
+    {
+        return gm::LinearInterpolation( source, target, weight );
+    };
+}
+
+TEST_CASE( "LinearInterpolation_FloatRange_FloatRange_float" )
+{
+    gm::FloatRange source;
+    gm::FloatRange target;
+    float          weight;
+    BENCHMARK( "LinearInterpolation" )
+    {
+        return gm::LinearInterpolation( source, target, weight );
+    };
+}
