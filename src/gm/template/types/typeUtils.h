@@ -82,3 +82,12 @@
     )
 {% endmacro %}
 
+{#
+    Utility macro to generate a range value with arithmetically increasing elements.
+#}
+{% macro GenArithmeticRange(rangeType, minValue, maxValue) %}
+    gm::{{ rangeType.className }}(
+        {{- GenArithmeticSequence(rangeType.elementType, minValue) -}},
+        {{- GenArithmeticSequence(rangeType.elementType, maxValue) -}}
+    )
+{% endmacro %}

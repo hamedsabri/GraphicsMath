@@ -98,6 +98,10 @@ RANGE_TYPES = [RangeType(scalarType) for scalarType in NUMERIC_SCALAR_TYPES] + [
     RangeType(vectorType) for vectorType in VECTOR_TYPES if len(vectorType.shape) == 1
 ]
 
+RANGE_TYPES_VECTOR = [
+    RangeType(valueType) for valueType in (SINGLE_INDEX_VECTOR_TYPES_FLOAT + SINGLE_INDEX_VECTOR_TYPES_INT)
+]
+
 RANGE_TYPES_FLOAT = [
     RangeType(valueType) for valueType in (SINGLE_INDEX_VECTOR_TYPES_FLOAT + [ScalarType(FLOAT)])
 ]
@@ -615,6 +619,16 @@ def GenerateFunctions():
             )
         )
 
+    # Longest axis
+    longestAxisOps = []
+    for valueType in RANGE_TYPES_VECTOR:
+        longestAxisOps.append(
+            FunctionInterface(
+                arguments=[FunctionArg("range", valueType, Mutability.Const),],
+                returnType=ScalarType(INT),
+            )
+        )
+
     functionGroups = [
         # Basic.
         FunctionGroup(["floor", "ceil", "abs",], unaryOps, FunctionCategory.BASIC),
@@ -635,6 +649,7 @@ def GenerateFunctions():
         FunctionGroup(["clamp",], clampOps, FunctionCategory.BASIC),
         FunctionGroup(["intersection", "expand"], rangeOps, FunctionCategory.BASIC),
         FunctionGroup(["contains"], containerOps, FunctionCategory.BASIC),
+        FunctionGroup(["longestAxis"], longestAxisOps, FunctionCategory.BASIC),
 
         # Linear algebra.
         FunctionGroup(["isIdentity"], checkMatrixOps, FunctionCategory.LINEAR_ALGEBRA),
