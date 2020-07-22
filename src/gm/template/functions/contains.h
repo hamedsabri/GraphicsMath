@@ -2,7 +2,7 @@
 {% import "functions/functionUtils.h" as functionUtils %}
 
 {%- block fileDoc -%}
-/// Check if a containee resides within a container.
+/// Check if a container, such as a range or array, contains a specified element or range of elements.
 {%- endblock %}
 
 {% block includes %}
@@ -18,9 +18,9 @@
 {% set container = interface.ArgName("container") %}
 {% set containee = interface.ArgName("containee") %}
 {% set containeeType = interface.ArgType("containee") %}
-/// Check if \p {{ containee }} is contained within the {{ category }} {{ container }}.
+/// Check if the {{ category }} \p {{ container }} completely contains \p {{ containee }}.
 ///
-/// \param {{ container }} The {{ category }}.
+/// \param {{ container }} The {{ category }} container.
 /// \param {{ containee }} The {{ containee }}.
 ///
 /// \retval true If \p {{ containee }} is completely contained within {{ container }}.

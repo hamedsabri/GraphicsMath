@@ -3,7 +3,8 @@
 
 {%- block fileDoc -%}
 /// Find the minimum of two input values.
-/// If the value type is a vector, the minimum will be computed per-element.
+///
+/// If the value type is a vector, the operation will be performed on the corresponding elements.
 {%- endblock %}
 
 {% block includes %}
