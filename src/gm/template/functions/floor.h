@@ -2,8 +2,9 @@
 {% import "functions/functionUtils.h" as functionUtils %}
 
 {%- block fileDoc -%}
-/// Floor the input value, by rounding downwards, returning the largest integral number less than the input.
-/// If the value type is a vector, the floor will be performed element-wise.
+/// Round the input downwards to the nearest integral value less than the input.
+///
+/// If the value type is a vector, the operation will be performed on each element.
 {%- endblock %}
 
 {% block includes %}

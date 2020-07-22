@@ -2,8 +2,9 @@
 {% import "functions/functionUtils.h" as functionUtils %}
 
 {%- block fileDoc -%}
-/// Ceil the input value, by rounding upwards to the nearest integral value.
-/// If the value type is a vector, the ceil will be performed element-wise.
+/// Round the input upwards to the nearest integral value greater than the input.
+///
+/// If the value type is a vector, the operation will be performed on each element.
 {%- endblock %}
 
 {% block includes %}
