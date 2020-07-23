@@ -370,6 +370,22 @@ def GenerateFunctions():
             )
         )
 
+    # Set rotation transform operations.
+    setRotateTransformOps = []
+    for matrixType in [VectorType((4, 4), ScalarType(FLOAT))]:
+        setRotateTransformOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg(
+                        "angle",
+                        matrixType.elementType,
+                        Mutability.Const,
+                    ),
+                    FunctionArg("matrix", matrixType, Mutability.Mutable),
+                ],
+            )
+        )
+
     # Angle interfaces.
     angleOps = []
     for scalarType in (ScalarType(FLOAT),):
@@ -674,6 +690,11 @@ def GenerateFunctions():
         FunctionGroup(
             ["setTranslate", "setScale",],
             setVectorTransformOps,
+            FunctionCategory.LINEAR_ALGEBRA,
+        ),
+        FunctionGroup(
+            ["setRotateX",],
+            setRotateTransformOps,
             FunctionCategory.LINEAR_ALGEBRA,
         ),
 
