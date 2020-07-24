@@ -54,6 +54,7 @@ void BindCeil( pybind11::module& );
 void BindRayAABBIntersection( pybind11::module& );
 void BindDotProduct( pybind11::module& );
 void BindIntersection( pybind11::module& );
+void BindSetRotateY( pybind11::module& );
 void BindSetRotateX( pybind11::module& );
 void BindExpand( pybind11::module& );
 void BindDistance( pybind11::module& );
@@ -123,6 +124,7 @@ PYBIND11_MODULE( gm, o_module )
     BindRayAABBIntersection( o_module );
     BindDotProduct( o_module );
     BindIntersection( o_module );
+    BindSetRotateY( o_module );
     BindSetRotateX( o_module );
     BindExpand( o_module );
     BindDistance( o_module );
