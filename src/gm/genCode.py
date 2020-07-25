@@ -693,7 +693,7 @@ def GenerateFunctions():
             FunctionCategory.LINEAR_ALGEBRA,
         ),
         FunctionGroup(
-            ["setRotateX", "setRotateY",],
+            ["setRotateX", "setRotateY", "setRotateZ", ],
             setRotateTransformOps,
             FunctionCategory.LINEAR_ALGEBRA,
         ),
