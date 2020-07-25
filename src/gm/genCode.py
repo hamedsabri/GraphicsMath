@@ -370,15 +370,36 @@ def GenerateFunctions():
             )
         )
 
-    # Set rotation transform operations.
-    setRotateTransformOps = []
+    # Set rotation XYZ axis ops.
+    setRotateXYZOps = []
     for matrixType in [VectorType((4, 4), ScalarType(FLOAT))]:
-        setRotateTransformOps.append(
+        setRotateXYZOps.append(
             FunctionInterface(
                 arguments=[
                     FunctionArg(
                         "angle",
                         matrixType.elementType,
+                        Mutability.Const,
+                    ),
+                    FunctionArg("matrix", matrixType, Mutability.Mutable),
+                ],
+            )
+        )
+
+    # Set arbituary rotation operations.
+    setRotateOps = []
+    for matrixType in [VectorType((4, 4), ScalarType(FLOAT))]:
+        setRotateOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg(
+                        "angle",
+                        matrixType.elementType,
+                        Mutability.Const,
+                    ),
+                    FunctionArg(
+                        "axis",
+                        VectorType((matrixType.shape[0] - 1,), matrixType.elementType),
                         Mutability.Const,
                     ),
                     FunctionArg("matrix", matrixType, Mutability.Mutable),
@@ -694,7 +715,12 @@ def GenerateFunctions():
         ),
         FunctionGroup(
             ["setRotateX", "setRotateY", "setRotateZ", ],
-            setRotateTransformOps,
+            setRotateXYZOps,
+            FunctionCategory.LINEAR_ALGEBRA,
+        ),
+        FunctionGroup(
+            ["setRotate",],
+            setRotateOps,
             FunctionCategory.LINEAR_ALGEBRA,
         ),
 
