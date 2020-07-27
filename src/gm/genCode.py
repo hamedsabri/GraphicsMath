@@ -292,6 +292,19 @@ def GenerateFunctions():
             )
         )
 
+    # Coordinate system.
+    coordSysOps = []
+    for vectorType in (VectorType((3,), ScalarType(FLOAT)),):
+        coordSysOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("vectorA", vectorType, Mutability.Const),
+                    FunctionArg("vectorB", vectorType, Mutability.Mutable),
+                    FunctionArg("vectorC", vectorType, Mutability.Mutable),
+                ],
+            )
+        )
+
     # Vector reduction.
     vectorReductionOps = []
     for vectorType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
@@ -721,6 +734,11 @@ def GenerateFunctions():
         FunctionGroup(
             ["setRotate",],
             setRotateOps,
+            FunctionCategory.LINEAR_ALGEBRA,
+        ),
+        FunctionGroup(
+            ["coordinateSystem",],
+            coordSysOps,
             FunctionCategory.LINEAR_ALGEBRA,
         ),
 
