@@ -102,9 +102,7 @@ RANGE_TYPES_VECTOR = [
     RangeType(valueType) for valueType in (SINGLE_INDEX_VECTOR_TYPES_FLOAT + SINGLE_INDEX_VECTOR_TYPES_INT)
 ]
 
-RANGE_TYPES_FLOAT = [
-    RangeType(valueType) for valueType in (SINGLE_INDEX_VECTOR_TYPES_FLOAT + [ScalarType(FLOAT)])
-]
+RANGE_TYPES_FLOAT = [RangeType(valueType) for valueType in (SINGLE_INDEX_VECTOR_TYPES_FLOAT + [ScalarType(FLOAT)])]
 
 
 """
@@ -129,6 +127,7 @@ FUNCTIONS = {}
 #
 # Code generation for types.
 #
+
 
 def PopulateCompositeTypes():
     """
@@ -162,9 +161,7 @@ def GenerateTypes():
         # C++ source code.
         filePaths.append(
             GenerateCode(
-                os.path.join(
-                    TYPES_DIR, "{category}Type.h".format(category=valueType.CATEGORY,)
-                ),
+                os.path.join(TYPES_DIR, "{category}Type.h".format(category=valueType.CATEGORY,)),
                 os.path.join(TYPES_DIR, valueType.headerFileName),
                 valueType=valueType,
             )
@@ -174,17 +171,9 @@ def GenerateTypes():
         filePaths.append(
             GenerateCode(
                 os.path.join(
-                    TYPES_DIR,
-                    TESTS_DIR,
-                    "test{category}Type.cpp".format(
-                        category=UpperCamelCase(valueType.CATEGORY),
-                    ),
+                    TYPES_DIR, TESTS_DIR, "test{category}Type.cpp".format(category=UpperCamelCase(valueType.CATEGORY),),
                 ),
-                os.path.join(
-                    TYPES_DIR,
-                    TESTS_DIR,
-                    "test{className}.cpp".format(className=valueType.className),
-                ),
+                os.path.join(TYPES_DIR, TESTS_DIR, "test{className}.cpp".format(className=valueType.className),),
                 valueType=valueType,
             )
         )
@@ -195,15 +184,9 @@ def GenerateTypes():
                 os.path.join(
                     PYTHON_DIR,
                     TYPES_DIR,
-                    "bind{category}Type.cpp".format(
-                        category=UpperCamelCase(valueType.CATEGORY),
-                    ),
+                    "bind{category}Type.cpp".format(category=UpperCamelCase(valueType.CATEGORY),),
                 ),
-                os.path.join(
-                    PYTHON_DIR,
-                    TYPES_DIR,
-                    "bind{className}.cpp".format(className=valueType.className),
-                ),
+                os.path.join(PYTHON_DIR, TYPES_DIR, "bind{className}.cpp".format(className=valueType.className),),
                 valueType=valueType,
             )
         )
@@ -215,15 +198,10 @@ def GenerateTypes():
                     PYTHON_DIR,
                     TYPES_DIR,
                     TESTS_DIR,
-                    "test{category}Type.py".format(
-                        category=UpperCamelCase(valueType.CATEGORY),
-                    ),
+                    "test{category}Type.py".format(category=UpperCamelCase(valueType.CATEGORY),),
                 ),
                 os.path.join(
-                    PYTHON_DIR,
-                    TYPES_DIR,
-                    TESTS_DIR,
-                    "test{className}.py".format(className=valueType.className),
+                    PYTHON_DIR, TYPES_DIR, TESTS_DIR, "test{className}.py".format(className=valueType.className),
                 ),
                 valueType=valueType,
             )
@@ -243,14 +221,9 @@ def GenerateFunctions():
 
     # Unary operations.
     unaryOps = []
-    for valueType in (
-        [ScalarType(FLOAT),] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES
-    ):
+    for valueType in [ScalarType(FLOAT),] + SINGLE_INDEX_VECTOR_TYPES_FLOAT + MATRIX_TYPES:
         unaryOps.append(
-            FunctionInterface(
-                arguments=[FunctionArg("value", valueType, Mutability.Const),],
-                returnType=valueType,
-            )
+            FunctionInterface(arguments=[FunctionArg("value", valueType, Mutability.Const),], returnType=valueType,)
         )
 
     # Binary comparison operations.
@@ -310,8 +283,7 @@ def GenerateFunctions():
     for vectorType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
         vectorReductionOps.append(
             FunctionInterface(
-                arguments=[FunctionArg("vector", vectorType, Mutability.Const),],
-                returnType=vectorType.elementType,
+                arguments=[FunctionArg("vector", vectorType, Mutability.Const),], returnType=vectorType.elementType,
             )
         )
 
@@ -319,28 +291,20 @@ def GenerateFunctions():
     vectorOps = []
     for vectorType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
         vectorOps.append(
-            FunctionInterface(
-                arguments=[FunctionArg("vector", vectorType, Mutability.Const),],
-                returnType=vectorType,
-            )
+            FunctionInterface(arguments=[FunctionArg("vector", vectorType, Mutability.Const),], returnType=vectorType,)
         )
 
     # Set matrix value.
     setMatrixOps = []
     for matrixType in MATRIX_TYPES:
-        setMatrixOps.append(
-            FunctionInterface(
-                arguments=[FunctionArg("matrix", matrixType, Mutability.Mutable),],
-            )
-        )
+        setMatrixOps.append(FunctionInterface(arguments=[FunctionArg("matrix", matrixType, Mutability.Mutable),],))
 
     # Check matrix value.
     checkMatrixOps = []
     for matrixType in MATRIX_TYPES:
         checkMatrixOps.append(
             FunctionInterface(
-                arguments=[FunctionArg("matrix", matrixType, Mutability.Const),],
-                returnType=ScalarType(BOOL),
+                arguments=[FunctionArg("matrix", matrixType, Mutability.Const),], returnType=ScalarType(BOOL),
             )
         )
 
@@ -348,10 +312,7 @@ def GenerateFunctions():
     matrixUnaryOps = []
     for matrixType in MATRIX_TYPES:
         matrixUnaryOps.append(
-            FunctionInterface(
-                arguments=[FunctionArg("matrix", matrixType, Mutability.Const),],
-                returnType=matrixType,
-            )
+            FunctionInterface(arguments=[FunctionArg("matrix", matrixType, Mutability.Const),], returnType=matrixType,)
         )
 
     # Matrix binary ops.
@@ -374,9 +335,7 @@ def GenerateFunctions():
             FunctionInterface(
                 arguments=[
                     FunctionArg(
-                        "vector",
-                        VectorType((matrixType.shape[0] - 1,), matrixType.elementType),
-                        Mutability.Const,
+                        "vector", VectorType((matrixType.shape[0] - 1,), matrixType.elementType), Mutability.Const,
                     ),
                     FunctionArg("matrix", matrixType, Mutability.Mutable),
                 ],
@@ -389,11 +348,7 @@ def GenerateFunctions():
         setRotateXYZOps.append(
             FunctionInterface(
                 arguments=[
-                    FunctionArg(
-                        "angle",
-                        matrixType.elementType,
-                        Mutability.Const,
-                    ),
+                    FunctionArg("angle", matrixType.elementType, Mutability.Const,),
                     FunctionArg("matrix", matrixType, Mutability.Mutable),
                 ],
             )
@@ -405,15 +360,9 @@ def GenerateFunctions():
         setRotateOps.append(
             FunctionInterface(
                 arguments=[
+                    FunctionArg("angle", matrixType.elementType, Mutability.Const,),
                     FunctionArg(
-                        "angle",
-                        matrixType.elementType,
-                        Mutability.Const,
-                    ),
-                    FunctionArg(
-                        "axis",
-                        VectorType((matrixType.shape[0] - 1,), matrixType.elementType),
-                        Mutability.Const,
+                        "axis", VectorType((matrixType.shape[0] - 1,), matrixType.elementType), Mutability.Const,
                     ),
                     FunctionArg("matrix", matrixType, Mutability.Mutable),
                 ],
@@ -424,10 +373,7 @@ def GenerateFunctions():
     angleOps = []
     for scalarType in (ScalarType(FLOAT),):
         angleOps.append(
-            FunctionInterface(
-                arguments=[FunctionArg("angle", scalarType, Mutability.Const),],
-                returnType=scalarType,
-            )
+            FunctionInterface(arguments=[FunctionArg("angle", scalarType, Mutability.Const),], returnType=scalarType,)
         )
 
     # Euclidean space point operations.
@@ -448,9 +394,7 @@ def GenerateFunctions():
 
     # Interpolation operators.
     linearInterpolationOps = []
-    for valueType in (
-        [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT + RANGE_TYPES_FLOAT
-    ):
+    for valueType in [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT + RANGE_TYPES_FLOAT:
         arguments = [
             FunctionArg("source", valueType, Mutability.Const),
             FunctionArg("target", valueType, Mutability.Const),
@@ -465,14 +409,10 @@ def GenerateFunctions():
                 weightType = valueType.elementType.elementType
 
         arguments.append(FunctionArg("weight", weightType, Mutability.Const))
-        linearInterpolationOps.append(
-            FunctionInterface(arguments=arguments, returnType=valueType,)
-        )
+        linearInterpolationOps.append(FunctionInterface(arguments=arguments, returnType=valueType,))
 
     bilinearInterpolationOps = []
-    for valueType in (
-        [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT
-    ):
+    for valueType in [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT:
         arguments = [
             FunctionArg("corner00", valueType, Mutability.Const),
             FunctionArg("corner10", valueType, Mutability.Const),
@@ -487,14 +427,10 @@ def GenerateFunctions():
             weightType = VectorType((2,), valueType.elementType)
         arguments.append(FunctionArg("weight", weightType, Mutability.Const))
 
-        bilinearInterpolationOps.append(
-            FunctionInterface(arguments=arguments, returnType=valueType,)
-        )
+        bilinearInterpolationOps.append(FunctionInterface(arguments=arguments, returnType=valueType,))
 
     trilinearInterpolationOps = []
-    for valueType in (
-        [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT
-    ):
+    for valueType in [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT:
         arguments = [
             FunctionArg("corner000", valueType, Mutability.Const),
             FunctionArg("corner100", valueType, Mutability.Const),
@@ -513,15 +449,11 @@ def GenerateFunctions():
             weightType = VectorType((3,), valueType.elementType)
         arguments.append(FunctionArg("weight", weightType, Mutability.Const))
 
-        trilinearInterpolationOps.append(
-            FunctionInterface(arguments=arguments, returnType=valueType,)
-        )
+        trilinearInterpolationOps.append(FunctionInterface(arguments=arguments, returnType=valueType,))
 
     # Map operators.
     mapOps = []
-    for valueType in (
-        [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT
-    ):
+    for valueType in [ScalarType(FLOAT)] + MATRIX_TYPES + SINGLE_INDEX_VECTOR_TYPES_FLOAT:
         if valueType.isScalar:
             rangeValueType = RangeType(valueType)
         else:
@@ -538,7 +470,7 @@ def GenerateFunctions():
 
     # Map operators.
     clampOps = []
-    for valueType in (NUMERIC_SCALAR_TYPES + VECTOR_TYPES):
+    for valueType in NUMERIC_SCALAR_TYPES + VECTOR_TYPES:
         if valueType.isScalar:
             rangeValueType = RangeType(valueType)
         else:
@@ -612,9 +544,7 @@ def GenerateFunctions():
                     FunctionArg("a", valueType, Mutability.Const),
                     FunctionArg("b", valueType, Mutability.Const),
                     FunctionArg("c", valueType, Mutability.Const),
-                    FunctionArg(
-                        "roots", VectorType((2,), valueType), Mutability.Mutable
-                    ),
+                    FunctionArg("roots", VectorType((2,), valueType), Mutability.Mutable),
                 ],
                 returnType=ScalarType(INT),
             )
@@ -626,16 +556,10 @@ def GenerateFunctions():
             FunctionInterface(
                 arguments=[
                     FunctionArg("sphereOrigin", valueType, Mutability.Const),
-                    FunctionArg(
-                        "sphereRadius", valueType.elementType, Mutability.Const
-                    ),
+                    FunctionArg("sphereRadius", valueType.elementType, Mutability.Const),
                     FunctionArg("rayOrigin", valueType, Mutability.Const),
                     FunctionArg("rayDirection", valueType, Mutability.Const),
-                    FunctionArg(
-                        "intersections",
-                        RangeType(valueType.elementType),
-                        Mutability.Mutable,
-                    ),
+                    FunctionArg("intersections", RangeType(valueType.elementType), Mutability.Mutable,),
                 ],
                 returnType=ScalarType(INT),
             )
@@ -649,11 +573,7 @@ def GenerateFunctions():
                     FunctionArg("rayOrigin", valueType, Mutability.Const),
                     FunctionArg("rayDirection", valueType, Mutability.Const),
                     FunctionArg("aabb", RangeType(valueType), Mutability.Const),
-                    FunctionArg(
-                        "intersections",
-                        RangeType(valueType.elementType),
-                        Mutability.Mutable,
-                    ),
+                    FunctionArg("intersections", RangeType(valueType.elementType), Mutability.Mutable,),
                 ],
                 returnType=ScalarType(BOOL),
             )
@@ -664,8 +584,7 @@ def GenerateFunctions():
     for valueType in NUMERIC_SCALAR_TYPES:
         randomOps.append(
             FunctionInterface(
-                arguments=[FunctionArg("range", RangeType(valueType), Mutability.Const),],
-                returnType=valueType,
+                arguments=[FunctionArg("range", RangeType(valueType), Mutability.Const),], returnType=valueType,
             )
         )
 
@@ -674,8 +593,20 @@ def GenerateFunctions():
     for valueType in RANGE_TYPES_VECTOR:
         longestAxisOps.append(
             FunctionInterface(
-                arguments=[FunctionArg("range", valueType, Mutability.Const),],
-                returnType=ScalarType(INT),
+                arguments=[FunctionArg("range", valueType, Mutability.Const),], returnType=ScalarType(INT),
+            )
+        )
+
+    # Face forward
+    faceForwardOps = []
+    for valueType in SINGLE_INDEX_VECTOR_TYPES_FLOAT:
+        faceForwardOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("normal", valueType, Mutability.Const),
+                    FunctionArg("guide", valueType, Mutability.Const),
+                ],
+                returnType=valueType,
             )
         )
 
@@ -686,74 +617,33 @@ def GenerateFunctions():
         FunctionGroup(["quadraticRoots",], quadraticOps, FunctionCategory.BASIC),
         FunctionGroup(["degrees", "radians",], angleOps, FunctionCategory.BASIC),
         FunctionGroup(["randomNumber",], randomOps, FunctionCategory.BASIC),
-        FunctionGroup(
-            ["linearInterpolation",], linearInterpolationOps, FunctionCategory.BASIC
-        ),
-        FunctionGroup(
-            ["bilinearInterpolation",], bilinearInterpolationOps, FunctionCategory.BASIC
-        ),
-        FunctionGroup(
-            ["trilinearInterpolation",], trilinearInterpolationOps, FunctionCategory.BASIC
-        ),
+        FunctionGroup(["linearInterpolation",], linearInterpolationOps, FunctionCategory.BASIC),
+        FunctionGroup(["bilinearInterpolation",], bilinearInterpolationOps, FunctionCategory.BASIC),
+        FunctionGroup(["trilinearInterpolation",], trilinearInterpolationOps, FunctionCategory.BASIC),
         FunctionGroup(["linearMap",], mapOps, FunctionCategory.BASIC),
         FunctionGroup(["clamp",], clampOps, FunctionCategory.BASIC),
         FunctionGroup(["intersection", "expand"], rangeOps, FunctionCategory.BASIC),
         FunctionGroup(["contains"], containerOps, FunctionCategory.BASIC),
         FunctionGroup(["longestAxis"], longestAxisOps, FunctionCategory.BASIC),
-
         # Linear algebra.
         FunctionGroup(["isIdentity"], checkMatrixOps, FunctionCategory.LINEAR_ALGEBRA),
         FunctionGroup(["setIdentity"], setMatrixOps, FunctionCategory.LINEAR_ALGEBRA),
         FunctionGroup(["transpose"], matrixUnaryOps, FunctionCategory.LINEAR_ALGEBRA),
-        FunctionGroup(
-            ["matrixProduct"], matrixBinaryOps, FunctionCategory.LINEAR_ALGEBRA
-        ),
+        FunctionGroup(["matrixProduct"], matrixBinaryOps, FunctionCategory.LINEAR_ALGEBRA),
         FunctionGroup(["normalize",], vectorOps, FunctionCategory.LINEAR_ALGEBRA),
-        FunctionGroup(
-            ["length", "lengthSquared",],
-            vectorReductionOps,
-            FunctionCategory.LINEAR_ALGEBRA,
-        ),
-        FunctionGroup(
-            ["dotProduct",], vectorProductOps, FunctionCategory.LINEAR_ALGEBRA
-        ),
-        FunctionGroup(
-            ["crossProduct",], crossProductOps, FunctionCategory.LINEAR_ALGEBRA
-        ),
+        FunctionGroup(["length", "lengthSquared",], vectorReductionOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["dotProduct",], vectorProductOps, FunctionCategory.LINEAR_ALGEBRA),
+        FunctionGroup(["crossProduct",], crossProductOps, FunctionCategory.LINEAR_ALGEBRA),
         FunctionGroup(["distance"], pointReductionOps, FunctionCategory.LINEAR_ALGEBRA),
-        FunctionGroup(
-            ["setTranslate", "setScale",],
-            setVectorTransformOps,
-            FunctionCategory.LINEAR_ALGEBRA,
-        ),
-        FunctionGroup(
-            ["setRotateX", "setRotateY", "setRotateZ", ],
-            setRotateXYZOps,
-            FunctionCategory.LINEAR_ALGEBRA,
-        ),
-        FunctionGroup(
-            ["setRotate",],
-            setRotateOps,
-            FunctionCategory.LINEAR_ALGEBRA,
-        ),
-        FunctionGroup(
-            ["coordinateSystem",],
-            coordSysOps,
-            FunctionCategory.LINEAR_ALGEBRA,
-        ),
-
+        FunctionGroup(["setTranslate", "setScale",], setVectorTransformOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["setRotateX", "setRotateY", "setRotateZ",], setRotateXYZOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["setRotate",], setRotateOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["coordinateSystem",], coordSysOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["faceForward",], faceForwardOps, FunctionCategory.LINEAR_ALGEBRA,),
         # Ray tracing
         FunctionGroup(["rayPosition",], rayOps, FunctionCategory.RAY_TRACING),
-        FunctionGroup(
-            ["raySphereIntersection",],
-            raySphereIntersectionOps,
-            FunctionCategory.RAY_TRACING,
-        ),
-        FunctionGroup(
-            ["rayAABBIntersection",],
-            rayAABBIntersectionOps,
-            FunctionCategory.RAY_TRACING,
-        ),
+        FunctionGroup(["raySphereIntersection",], raySphereIntersectionOps, FunctionCategory.RAY_TRACING,),
+        FunctionGroup(["rayAABBIntersection",], rayAABBIntersectionOps, FunctionCategory.RAY_TRACING,),
     ]
 
     # Generate code.
@@ -771,18 +661,12 @@ def GenerateFunctions():
 
             # Generate C++ test code (if the template is available).
             # Some tests are hand-authored.
-            testTemplatePath = os.path.join(
-                FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name)
-            )
+            testTemplatePath = os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name))
             if os.path.isfile(GetTemplateFile(testTemplatePath)):
                 filePaths.append(
                     GenerateCode(
                         testTemplatePath,
-                        os.path.join(
-                            FUNCTIONS_DIR,
-                            TESTS_DIR,
-                            "test{name}.cpp".format(name=function.name),
-                        ),
+                        os.path.join(FUNCTIONS_DIR, TESTS_DIR, "test{name}.cpp".format(name=function.name),),
                         function=function,
                     )
                 )
@@ -790,14 +674,8 @@ def GenerateFunctions():
             # Benchmarking.
             filePaths.append(
                 GenerateCode(
-                    os.path.join(
-                        FUNCTIONS_DIR, BENCHMARKS_DIR, "benchmarkFunction.cpp"
-                    ),
-                    os.path.join(
-                        FUNCTIONS_DIR,
-                        BENCHMARKS_DIR,
-                        "benchmark{name}.cpp".format(name=function.name),
-                    ),
+                    os.path.join(FUNCTIONS_DIR, BENCHMARKS_DIR, "benchmarkFunction.cpp"),
+                    os.path.join(FUNCTIONS_DIR, BENCHMARKS_DIR, "benchmark{name}.cpp".format(name=function.name),),
                     function=function,
                 )
             )
@@ -806,11 +684,7 @@ def GenerateFunctions():
             filePaths.append(
                 GenerateCode(
                     os.path.join(PYTHON_DIR, FUNCTIONS_DIR, "bindFunction.cpp"),
-                    os.path.join(
-                        PYTHON_DIR,
-                        FUNCTIONS_DIR,
-                        "bind{name}.cpp".format(name=function.name),
-                    ),
+                    os.path.join(PYTHON_DIR, FUNCTIONS_DIR, "bind{name}.cpp".format(name=function.name),),
                     function=function,
                 )
             )

@@ -51,6 +51,7 @@ void BindFloor( pybind11::module& );
 void BindTranspose( pybind11::module& );
 void BindSetScale( pybind11::module& );
 void BindCeil( pybind11::module& );
+void BindFaceForward( pybind11::module& );
 void BindRayAABBIntersection( pybind11::module& );
 void BindDotProduct( pybind11::module& );
 void BindIntersection( pybind11::module& );
@@ -124,6 +125,7 @@ PYBIND11_MODULE( gm, o_module )
     BindTranspose( o_module );
     BindSetScale( o_module );
     BindCeil( o_module );
+    BindFaceForward( o_module );
     BindRayAABBIntersection( o_module );
     BindDotProduct( o_module );
     BindIntersection( o_module );
