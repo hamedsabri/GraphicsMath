@@ -36,9 +36,7 @@ Global jinja2 environment.
 """
 JINJA2_ENVIRONMENT = Environment(
     undefined=StrictUndefined,
-    loader=FileSystemLoader(
-        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", TEMPLATE_DIR))
-    ),
+    loader=FileSystemLoader(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", TEMPLATE_DIR))),
 )
 
 """
@@ -102,9 +100,7 @@ def RunCommand(command, expectedCode=0):
         expectedCode (int): Expected return code of the process.
     """
     LOGGER.info("Running command {}".format(command))
-    process = subprocess.Popen(
-        shlex.split(command), stdout=subprocess.PIPE, stderr=subprocess.STDOUT
-    )
+    process = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     stdout, _ = process.communicate()
     if process.returncode != expectedCode:
         LOGGER.error(stdout)
@@ -135,17 +131,11 @@ def FormatCode(fileNames):
     Args:
         fileNames (list): input files to automatically format.
     """
-    pythonFiles = [
-        fileName for fileName in fileNames if GetFileExt(fileName) == PY_SOURCE_EXT
-    ]
+    pythonFiles = [fileName for fileName in fileNames if GetFileExt(fileName) == PY_SOURCE_EXT]
     if pythonFiles:
         RunCommand("black " + " ".join(pythonFiles))
 
-    cppFiles = [
-        fileName
-        for fileName in fileNames
-        if GetFileExt(fileName) in (CPP_SOURCE_EXT, CPP_HEADER_EXT)
-    ]
+    cppFiles = [fileName for fileName in fileNames if GetFileExt(fileName) in (CPP_SOURCE_EXT, CPP_HEADER_EXT)]
     if cppFiles:
         RunCommand("clang-format -i " + " ".join(cppFiles))
 
@@ -184,8 +174,7 @@ def RenderTemplate(templatePath, **kwargs):
         templateStr = os.linesep.join(
             [
                 commentPrefix,
-                commentPrefix
-                + " This file is auto-generated, please do not modify directly!",
+                commentPrefix + " This file is auto-generated, please do not modify directly!",
                 commentPrefix,
                 "",
             ]

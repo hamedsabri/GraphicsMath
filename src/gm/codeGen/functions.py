@@ -93,9 +93,7 @@ class FunctionInterface:
 
         def typedArg(arg):
             return "{constQualifier} {className}& {name}".format(
-                constQualifier=arg.constQualifier,
-                className=arg.type.className,
-                name=arg.name,
+                constQualifier=arg.constQualifier, className=arg.type.className, name=arg.name,
             )
 
         return ", ".join([typedArg(arg) for arg in self._arguments.values()])

@@ -342,9 +342,7 @@ class VectorType(ElementContainerType):
             prefix = "Vec"
 
         return "{prefix}{shape}{elementType}".format(
-            prefix=prefix,
-            shape=str(self.shape[0]),
-            elementType=self.elementType.className[0],
+            prefix=prefix, shape=str(self.shape[0]), elementType=self.elementType.className[0],
         )
 
     @property
@@ -358,9 +356,7 @@ class VectorType(ElementContainerType):
             prefix = "vec"
 
         return "{prefix}{shape}{elementType}.h".format(
-            prefix=prefix,
-            shape=str(self.shape[0]),
-            elementType=self.elementType.className[0],
+            prefix=prefix, shape=str(self.shape[0]), elementType=self.elementType.className[0],
         )
 
     @property
@@ -406,8 +402,7 @@ class VectorType(ElementContainerType):
             return []
 
         elementNames = ["x", "y", "z", "w"]
-        return [NamedElement(elementNames[elementIndex], self.elementType)
-                for elementIndex in range(self.elementSize)]
+        return [NamedElement(elementNames[elementIndex], self.elementType) for elementIndex in range(self.elementSize)]
 
 
 class RangeType(ElementContainerType):
@@ -441,9 +436,7 @@ class RangeType(ElementContainerType):
         Returns:
             str: the class name of this range type.
         """
-        return "{elementTypeName}Range".format(
-            elementTypeName=(UpperCamelCase(self.elementType.className))
-        )
+        return "{elementTypeName}Range".format(elementTypeName=(UpperCamelCase(self.elementType.className)))
 
     @property
     def headerFileName(self):
@@ -460,14 +453,10 @@ class RangeType(ElementContainerType):
         """
         if self.elementType.isVector:
             return "{elementHeaderFileName}Range.h".format(
-                elementHeaderFileName=os.path.splitext(self.elementType.headerFileName)[
-                    0
-                ]
+                elementHeaderFileName=os.path.splitext(self.elementType.headerFileName)[0]
             )
         else:
-            return "{elementTypeName}Range.h".format(
-                elementTypeName=LowerCamelCase(self.elementType.className),
-            )
+            return "{elementTypeName}Range.h".format(elementTypeName=LowerCamelCase(self.elementType.className),)
 
     @property
     def isRange(self):
@@ -509,9 +498,7 @@ class ArrayType(ElementContainerType):
         Returns:
             str: the class name of this array type.
         """
-        return "{elementTypeName}Array".format(
-            elementTypeName=(UpperCamelCase(self.elementType.className))
-        )
+        return "{elementTypeName}Array".format(elementTypeName=(UpperCamelCase(self.elementType.className)))
 
     @property
     def headerFileName(self):
@@ -528,14 +515,10 @@ class ArrayType(ElementContainerType):
         """
         if self.elementType.isVector:
             return "{elementHeaderFileName}Array.h".format(
-                elementHeaderFileName=os.path.splitext(self.elementType.headerFileName)[
-                    0
-                ]
+                elementHeaderFileName=os.path.splitext(self.elementType.headerFileName)[0]
             )
         else:
-            return "{elementTypeName}Array.h".format(
-                elementTypeName=LowerCamelCase(self.elementType.className),
-            )
+            return "{elementTypeName}Array.h".format(elementTypeName=LowerCamelCase(self.elementType.className),)
 
     @property
     def isArray(self):
