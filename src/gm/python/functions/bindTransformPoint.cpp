@@ -13,5 +13,5 @@ GM_NS_USING
 void BindTransformPoint( pybind11::module& o_module )
 {
     o_module.def( "TransformPoint",
-                  []( const Mat4f& i_matrix, const Vec3f& i_point ) { return TransformPoint( i_matrix, i_point ); } );
+                  []( const Mat4f& i_matrix, const Vec3f& i_vector ) { return TransformPoint( i_matrix, i_vector ); } );
 }

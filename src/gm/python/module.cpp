@@ -60,6 +60,7 @@ void BindSetRotateX( pybind11::module& );
 void BindExpand( pybind11::module& );
 void BindSetRotateZ( pybind11::module& );
 void BindDistance( pybind11::module& );
+void BindRayPosition( pybind11::module& );
 void BindTransformPoint( pybind11::module& );
 void BindRadians( pybind11::module& );
 void BindCoordinateSystem( pybind11::module& );
@@ -71,7 +72,7 @@ void BindLengthSquared( pybind11::module& );
 void BindRaySphereIntersection( pybind11::module& );
 void BindSetRotate( pybind11::module& );
 void BindMatrixProduct( pybind11::module& );
-void BindRayPosition( pybind11::module& );
+void BindTransformVector( pybind11::module& );
 void BindQuadraticRoots( pybind11::module& );
 void BindIsIdentity( pybind11::module& );
 
@@ -135,6 +136,7 @@ PYBIND11_MODULE( gm, o_module )
     BindExpand( o_module );
     BindSetRotateZ( o_module );
     BindDistance( o_module );
+    BindRayPosition( o_module );
     BindTransformPoint( o_module );
     BindRadians( o_module );
     BindCoordinateSystem( o_module );
@@ -146,7 +148,7 @@ PYBIND11_MODULE( gm, o_module )
     BindRaySphereIntersection( o_module );
     BindSetRotate( o_module );
     BindMatrixProduct( o_module );
-    BindRayPosition( o_module );
+    BindTransformVector( o_module );
     BindQuadraticRoots( o_module );
     BindIsIdentity( o_module );
 }

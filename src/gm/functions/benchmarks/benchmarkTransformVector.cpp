@@ -5,14 +5,14 @@
 #define CATCH_CONFIG_ENABLE_BENCHMARKING
 #include <catch2/catch.hpp>
 
-#include <gm/functions/transformPoint.h>
+#include <gm/functions/transformVector.h>
 
-TEST_CASE( "TransformPoint_Mat4f_Vec3f" )
+TEST_CASE( "TransformVector_Mat4f_Vec3f" )
 {
     gm::Mat4f matrix;
     gm::Vec3f vector;
-    BENCHMARK( "TransformPoint" )
+    BENCHMARK( "TransformVector" )
     {
-        return gm::TransformPoint( matrix, vector );
+        return gm::TransformVector( matrix, vector );
     };
 }
