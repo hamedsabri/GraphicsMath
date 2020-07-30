@@ -60,6 +60,7 @@ void BindSetRotateX( pybind11::module& );
 void BindExpand( pybind11::module& );
 void BindSetRotateZ( pybind11::module& );
 void BindDistance( pybind11::module& );
+void BindTransformPoint( pybind11::module& );
 void BindRadians( pybind11::module& );
 void BindCoordinateSystem( pybind11::module& );
 void BindLength( pybind11::module& );
@@ -134,6 +135,7 @@ PYBIND11_MODULE( gm, o_module )
     BindExpand( o_module );
     BindSetRotateZ( o_module );
     BindDistance( o_module );
+    BindTransformPoint( o_module );
     BindRadians( o_module );
     BindCoordinateSystem( o_module );
     BindLength( o_module );

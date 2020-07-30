@@ -1,3 +1,7 @@
+//
+// This file is auto-generated, please do not modify directly!
+//
+
 #include <catch2/catch.hpp>
 
 #include <gm/functions/matrixProduct.h>
@@ -14,38 +18,14 @@ TEST_CASE( "MatrixProduct_Mat3f" )
     CHECK( gm::MatrixProduct( matrixA, matrixB ) == gm::Mat3f( 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 ) );
 
     // E^-1 * E^-1 = L
-    matrixA = gm::Mat3f(
-        1, 0, 0,
-        2, 1, 0,
-        0, 0, 1
-    );
-    matrixB = gm::Mat3f(
-        1, 0, 0,
-        0, 1, 0,
-        3, 0, 1
-    );
-    CHECK( gm::MatrixProduct( matrixA, matrixB ) == gm::Mat3f(
-        1, 0, 0,
-        2, 1, 0,
-        3, 0, 1
-    ) );
+    matrixA = gm::Mat3f( 1, 0, 0, 2, 1, 0, 0, 0, 1 );
+    matrixB = gm::Mat3f( 1, 0, 0, 0, 1, 0, 3, 0, 1 );
+    CHECK( gm::MatrixProduct( matrixA, matrixB ) == gm::Mat3f( 1, 0, 0, 2, 1, 0, 3, 0, 1 ) );
 
     // L * L = L
-    matrixA = gm::Mat3f(
-        1, 0, 0,
-        1, 1, 0,
-        1, 1, 1
-    );
-    matrixB = gm::Mat3f(
-        1, 0, 0,
-        1, 1, 0,
-        1, 1, 1
-    );
-    CHECK( gm::MatrixProduct( matrixA, matrixB ) == gm::Mat3f(
-        1, 0, 0,
-        2, 1, 0,
-        3, 2, 1
-    ) );
+    matrixA = gm::Mat3f( 1, 0, 0, 1, 1, 0, 1, 1, 1 );
+    matrixB = gm::Mat3f( 1, 0, 0, 1, 1, 0, 1, 1, 1 );
+    CHECK( gm::MatrixProduct( matrixA, matrixB ) == gm::Mat3f( 1, 0, 0, 2, 1, 0, 3, 2, 1 ) );
 }
 
 TEST_CASE( "MatrixProduct_Mat4f" )
@@ -60,42 +40,12 @@ TEST_CASE( "MatrixProduct_Mat4f" )
            gm::Mat4f( 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ) );
 
     // E^-1 * E^-1 = L
-    matrixA = gm::Mat4f(
-        1, 0, 0, 0,
-        2, 1, 0, 0,
-        0, 0, 1, 0,
-        0, 0, 0, 1
-    );
-    matrixB = gm::Mat4f(
-        1, 0, 0, 0,
-        0, 1, 0, 0,
-        3, 0, 1, 0,
-        0, 0, 0, 1
-    );
-    CHECK( gm::MatrixProduct( matrixA, matrixB ) == gm::Mat4f(
-        1, 0, 0, 0,
-        2, 1, 0, 0,
-        3, 0, 1, 0,
-        0, 0, 0, 1
-    ) );
+    matrixA = gm::Mat4f( 1, 0, 0, 0, 2, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 );
+    matrixB = gm::Mat4f( 1, 0, 0, 0, 0, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1 );
+    CHECK( gm::MatrixProduct( matrixA, matrixB ) == gm::Mat4f( 1, 0, 0, 0, 2, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1 ) );
 
     // L * L = L
-    matrixA = gm::Mat4f(
-        1, 0, 0, 0,
-        1, 1, 0, 0,
-        1, 1, 1, 0,
-        1, 1, 1, 1
-    );
-    matrixB = gm::Mat4f(
-        1, 0, 0, 0,
-        1, 1, 0, 0,
-        1, 1, 1, 0,
-        1, 1, 1, 1
-    );
-    CHECK( gm::MatrixProduct( matrixA, matrixB ) == gm::Mat4f(
-        1, 0, 0, 0,
-        2, 1, 0, 0,
-        3, 2, 1, 0,
-        4, 3, 2, 1
-    ) );
+    matrixA = gm::Mat4f( 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1 );
+    matrixB = gm::Mat4f( 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1 );
+    CHECK( gm::MatrixProduct( matrixA, matrixB ) == gm::Mat4f( 1, 0, 0, 0, 2, 1, 0, 0, 3, 2, 1, 0, 4, 3, 2, 1 ) );
 }

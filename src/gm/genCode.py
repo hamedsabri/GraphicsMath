@@ -610,6 +610,19 @@ def GenerateFunctions():
             )
         )
 
+    # Transform point.
+    transformPointOps = []
+    for valueType in (VectorType((3,), ScalarType(FLOAT)),):
+        transformPointOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("matrix", VectorType((4, 4), ScalarType(FLOAT)), Mutability.Const),
+                    FunctionArg("point", valueType, Mutability.Const),
+                ],
+                returnType=valueType,
+            )
+        )
+
     functionGroups = [
         # Basic.
         FunctionGroup(["floor", "ceil", "abs",], unaryOps, FunctionCategory.BASIC),
@@ -640,6 +653,7 @@ def GenerateFunctions():
         FunctionGroup(["setRotate",], setRotateOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["coordinateSystem",], coordSysOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["faceForward",], faceForwardOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["transformPoint",], transformPointOps, FunctionCategory.LINEAR_ALGEBRA,),
         # Ray tracing
         FunctionGroup(["rayPosition",], rayOps, FunctionCategory.RAY_TRACING),
         FunctionGroup(["raySphereIntersection",], raySphereIntersectionOps, FunctionCategory.RAY_TRACING,),
