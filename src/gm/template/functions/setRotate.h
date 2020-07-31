@@ -2,7 +2,7 @@
 {% import "functions/functionUtils.h" as functionUtils %}
 
 {%- block fileDoc -%}
-/// Set a rotation for an specified axis on a transformation matrix, with respect to the right-hand rule.
+/// Set a rotation for an specified axis on a transformation matrix, with respect to the left hand rule.
 {%- endblock %}
 
 {% block includes %}
