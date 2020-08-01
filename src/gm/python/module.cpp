@@ -36,6 +36,7 @@ void BindMat4fArray( pybind11::module& );
 // Function Declarations.
 void BindLinearInterpolation( pybind11::module& );
 void BindNormalize( pybind11::module& );
+void BindInverse( pybind11::module& );
 void BindMin( pybind11::module& );
 void BindContains( pybind11::module& );
 void BindAbs( pybind11::module& );
@@ -113,6 +114,7 @@ PYBIND11_MODULE( gm, o_module )
     // Functions.
     BindLinearInterpolation( o_module );
     BindNormalize( o_module );
+    BindInverse( o_module );
     BindMin( o_module );
     BindContains( o_module );
     BindAbs( o_module );

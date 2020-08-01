@@ -637,6 +637,19 @@ def GenerateFunctions():
             )
         )
 
+    # Matrix inverse.
+    matrixInverseOps = []
+    for valueType in (VectorType((4,4), ScalarType(FLOAT)),):
+        matrixInverseOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("matrix", valueType, Mutability.Const),
+                    FunctionArg("inverse", valueType, Mutability.Mutable),
+                ],
+                returnType=ScalarType(BOOL),
+            )
+        )
+
     functionGroups = [
         # Basic.
         FunctionGroup(["floor", "ceil", "abs",], unaryOps, FunctionCategory.BASIC),
@@ -669,6 +682,7 @@ def GenerateFunctions():
         FunctionGroup(["faceForward",], faceForwardOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["transformPoint", "transformVector",], transformVectorOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["lookAt",], lookAtOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["inverse",], matrixInverseOps, FunctionCategory.LINEAR_ALGEBRA,),
         # Ray tracing
         FunctionGroup(["rayPosition",], rayOps, FunctionCategory.RAY_TRACING),
         FunctionGroup(["raySphereIntersection",], raySphereIntersectionOps, FunctionCategory.RAY_TRACING,),
