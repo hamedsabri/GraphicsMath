@@ -623,6 +623,20 @@ def GenerateFunctions():
             )
         )
 
+    # Look at.
+    lookAtOps = []
+    for valueType in (VectorType((3,), ScalarType(FLOAT)),):
+        lookAtOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("position", valueType, Mutability.Const),
+                    FunctionArg("look", valueType, Mutability.Const),
+                    FunctionArg("up", valueType, Mutability.Const),
+                ],
+                returnType=VectorType((4, 4), ScalarType(FLOAT)),
+            )
+        )
+
     functionGroups = [
         # Basic.
         FunctionGroup(["floor", "ceil", "abs",], unaryOps, FunctionCategory.BASIC),
@@ -654,6 +668,7 @@ def GenerateFunctions():
         FunctionGroup(["coordinateSystem",], coordSysOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["faceForward",], faceForwardOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["transformPoint", "transformVector",], transformVectorOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["lookAt",], lookAtOps, FunctionCategory.LINEAR_ALGEBRA,),
         # Ray tracing
         FunctionGroup(["rayPosition",], rayOps, FunctionCategory.RAY_TRACING),
         FunctionGroup(["raySphereIntersection",], raySphereIntersectionOps, FunctionCategory.RAY_TRACING,),
