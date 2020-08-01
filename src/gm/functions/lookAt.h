@@ -30,6 +30,7 @@ GM_NS_OPEN
 /// \return Transformation for positioning and orienting the camera.
 GM_HOST_DEVICE inline Mat4f LookAt( const Vec3f& i_position, const Vec3f& i_look, const Vec3f& i_up )
 {
+    // Construct a 3D orthonormal basis of the camera.
     Vec3f lookDir = Normalize( i_look - i_position );
     Vec3f right   = Normalize( CrossProduct( Normalize( i_up ), lookDir ) );
     Vec3f newUp   = CrossProduct( lookDir, right );

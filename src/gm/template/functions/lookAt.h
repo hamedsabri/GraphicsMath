@@ -30,6 +30,7 @@
 /// \return Transformation for positioning and orienting the camera.
 {{- functionUtils.signature(function, interface) -}}
 {
+    // Construct a 3D orthonormal basis of the camera.
     {{ vectorType.className }} lookDir = Normalize( {{ look }} - {{ position }} );
     {{ vectorType.className }} right = Normalize( CrossProduct( Normalize( {{ up }} ), lookDir ) );
     {{ vectorType.className }} newUp = CrossProduct( lookDir, right );
