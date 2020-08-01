@@ -20,7 +20,7 @@
 /// \return The angle in units of degrees.
 {{- functionUtils.signature(function, interface) -}}
 {
-    constexpr {{ angleType.className }} radiansToDegreesRatio = {{ angleType.CppValue(180) }} / GM_PI;
+    constexpr {{ angleType.className }} radiansToDegreesRatio = {{ angleType.CppValue(180) }} / Pi;
     return {{ angle }} * radiansToDegreesRatio;
 }
 {% endfor %}
