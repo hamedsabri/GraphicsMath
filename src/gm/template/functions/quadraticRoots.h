@@ -15,7 +15,7 @@
 
 {% block includes %}
 {{ functionUtils.typeIncludes(function) }}
-#include <gm/base/assert.h>
+#include <gm/base/diagnostic.h>
 {% endblock %}
 
 {% block body %}

@@ -5,7 +5,7 @@
 #include <cstring>
 #include <sstream>
 
-#include <gm/base/assert.h>
+#include <gm/base/diagnostic.h>
 {% if valueType.elementType.className != "int" -%}
 #include <gm/base/almost.h>
 {%- endif %}

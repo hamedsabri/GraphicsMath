@@ -6,7 +6,7 @@
 {%- endblock %}
 
 {% block includes %}
-#include <gm/base/assert.h>
+#include <gm/base/diagnostic.h>
 
 {{ functionUtils.typeIncludes(function) }}
 {% endblock %}

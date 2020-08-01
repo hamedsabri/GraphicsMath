@@ -50,7 +50,7 @@
 
 {% block includes %}
 {{ functionUtils.typeIncludes(function) }}
-#include <gm/base/assert.h>
+#include <gm/base/diagnostic.h>
 #include <gm/functions/dotProduct.h>
 #include <gm/functions/quadraticRoots.h>
 #include <gm/functions/length.h>
