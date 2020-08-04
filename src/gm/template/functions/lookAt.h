@@ -7,16 +7,17 @@
 
 {% block includes %}
 {{ functionUtils.typeIncludes(function) }}
-
+#include <gm/base/diagnostic.h>
 #include <gm/functions/normalize.h>
 #include <gm/functions/crossProduct.h>
+#include <gm/functions/inverse.h>
 {% endblock %}
 
 {% block body %}
 {% for interface in function.interfaces %}
-{% set position = interface.ArgName("position") %}
-{% set look     = interface.ArgName("look") %}
-{% set up       = interface.ArgName("up") %}
+{% set position   = interface.ArgName("position") %}
+{% set look       = interface.ArgName("look") %}
+{% set up         = interface.ArgName("up") %}
 {% set vectorType = interface.ArgType("position") %}
 {% set matrixType = interface.returnType %}
 /// Construct a transformation for placing a camera in a scene provided a
@@ -62,7 +63,10 @@
     matrix( 2, 3 ) = {{ position }}.Z();
     matrix( 3, 3 ) = 1;
 
-    return matrix;
+    // Compute inverse.
+    {{ matrixType.className }} inverse;
+    GM_VERIFY( Inverse( matrix, inverse ) );
+    return inverse;
 }
 
 {% endfor %}

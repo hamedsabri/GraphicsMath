@@ -14,7 +14,9 @@
 #include <gm/types/mat4f.h>
 #include <gm/types/vec3f.h>
 
+#include <gm/base/diagnostic.h>
 #include <gm/functions/crossProduct.h>
+#include <gm/functions/inverse.h>
 #include <gm/functions/normalize.h>
 
 GM_NS_OPEN
@@ -62,7 +64,10 @@ GM_HOST_DEVICE inline Mat4f LookAt( const Vec3f& i_position, const Vec3f& i_look
     matrix( 2, 3 ) = i_position.Z();
     matrix( 3, 3 ) = 1;
 
-    return matrix;
+    // Compute inverse.
+    Mat4f inverse;
+    GM_VERIFY( Inverse( matrix, inverse ) );
+    return inverse;
 }
 
 GM_NS_CLOSE
