@@ -528,6 +528,27 @@ def GenerateFunctions():
             )
         )
 
+    expandOps = []
+    for valueType in RANGE_TYPES:
+        expandOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("lhs", valueType, Mutability.Const),
+                    FunctionArg("rhs", valueType, Mutability.Const),
+                ],
+                returnType=valueType,
+            )
+        )
+        expandOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("lhs", valueType, Mutability.Const),
+                    FunctionArg("rhs", valueType.elementType, Mutability.Const),
+                ],
+                returnType=valueType,
+            )
+        )
+
     containerOps = []
     for valueType in RANGE_TYPES:
         # Element in container test.
@@ -693,7 +714,8 @@ def GenerateFunctions():
         FunctionGroup(["trilinearInterpolation",], trilinearInterpolationOps, FunctionCategory.BASIC),
         FunctionGroup(["linearMap",], mapOps, FunctionCategory.BASIC),
         FunctionGroup(["clamp",], clampOps, FunctionCategory.BASIC),
-        FunctionGroup(["intersection", "expand"], rangeOps, FunctionCategory.BASIC),
+        FunctionGroup(["intersection",], rangeOps, FunctionCategory.BASIC),
+        FunctionGroup(["expand",], expandOps, FunctionCategory.BASIC),
         FunctionGroup(["contains"], containerOps, FunctionCategory.BASIC),
         FunctionGroup(["longestAxis"], longestAxisOps, FunctionCategory.BASIC),
         # Linear algebra.

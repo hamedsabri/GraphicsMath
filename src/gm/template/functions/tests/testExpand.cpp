@@ -6,8 +6,10 @@
 
 {% for interface in function.interfaces %}
 {% set rangeType = interface.ArgType("lhs") %}
-TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("lhs") }}" )
+{% set rhsType   = interface.ArgType("rhs") %}
+TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("lhs") }}_{{ interface.ArgClass("rhs") }}" )
 {
+{% if rhsType.isRange -%}
     // Expand with non-empty ranges.
     CHECK( gm::{{ function.name }}(
         {{- typeUtils.GenRange( rangeType, -2, 4 ) -}},
@@ -27,11 +29,28 @@ TEST_CASE( "{{ function.name }}_{{ interface.ArgClass("lhs") }}" )
         {{- typeUtils.GenRange( rangeType, 2, -2 ) -}},
         {{- typeUtils.GenRange( rangeType, -1, 1 ) -}}
     ) == {{- typeUtils.GenRange( rangeType, -1, 1 ) -}} );
-
     // Expand with two empty ranges.
     CHECK( gm::{{ function.name }}(
         {{- typeUtils.GenRange( rangeType, 2, -2 ) -}},
         {{- typeUtils.GenRange( rangeType, 1, -1 ) -}}
     ).IsEmpty() );
+{%- else -%}
+    // Expand with element type.
+    CHECK( gm::{{ function.name }}(
+        {{- typeUtils.GenRange( rangeType, -2, 2 ) -}},
+        {{- typeUtils.GenUniformSequence( rangeType.elementType, 3 ) -}}
+    ) == {{- typeUtils.GenRange( rangeType, -2, 3 ) -}} );
+
+    CHECK( gm::{{ function.name }}(
+        {{- typeUtils.GenRange( rangeType, -2, 2 ) -}},
+        {{- typeUtils.GenUniformSequence( rangeType.elementType, -3 ) -}}
+    ) == {{- typeUtils.GenRange( rangeType, -3, 2 ) -}} );
+
+    // Expand with empty range and element type.
+    CHECK( gm::{{ function.name }}(
+        {{- typeUtils.GenRange( rangeType, 2, -2 ) -}},
+        {{- typeUtils.GenUniformSequence( rangeType.elementType, 3 ) -}}
+    ) == {{- typeUtils.GenRange( rangeType, 3, 3 ) -}} );
+{%- endif -%}
 }
 {% endfor %}

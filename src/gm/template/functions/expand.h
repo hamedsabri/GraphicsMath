@@ -21,11 +21,6 @@
 {% set rhs = interface.ArgName("rhs") %}
 /// Compute the expanded {{ category }} of \p {{ lhs }} and \p {{ rhs }}.
 ///
-/// There are three special scenarios for handling empty input ranges:
-/// - If {{ lhs }} and {{ rhs }} are both empty, an empty range is returned.
-/// - If {{ lhs }} is empty, but not {{ rhs }}, {{ rhs }} is returned.
-/// - If {{ rhs }} is empty, but not {{ lhs }}, {{ lhs }} is returned.
-///
 /// \param {{ lhs }} The first {{ category }}.
 /// \param {{ rhs }} The second {{ category }}.
 ///
@@ -33,6 +28,7 @@
 {{- functionUtils.signature(function, interface) -}}
 {
     bool leftEmpty = {{ lhs }}.IsEmpty();
+{%- if interface.ArgType("rhs").isRange -%}
     bool rightEmpty = {{ rhs }}.IsEmpty();
     if ( leftEmpty && rightEmpty )
     {
@@ -51,6 +47,17 @@
         Min( {{ lhs }}.Min(), {{ rhs }}.Min() ),
         Max( {{ lhs }}.Max(), {{ rhs }}.Max() )
     );
+{%- else -%}
+    if ( leftEmpty )
+    {
+        return {{ interface.returnType.className }}( {{ rhs }}, {{ rhs }} );
+    }
+
+    return {{ interface.returnType.className }}(
+        Min( {{ lhs }}.Min(), {{ rhs }} ),
+        Max( {{ lhs }}.Max(), {{ rhs }} )
+    );
+{%- endif -%}
 }
 {% endfor %}
 {% endblock %}
