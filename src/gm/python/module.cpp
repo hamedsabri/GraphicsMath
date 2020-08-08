@@ -45,6 +45,7 @@ void BindDegrees( pybind11::module& );
 void BindTrilinearInterpolation( pybind11::module& );
 void BindBilinearInterpolation( pybind11::module& );
 void BindRandomNumber( pybind11::module& );
+void BindTransformAABB( pybind11::module& );
 void BindCrossProduct( pybind11::module& );
 void BindLongestAxis( pybind11::module& );
 void BindSetTranslate( pybind11::module& );
@@ -125,6 +126,7 @@ PYBIND11_MODULE( gm, o_module )
     BindTrilinearInterpolation( o_module );
     BindBilinearInterpolation( o_module );
     BindRandomNumber( o_module );
+    BindTransformAABB( o_module );
     BindCrossProduct( o_module );
     BindLongestAxis( o_module );
     BindSetTranslate( o_module );

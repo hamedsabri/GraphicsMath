@@ -674,6 +674,21 @@ def GenerateFunctions():
             )
         )
 
+    # Transform aabb.
+    transformAABBOps = []
+    for matrixType in (VectorType((4,4), ScalarType(FLOAT)),):
+        vectorType = VectorType((matrixType.shape[0] - 1,), ScalarType(FLOAT))
+        rangeType = RangeType(vectorType)
+        transformAABBOps.append(
+            FunctionInterface(
+                arguments=[
+                    FunctionArg("matrix", matrixType, Mutability.Const),
+                    FunctionArg("aabb", rangeType, Mutability.Const),
+                ],
+                returnType=rangeType,
+            )
+        )
+
     # Look at.
     lookAtOps = []
     for valueType in (VectorType((3,), ScalarType(FLOAT)),):
@@ -735,6 +750,7 @@ def GenerateFunctions():
         FunctionGroup(["faceForward",], faceForwardOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["transformVector",], transformVectorOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["transformPoint",], transformPointOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["transformAABB",], transformAABBOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["lookAt",], lookAtOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["inverse",], matrixInverseOps, FunctionCategory.LINEAR_ALGEBRA,),
         # Ray tracing
