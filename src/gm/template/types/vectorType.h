@@ -127,6 +127,9 @@ public:
     /// \name Matrix identity element
     // --------------------------------------------------------------------- //
 
+    /// Get the identity element for this matrix type.
+    ///
+    /// \return The identity element.
     GM_HOST_DEVICE static constexpr inline {{ valueType.className }} Identity()
     {
         return {{ valueType.className }}(

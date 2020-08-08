@@ -148,6 +148,9 @@ public:
     /// \name Matrix identity element
     // --------------------------------------------------------------------- //
 
+    /// Get the identity element for this matrix type.
+    ///
+    /// \return The identity element.
     GM_HOST_DEVICE static constexpr inline Mat4f Identity()
     {
         return Mat4f( 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f );
