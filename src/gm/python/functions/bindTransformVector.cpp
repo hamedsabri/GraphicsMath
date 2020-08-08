@@ -12,6 +12,9 @@ GM_NS_USING
 
 void BindTransformVector( pybind11::module& o_module )
 {
+    o_module.def( "TransformVector", []( const Mat3f& i_matrix, const Vec2f& i_vector ) {
+        return TransformVector( i_matrix, i_vector );
+    } );
     o_module.def( "TransformVector", []( const Mat4f& i_matrix, const Vec3f& i_vector ) {
         return TransformVector( i_matrix, i_vector );
     } );

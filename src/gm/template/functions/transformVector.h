@@ -2,7 +2,7 @@
 {% import "functions/functionUtils.h" as functionUtils %}
 
 {%- block fileDoc -%}
-/// Point transformation.
+/// Vector transformation.
 {%- endblock %}
 
 {% block includes %}
@@ -24,12 +24,18 @@
 {{- functionUtils.signature(function, interface) -}}
 {
     return {{ vectorType.className }}(
-        {{ vector }}.X() * {{ matrix }}( 0, 0 ) + {{ vector }}.Y() * {{ matrix }}( 0, 1 ) +
-            {{ vector }}.Z() * {{ matrix }}( 0, 2 ),
-        {{ vector }}.X() * {{ matrix }}( 1, 0 ) + {{ vector }}.Y() * {{ matrix }}( 1, 1 ) +
-            {{ vector }}.Z() * {{ matrix }}( 1, 2 ),
-        {{ vector }}.X() * {{ matrix }}( 2, 0 ) + {{ vector }}.Y() * {{ matrix }}( 2, 1 ) +
-            {{ vector }}.Z() * {{ matrix }}( 2, 2 ) );
+{%- for row in range(vectorType.elementSize) -%}
+{%- for col in range(vectorType.elementSize) -%}
+        {{ vector }}[ {{ col }} ] * {{ matrix }}( {{ row }}, {{ col }} )
+{%- if col + 1 < vectorType.elementSize -%}
+    +
+{%- endif -%}
+{%- endfor -%}
+{%- if row + 1 < vectorType.elementSize -%}
+    ,
+{%- endif -%}
+{%- endfor -%}
+    );
 }
 {% endfor %}
 {% endblock %}

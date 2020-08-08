@@ -181,7 +181,22 @@ def RenderTemplate(templatePath, **kwargs):
             + templateStr.split(os.linesep)
         )
         template = JINJA2_ENVIRONMENT.from_string(templateStr)
-        code = template.render(math=math, min=min, max=max, abs=abs, **kwargs)
+
+        from types import (
+            ScalarType, VectorType, FLOAT, INT
+        )
+
+        code = template.render(
+            math=math,
+            min=min,
+            max=max,
+            abs=abs,
+            ScalarType=ScalarType,
+            VectorType=VectorType,
+            FLOAT=FLOAT,
+            INT=INT,
+            **kwargs
+        )
         return code
 
 

@@ -626,14 +626,28 @@ def GenerateFunctions():
             )
         )
 
-    # Transform point.
+    # Transform vector.
     transformVectorOps = []
-    for valueType in (VectorType((3,), ScalarType(FLOAT)),):
+    for matrixType in MATRIX_TYPES:
+        vectorType = VectorType((matrixType.shape[0] - 1,), ScalarType(FLOAT))
         transformVectorOps.append(
             FunctionInterface(
                 arguments=[
+                    FunctionArg("matrix", matrixType, Mutability.Const),
+                    FunctionArg("vector", vectorType, Mutability.Const),
+                ],
+                returnType=vectorType,
+            )
+        )
+
+    # Transform point.
+    transformPointOps = []
+    for valueType in (VectorType((3,), ScalarType(FLOAT)),):
+        transformPointOps.append(
+            FunctionInterface(
+                arguments=[
                     FunctionArg("matrix", VectorType((4, 4), ScalarType(FLOAT)), Mutability.Const),
-                    FunctionArg("vector", valueType, Mutability.Const),
+                    FunctionArg("point", valueType, Mutability.Const),
                 ],
                 returnType=valueType,
             )
@@ -683,7 +697,7 @@ def GenerateFunctions():
         FunctionGroup(["contains"], containerOps, FunctionCategory.BASIC),
         FunctionGroup(["longestAxis"], longestAxisOps, FunctionCategory.BASIC),
         # Linear algebra.
-        FunctionGroup(["isIdentity"], checkMatrixOps, FunctionCategory.LINEAR_ALGEBRA),
+        FunctionGroup(["isIdentity", "hasScale",], checkMatrixOps, FunctionCategory.LINEAR_ALGEBRA),
         FunctionGroup(["setIdentity"], setMatrixOps, FunctionCategory.LINEAR_ALGEBRA),
         FunctionGroup(["transpose"], matrixUnaryOps, FunctionCategory.LINEAR_ALGEBRA),
         FunctionGroup(["matrixProduct"], matrixBinaryOps, FunctionCategory.LINEAR_ALGEBRA),
@@ -697,7 +711,8 @@ def GenerateFunctions():
         FunctionGroup(["setRotate",], setRotateOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["coordinateSystem",], coordSysOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["faceForward",], faceForwardOps, FunctionCategory.LINEAR_ALGEBRA,),
-        FunctionGroup(["transformPoint", "transformVector",], transformVectorOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["transformVector",], transformVectorOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["transformPoint",], transformPointOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["lookAt",], lookAtOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["inverse",], matrixInverseOps, FunctionCategory.LINEAR_ALGEBRA,),
         # Ray tracing

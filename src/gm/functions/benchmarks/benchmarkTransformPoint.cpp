@@ -10,9 +10,9 @@
 TEST_CASE( "TransformPoint_Mat4f_Vec3f" )
 {
     gm::Mat4f matrix;
-    gm::Vec3f vector;
+    gm::Vec3f point;
     BENCHMARK( "TransformPoint" )
     {
-        return gm::TransformPoint( matrix, vector );
+        return gm::TransformPoint( matrix, point );
     };
 }
