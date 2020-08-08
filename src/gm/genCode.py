@@ -226,6 +226,22 @@ def GenerateFunctions():
             FunctionInterface(arguments=[FunctionArg("value", valueType, Mutability.Const),], returnType=valueType,)
         )
 
+    # Range unary operations.
+    rangeUnaryOps = []
+    for rangeType in RANGE_TYPES:
+
+        if rangeType.elementType.isScalar:
+            returnType = rangeType.elementType
+        else:
+            returnType = rangeType.elementType.elementType
+
+        rangeUnaryOps.append(
+            FunctionInterface(
+                arguments=[FunctionArg("range", rangeType, Mutability.Const),],
+                returnType=returnType,
+            )
+        )
+
     # Binary comparison operations.
     binaryComparisonOps = []
     for valueType in SCALAR_TYPES + VECTOR_TYPES:
@@ -653,6 +669,7 @@ def GenerateFunctions():
     functionGroups = [
         # Basic.
         FunctionGroup(["floor", "ceil", "abs",], unaryOps, FunctionCategory.BASIC),
+        FunctionGroup(["content",], rangeUnaryOps, FunctionCategory.BASIC),
         FunctionGroup(["min", "max",], binaryComparisonOps, FunctionCategory.BASIC),
         FunctionGroup(["quadraticRoots",], quadraticOps, FunctionCategory.BASIC),
         FunctionGroup(["degrees", "radians",], angleOps, FunctionCategory.BASIC),
