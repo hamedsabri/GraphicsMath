@@ -124,5 +124,5 @@ void BindMat4f( pybind11::module& o_module )
     cls.def( "GetElementSize", &Mat4f::GetElementSize );
 
     // Check for nans.
-    cls.def( "HasNans", &Mat4f::HasNans );
+    cls.def( "HasNaNs", &Mat4f::HasNaNs );
 }

@@ -87,5 +87,5 @@ void BindVec2i( pybind11::module& o_module )
     cls.def( "GetElementSize", &Vec2i::GetElementSize );
 
     // Check for nans.
-    cls.def( "HasNans", &Vec2i::HasNans );
+    cls.def( "HasNaNs", &Vec2i::HasNaNs );
 }

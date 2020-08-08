@@ -159,5 +159,5 @@ void Bind{{ valueType.className }}( pybind11::module& o_module )
     cls.def( "GetElementSize", &{{ valueType.className }}::GetElementSize );
 
     // Check for nans.
-    cls.def( "HasNans", &{{ valueType.className }}::HasNans );
+    cls.def( "HasNaNs", &{{ valueType.className }}::HasNaNs );
 }

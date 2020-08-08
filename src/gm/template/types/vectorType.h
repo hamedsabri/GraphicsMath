@@ -49,7 +49,7 @@ public:
 {%- endfor %}
         }
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
     }
 
     // --------------------------------------------------------------------- //
@@ -65,7 +65,7 @@ public:
     /// \return mutable element value.
     GM_HOST_DEVICE inline {{ valueType.elementType.className }}& operator[]( size_t i_index )
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
         GM_ASSERT( i_index < {{ valueType.elementSize }} );
         return m_elements[ i_index ];
     }
@@ -79,7 +79,7 @@ public:
     /// \return immutable element value.
     GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& operator[]( size_t i_index ) const
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
         GM_ASSERT( i_index < {{ valueType.elementSize }} );
         return m_elements[ i_index ];
     }
@@ -100,7 +100,7 @@ public:
     /// \return Element value.
     GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
         GM_ASSERT( i_row < {{ valueType.shape[0] }} );
         GM_ASSERT( i_column < {{ valueType.shape[1] }} );
         return m_elements[ i_row * {{ valueType.shape[ 0 ] }} + i_column ];
@@ -117,7 +117,7 @@ public:
     /// \return Element value.
     GM_HOST_DEVICE inline {{ valueType.elementType.className }}& operator()( size_t i_row, size_t i_column )
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
         GM_ASSERT( i_row < {{ valueType.shape[0] }} );
         GM_ASSERT( i_column < {{ valueType.shape[1] }} );
         return m_elements[ i_row * {{ valueType.shape[ 0 ] }} + i_column ];
@@ -162,7 +162,7 @@ public:
     /// \return Const reference to the element at index {{ loop.index0 }}.
     GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& {{ namedElement.accessorName }}() const
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
         return m_elements[ {{ loop.index0 }} ];
     }
 
@@ -171,7 +171,7 @@ public:
     /// \return Mutable reference to the element at index {{ loop.index0 }}.
     GM_HOST_DEVICE inline {{ valueType.elementType.className }}& {{ namedElement.accessorName }}()
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
         return m_elements[ {{ loop.index0 }} ];
     }
 {%- endfor %}
@@ -187,7 +187,7 @@ public:
     /// \return the new vector.
     GM_HOST_DEVICE inline {{ valueType.className }} operator+( const {{ valueType.className }}& i_vector ) const
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
         return {{ valueType.className }}(
 {% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] + i_vector.m_elements[ {{ index }} ]
@@ -201,7 +201,7 @@ public:
     /// Element-wise vector addition assignment.
     GM_HOST_DEVICE inline {{ valueType.className }}& operator+=( const {{ valueType.className }}& i_vector )
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
 {% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] += i_vector.m_elements[ {{ index }} ];
 {%- endfor %}
@@ -211,7 +211,7 @@ public:
     /// Vector subtraction.
     GM_HOST_DEVICE inline {{ valueType.className }} operator-( const {{ valueType.className }}& i_vector ) const
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
         return {{ valueType.className }}(
 {% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] - i_vector.m_elements[ {{ index }} ]
@@ -225,7 +225,7 @@ public:
     /// Vector subtraction assignment.
     GM_HOST_DEVICE inline {{ valueType.className }}& operator-=( const {{ valueType.className }}& i_vector )
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
 {% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] -= i_vector.m_elements[ {{ index }} ];
 {%- endfor %}
@@ -235,7 +235,7 @@ public:
     /// Scalar multiplication assignment.
     GM_HOST_DEVICE inline {{ valueType.className }}& operator*=( const {{ valueType.elementType.className }}& i_scalar )
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
 {% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] *= i_scalar;
 {%- endfor %}
@@ -245,7 +245,7 @@ public:
     /// Scalar division.
     GM_HOST_DEVICE inline {{ valueType.className }} operator/( const {{ valueType.elementType.className }}& i_scalar ) const
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
         GM_ASSERT( i_scalar != {{ valueType.CppValue(0) }} );
 {% if valueType.elementType == "float" or valueType.elementType == "double" -%}
         {{ valueType.elementType.className }} reciprocal = {{ valueType.CppValue(1) }} / i_scalar;
@@ -271,7 +271,7 @@ public:
     /// Scalar division assignment.
     GM_HOST_DEVICE inline {{ valueType.className }}& operator/=( const {{ valueType.elementType.className }}& i_scalar )
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
         GM_ASSERT( i_scalar != {{ valueType.CppValue(0) }} );
 {% if valueType.elementType == "float" or valueType.elementType == "double" -%}
         {{ valueType.elementType.className }} reciprocal = {{ valueType.CppValue(1) }} / i_scalar;
@@ -289,7 +289,7 @@ public:
     /// Unary negation.
     GM_HOST_DEVICE inline {{ valueType.className }} operator-() const
     {
-        GM_ASSERT( !HasNans() );
+        GM_ASSERT( !HasNaNs() );
         return {{ valueType.className }}(
 {% for index in range(valueType.elementSize) -%}
         -m_elements[ {{ index }} ]
@@ -342,7 +342,7 @@ public:
     // --------------------------------------------------------------------- //
 
     /// Are any of the element values NaNs?
-    GM_HOST_DEVICE inline bool HasNans() const
+    GM_HOST_DEVICE inline bool HasNaNs() const
     {
         return
 {% for index in range(valueType.elementSize) -%}
@@ -400,7 +400,7 @@ private:
 /// Vector-scalar multiplication.
 GM_HOST_DEVICE inline {{ valueType.className }} operator*( const {{ valueType.className }}& i_vector, const {{ valueType.elementType.className }}& i_scalar )
 {
-    GM_ASSERT( !i_vector.HasNans() );
+    GM_ASSERT( !i_vector.HasNaNs() );
     return {{ valueType.className }}(
 {% for index in range(valueType.elementSize) -%}
     i_vector[ {{ index }} ] * i_scalar
@@ -414,7 +414,7 @@ GM_HOST_DEVICE inline {{ valueType.className }} operator*( const {{ valueType.cl
 /// Scalar-vector multiplication.
 GM_HOST_DEVICE inline {{ valueType.className }} operator*( const {{ valueType.elementType.className }}& i_scalar, const {{ valueType.className }}& i_vector )
 {
-    GM_ASSERT( !i_vector.HasNans() );
+    GM_ASSERT( !i_vector.HasNaNs() );
     return {{ valueType.className }}(
 {% for index in range(valueType.elementSize) -%}
     i_vector[ {{ index }} ] * i_scalar

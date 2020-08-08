@@ -117,5 +117,5 @@ void BindMat3f( pybind11::module& o_module )
     cls.def( "GetElementSize", &Mat3f::GetElementSize );
 
     // Check for nans.
-    cls.def( "HasNans", &Mat3f::HasNans );
+    cls.def( "HasNaNs", &Mat3f::HasNaNs );
 }

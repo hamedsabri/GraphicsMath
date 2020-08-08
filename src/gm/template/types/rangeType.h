@@ -287,13 +287,13 @@ public:
     /// Check if the min or max contain NaN values.
     ///
     /// \return If this range has NaN values.
-    GM_HOST_DEVICE inline bool HasNans() const
+    GM_HOST_DEVICE inline bool HasNaNs() const
     {
         return
 {%- if valueType.elementType.isScalar %}
         std::isnan( Min() ) || std::isnan( Max() )
 {%- elif valueType.elementType.isVector %}
-        Min().HasNans() || Max().HasNans()
+        Min().HasNaNs() || Max().HasNaNs()
 {%- endif %}
         ;
     }
