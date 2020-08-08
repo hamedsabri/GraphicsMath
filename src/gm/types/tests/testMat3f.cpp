@@ -92,6 +92,13 @@ TEST_CASE( "Mat3f_MatrixElementWriteAccess" )
     CHECK( matrix == gm::Mat3f( 0.0f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f ) );
 }
 
+TEST_CASE( "Mat3f_Identity" )
+{
+    gm::Mat3f matrix = gm::Mat3f::Identity();
+
+    CHECK( matrix == gm::Mat3f( 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f ) );
+}
+
 TEST_CASE( "Mat3f_Addition" )
 {
     gm::Mat3f matrixA = gm::Mat3f( 0.0f, 2.0f, 4.0f, 6.0f, 8.0f, 10.0f, 12.0f, 14.0f, 16.0f );

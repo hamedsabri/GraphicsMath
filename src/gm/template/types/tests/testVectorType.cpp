@@ -64,6 +64,28 @@ TEST_CASE( "{{ valueType.className }}_MatrixElementWriteAccess" )
 {%- endfor %}
     CHECK( {{ valueType.varName }} == {{- typeUtils.GenArithmeticSequence( valueType, 1 ) -}});
 }
+
+TEST_CASE( "{{ valueType.className }}_Identity" )
+{
+    gm::{{ valueType.className }} {{ valueType.varName }} = gm::{{ valueType.className }}::Identity();
+
+    CHECK( {{ valueType.varName }} == gm::{{ valueType.className }}(
+{% for row in range(valueType.shape[0]) -%}
+{% for col in range(valueType.shape[1]) -%}
+{% if row == col -%}
+    {{ valueType.CppValue( 1 ) }}
+{%- else -%}
+    {{ valueType.CppValue( 0 ) }}
+{%- endif %}
+{% if row + 1 < valueType.shape[0] or col + 1 < valueType.shape[ 1 ] -%}
+    ,
+{%- endif %}
+{%- endfor -%}
+{%- endfor -%}
+        )
+    );
+}
+
 {%- endif %}
 
 {% for namedElement in valueType.namedElements %}

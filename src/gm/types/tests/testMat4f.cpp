@@ -190,6 +190,15 @@ TEST_CASE( "Mat4f_MatrixElementWriteAccess" )
                                 15.0f ) );
 }
 
+TEST_CASE( "Mat4f_Identity" )
+{
+    gm::Mat4f matrix = gm::Mat4f::Identity();
+
+    CHECK(
+        matrix ==
+        gm::Mat4f( 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f ) );
+}
+
 TEST_CASE( "Mat4f_Addition" )
 {
     gm::Mat4f matrixA = gm::Mat4f( 0.0f,

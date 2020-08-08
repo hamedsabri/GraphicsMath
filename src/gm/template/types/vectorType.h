@@ -122,6 +122,29 @@ public:
         GM_ASSERT( i_column < {{ valueType.shape[1] }} );
         return m_elements[ i_row * {{ valueType.shape[ 0 ] }} + i_column ];
     }
+
+    // --------------------------------------------------------------------- //
+    /// \name Matrix identity element
+    // --------------------------------------------------------------------- //
+
+    GM_HOST_DEVICE static constexpr inline {{ valueType.className }} Identity()
+    {
+        return {{ valueType.className }}(
+{% for row in range(valueType.shape[0]) -%}
+{% for col in range(valueType.shape[1]) -%}
+{% if row == col -%}
+    {{ valueType.CppValue( 1 ) }}
+{%- else -%}
+    {{ valueType.CppValue( 0 ) }}
+{%- endif %}
+{% if row + 1 < valueType.shape[0] or col + 1 < valueType.shape[ 1 ] -%}
+    ,
+{%- endif %}
+{%- endfor -%}
+{%- endfor -%}
+        );
+    }
+
 {%- endif %}
 
 {% if valueType.shape|length == 1 and valueType.elementSize <= 4 -%}
