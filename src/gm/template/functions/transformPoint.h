@@ -18,7 +18,8 @@
 /// Transform a \p {{ point }} with the transformation matrix \p {{ matrix }}.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ matrix }} The input matrix to transpose.
+/// \param {{ matrix }} The transformation matrix.
+/// \param {{ point }} The point to transform.
 ///
 /// \return Transformed point.
 {{- functionUtils.signature(function, interface) -}}

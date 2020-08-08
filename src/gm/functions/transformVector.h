@@ -21,7 +21,8 @@ GM_NS_OPEN
 /// Transform a \p i_vector with the transformation matrix \p i_matrix.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \param i_matrix The input matrix to transpose.
+/// \param i_matrix The transformation matrix.
+/// \param i_vector The vector to transform.
 ///
 /// \return Transformed vector.
 GM_HOST_DEVICE inline Vec2f TransformVector( const Mat3f& i_matrix, const Vec2f& i_vector )
@@ -33,7 +34,8 @@ GM_HOST_DEVICE inline Vec2f TransformVector( const Mat3f& i_matrix, const Vec2f&
 /// Transform a \p i_vector with the transformation matrix \p i_matrix.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \param i_matrix The input matrix to transpose.
+/// \param i_matrix The transformation matrix.
+/// \param i_vector The vector to transform.
 ///
 /// \return Transformed vector.
 GM_HOST_DEVICE inline Vec3f TransformVector( const Mat4f& i_matrix, const Vec3f& i_vector )

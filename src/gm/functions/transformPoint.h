@@ -19,7 +19,8 @@ GM_NS_OPEN
 /// Transform a \p i_point with the transformation matrix \p i_matrix.
 /// \ingroup gm_functions_linearAlgebra
 ///
-/// \param i_matrix The input matrix to transpose.
+/// \param i_matrix The transformation matrix.
+/// \param i_point The point to transform.
 ///
 /// \return Transformed point.
 GM_HOST_DEVICE inline Vec3f TransformPoint( const Mat4f& i_matrix, const Vec3f& i_point )
