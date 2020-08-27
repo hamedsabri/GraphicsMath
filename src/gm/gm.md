@@ -20,10 +20,6 @@ A convenience build script is provided at the root of the repository for buildin
 
 To build python bindings for GraphicsMath, set the cmake option `BUILD_PYTHON_BINDINGS="ON"` when configuring cmake.
 
-\subsection GM_section_building_cudaDeviceCode Including in CUDA Device Code
-
-To include and utilize GraphicsMath types and functions in CUDA device code, set the pre-processor definition `GM_CUDA_SUPPORT`.
-
 \section GM_section_developerNotes Developer Notes
 
 \subsection GM_section_developerNotes_sourceTree Source Tree
