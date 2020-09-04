@@ -23,11 +23,13 @@ function(
     )
 
     target_compile_options(${TARGET_NAME}
-        PRIVATE -g             # Include debug symbols.
-                -O3            # Highest degree of code optimisation.
-                -Wall          # Enable _all_ warnings.
+        PRIVATE -g      # Include debug symbols.
+                -O3     # Highest degree of code optimisation.
+                -Wall   # Enable _all_ warnings.
+                -Werror # Error on compilation for warnings.
+                -fno-omit-frame-pointer # Preserve frame pointer register.
+
                 -Wno-comment   # Disable warning about multi-line comments.
-                -Werror        # Error on compilation for warnings.
     )
 
     target_compile_definitions(${TARGET_NAME}
