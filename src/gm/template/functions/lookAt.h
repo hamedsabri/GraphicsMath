@@ -28,7 +28,7 @@
 /// \param {{ look }} Point in space for the camera to look at.
 /// \param {{ up }} The up vector of the camera, for orientation purposes.
 ///
-/// \return Transformation for positioning and orienting the camera.
+/// \return Transformation for positioning and orienting camera-space into world space.
 {{- functionUtils.signature(function, interface) -}}
 {
     // Construct a 3D orthonormal basis of the camera.
@@ -63,10 +63,8 @@
     matrix( 2, 3 ) = {{ position }}.Z();
     matrix( 3, 3 ) = 1;
 
-    // Compute inverse.
-    {{ matrixType.className }} inverse;
-    GM_VERIFY( Inverse( matrix, inverse ) );
-    return inverse;
+    // Return camera-to-world matrix.
+    return matrix;
 }
 
 {% endfor %}
