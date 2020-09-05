@@ -4,9 +4,12 @@ Common code generation utilities.
 
 import os
 import shlex
+import shutil
 import subprocess
 import math
 import logging
+import tempfile
+import difflib
 
 from jinja2 import (
     Environment,
@@ -42,7 +45,23 @@ JINJA2_ENVIRONMENT = Environment(
 """
 Global logger
 """
-LOGGER = logging.getLogger("gm")
+global LOGGER
+LOGGER = logging.getLogger("GraphicsMath")
+
+
+def SetupLogging(level=logging.INFO):
+    """
+    Set the level of the global logger.
+
+    Args:
+        level (logging.Level): the level of the logging.
+    """
+    # Set the formatting output:
+    handler = logging.StreamHandler()
+    handler.setLevel(level)
+
+    LOGGER.addHandler(handler)
+    LOGGER.setLevel(level)
 
 
 class Style:
@@ -99,7 +118,7 @@ def RunCommand(command, expectedCode=0):
         command (str): The command to run.
         expectedCode (int): Expected return code of the process.
     """
-    LOGGER.info("Running command {}".format(command))
+    LOGGER.debug("Running command {}".format(command))
     process = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     stdout, _ = process.communicate()
     if process.returncode != expectedCode:
@@ -119,25 +138,9 @@ def WriteFile(filePath, content):
         filePath (str): path to write to.
         content (str): content to write.
     """
-    LOGGER.info("Generated {!r}".format(filePath))
+    LOGGER.debug("Generated file {!r}".format(filePath))
     with open(filePath, "w") as f:
         f.write(content)
-
-
-def FormatCode(fileNames):
-    """
-    Run clang-format over input files, formatting in-place.
-
-    Args:
-        fileNames (list): input files to automatically format.
-    """
-    pythonFiles = [fileName for fileName in fileNames if GetFileExt(fileName) == PY_SOURCE_EXT]
-    if pythonFiles:
-        RunCommand("black " + " ".join(pythonFiles))
-
-    cppFiles = [fileName for fileName in fileNames if GetFileExt(fileName) in (CPP_SOURCE_EXT, CPP_HEADER_EXT)]
-    if cppFiles:
-        RunCommand("clang-format -i " + " ".join(cppFiles))
 
 
 def GetTemplateFile(templateName):
@@ -200,6 +203,19 @@ def RenderTemplate(templatePath, **kwargs):
         return code
 
 
+def FormatCode(filePath):
+    """
+    Run automated code formatting and modify ``filePath`` in place.
+
+    Args:
+        fileNames (list): input files to automatically format.
+    """
+    if GetFileExt(filePath) == PY_SOURCE_EXT:
+        RunCommand("black " + filePath)
+    elif GetFileExt(filePath) in (CPP_SOURCE_EXT, CPP_HEADER_EXT):
+        RunCommand("clang-format -i " + filePath)
+
+
 def GenerateCode(relTemplatePath, outputPath, **kwargs):
     """
     Generate code by rendering the specified jinja2 template at ``relTemplatePath``, passing in ``kwargs``,
@@ -210,5 +226,30 @@ def GenerateCode(relTemplatePath, outputPath, **kwargs):
     """
     code = RenderTemplate(GetTemplateFile(relTemplatePath), **kwargs)
     outputAbsPath = os.path.abspath(outputPath)
-    WriteFile(outputAbsPath, code)
+
+    if os.path.isfile(outputAbsPath):
+        # Read old file contents.
+        with open(outputAbsPath, "r") as f:
+            oldContent = f.read()
+
+        # Generate new code file.
+        tempFilePath = os.path.join(
+            os.path.dirname(outputAbsPath),
+            "_TMP_" + os.path.basename(outputAbsPath)
+        )
+
+        WriteFile(tempFilePath, code)
+        FormatCode(tempFilePath)
+        with open(tempFilePath, "r") as f:
+            newContent = f.read()
+
+        # If there is code diff, then overwrite old file.
+        codeDiff = difflib.unified_diff(oldContent, newContent)
+        if list(codeDiff):
+            WriteFile(outputAbsPath, newContent)
+
+        os.remove(tempFilePath)
+    else:
+        WriteFile(outputAbsPath, code)
+
     return outputAbsPath

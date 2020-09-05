@@ -5,6 +5,8 @@ Main entry point / script for generating GraphicsMath C++ and Python source code
 """
 
 import os
+import argparse
+import logging
 
 from codeGen.utils import (
     GetTemplateFile,
@@ -14,6 +16,7 @@ from codeGen.utils import (
     LowerCamelCase,
     UpperCamelCase,
     PrintMessage,
+    SetupLogging,
 )
 
 from codeGen.types import (
@@ -814,6 +817,20 @@ def GenerateFunctions():
 #
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser("GraphicsMath code generation tool.")
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        help="Set the logging level to DEBUG, producing more verbose outputs.",
+        action="store_true",
+    )
+
+    args = parser.parse_args()
+    if args.verbose:
+        SetupLogging(logging.DEBUG)
+    else:
+        SetupLogging()
+
     # Generate the complete set ValueTypes first, pre-requisite to generating functions.
     filePaths, valueTypes = GenerateTypes()
 
@@ -831,7 +848,3 @@ if __name__ == "__main__":
             UpperCamelCase=UpperCamelCase,
         )
     )
-
-    # Format all the code to standard.
-    PrintMessage("Formatting code...")
-    FormatCode(filePaths)
