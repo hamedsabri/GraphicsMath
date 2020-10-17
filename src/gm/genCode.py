@@ -23,7 +23,6 @@ from codeGen.types import (
     ScalarType,
     VectorType,
     RangeType,
-    ArrayType,
     CompositeType,
     NamedElement,
     INT,
@@ -109,13 +108,6 @@ RANGE_TYPES_FLOAT = [RangeType(valueType) for valueType in (SINGLE_INDEX_VECTOR_
 
 
 """
-ARRAY_TYPES is the fixed, global set of array-based value types to generate code for.
-"""
-ARRAY_TYPES = [ArrayType(scalarType) for scalarType in SCALAR_TYPES] + [
-    ArrayType(vectorType) for vectorType in VECTOR_TYPES
-]
-
-"""
 COMPOSITE_TYPES is a dict of type name (str) -> type object (CompositeType).
 It is populated in GenerateCompositeTypes.
 """
@@ -145,7 +137,6 @@ def GenerateTypes():
     """
     Top-level entry point for generating all data type source files.
     Vectors and matrices types will be generated.
-    Array types of pod, vectors, and matrices will also be generated.
 
     Returns:
         tuple: (
@@ -153,13 +144,12 @@ def GenerateTypes():
             list: associated ValueType(s)
         )
     """
-    # TODO Generate composite types.
     PrintMessage("Generating types...")
 
     PopulateCompositeTypes()
 
     filePaths = []
-    valueTypes = VECTOR_TYPES + RANGE_TYPES + ARRAY_TYPES + COMPOSITE_TYPES.values()
+    valueTypes = VECTOR_TYPES + RANGE_TYPES + COMPOSITE_TYPES.values()
     for valueType in valueTypes:
         # C++ source code.
         filePaths.append(

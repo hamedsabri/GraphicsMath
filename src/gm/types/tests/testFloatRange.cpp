@@ -4,8 +4,9 @@
 
 #include <catch2/catch.hpp>
 
-#include <gm/types/floatArray.h>
 #include <gm/types/floatRange.h>
+
+#include <vector>
 
 TEST_CASE( "FloatRange_DefaultConstructor" )
 {

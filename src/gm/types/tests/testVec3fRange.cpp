@@ -4,8 +4,9 @@
 
 #include <catch2/catch.hpp>
 
-#include <gm/types/vec3fArray.h>
 #include <gm/types/vec3fRange.h>
+
+#include <vector>
 
 TEST_CASE( "Vec3fRange_DefaultConstructor" )
 {

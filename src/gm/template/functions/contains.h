@@ -2,7 +2,7 @@
 {% import "functions/functionUtils.h" as functionUtils %}
 
 {%- block fileDoc -%}
-/// Check if a container, such as a range or array, contains a specified element or range of elements.
+/// Check if a container, such as a range contains a specified element or range of elements.
 {%- endblock %}
 
 {% block includes %}

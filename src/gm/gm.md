@@ -20,7 +20,7 @@ See README.md on https://github.com/moddyz/GraphicsMath for build instructions.
 
 The C++ headers are organized into the three categories:
 - \p src/gm/base - common utilities and definitions.
-- \p src/gm/types - computer graphics value types (vectors, arrays).
+- \p src/gm/types - computer graphics value types (vectors and ranges).
 - \p src/gm/functions - functionality which operate on \p gm types.
 
 Python bindings for \p types and \p functions are available under \p src/gm/python.
@@ -56,13 +56,9 @@ The GraphicsMath project is hosted on GitHub: https://github.com/moddyz/Graphics
 \ingroup GM_types
 \brief Minimum, maximum range of elemental value types.
 
-\defgroup gm_types_array Array types
-\ingroup GM_types
-\brief Dynamic length containers of elemental value types.
-
 \defgroup gm_types_composite Composite types
 \ingroup GM_types
-\brief \em Named element compositions of array, vector, scalar, or other composite value types.
+\brief \em Named element compositions of vector, scalar, or other composite value types.
 
 \defgroup GM_functions Functions
 \brief Functional operators commonly used in computer graphics.
