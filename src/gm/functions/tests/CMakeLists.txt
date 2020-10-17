@@ -1,5 +1,5 @@
 file(GLOB CPPFILES *.cpp)
-cpp_test_program(test_${CATEGORY_NAME}
+cpp_test(test_${CATEGORY_NAME}
     CPPFILES
         ${CPPFILES}
     LIBRARIES

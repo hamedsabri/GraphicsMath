@@ -1,21 +1,8 @@
-include(
-    Private
-)
+include(CXXTools)
 
-# Builds a C++ python module.
+# Builds a pybind11-based C++ python module.
 #
-# pybind11 and Python::Python are automatically added as library dependencies.
-#
-# Multi-value Arguments:
-#   CPPFILES
-#       C++ source files.
-#   INCLUDE_PATHS
-#       Include paths for compiling the source files.
-#   LIBRARIES
-#       Library dependencies used for linking, but also inheriting INTERFACE properties.
-#   DEFINES
-#       Custom preprocessor defines to set.
-#
+# pybind11 will need to be made available as an imported library.
 function(
     cpp_python_module
     MODULE_NAME
@@ -42,7 +29,7 @@ function(
     # Add a prefix to avoid conflict(s) between C++ targets and python target names.
     # Other targets should not be linking against python plugins anyway, so it is ok
     # if the target name is obfuscated.
-    set(TARGET_NAME pylib_${MODULE_NAME})
+    set(TARGET_NAME _${MODULE_NAME})
 
     # Add a new shared library target.
     add_library(${TARGET_NAME}
@@ -50,32 +37,24 @@ function(
         ${args_CPPFILES}
     )
 
-    # Apply common compiler properties, and include path properties.
-    _set_compile_properties(${TARGET_NAME}
+    # Apply properties.
+    _cpp_target_properties(${LIBRARY_NAME}
         INCLUDE_PATHS
             ${args_INCLUDE_PATHS}
         DEFINES
             ${args_DEFINES}
+        LIBRARIES
+            ${args_LIBRARIES}
     )
-
-    _set_link_properties(${TARGET_NAME})
 
     # Strip lib prefix.
     set_target_properties(${TARGET_NAME} PROPERTIES PREFIX "")
 
-    # Link to libraries.
-    target_link_libraries(${TARGET_NAME}
-        PRIVATE
-            ${args_LIBRARIES}
-            Python::Python
-            pybind11
-    )
-
+    # Set library name (due to prefixed target name).
     set_target_properties(${TARGET_NAME}
         PROPERTIES
             OUTPUT_NAME ${MODULE_NAME}
     )
-
 
     # Install the built library.
     install(
@@ -85,4 +64,3 @@ function(
     )
 
 endfunction() # cpp_library
-

@@ -6,7 +6,7 @@
 #include <sstream>
 
 #include <gm/base/diagnostic.h>
-{% if valueType.elementType.className != "int" -%}
+{% if valueType.isFloatingPoint -%}
 #include <gm/base/almost.h>
 {%- endif %}
 {% endblock %}
@@ -49,7 +49,9 @@ public:
 {%- endfor %}
         }
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
     }
 
     // --------------------------------------------------------------------- //
@@ -65,7 +67,9 @@ public:
     /// \return mutable element value.
     GM_HOST_DEVICE inline {{ valueType.elementType.className }}& operator[]( size_t i_index )
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
         GM_ASSERT( i_index < {{ valueType.elementSize }} );
         return m_elements[ i_index ];
     }
@@ -79,7 +83,9 @@ public:
     /// \return immutable element value.
     GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& operator[]( size_t i_index ) const
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
         GM_ASSERT( i_index < {{ valueType.elementSize }} );
         return m_elements[ i_index ];
     }
@@ -100,7 +106,9 @@ public:
     /// \return Element value.
     GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& operator()( size_t i_row, size_t i_column ) const
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
         GM_ASSERT( i_row < {{ valueType.shape[0] }} );
         GM_ASSERT( i_column < {{ valueType.shape[1] }} );
         return m_elements[ i_row * {{ valueType.shape[ 0 ] }} + i_column ];
@@ -117,7 +125,9 @@ public:
     /// \return Element value.
     GM_HOST_DEVICE inline {{ valueType.elementType.className }}& operator()( size_t i_row, size_t i_column )
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
         GM_ASSERT( i_row < {{ valueType.shape[0] }} );
         GM_ASSERT( i_column < {{ valueType.shape[1] }} );
         return m_elements[ i_row * {{ valueType.shape[ 0 ] }} + i_column ];
@@ -162,7 +172,9 @@ public:
     /// \return Const reference to the element at index {{ loop.index0 }}.
     GM_HOST_DEVICE inline const {{ valueType.elementType.className }}& {{ namedElement.accessorName }}() const
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
         return m_elements[ {{ loop.index0 }} ];
     }
 
@@ -171,7 +183,9 @@ public:
     /// \return Mutable reference to the element at index {{ loop.index0 }}.
     GM_HOST_DEVICE inline {{ valueType.elementType.className }}& {{ namedElement.accessorName }}()
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
         return m_elements[ {{ loop.index0 }} ];
     }
 {%- endfor %}
@@ -187,7 +201,9 @@ public:
     /// \return the new vector.
     GM_HOST_DEVICE inline {{ valueType.className }} operator+( const {{ valueType.className }}& i_vector ) const
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
         return {{ valueType.className }}(
 {% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] + i_vector.m_elements[ {{ index }} ]
@@ -201,7 +217,9 @@ public:
     /// Element-wise vector addition assignment.
     GM_HOST_DEVICE inline {{ valueType.className }}& operator+=( const {{ valueType.className }}& i_vector )
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
 {% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] += i_vector.m_elements[ {{ index }} ];
 {%- endfor %}
@@ -211,7 +229,9 @@ public:
     /// Vector subtraction.
     GM_HOST_DEVICE inline {{ valueType.className }} operator-( const {{ valueType.className }}& i_vector ) const
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
         return {{ valueType.className }}(
 {% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] - i_vector.m_elements[ {{ index }} ]
@@ -225,7 +245,9 @@ public:
     /// Vector subtraction assignment.
     GM_HOST_DEVICE inline {{ valueType.className }}& operator-=( const {{ valueType.className }}& i_vector )
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
 {% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] -= i_vector.m_elements[ {{ index }} ];
 {%- endfor %}
@@ -235,7 +257,9 @@ public:
     /// Scalar multiplication assignment.
     GM_HOST_DEVICE inline {{ valueType.className }}& operator*=( const {{ valueType.elementType.className }}& i_scalar )
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif -%}
 {% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] *= i_scalar;
 {%- endfor %}
@@ -245,9 +269,11 @@ public:
     /// Scalar division.
     GM_HOST_DEVICE inline {{ valueType.className }} operator/( const {{ valueType.elementType.className }}& i_scalar ) const
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
         GM_ASSERT( i_scalar != {{ valueType.CppValue(0) }} );
-{% if valueType.elementType == "float" or valueType.elementType == "double" -%}
+{% if valueType.isFloatingPoint -%}
         {{ valueType.elementType.className }} reciprocal = {{ valueType.CppValue(1) }} / i_scalar;
         return {{ valueType.className }}(
 {% for index in range(valueType.elementSize) -%}
@@ -271,9 +297,11 @@ public:
     /// Scalar division assignment.
     GM_HOST_DEVICE inline {{ valueType.className }}& operator/=( const {{ valueType.elementType.className }}& i_scalar )
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
         GM_ASSERT( i_scalar != {{ valueType.CppValue(0) }} );
-{% if valueType.elementType == "float" or valueType.elementType == "double" -%}
+{% if valueType.isFloatingPoint -%}
         {{ valueType.elementType.className }} reciprocal = {{ valueType.CppValue(1) }} / i_scalar;
 {% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] *= reciprocal;
@@ -289,7 +317,9 @@ public:
     /// Unary negation.
     GM_HOST_DEVICE inline {{ valueType.className }} operator-() const
     {
+{% if valueType.isFloatingPoint -%}
         GM_ASSERT( !HasNaNs() );
+{%- endif %}
         return {{ valueType.className }}(
 {% for index in range(valueType.elementSize) -%}
         -m_elements[ {{ index }} ]
@@ -341,6 +371,7 @@ public:
     /// \name Debug
     // --------------------------------------------------------------------- //
 
+{% if valueType.isFloatingPoint -%}
     /// Are any of the element values NaNs?
     GM_HOST_DEVICE inline bool HasNaNs() const
     {
@@ -353,6 +384,7 @@ public:
 {%- endfor %}
         ;
     }
+{%- endif %}
 
     /// Get the string representation.  For debugging purposes.
     ///
@@ -400,7 +432,9 @@ private:
 /// Vector-scalar multiplication.
 GM_HOST_DEVICE inline {{ valueType.className }} operator*( const {{ valueType.className }}& i_vector, const {{ valueType.elementType.className }}& i_scalar )
 {
+{% if valueType.isFloatingPoint -%}
     GM_ASSERT( !i_vector.HasNaNs() );
+{%- endif %}
     return {{ valueType.className }}(
 {% for index in range(valueType.elementSize) -%}
     i_vector[ {{ index }} ] * i_scalar
@@ -414,7 +448,9 @@ GM_HOST_DEVICE inline {{ valueType.className }} operator*( const {{ valueType.cl
 /// Scalar-vector multiplication.
 GM_HOST_DEVICE inline {{ valueType.className }} operator*( const {{ valueType.elementType.className }}& i_scalar, const {{ valueType.className }}& i_vector )
 {
+{% if valueType.isFloatingPoint -%}
     GM_ASSERT( !i_vector.HasNaNs() );
+{%- endif %}
     return {{ valueType.className }}(
 {% for index in range(valueType.elementSize) -%}
     i_vector[ {{ index }} ] * i_scalar
