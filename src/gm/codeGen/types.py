@@ -204,6 +204,13 @@ class ScalarType(ValueType):
         """
         return True
 
+    @property
+    def isFloatingPoint(self):
+        """
+        Value type is floating point.
+        """
+        return self.className in (FLOAT, DOUBLE)
+
     def CppValue(self, value):
         """
         Convert the ``value`` instance to the C++ compliant value of the current type, as a string.
@@ -291,6 +298,13 @@ class ElementContainerType(ValueType):
             str: A name for variables of this type.
         """
         return self.CATEGORY
+
+    @property
+    def isFloatingPoint(self):
+        """
+        Value type is floating point.
+        """
+        return self.elementType.isFloatingPoint
 
 
 class VectorType(ElementContainerType):

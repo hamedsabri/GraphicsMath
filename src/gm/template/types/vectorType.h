@@ -247,7 +247,7 @@ public:
     {
         GM_ASSERT( !HasNaNs() );
         GM_ASSERT( i_scalar != {{ valueType.CppValue(0) }} );
-{% if valueType.elementType == "float" or valueType.elementType == "double" -%}
+{% if valueType.isFloatingPoint -%}
         {{ valueType.elementType.className }} reciprocal = {{ valueType.CppValue(1) }} / i_scalar;
         return {{ valueType.className }}(
 {% for index in range(valueType.elementSize) -%}
@@ -273,7 +273,7 @@ public:
     {
         GM_ASSERT( !HasNaNs() );
         GM_ASSERT( i_scalar != {{ valueType.CppValue(0) }} );
-{% if valueType.elementType == "float" or valueType.elementType == "double" -%}
+{% if valueType.isFloatingPoint -%}
         {{ valueType.elementType.className }} reciprocal = {{ valueType.CppValue(1) }} / i_scalar;
 {% for index in range(valueType.elementSize) -%}
         m_elements[ {{ index }} ] *= reciprocal;
