@@ -1,3 +1,5 @@
+![Build and test](https://github.com/moddyz/GraphicsMath/workflows/Build%20and%20test/badge.svg)
+
 # GraphicsMath
 
 **GraphicsMath** is a C++ header-only computer graphics math library. 
@@ -8,31 +10,37 @@ Optional features include:
 
 ## Table of Contents
 
-- [Documentation](#documentation)
+- [Dependencies](#dependencies)
 - [Building](#building)
-  - [Requirements](#requirements)
-- [Build Status](#build-status)
+- [Documentation](#documentation)
+
+### Dependencies
+
+The following dependencies are mandatory:
+- C++ compiler
+- [CMake](https://cmake.org/documentation/) (3.12 or greater)
+
+The following dependencies are optional:
+- [Python](https://www.python.org/) for python bindings.
+- [Doxygen](https://www.doxygen.nl/index.html) and [graphiviz](https://graphviz.org/) for documentation.
+
+## Building
+
+Example snippet for building this project:
+```
+mkdir build && cd build
+cmake -DCMAKE_INSTALL_PREFIX="/apps/GraphicsMath/" ..
+cmake --build  . -- VERBOSE=1 -j8 install
+```
+CMake options for configuring this project:
+
+| CMake Variable name     | Description                                                            | Default |
+| ----------------------- | ---------------------------------------------------------------------- | ------- |
+| `BUILD_TESTING`         | Build tests.                                                           | `OFF`   |
+| `BUILD_DOCUMENTATION`   | Build documentation.                                                   | `OFF`   |
+| `BUILD_PYTHON_BINDINGS` | Build python bindings.                                                 | `OFF`   |
+| `BUILD_BENCHMARKING`    | Build performance benchmarking tests.                                  | `OFF`   |
 
 ## Documentation
 
 Doxygen documentation based on the latest state of master, [hosted by GitHub Pages](https://moddyz.github.io/GraphicsMath/).
-
-## Building
-
-A convenience build script is provided, for building all targets, and optionally installing to a location:
-```
-./build.sh <OPTIONAL_INSTALL_LOCATION>
-```
-
-### Requirements
-
-- `>= CMake-3.17`
-- `>= C++17`
-- `doxygen` and `graphviz` (optional for documentation)
-
-## Build Status
-
-|       | master | 
-| ----- | ------ | 
-| macOS-10.14 | [![Build Status](https://travis-ci.com/moddyz/GraphicsMath.svg?branch=master)](https://travis-ci.com/moddyz/GraphicsMath) |
-
