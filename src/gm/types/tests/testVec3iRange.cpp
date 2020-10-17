@@ -4,8 +4,9 @@
 
 #include <catch2/catch.hpp>
 
-#include <gm/types/vec3iArray.h>
 #include <gm/types/vec3iRange.h>
+
+#include <vector>
 
 TEST_CASE( "Vec3iRange_DefaultConstructor" )
 {
@@ -64,14 +65,14 @@ TEST_CASE( "Vec3iRange_IsEmpty" )
 
 TEST_CASE( "Vec3iRange_RangeIteration" )
 {
-    gm::Vec3iRange range( gm::Vec3i( -2, -2, -2 ), gm::Vec3i( 4, 4, 4 ) );
-    gm::Vec3iArray array;
+    gm::Vec3iRange           range( gm::Vec3i( -2, -2, -2 ), gm::Vec3i( 4, 4, 4 ) );
+    std::vector< gm::Vec3i > array;
     for ( const gm::Vec3i& value : range )
     {
         array.push_back( value );
     }
 
-    gm::Vec3iArray expectedArray = {
+    std::vector< gm::Vec3i > expectedArray = {
         gm::Vec3i( -2, -2, -2 ), gm::Vec3i( -1, -2, -2 ), gm::Vec3i( 0, -2, -2 ),  gm::Vec3i( 1, -2, -2 ),
         gm::Vec3i( 2, -2, -2 ),  gm::Vec3i( 3, -2, -2 ),  gm::Vec3i( -2, -1, -2 ), gm::Vec3i( -1, -1, -2 ),
         gm::Vec3i( 0, -1, -2 ),  gm::Vec3i( 1, -1, -2 ),  gm::Vec3i( 2, -1, -2 ),  gm::Vec3i( 3, -1, -2 ),

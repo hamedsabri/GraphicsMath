@@ -56,10 +56,6 @@ The GraphicsMath project is hosted on GitHub: https://github.com/moddyz/Graphics
 \ingroup GM_types
 \brief Minimum, maximum range of elemental value types.
 
-\defgroup gm_types_array Array types
-\ingroup GM_types
-\brief Dynamic length containers of elemental value types.
-
 \defgroup gm_types_composite Composite types
 \ingroup GM_types
 \brief \em Named element compositions of array, vector, scalar, or other composite value types.

@@ -4,8 +4,9 @@
 
 #include <catch2/catch.hpp>
 
-#include <gm/types/vec4iArray.h>
 #include <gm/types/vec4iRange.h>
+
+#include <vector>
 
 TEST_CASE( "Vec4iRange_DefaultConstructor" )
 {
@@ -66,14 +67,14 @@ TEST_CASE( "Vec4iRange_IsEmpty" )
 
 TEST_CASE( "Vec4iRange_RangeIteration" )
 {
-    gm::Vec4iRange range( gm::Vec4i( -2, -2, -2, -2 ), gm::Vec4i( 4, 4, 4, 4 ) );
-    gm::Vec4iArray array;
+    gm::Vec4iRange           range( gm::Vec4i( -2, -2, -2, -2 ), gm::Vec4i( 4, 4, 4, 4 ) );
+    std::vector< gm::Vec4i > array;
     for ( const gm::Vec4i& value : range )
     {
         array.push_back( value );
     }
 
-    gm::Vec4iArray expectedArray = {
+    std::vector< gm::Vec4i > expectedArray = {
         gm::Vec4i( -2, -2, -2, -2 ), gm::Vec4i( -1, -2, -2, -2 ), gm::Vec4i( 0, -2, -2, -2 ),
         gm::Vec4i( 1, -2, -2, -2 ),  gm::Vec4i( 2, -2, -2, -2 ),  gm::Vec4i( 3, -2, -2, -2 ),
         gm::Vec4i( -2, -1, -2, -2 ), gm::Vec4i( -1, -1, -2, -2 ), gm::Vec4i( 0, -1, -2, -2 ),

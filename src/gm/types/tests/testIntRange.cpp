@@ -4,8 +4,9 @@
 
 #include <catch2/catch.hpp>
 
-#include <gm/types/intArray.h>
 #include <gm/types/intRange.h>
+
+#include <vector>
 
 TEST_CASE( "IntRange_DefaultConstructor" )
 {
@@ -56,13 +57,13 @@ TEST_CASE( "IntRange_IsEmpty" )
 
 TEST_CASE( "IntRange_RangeIteration" )
 {
-    gm::IntRange range( -3, 3 );
-    gm::IntArray array;
+    gm::IntRange       range( -3, 3 );
+    std::vector< int > array;
     for ( const int& value : range )
     {
         array.push_back( value );
     }
 
-    gm::IntArray expectedArray = {-3, -2, -1, 0, 1, 2};
+    std::vector< int > expectedArray = {-3, -2, -1, 0, 1, 2};
     CHECK( array == expectedArray );
 }

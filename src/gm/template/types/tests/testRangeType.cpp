@@ -1,7 +1,8 @@
 #include <catch2/catch.hpp>
 
 #include <gm/types/{{ valueType.headerFileName }}>
-#include <gm/types/{{ valueType.headerFileName.replace("Range", "Array") }}>
+
+#include <vector>
 
 {% import "types/typeUtils.h" as typeUtils %}
 
@@ -85,13 +86,14 @@ TEST_CASE( "{{ valueType.className }}_IsEmpty" )
 TEST_CASE( "{{ valueType.className }}_RangeIteration" )
 {
     gm::{{ valueType.className }} range( {{ valueType.CppValue( -3 ) }}, {{ valueType.CppValue( 3 ) }} );
-    gm::{{ valueType.className.replace("Range", "Array") }} array;
+    std::vector< {{ valueType.elementType.namespacedClassName }} > array;
     for ( const {{ valueType.elementType.className }}& value : range )
     {
         array.push_back( value );
     }
 
-    gm::{{ valueType.className.replace("Range", "Array") }} expectedArray = {
+
+    std::vector< {{ valueType.elementType.namespacedClassName }} > expectedArray = {
 {% for index in range(-3, 3) -%}
         {{ valueType.CppValue( index ) }}
 {%- if index + 1 < 3 -%}
@@ -121,13 +123,13 @@ TEST_CASE( "{{ valueType.className }}_RangeIteration" )
 {%- endfor -%}
     )
     );
-    gm::{{ valueType.className.replace("Range", "Array") }} array;
+    std::vector< {{ valueType.elementType.namespacedClassName }} > array;
     for ( const gm::{{ valueType.elementType.className }}& value : range )
     {
         array.push_back( value );
     }
 
-    gm::{{ valueType.className.replace("Range", "Array") }} expectedArray = {
+    std::vector< {{ valueType.elementType.namespacedClassName }} > expectedArray = {
 {% if valueType.elementType.elementSize == 2 -%}
 {% for y in range(-2, 4) -%}
 {% for x in range(-2, 4) -%}
