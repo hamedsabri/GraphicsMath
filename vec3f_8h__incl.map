@@ -1,7 +1,7 @@
-<map id="/code/GraphicsMath/src/gm/types/vec3f.h" name="/code/GraphicsMath/src/gm/types/vec3f.h">
-<area shape="rect" id="node2" href="$gm_8h.html" title="GraphicsMath: C++ header&#45;only computer graphics math library. " alt="" coords="315,169,388,196"/>
-<area shape="rect" id="node7" href="$almost_8h.html" title="gm/base/almost.h" alt="" coords="288,95,415,121"/>
-<area shape="rect" id="node8" href="$diagnostic_8h.html" title="Diagnostic utilities. " alt="" coords="440,95,586,121"/>
-<area shape="rect" id="node3" href="$hostDevice_8h.html" title="gm/base/hostDevice.h" alt="" coords="275,244,428,271"/>
-<area shape="rect" id="node9" href="$log_8h.html" title="Logging utility functions. " alt="" coords="446,169,550,196"/>
+<map id="/home/runner/work/GraphicsMath/GraphicsMath/src/gm/types/vec3f.h" name="/home/runner/work/GraphicsMath/GraphicsMath/src/gm/types/vec3f.h">
+<area shape="rect" id="node2" href="$gm_8h.html" title="GraphicsMath: C++ header&#45;only computer graphics math library. " alt="" coords="315,184,389,211"/>
+<area shape="rect" id="node7" href="$almost_8h.html" title="gm/base/almost.h" alt="" coords="289,109,415,136"/>
+<area shape="rect" id="node8" href="$diagnostic_8h.html" title="Diagnostic utilities. " alt="" coords="440,109,587,136"/>
+<area shape="rect" id="node3" href="$hostDevice_8h.html" title="gm/base/hostDevice.h" alt="" coords="275,259,429,285"/>
+<area shape="rect" id="node9" href="$log_8h.html" title="Logging utility functions. " alt="" coords="447,184,551,211"/>
 </map>

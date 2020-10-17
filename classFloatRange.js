@@ -4,7 +4,7 @@ var classFloatRange =
     [ "FloatRange", "classFloatRange.html#adcc4a3535059e90f8dd6e42e40acccad", null ],
     [ "FloatRange", "classFloatRange.html#a534f3b3d39c17032a2a47faf1494e0e7", null ],
     [ "GetString", "classFloatRange.html#af60eba53218792d75280997798bcf37d", null ],
-    [ "HasNans", "classFloatRange.html#aa50351b449b166044a8aaa7d48db02b5", null ],
+    [ "HasNaNs", "classFloatRange.html#ac78d3dfd8729d84893d44ebfe7e74c54", null ],
     [ "IsEmpty", "classFloatRange.html#aeaa530954511846098568f8188864d84", null ],
     [ "Max", "classFloatRange.html#abb57ed322ea0431392aa8c0e704979c7", null ],
     [ "Max", "classFloatRange.html#ae647942e0aeeea4b2db8a2af6ad87368", null ],

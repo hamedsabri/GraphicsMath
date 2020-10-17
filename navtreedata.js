@@ -4,8 +4,7 @@ var NAVTREE =
     [ "Introduction", "index.html#GM_section_introduction", null ],
     [ "Library usage", "index.html#GM_section_usage", null ],
     [ "Building", "index.html#GM_section_building", [
-      [ "Building Python Bindings", "index.html#GM_section_building_pythonBindings", null ],
-      [ "Including in CUDA Device Code", "index.html#GM_section_building_cudaDeviceCode", null ]
+      [ "Building Python Bindings", "index.html#GM_section_building_pythonBindings", null ]
     ] ],
     [ "Developer Notes", "index.html#GM_section_developerNotes", [
       [ "Source Tree", "index.html#GM_section_developerNotes_sourceTree", null ],
@@ -37,9 +36,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "abs_8h.html",
-"classVec4f.html#a20fe5244e715393f0564b2fffd8d2180",
-"group__gm__functions__basic.html#ga0b702023c3efcce7d660a7504f30c30e",
-"group__gm__types__array.html"
+"classVec4f.html#a4034ef5a221c0b490cec1010ae5132a4",
+"group__gm__functions__basic.html#ga18cff1ac7be5e714cb3bec000a23597e",
+"hostDevice_8h.html#a7fca25929bf76aa6b8ef67bc293dfb10"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -4,7 +4,7 @@ var classVec2f =
     [ "Vec2f", "classVec2f.html#a1c9fee7a4c6502bacedbe27022194ec4", null ],
     [ "Vec2f", "classVec2f.html#ab2afedb7241eef8e3433870f1b827727", null ],
     [ "GetString", "classVec2f.html#a489584d9154dffbb9167af698093b171", null ],
-    [ "HasNans", "classVec2f.html#a7c8dd757f610aea8e948cbbc5858da7e", null ],
+    [ "HasNaNs", "classVec2f.html#a515bda08970c422ccee4d5559f6ea126", null ],
     [ "operator!=", "classVec2f.html#aee82ab6ea8aa8d2e7f16506ab0b4dd70", null ],
     [ "operator*=", "classVec2f.html#a5b835ffd8c04707e8cf4d9899164bd25", null ],
     [ "operator+", "classVec2f.html#aa565fe6421a39d5556c9a9f495578cfd", null ],

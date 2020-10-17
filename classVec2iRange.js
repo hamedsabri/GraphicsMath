@@ -7,7 +7,6 @@ var classVec2iRange =
     [ "begin", "classVec2iRange.html#a480caefd8649aa55d132af1efc39ec05", null ],
     [ "end", "classVec2iRange.html#acfb298bc91ea68fc3960325839b34a76", null ],
     [ "GetString", "classVec2iRange.html#a22bde78e56174425c71662d6d5ad3d73", null ],
-    [ "HasNans", "classVec2iRange.html#a3757bd29e260050ad17cc737fe522671", null ],
     [ "IsEmpty", "classVec2iRange.html#ab87d1beefd107e0119c47ceedc64f7d4", null ],
     [ "Max", "classVec2iRange.html#acc21370dcd6a419aa54352eae98756c9", null ],
     [ "Max", "classVec2iRange.html#a0942f5cd4a772e02a42b048b29147dbc", null ],

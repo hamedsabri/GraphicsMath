@@ -1,17 +1,9 @@
 var NAVTREEINDEX3 =
 {
-"group__gm__types__array.html":[5,0,2],
-"group__gm__types__composite.html":[5,0,3],
-"group__gm__types__range.html":[5,0,1],
-"group__gm__types__vector.html":[5,0,0],
-"hasScale_8h.html":[7,0,0,0,1,14],
-"hasScale_8h_source.html":[7,0,0,0,1,14],
-"hostDevice_8h.html":[7,0,0,0,0,3],
 "hostDevice_8h.html#a7fca25929bf76aa6b8ef67bc293dfb10":[7,0,0,0,0,3,0],
 "hostDevice_8h_source.html":[7,0,0,0,0,3],
 "index.html":[],
 "index.html#GM_section_building":[2],
-"index.html#GM_section_building_cudaDeviceCode":[2,1],
 "index.html#GM_section_building_pythonBindings":[2,0],
 "index.html#GM_section_developerNotes":[3],
 "index.html#GM_section_developerNotes_codeGeneration":[3,1],

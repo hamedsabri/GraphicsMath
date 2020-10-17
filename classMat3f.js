@@ -4,7 +4,7 @@ var classMat3f =
     [ "Mat3f", "classMat3f.html#a0164b1e1962fe798338ef6d0c8ffcd96", null ],
     [ "Mat3f", "classMat3f.html#a57a739cacc9af914ac18e6c077bfbfdb", null ],
     [ "GetString", "classMat3f.html#a82c25011aa02f195761be185844da0ca", null ],
-    [ "HasNans", "classMat3f.html#a97148b60921c1f65f4e7831fa5f81c01", null ],
+    [ "HasNaNs", "classMat3f.html#abe58dc00c15eecf4daf5f6ef44321dd9", null ],
     [ "operator!=", "classMat3f.html#a7f206087be32b28568a4a699716ee74c", null ],
     [ "operator()", "classMat3f.html#a65b2c60894ac10b266c5ca13ee7f67c4", null ],
     [ "operator()", "classMat3f.html#a5b3dcb1e186b2586e0d323b5f6dc374d", null ],

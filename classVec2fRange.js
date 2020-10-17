@@ -4,7 +4,7 @@ var classVec2fRange =
     [ "Vec2fRange", "classVec2fRange.html#a0323df3d02aa252dfa5ef2c3905f7eed", null ],
     [ "Vec2fRange", "classVec2fRange.html#aff9e916522d73499aea5034956d8f90b", null ],
     [ "GetString", "classVec2fRange.html#a0dcdb08d10a6ca82cdf28f725d0a2e72", null ],
-    [ "HasNans", "classVec2fRange.html#a2e234e346c914e213cae8bb68a2a8486", null ],
+    [ "HasNaNs", "classVec2fRange.html#aca70a7bbed0390612b49e1eb248a08ab", null ],
     [ "IsEmpty", "classVec2fRange.html#a1ff0d0b87fb768b67824e2d6cddd2ae4", null ],
     [ "Max", "classVec2fRange.html#ac8ac709dc952cb1e02daf487e28cb61f", null ],
     [ "Max", "classVec2fRange.html#a12ef79fbf94043832e57a54e01d5c9b2", null ],

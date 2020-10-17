@@ -4,7 +4,6 @@ var classVec4i =
     [ "Vec4i", "classVec4i.html#ad4a304ba844ddd90d268081d1aa50ebd", null ],
     [ "Vec4i", "classVec4i.html#ad37fe46a9502f9c9c0d06e012af63e99", null ],
     [ "GetString", "classVec4i.html#a72636aabd65474df7d5bb70552f8f5e7", null ],
-    [ "HasNans", "classVec4i.html#adaadb881c26b884bc2c95bf0af13fb8b", null ],
     [ "operator!=", "classVec4i.html#ac7ce94546221b1dcda6fa62d06f4bab6", null ],
     [ "operator*=", "classVec4i.html#a09b5e723a30350cde377cc5c02d08ffe", null ],
     [ "operator+", "classVec4i.html#a67c8eabdf2ac87162336b5f5d6020bf2", null ],

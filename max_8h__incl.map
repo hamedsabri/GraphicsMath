@@ -1,15 +1,15 @@
-<map id="/code/GraphicsMath/src/gm/functions/max.h" name="/code/GraphicsMath/src/gm/functions/max.h">
-<area shape="rect" id="node2" href="$gm_8h.html" title="GraphicsMath: C++ header&#45;only computer graphics math library. " alt="" coords="374,244,447,271"/>
-<area shape="rect" id="node4" href="$mat3f_8h.html" title="gm/types/mat3f.h" alt="" coords="331,95,455,121"/>
-<area shape="rect" id="node13" href="$mat4f_8h.html" title="gm/types/mat4f.h" alt="" coords="479,95,603,121"/>
-<area shape="rect" id="node14" href="$vec2f_8h.html" title="gm/types/vec2f.h" alt="" coords="37,95,160,121"/>
-<area shape="rect" id="node15" href="$vec2i_8h.html" title="gm/types/vec2i.h" alt="" coords="921,95,1044,121"/>
-<area shape="rect" id="node16" href="$vec3f_8h.html" title="gm/types/vec3f.h" alt="" coords="628,95,750,121"/>
-<area shape="rect" id="node17" href="$vec3i_8h.html" title="gm/types/vec3i.h" alt="" coords="1068,95,1190,121"/>
-<area shape="rect" id="node18" href="$vec4f_8h.html" title="gm/types/vec4f.h" alt="" coords="184,95,306,121"/>
-<area shape="rect" id="node19" href="$vec4i_8h.html" title="gm/types/vec4i.h" alt="" coords="774,95,897,121"/>
-<area shape="rect" id="node3" href="$hostDevice_8h.html" title="gm/base/hostDevice.h" alt="" coords="334,319,487,345"/>
-<area shape="rect" id="node8" href="$almost_8h.html" title="gm/base/almost.h" alt="" coords="246,169,372,196"/>
-<area shape="rect" id="node9" href="$diagnostic_8h.html" title="Diagnostic utilities. " alt="" coords="760,169,906,196"/>
-<area shape="rect" id="node10" href="$log_8h.html" title="Logging utility functions. " alt="" coords="725,244,829,271"/>
+<map id="/home/runner/work/GraphicsMath/GraphicsMath/src/gm/functions/max.h" name="/home/runner/work/GraphicsMath/GraphicsMath/src/gm/functions/max.h">
+<area shape="rect" id="node2" href="$gm_8h.html" title="GraphicsMath: C++ header&#45;only computer graphics math library. " alt="" coords="373,259,447,285"/>
+<area shape="rect" id="node4" href="$mat3f_8h.html" title="gm/types/mat3f.h" alt="" coords="331,109,455,136"/>
+<area shape="rect" id="node13" href="$mat4f_8h.html" title="gm/types/mat4f.h" alt="" coords="479,109,603,136"/>
+<area shape="rect" id="node14" href="$vec2f_8h.html" title="gm/types/vec2f.h" alt="" coords="37,109,159,136"/>
+<area shape="rect" id="node15" href="$vec2i_8h.html" title="gm/types/vec2i.h" alt="" coords="921,109,1043,136"/>
+<area shape="rect" id="node16" href="$vec3f_8h.html" title="gm/types/vec3f.h" alt="" coords="627,109,750,136"/>
+<area shape="rect" id="node17" href="$vec3i_8h.html" title="gm/types/vec3i.h" alt="" coords="1067,109,1190,136"/>
+<area shape="rect" id="node18" href="$vec4f_8h.html" title="gm/types/vec4f.h" alt="" coords="183,109,306,136"/>
+<area shape="rect" id="node19" href="$vec4i_8h.html" title="gm/types/vec4i.h" alt="" coords="774,109,897,136"/>
+<area shape="rect" id="node3" href="$hostDevice_8h.html" title="gm/base/hostDevice.h" alt="" coords="333,333,487,360"/>
+<area shape="rect" id="node8" href="$almost_8h.html" title="gm/base/almost.h" alt="" coords="245,184,372,211"/>
+<area shape="rect" id="node9" href="$diagnostic_8h.html" title="Diagnostic utilities. " alt="" coords="759,184,906,211"/>
+<area shape="rect" id="node10" href="$log_8h.html" title="Logging utility functions. " alt="" coords="725,259,829,285"/>
 </map>

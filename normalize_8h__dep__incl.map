@@ -1,5 +1,5 @@
-<map id="/code/GraphicsMath/src/gm/functions/normalize.h" name="/code/GraphicsMath/src/gm/functions/normalize.h">
-<area shape="rect" id="node2" href="$coordinateSystem_8h.html" title="Construct a local coordinate system from a single input vector. " alt="" coords="5,95,192,151"/>
-<area shape="rect" id="node3" href="$lookAt_8h.html" title="Look&#45;at transformation, for a left&#45;handed coordinate system. " alt="" coords="217,102,391,143"/>
-<area shape="rect" id="node4" href="$setRotate_8h.html" title="Set a rotation for an specified axis on a transformation matrix, with respect to the left hand rule..." alt="" coords="416,102,611,143"/>
+<map id="/home/runner/work/GraphicsMath/GraphicsMath/src/gm/functions/normalize.h" name="/home/runner/work/GraphicsMath/GraphicsMath/src/gm/functions/normalize.h">
+<area shape="rect" id="node2" href="$coordinateSystem_8h.html" title="Construct a local coordinate system from a single input vector. " alt="" coords="5,109,204,165"/>
+<area shape="rect" id="node3" href="$lookAt_8h.html" title="Look&#45;at transformation, for a left&#45;handed coordinate system. " alt="" coords="229,109,415,165"/>
+<area shape="rect" id="node4" href="$setRotate_8h.html" title="Set a rotation for an specified axis on a transformation matrix, with respect to the left hand rule..." alt="" coords="439,109,626,165"/>
 </map>
