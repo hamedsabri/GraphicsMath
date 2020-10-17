@@ -4,9 +4,6 @@ var NAVTREE =
     [ "Introduction", "index.html#GM_section_introduction", null ],
     [ "Library usage", "index.html#GM_section_usage", null ],
     [ "Building", "index.html#GM_section_building", [
-      [ "Building Python Bindings", "index.html#GM_section_building_pythonBindings", null ]
-    ] ],
-    [ "Developer Notes", "index.html#GM_section_developerNotes", [
       [ "Source Tree", "index.html#GM_section_developerNotes_sourceTree", null ],
       [ "Code Generation", "index.html#GM_section_developerNotes_codeGeneration", null ],
       [ "Motivation", "index.html#GM_section_developerNotes_motivation", null ]
