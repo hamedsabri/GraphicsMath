@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['array_20types',['Array types',['../group__gm__types__array.html',1,'']]]
+  ['basic_20math_20operators',['Basic math operators',['../group__gm__functions__basic.html',1,'']]]
 ];

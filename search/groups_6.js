@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['types',['Types',['../group__GM__types.html',1,'']]]
+  ['vector_20types',['Vector types',['../group__gm__types__vector.html',1,'']]]
 ];

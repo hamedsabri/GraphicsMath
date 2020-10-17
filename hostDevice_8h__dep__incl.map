@@ -1,51 +1,51 @@
 <map id="/home/runner/work/GraphicsMath/GraphicsMath/src/gm/base/hostDevice.h" name="/home/runner/work/GraphicsMath/GraphicsMath/src/gm/base/hostDevice.h">
-<area shape="rect" id="node2" href="$gm_8h.html" title="GraphicsMath: C++ header&#45;only computer graphics math library. " alt="" coords="3692,109,3906,151"/>
-<area shape="rect" id="node3" href="$almost_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/base/almost.h" alt="" coords="4384,199,4571,255"/>
-<area shape="rect" id="node4" href="$floatRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/floatRange.h" alt="" coords="4334,303,4520,359"/>
-<area shape="rect" id="node5" href="$clamp_8h.html" title="Value clamp. " alt="" coords="3507,407,3694,463"/>
-<area shape="rect" id="node6" href="$contains_8h.html" title="Check if a container, such as a range or array, contains a specified element or range of elements..." alt="" coords="4370,511,4556,567"/>
-<area shape="rect" id="node7" href="$content_8h.html" title="Content for an N&#45;dimensional range. " alt="" coords="5368,511,5555,567"/>
-<area shape="rect" id="node8" href="$expand_8h.html" title="Range expansion. " alt="" coords="4159,511,4346,567"/>
-<area shape="rect" id="node9" href="$intersection_8h.html" title="Range intersection. " alt="" coords="5579,511,5766,567"/>
-<area shape="rect" id="node10" href="$mat3f_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/mat3f.h" alt="" coords="2056,303,2243,359"/>
-<area shape="rect" id="node11" href="$mat3fArray_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/mat3fArray.h" alt="" coords="240,407,427,463"/>
-<area shape="rect" id="node12" href="$abs_8h.html" title="Find the absolute value of two input values, defined as the magnitude of a real number without its si..." alt="" coords="1926,407,2112,463"/>
-<area shape="rect" id="node13" href="$bilinearInterpolation_8h.html" title="Bilinear interpolation. " alt="" coords="2137,407,2344,463"/>
-<area shape="rect" id="node14" href="$ceil_8h.html" title="Round the input upwards to the nearest integral value greater than the input. " alt="" coords="1504,407,1691,463"/>
-<area shape="rect" id="node15" href="$floor_8h.html" title="Round the input downwards to the nearest integral value less than the input. " alt="" coords="1715,407,1902,463"/>
-<area shape="rect" id="node16" href="$hasScale_8h.html" title="Check if a matrix has a scaling transformation. " alt="" coords="872,407,1059,463"/>
-<area shape="rect" id="node17" href="$isIdentity_8h.html" title="Check if the input matrix is the identity matrix. " alt="" coords="1083,407,1270,463"/>
-<area shape="rect" id="node18" href="$mat4f_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/mat4f.h" alt="" coords="1846,303,2032,359"/>
-<area shape="rect" id="node19" href="$mat4fArray_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/mat4fArray.h" alt="" coords="30,407,216,463"/>
-<area shape="rect" id="node20" href="$inverse_8h.html" title="Matrix inverse. " alt="" coords="662,407,848,463"/>
-<area shape="rect" id="node21" href="$vec2f_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec2f.h" alt="" coords="2702,303,2888,359"/>
-<area shape="rect" id="node22" href="$vec2fArray_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec2fArray.h" alt="" coords="1294,407,1480,463"/>
-<area shape="rect" id="node23" href="$vec2fRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec2fRange.h" alt="" coords="5278,407,5464,463"/>
-<area shape="rect" id="node24" href="$distance_8h.html" title="Compute the distance between two points. " alt="" coords="2883,407,3070,463"/>
-<area shape="rect" id="node25" href="$dotProduct_8h.html" title="Dot product, or inner product between two equal&#45;length vectors. " alt="" coords="2571,407,2758,463"/>
-<area shape="rect" id="node26" href="$faceForward_8h.html" title="Normal vector face forward. " alt="" coords="2339,511,2526,567"/>
-<area shape="rect" id="node27" href="$vec2iRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec2iRange.h" alt="" coords="6011,407,6198,463"/>
-<area shape="rect" id="node28" href="$vec3f_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec3f.h" alt="" coords="3064,303,3251,359"/>
-<area shape="rect" id="node29" href="$vec3fArray_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec3fArray.h" alt="" coords="3296,407,3483,463"/>
-<area shape="rect" id="node30" href="$vec3fRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec3fRange.h" alt="" coords="4856,407,5043,463"/>
-<area shape="rect" id="node31" href="$coordinateSystem_8h.html" title="Construct a local coordinate system from a single input vector. " alt="" coords="6469,511,6668,567"/>
-<area shape="rect" id="node32" href="$crossProduct_8h.html" title="Vector cross product. " alt="" coords="6475,407,6662,463"/>
-<area shape="rect" id="node33" href="$vec3iRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec3iRange.h" alt="" coords="4646,407,4832,463"/>
-<area shape="rect" id="node34" href="$vec4f_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec4f.h" alt="" coords="2390,303,2576,359"/>
-<area shape="rect" id="node35" href="$vec4fArray_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec4fArray.h" alt="" coords="451,407,638,463"/>
-<area shape="rect" id="node36" href="$vec4fRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec4fRange.h" alt="" coords="4435,407,4622,463"/>
-<area shape="rect" id="node37" href="$vec4iRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec4iRange.h" alt="" coords="5539,407,5726,463"/>
-<area shape="rect" id="node38" href="$constants_8h.html" title="Numerical constants. " alt="" coords="5763,199,5950,255"/>
-<area shape="rect" id="node39" href="$degrees_8h.html" title="Unit conversion from an angle encoded as radians into degrees. " alt="" coords="5778,303,5964,359"/>
-<area shape="rect" id="node40" href="$diagnostic_8h.html" title="Diagnostic utilities. " alt="" coords="2702,199,2888,255"/>
-<area shape="rect" id="node41" href="$vec2i_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec2i.h" alt="" coords="4072,303,4259,359"/>
-<area shape="rect" id="node42" href="$vec2iArray_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec2iArray.h" alt="" coords="5750,407,5936,463"/>
-<area shape="rect" id="node43" href="$vec3i_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec3i.h" alt="" coords="3550,303,3736,359"/>
-<area shape="rect" id="node44" href="$vec3iArray_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec3iArray.h" alt="" coords="3819,407,4006,463"/>
-<area shape="rect" id="node45" href="$vec4i_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec4i.h" alt="" coords="3862,303,4048,359"/>
-<area shape="rect" id="node46" href="$vec4iArray_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec4iArray.h" alt="" coords="5067,407,5254,463"/>
-<area shape="rect" id="node47" href="$boolArray_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/boolArray.h" alt="" coords="6526,199,6712,255"/>
-<area shape="rect" id="node48" href="$floatArray_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/floatArray.h" alt="" coords="6736,199,6923,255"/>
-<area shape="rect" id="node49" href="$intArray_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/intArray.h" alt="" coords="6947,199,7134,255"/>
-<area shape="rect" id="node50" href="$intRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/intRange.h" alt="" coords="5567,303,5754,359"/>
+<area shape="rect" id="node2" href="$gm_8h.html" title="GraphicsMath: C++ header&#45;only computer graphics math library. " alt="" coords="3552,109,3766,151"/>
+<area shape="rect" id="node3" href="$almost_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/base/almost.h" alt="" coords="1723,199,1910,255"/>
+<area shape="rect" id="node4" href="$floatRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/floatRange.h" alt="" coords="1723,303,1910,359"/>
+<area shape="rect" id="node5" href="$clamp_8h.html" title="Value clamp. " alt="" coords="2082,407,2268,463"/>
+<area shape="rect" id="node6" href="$contains_8h.html" title="Check if a container, such as a range contains a specified element or range of elements. " alt="" coords="1596,511,1783,567"/>
+<area shape="rect" id="node7" href="$content_8h.html" title="Content for an N&#45;dimensional range. " alt="" coords="719,511,906,567"/>
+<area shape="rect" id="node8" href="$expand_8h.html" title="Range expansion. " alt="" coords="1900,511,2087,567"/>
+<area shape="rect" id="node9" href="$intersection_8h.html" title="Range intersection. " alt="" coords="508,511,695,567"/>
+<area shape="rect" id="node10" href="$linearInterpolation_8h.html" title="Linear interpolation. " alt="" coords="3269,511,3465,567"/>
+<area shape="rect" id="node11" href="$bilinearInterpolation_8h.html" title="Bilinear interpolation. " alt="" coords="3985,615,4192,671"/>
+<area shape="rect" id="node12" href="$linearMap_8h.html" title="Linear mapping. " alt="" coords="3642,407,3828,463"/>
+<area shape="rect" id="node13" href="$mat3f_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/mat3f.h" alt="" coords="2967,303,3154,359"/>
+<area shape="rect" id="node14" href="$abs_8h.html" title="Find the absolute value of two input values, defined as the magnitude of a real number without its si..." alt="" coords="4519,407,4706,463"/>
+<area shape="rect" id="node15" href="$ceil_8h.html" title="Round the input upwards to the nearest integral value greater than the input. " alt="" coords="4730,407,4916,463"/>
+<area shape="rect" id="node16" href="$floor_8h.html" title="Round the input downwards to the nearest integral value less than the input. " alt="" coords="4940,407,5127,463"/>
+<area shape="rect" id="node17" href="$hasScale_8h.html" title="Check if a matrix has a scaling transformation. " alt="" coords="5270,615,5456,671"/>
+<area shape="rect" id="node18" href="$isIdentity_8h.html" title="Check if the input matrix is the identity matrix. " alt="" coords="2967,407,3154,463"/>
+<area shape="rect" id="node19" href="$matrixProduct_8h.html" title="Matrix multiplication. " alt="" coords="3178,407,3364,463"/>
+<area shape="rect" id="node20" href="$max_8h.html" title="Find the maximum of two input values. " alt="" coords="2554,407,2740,463"/>
+<area shape="rect" id="node21" href="$min_8h.html" title="Find the minimum of two input values. " alt="" coords="2343,407,2530,463"/>
+<area shape="rect" id="node22" href="$mat4f_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/mat4f.h" alt="" coords="3460,303,3647,359"/>
+<area shape="rect" id="node23" href="$inverse_8h.html" title="Matrix inverse. " alt="" coords="4156,407,4343,463"/>
+<area shape="rect" id="node24" href="$lookAt_8h.html" title="Look&#45;at transformation, for a left&#45;handed coordinate system. " alt="" coords="5038,823,5224,879"/>
+<area shape="rect" id="node25" href="$vec2f_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec2f.h" alt="" coords="5374,303,5560,359"/>
+<area shape="rect" id="node26" href="$vec2fRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec2fRange.h" alt="" coords="1044,407,1231,463"/>
+<area shape="rect" id="node27" href="$longestAxis_8h.html" title="Longest axis of a range. " alt="" coords="1006,511,1192,567"/>
+<area shape="rect" id="node28" href="$distance_8h.html" title="Compute the distance between two points. " alt="" coords="6190,719,6376,775"/>
+<area shape="rect" id="node29" href="$dotProduct_8h.html" title="Dot product, or inner product between two equal&#45;length vectors. " alt="" coords="5962,407,6148,463"/>
+<area shape="rect" id="node30" href="$faceForward_8h.html" title="Normal vector face forward. " alt="" coords="6012,511,6199,567"/>
+<area shape="rect" id="node31" href="$lengthSquared_8h.html" title="Compute the length squared of a vector, defined as the sum of the squares of each vector element..." alt="" coords="5802,511,5988,567"/>
+<area shape="rect" id="node32" href="$length_8h.html" title="Compute the length, or magnitude, of a vector. " alt="" coords="5802,615,5988,671"/>
+<area shape="rect" id="node33" href="$coordinateSystem_8h.html" title="Construct a local coordinate system from a single input vector. " alt="" coords="5665,823,5864,879"/>
+<area shape="rect" id="node34" href="$normalize_8h.html" title="Vector normalization. " alt="" coords="5671,719,5858,775"/>
+<area shape="rect" id="node35" href="$quadraticRoots_8h.html" title="Solve for the roots of a quadratic equation of the form . " alt="" coords="6426,407,6612,463"/>
+<area shape="rect" id="node36" href="$vec2iRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec2iRange.h" alt="" coords="260,407,447,463"/>
+<area shape="rect" id="node37" href="$vec3f_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec3f.h" alt="" coords="5096,303,5283,359"/>
+<area shape="rect" id="node38" href="$vec3fRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec3fRange.h" alt="" coords="1255,407,1442,463"/>
+<area shape="rect" id="node39" href="$crossProduct_8h.html" title="Vector cross product. " alt="" coords="5219,719,5406,775"/>
+<area shape="rect" id="node40" href="$vec3iRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec3iRange.h" alt="" coords="471,407,658,463"/>
+<area shape="rect" id="node41" href="$vec4f_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec4f.h" alt="" coords="3975,303,4162,359"/>
+<area shape="rect" id="node42" href="$vec4fRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec4fRange.h" alt="" coords="1466,407,1652,463"/>
+<area shape="rect" id="node43" href="$vec4iRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec4iRange.h" alt="" coords="682,407,868,463"/>
+<area shape="rect" id="node44" href="$constants_8h.html" title="Numerical constants. " alt="" coords="7295,199,7482,255"/>
+<area shape="rect" id="node45" href="$degrees_8h.html" title="Unit conversion from an angle encoded as radians into degrees. " alt="" coords="7270,303,7456,359"/>
+<area shape="rect" id="node46" href="$diagnostic_8h.html" title="Diagnostic utilities. " alt="" coords="3798,199,3984,255"/>
+<area shape="rect" id="node47" href="$vec2i_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec2i.h" alt="" coords="1944,303,2131,359"/>
+<area shape="rect" id="node48" href="$vec3i_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec3i.h" alt="" coords="2155,303,2342,359"/>
+<area shape="rect" id="node49" href="$vec4i_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/vec4i.h" alt="" coords="2416,303,2603,359"/>
+<area shape="rect" id="node50" href="$intRange_8h.html" title="/home/runner/work/Graphics\lMath/GraphicsMath/src/gm\l/types/intRange.h" alt="" coords="888,303,1075,359"/>
 </map>

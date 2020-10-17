@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['basic_20math_20operators',['Basic math operators',['../group__gm__functions__basic.html',1,'']]]
+  ['composite_20types',['Composite types',['../group__gm__types__composite.html',1,'']]]
 ];

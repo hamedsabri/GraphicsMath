@@ -1,5 +1,5 @@
 <map id="/home/runner/work/GraphicsMath/GraphicsMath/src/gm/types/vec3iRange.h" name="/home/runner/work/GraphicsMath/GraphicsMath/src/gm/types/vec3iRange.h">
-<area shape="rect" id="node2" href="$contains_8h.html" title="Check if a container, such as a range or array, contains a specified element or range of elements..." alt="" coords="5,109,192,165"/>
+<area shape="rect" id="node2" href="$contains_8h.html" title="Check if a container, such as a range contains a specified element or range of elements. " alt="" coords="5,109,192,165"/>
 <area shape="rect" id="node3" href="$content_8h.html" title="Content for an N&#45;dimensional range. " alt="" coords="216,109,403,165"/>
 <area shape="rect" id="node4" href="$expand_8h.html" title="Range expansion. " alt="" coords="427,109,613,165"/>
 <area shape="rect" id="node6" href="$intersection_8h.html" title="Range intersection. " alt="" coords="637,109,824,165"/>
