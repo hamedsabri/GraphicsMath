@@ -14,13 +14,7 @@ The library is organized into \ref GM_types and \ref GM_functions.
 
 \section GM_section_building Building
 
-A convenience build script is provided at the root of the repository for building all targets, and optionally installing to a location: `./build.sh <OPTIONAL_INSTALL_LOCATION>`.
-
-\subsection GM_section_building_pythonBindings Building Python Bindings
-
-To build python bindings for GraphicsMath, set the cmake option `BUILD_PYTHON_BINDINGS="ON"` when configuring cmake.
-
-\section GM_section_developerNotes Developer Notes
+See README.md on https://github.com/moddyz/GraphicsMath for build instructions.
 
 \subsection GM_section_developerNotes_sourceTree Source Tree
 
