@@ -284,6 +284,7 @@ public:
     /// \name Debug
     // --------------------------------------------------------------------- //
 
+{% if valueType.isFloatingPoint -%}
     /// Check if the min or max contain NaN values.
     ///
     /// \return If this range has NaN values.
@@ -297,6 +298,7 @@ public:
 {%- endif %}
         ;
     }
+{%- endif %}
 
     /// Get the string representation.  For debugging purposes.
     ///
