@@ -709,6 +709,15 @@ def GenerateFunctions():
             )
         )
 
+    orthographicProjectionOps = [
+        FunctionInterface(
+            arguments=[
+                FunctionArg("viewingVolume", RangeType(VectorType((3,), ScalarType(FLOAT))), Mutability.Const),
+            ],
+            returnType=VectorType((4, 4), ScalarType(FLOAT)),
+        )
+    ]
+
     functionGroups = [
         # Basic.
         FunctionGroup(["floor", "ceil", "abs",], unaryOps, FunctionCategory.BASIC),
@@ -746,6 +755,7 @@ def GenerateFunctions():
         FunctionGroup(["transformAABB",], transformAABBOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["lookAt",], lookAtOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["inverse",], matrixInverseOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["orthographicProjection",], orthographicProjectionOps, FunctionCategory.LINEAR_ALGEBRA,),
         # Ray tracing
         FunctionGroup(["rayPosition",], rayOps, FunctionCategory.RAY_TRACING),
         FunctionGroup(["raySphereIntersection",], raySphereIntersectionOps, FunctionCategory.RAY_TRACING,),

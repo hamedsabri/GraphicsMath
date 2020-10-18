@@ -251,5 +251,6 @@ def GenerateCode(relTemplatePath, outputPath, **kwargs):
         os.remove(tempFilePath)
     else:
         WriteFile(outputAbsPath, code)
+        FormatCode(outputAbsPath)
 
     return outputAbsPath

@@ -32,6 +32,7 @@ void BindContent( pybind11::module& );
 void BindAbs( pybind11::module& );
 void BindDegrees( pybind11::module& );
 void BindTrilinearInterpolation( pybind11::module& );
+void BindOrthographicProjection( pybind11::module& );
 void BindBilinearInterpolation( pybind11::module& );
 void BindRandomNumber( pybind11::module& );
 void BindTransformAABB( pybind11::module& );
@@ -102,6 +103,7 @@ PYBIND11_MODULE( gm, o_module )
     BindAbs( o_module );
     BindDegrees( o_module );
     BindTrilinearInterpolation( o_module );
+    BindOrthographicProjection( o_module );
     BindBilinearInterpolation( o_module );
     BindRandomNumber( o_module );
     BindTransformAABB( o_module );
