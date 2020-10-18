@@ -28,6 +28,7 @@ var dir_73d0a3bf50fe146b2db42dbfc4686019 =
     [ "max.h", "max_8h.html", "max_8h" ],
     [ "min.h", "min_8h.html", "min_8h" ],
     [ "normalize.h", "normalize_8h.html", "normalize_8h" ],
+    [ "orthographicProjection.h", "orthographicProjection_8h.html", "orthographicProjection_8h" ],
     [ "quadraticRoots.h", "quadraticRoots_8h.html", "quadraticRoots_8h" ],
     [ "radians.h", "radians_8h.html", "radians_8h" ],
     [ "randomNumber.h", "randomNumber_8h.html", "randomNumber_8h" ],
