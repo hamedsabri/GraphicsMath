@@ -718,6 +718,31 @@ def GenerateFunctions():
         )
     ]
 
+    perspectiveProjectionOps = [
+        # Frustum based.
+        FunctionInterface(
+            arguments=[
+                FunctionArg("left", ScalarType(FLOAT), Mutability.Const),
+                FunctionArg("right", ScalarType(FLOAT), Mutability.Const),
+                FunctionArg("bottom", ScalarType(FLOAT), Mutability.Const),
+                FunctionArg("top", ScalarType(FLOAT), Mutability.Const),
+                FunctionArg("near", ScalarType(FLOAT), Mutability.Const),
+                FunctionArg("far", ScalarType(FLOAT), Mutability.Const),
+            ],
+            returnType=VectorType((4, 4), ScalarType(FLOAT)),
+        ),
+        # FOV and aspect ratio based.
+        FunctionInterface(
+            arguments=[
+                FunctionArg("fieldOfView", ScalarType(FLOAT), Mutability.Const),
+                FunctionArg("aspectRatio", ScalarType(FLOAT), Mutability.Const),
+                FunctionArg("near", ScalarType(FLOAT), Mutability.Const),
+                FunctionArg("far", ScalarType(FLOAT), Mutability.Const),
+            ],
+            returnType=VectorType((4, 4), ScalarType(FLOAT)),
+        )
+    ]
+
     functionGroups = [
         # Basic.
         FunctionGroup(["floor", "ceil", "abs",], unaryOps, FunctionCategory.BASIC),
@@ -756,6 +781,7 @@ def GenerateFunctions():
         FunctionGroup(["lookAt",], lookAtOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["inverse",], matrixInverseOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["orthographicProjection",], orthographicProjectionOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["perspectiveProjection",], perspectiveProjectionOps, FunctionCategory.LINEAR_ALGEBRA,),
         # Ray tracing
         FunctionGroup(["rayPosition",], rayOps, FunctionCategory.RAY_TRACING),
         FunctionGroup(["raySphereIntersection",], raySphereIntersectionOps, FunctionCategory.RAY_TRACING,),
