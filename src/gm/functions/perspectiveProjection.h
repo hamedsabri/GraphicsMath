@@ -96,12 +96,12 @@ PerspectiveProjection( const float& i_fieldOfView, const float& i_aspectRatio, c
     GM_ASSERT( i_aspectRatio > 0.0f );
 
     // Compute the frustum values.
-    float fovRadians = gm::Radians( i_fieldOfView );
+    float fovRadians = Radians( i_fieldOfView );
     float top        = i_near * tan( fovRadians / 2.0f );
     float bottom     = -top;
     float right      = top * i_aspectRatio;
     float left       = -right;
-    return PerspectiveProjection( left, bottom, i_near, right, top, i_far );
+    return PerspectiveProjection( left, right, bottom, top, i_near, i_far );
 }
 
 GM_NS_CLOSE

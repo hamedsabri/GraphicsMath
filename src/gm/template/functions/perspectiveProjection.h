@@ -97,12 +97,12 @@
     GM_ASSERT( {{ aspectRatio }} > 0.0f );
 
     // Compute the frustum values.
-    float fovRadians = gm::Radians( {{ fieldOfView }} );
+    float fovRadians = Radians( {{ fieldOfView }} );
     float top    = {{ near }} * tan( fovRadians / 2.0f );
     float bottom = -top;
     float right  = top * {{ aspectRatio }};
     float left   = -right;
-    return PerspectiveProjection( left, bottom, {{ near }}, right, top, {{ far }} );
+    return PerspectiveProjection( left, right, bottom, top, {{ near }}, {{ far }} );
 
 }
 
