@@ -13,5 +13,12 @@ GM_NS_USING
 void BindOrthographicProjection( pybind11::module& o_module )
 {
     o_module.def( "OrthographicProjection",
-                  []( const Vec3fRange& i_viewingVolume ) { return OrthographicProjection( i_viewingVolume ); } );
+                  []( const float& i_left,
+                      const float& i_right,
+                      const float& i_bottom,
+                      const float& i_top,
+                      const float& i_near,
+                      const float& i_far ) {
+                      return OrthographicProjection( i_left, i_right, i_bottom, i_top, i_near, i_far );
+                  } );
 }

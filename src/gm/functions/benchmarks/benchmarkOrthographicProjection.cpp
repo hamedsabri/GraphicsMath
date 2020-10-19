@@ -7,11 +7,16 @@
 
 #include <gm/functions/orthographicProjection.h>
 
-TEST_CASE( "OrthographicProjection_Vec3fRange" )
+TEST_CASE( "OrthographicProjection_float_float_float_float_float_float" )
 {
-    gm::Vec3fRange viewingVolume;
+    float left;
+    float right;
+    float bottom;
+    float top;
+    float near;
+    float far;
     BENCHMARK( "OrthographicProjection" )
     {
-        return gm::OrthographicProjection( viewingVolume );
+        return gm::OrthographicProjection( left, right, bottom, top, near, far );
     };
 }

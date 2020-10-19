@@ -29,7 +29,7 @@ GM_NS_OPEN
 /// \param i_bottom Bottom of the near clipping plane.
 /// \param i_top Top of the near clipping plane.
 /// \param i_near Distance to the near clipping plane.
-/// \param i_far Distance to the near far clipping plane.
+/// \param i_far Distance to the far clipping plane.
 ///
 /// \return Perspective projection transformation matrix.
 GM_HOST_DEVICE inline Mat4f PerspectiveProjection( const float& i_left,

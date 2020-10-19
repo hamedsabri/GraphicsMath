@@ -16,21 +16,38 @@
 
 {% block body %}
 {% for interface in function.interfaces %}
-{% set viewingVolume = interface.ArgName("viewingVolume") %}
+{% set left   = interface.ArgName("left") %}
+{% set right  = interface.ArgName("right") %}
+{% set bottom = interface.ArgName("bottom") %}
+{% set top    = interface.ArgName("top") %}
+{% set near   = interface.ArgName("near") %}
+{% set far    = interface.ArgName("far") %}
 /// Construct an orthographic projection matrix from an axis-aligned, rectilinear viewing volume.
 /// \ingroup gm_functions_{{ function.category }}
 ///
-/// \param {{ viewingVolume }} Orthographic viewing volume.
+/// \param {{ left }} Left of the viewing volume.
+/// \param {{ right }} Right of the viewing volume.
+/// \param {{ bottom }} Bottom of the viewing volume.
+/// \param {{ top }} Top of the viewing volume.
+/// \param {{ near }} Distance to the near clipping plane.
+/// \param {{ far }} Distance to the far clipping plane.
 ///
 /// \return Orthographic projection transformation matrix.
 {{- functionUtils.signature(function, interface) -}}
 {
+    GM_ASSERT( {{ left }} >= 0.0f );
+    GM_ASSERT( {{ right }} >= {{ left }} );
+    GM_ASSERT( {{ bottom }} >= 0.0f );
+    GM_ASSERT( {{ top }} >= {{ bottom }} );
+    GM_ASSERT( {{ near }} >= 0.0f );
+    GM_ASSERT( {{ far }} >= {{ near }} );
+
     // Center viewing volume about origin, such that the scaling is applied uniformly.
     gm::Mat4f centeringXform = gm::Mat4f::Identity();
     SetTranslate( gm::Vec3f(
-            -( {{ viewingVolume }}.Max().X() + {{ viewingVolume }}.Min().X() ) * 0.5f,
-            -( {{ viewingVolume }}.Max().Y() + {{ viewingVolume }}.Min().Y() ) * 0.5f,
-            -( {{ viewingVolume }}.Max().Z() + {{ viewingVolume }}.Min().Z() ) * 0.5f
+            -( {{ right }} + {{ left }} ) * 0.5f,
+            -( {{ top }} + {{ bottom }} ) * 0.5f,
+            -( {{ far }} + {{ near }} ) * 0.5f
         ),
         centeringXform
     );
@@ -39,9 +56,9 @@
     gm::Mat4f scaleXform = gm::Mat4f::Identity();
     SetScale(
         gm::Vec3f(
-            2.0f / ( {{ viewingVolume }}.Max().X() - {{ viewingVolume }}.Min().X() ),
-            2.0f / ( {{ viewingVolume }}.Max().Y() - {{ viewingVolume }}.Min().Y() ),
-            2.0f / ( {{ viewingVolume }}.Max().Z() - {{ viewingVolume }}.Min().Z() )
+            2.0f / ( {{ right }} - {{ left }} ),
+            2.0f / ( {{ top }} - {{ bottom }} ),
+            2.0f / ( {{ far }} - {{ near }} )
         ),
         scaleXform
     );
