@@ -1,17 +1,15 @@
 var searchData=
 [
-  ['setidentity',['SetIdentity',['../group__gm__functions__linearAlgebra.html#ga624e672e84b35e2e58504e9c9ca83567',1,'SetIdentity(Mat3f &amp;o_matrix):&#160;setIdentity.h'],['../group__gm__functions__linearAlgebra.html#ga60f6071b88a0c4dd92133901a7d640f6',1,'SetIdentity(Mat4f &amp;o_matrix):&#160;setIdentity.h']]],
-  ['setidentity_2eh',['setIdentity.h',['../setIdentity_8h.html',1,'']]],
-  ['setrotate',['SetRotate',['../group__gm__functions__linearAlgebra.html#gad994eac4a22ddd247e31745034e7ebf8',1,'setRotate.h']]],
-  ['setrotate_2eh',['setRotate.h',['../setRotate_8h.html',1,'']]],
-  ['setrotatex',['SetRotateX',['../group__gm__functions__linearAlgebra.html#gaecd83f15ac88c28c77750639468427e8',1,'setRotateX.h']]],
-  ['setrotatex_2eh',['setRotateX.h',['../setRotateX_8h.html',1,'']]],
-  ['setrotatey',['SetRotateY',['../group__gm__functions__linearAlgebra.html#ga28e5dd5cd85eb1a8799282866237677c',1,'setRotateY.h']]],
-  ['setrotatey_2eh',['setRotateY.h',['../setRotateY_8h.html',1,'']]],
-  ['setrotatez',['SetRotateZ',['../group__gm__functions__linearAlgebra.html#ga72a4b07d5c14fd8ce4f7479f65247262',1,'setRotateZ.h']]],
-  ['setrotatez_2eh',['setRotateZ.h',['../setRotateZ_8h.html',1,'']]],
-  ['setscale',['SetScale',['../group__gm__functions__linearAlgebra.html#ga5dae65aada891685f50d2d15eb2aa2ce',1,'SetScale(const Vec2f &amp;i_vector, Mat3f &amp;o_matrix):&#160;setScale.h'],['../group__gm__functions__linearAlgebra.html#gaa33e6fc7dc2f7e2a30bbb04ef24763fa',1,'SetScale(const Vec3f &amp;i_vector, Mat4f &amp;o_matrix):&#160;setScale.h']]],
-  ['setscale_2eh',['setScale.h',['../setScale_8h.html',1,'']]],
-  ['settranslate',['SetTranslate',['../group__gm__functions__linearAlgebra.html#gac4bfbcbe26d914f674c4e001d71f880d',1,'SetTranslate(const Vec2f &amp;i_vector, Mat3f &amp;o_matrix):&#160;setTranslate.h'],['../group__gm__functions__linearAlgebra.html#gac05924df74e9de3ecbcfe319524ebd68',1,'SetTranslate(const Vec3f &amp;i_vector, Mat4f &amp;o_matrix):&#160;setTranslate.h']]],
-  ['settranslate_2eh',['setTranslate.h',['../setTranslate_8h.html',1,'']]]
+  ['ray_20tracing_20operators',['Ray tracing operators',['../group__gm__functions__rayTracing.html',1,'']]],
+  ['range_20types',['Range types',['../group__gm__types__range.html',1,'']]],
+  ['radians',['Radians',['../group__gm__functions__basic.html#ga126ab9894d7a876e65510ee740f31a30',1,'radians.h']]],
+  ['radians_2eh',['radians.h',['../radians_8h.html',1,'']]],
+  ['randomnumber',['RandomNumber',['../group__gm__functions__basic.html#gae1aca95f8806f8d9c854e90c5ee1e213',1,'RandomNumber(const FloatRange &amp;i_range):&#160;randomNumber.h'],['../group__gm__functions__basic.html#gaaa6843bdd825058465b7c0784a73c402',1,'RandomNumber(const IntRange &amp;i_range):&#160;randomNumber.h']]],
+  ['randomnumber_2eh',['randomNumber.h',['../randomNumber_8h.html',1,'']]],
+  ['rayaabbintersection',['RayAABBIntersection',['../rayAABBIntersection_8h.html#a4bf7c8313c46b9cbf21d6cf73f9995d0',1,'RayAABBIntersection(const Vec2f &amp;i_rayOrigin, const Vec2f &amp;i_rayDirection, const Vec2fRange &amp;i_aabb, FloatRange &amp;o_intersections):&#160;rayAABBIntersection.h'],['../rayAABBIntersection_8h.html#a09e1def07915702f638b593c712ffd7e',1,'RayAABBIntersection(const Vec3f &amp;i_rayOrigin, const Vec3f &amp;i_rayDirection, const Vec3fRange &amp;i_aabb, FloatRange &amp;o_intersections):&#160;rayAABBIntersection.h'],['../rayAABBIntersection_8h.html#a29f5a4d92836447265533f5f8a933108',1,'RayAABBIntersection(const Vec4f &amp;i_rayOrigin, const Vec4f &amp;i_rayDirection, const Vec4fRange &amp;i_aabb, FloatRange &amp;o_intersections):&#160;rayAABBIntersection.h']]],
+  ['rayaabbintersection_2eh',['rayAABBIntersection.h',['../rayAABBIntersection_8h.html',1,'']]],
+  ['rayposition',['RayPosition',['../group__gm__functions__rayTracing.html#gaab09e1c444961ebfd12582b9caa0df4f',1,'RayPosition(const Vec2f &amp;i_origin, const Vec2f &amp;i_direction, const float &amp;i_magnitude):&#160;rayPosition.h'],['../group__gm__functions__rayTracing.html#gaf4098439683fd8ee6134439c1e37486b',1,'RayPosition(const Vec3f &amp;i_origin, const Vec3f &amp;i_direction, const float &amp;i_magnitude):&#160;rayPosition.h']]],
+  ['rayposition_2eh',['rayPosition.h',['../rayPosition_8h.html',1,'']]],
+  ['raysphereintersection',['RaySphereIntersection',['../group__gm__functions__rayTracing.html#gaa14388e5cbb2f41e4efb04b01c77b1b6',1,'raySphereIntersection.h']]],
+  ['raysphereintersection_2eh',['raySphereIntersection.h',['../raySphereIntersection_8h.html',1,'']]]
 ];

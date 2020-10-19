@@ -145,6 +145,9 @@ Files</h2></td></tr>
 <tr class="memitem:orthographicProjection_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="orthographicProjection_8h.html">orthographicProjection.h</a></td></tr>
 <tr class="memdesc:orthographicProjection_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orthographic projection. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:perspectiveProjection_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="perspectiveProjection_8h.html">perspectiveProjection.h</a></td></tr>
+<tr class="memdesc:perspectiveProjection_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perspective projection. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:setIdentity_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="setIdentity_8h.html">setIdentity.h</a></td></tr>
 <tr class="memdesc:setIdentity_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <em>identity</em> matrix <img class="formulaInl" alt="$I$" src="form_7.png"/>, defined as the neutral element with respect to matrix multiplication: </p><p class="formulaDsp">
 <img class="formulaDsp" alt="\[ AI=A\]" src="form_66.png"/>
@@ -274,6 +277,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gaf31712dc899b8471205011dedaad8f3b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="gm_8h.html#a22ad8a4eb0ec100618321cb6bbed27fa">GM_NS_OPEN</a> <a class="el" href="hostDevice_8h.html#a7fca25929bf76aa6b8ef67bc293dfb10">GM_HOST_DEVICE</a> <a class="el" href="classMat4f.html">Mat4f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gm__functions__linearAlgebra.html#gaf31712dc899b8471205011dedaad8f3b">OrthographicProjection</a> (const <a class="el" href="classVec3fRange.html">Vec3fRange</a> &amp;i_viewingVolume)</td></tr>
 <tr class="memdesc:gaf31712dc899b8471205011dedaad8f3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an orthographic projection matrix from an axis-aligned, rectilinear viewing volume.  <a href="#gaf31712dc899b8471205011dedaad8f3b">More...</a><br /></td></tr>
 <tr class="separator:gaf31712dc899b8471205011dedaad8f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6c4b6095a0d69426a6869ef0c0636e2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="gm_8h.html#a22ad8a4eb0ec100618321cb6bbed27fa">GM_NS_OPEN</a> <a class="el" href="hostDevice_8h.html#a7fca25929bf76aa6b8ef67bc293dfb10">GM_HOST_DEVICE</a> <a class="el" href="classMat4f.html">Mat4f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gm__functions__linearAlgebra.html#ga6c4b6095a0d69426a6869ef0c0636e2a">PerspectiveProjection</a> (const float &amp;i_left, const float &amp;i_right, const float &amp;i_bottom, const float &amp;i_top, const float &amp;i_near, const float &amp;i_far)</td></tr>
+<tr class="memdesc:ga6c4b6095a0d69426a6869ef0c0636e2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an perspective projection matrix from a frustum specification.  <a href="#ga6c4b6095a0d69426a6869ef0c0636e2a">More...</a><br /></td></tr>
+<tr class="separator:ga6c4b6095a0d69426a6869ef0c0636e2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabb73624b06cd11fd33e0054540783291"><td class="memItemLeft" align="right" valign="top"><a class="el" href="hostDevice_8h.html#a7fca25929bf76aa6b8ef67bc293dfb10">GM_HOST_DEVICE</a> <a class="el" href="classMat4f.html">Mat4f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gm__functions__linearAlgebra.html#gabb73624b06cd11fd33e0054540783291">PerspectiveProjection</a> (const float &amp;i_fieldOfView, const float &amp;i_aspectRatio, const float &amp;i_near, const float &amp;i_far)</td></tr>
+<tr class="memdesc:gabb73624b06cd11fd33e0054540783291"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an perspective projection matrix from field of view, aspect ratio, and clipping distances.  <a href="#gabb73624b06cd11fd33e0054540783291">More...</a><br /></td></tr>
+<tr class="separator:gabb73624b06cd11fd33e0054540783291"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga624e672e84b35e2e58504e9c9ca83567"><td class="memItemLeft" align="right" valign="top"><a class="el" href="gm_8h.html#a22ad8a4eb0ec100618321cb6bbed27fa">GM_NS_OPEN</a> <a class="el" href="hostDevice_8h.html#a7fca25929bf76aa6b8ef67bc293dfb10">GM_HOST_DEVICE</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gm__functions__linearAlgebra.html#ga624e672e84b35e2e58504e9c9ca83567">SetIdentity</a> (<a class="el" href="classMat3f.html">Mat3f</a> &amp;o_matrix)</td></tr>
 <tr class="memdesc:ga624e672e84b35e2e58504e9c9ca83567"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the identity matrix onto <code>o_matrix</code>.  <a href="#ga624e672e84b35e2e58504e9c9ca83567">More...</a><br /></td></tr>
 <tr class="separator:ga624e672e84b35e2e58504e9c9ca83567"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1467,6 +1476,140 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">i_viewingVolume</td><td>Orthographic viewing volume.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Orthographic projection transformation matrix. </dd></dl>
+
+</div>
+</div>
+<a id="ga6c4b6095a0d69426a6869ef0c0636e2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6c4b6095a0d69426a6869ef0c0636e2a">&#9670;&nbsp;</a></span>PerspectiveProjection() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="gm_8h.html#a22ad8a4eb0ec100618321cb6bbed27fa">GM_NS_OPEN</a> <a class="el" href="hostDevice_8h.html#a7fca25929bf76aa6b8ef67bc293dfb10">GM_HOST_DEVICE</a> <a class="el" href="classMat4f.html">Mat4f</a> PerspectiveProjection </td>
+          <td>(</td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>i_left</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>i_right</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>i_bottom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>i_top</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>i_near</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>i_far</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct an perspective projection matrix from a frustum specification. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i_left</td><td>Left of the near clipping plane. </td></tr>
+    <tr><td class="paramname">i_right</td><td>Right of the near clipping plane. </td></tr>
+    <tr><td class="paramname">i_bottom</td><td>Bottom of the near clipping plane. </td></tr>
+    <tr><td class="paramname">i_top</td><td>Top of the near clipping plane. </td></tr>
+    <tr><td class="paramname">i_near</td><td>Distance to the near clipping plane. </td></tr>
+    <tr><td class="paramname">i_far</td><td>Distance to the near far clipping plane.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Perspective projection transformation matrix. </dd></dl>
+
+</div>
+</div>
+<a id="gabb73624b06cd11fd33e0054540783291"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabb73624b06cd11fd33e0054540783291">&#9670;&nbsp;</a></span>PerspectiveProjection() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="hostDevice_8h.html#a7fca25929bf76aa6b8ef67bc293dfb10">GM_HOST_DEVICE</a> <a class="el" href="classMat4f.html">Mat4f</a> PerspectiveProjection </td>
+          <td>(</td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>i_fieldOfView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>i_aspectRatio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>i_near</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>i_far</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct an perspective projection matrix from field of view, aspect ratio, and clipping distances. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i_fieldOfView</td><td>The vertical angle, in degrees, of the camera lens. </td></tr>
+    <tr><td class="paramname">i_aspectRatio</td><td>The ratio of the width to the height of the viewing plane. </td></tr>
+    <tr><td class="paramname">i_near</td><td>Distance to the near clipping plane. </td></tr>
+    <tr><td class="paramname">i_far</td><td>Distance to the near far clipping plane.</td></tr>
   </table>
   </dd>
 </dl>
