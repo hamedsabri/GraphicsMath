@@ -30,7 +30,7 @@
 /// \param {{ bottom }} Bottom of the near clipping plane.
 /// \param {{ top }} Top of the near clipping plane.
 /// \param {{ near }} Distance to the near clipping plane.
-/// \param {{ far }} Distance to the near far clipping plane.
+/// \param {{ far }} Distance to the far clipping plane.
 ///
 /// \return Perspective projection transformation matrix.
 {{- functionUtils.signature(function, frustumInterface) -}}

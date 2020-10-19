@@ -712,7 +712,12 @@ def GenerateFunctions():
     orthographicProjectionOps = [
         FunctionInterface(
             arguments=[
-                FunctionArg("viewingVolume", RangeType(VectorType((3,), ScalarType(FLOAT))), Mutability.Const),
+                FunctionArg("left", ScalarType(FLOAT), Mutability.Const),
+                FunctionArg("right", ScalarType(FLOAT), Mutability.Const),
+                FunctionArg("bottom", ScalarType(FLOAT), Mutability.Const),
+                FunctionArg("top", ScalarType(FLOAT), Mutability.Const),
+                FunctionArg("near", ScalarType(FLOAT), Mutability.Const),
+                FunctionArg("far", ScalarType(FLOAT), Mutability.Const),
             ],
             returnType=VectorType((4, 4), ScalarType(FLOAT)),
         )
