@@ -53,7 +53,7 @@ var group__gm__functions__linearAlgebra =
     [ "Normalize", "group__gm__functions__linearAlgebra.html#ga244920ba03e49ea95897a37bb2a343aa", null ],
     [ "Normalize", "group__gm__functions__linearAlgebra.html#ga1b576339cd0f19ee2470c0199bee2f26", null ],
     [ "Normalize", "group__gm__functions__linearAlgebra.html#ga2542196162e259d4a3af7428f928c3dc", null ],
-    [ "OrthographicProjection", "group__gm__functions__linearAlgebra.html#gaf31712dc899b8471205011dedaad8f3b", null ],
+    [ "OrthographicProjection", "group__gm__functions__linearAlgebra.html#ga2f47dc6c76f0703fd135d32fc3bdec15", null ],
     [ "PerspectiveProjection", "group__gm__functions__linearAlgebra.html#ga6c4b6095a0d69426a6869ef0c0636e2a", null ],
     [ "PerspectiveProjection", "group__gm__functions__linearAlgebra.html#gabb73624b06cd11fd33e0054540783291", null ],
     [ "SetIdentity", "group__gm__functions__linearAlgebra.html#ga624e672e84b35e2e58504e9c9ca83567", null ],
