@@ -43,4 +43,4 @@ CMake options for configuring this project:
 
 ## Documentation
 
-Doxygen documentation based on the latest state of master, [hosted by GitHub Pages](https://moddyz.github.io/GraphicsMath/).
+Doxygen documentation based on the latest state of the main branch is [hosted by GitHub Pages](https://moddyz.github.io/GraphicsMath/).
