@@ -26,6 +26,7 @@ var group__gm__functions__linearAlgebra =
     [ "transformPoint.h", "transformPoint_8h.html", null ],
     [ "transformVector.h", "transformVector_8h.html", null ],
     [ "transpose.h", "transpose_8h.html", null ],
+    [ "viewportTransform.h", "viewportTransform_8h.html", null ],
     [ "CoordinateSystem", "group__gm__functions__linearAlgebra.html#ga04684e6e79d382c59f04054cc5941a6e", null ],
     [ "CrossProduct", "group__gm__functions__linearAlgebra.html#ga605cfdddf338ebc702bcbad54a5d7870", null ],
     [ "Distance", "group__gm__functions__linearAlgebra.html#gaee62d995896999c4a6cd97015a30579d", null ],
@@ -71,5 +72,6 @@ var group__gm__functions__linearAlgebra =
     [ "TransformVector", "group__gm__functions__linearAlgebra.html#ga45223bfdeb9eb2bc9e79442b2dc68d59", null ],
     [ "TransformVector", "group__gm__functions__linearAlgebra.html#gaef745c06216caefa5adfef193f33aebb", null ],
     [ "Transpose", "group__gm__functions__linearAlgebra.html#ga462f9178bf3925bfa5036b340ce2faf0", null ],
-    [ "Transpose", "group__gm__functions__linearAlgebra.html#gad55b59e446f98ba38970449b3e354421", null ]
+    [ "Transpose", "group__gm__functions__linearAlgebra.html#gad55b59e446f98ba38970449b3e354421", null ],
+    [ "ViewportTransform", "group__gm__functions__linearAlgebra.html#gabc0a2987a94c4fd2d8ad957b73de71bf", null ]
 ];

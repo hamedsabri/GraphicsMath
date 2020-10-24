@@ -34,8 +34,8 @@ var NAVTREEINDEX =
 [
 "abs_8h.html",
 "classVec4f.html#a630e69e64b125d7556383935d3d3cdcf",
-"group__gm__functions__basic.html#ga21fe6277b7df1ed38a172bae00595430",
-"hostDevice_8h.html"
+"group__gm__functions__basic.html#ga1eb7b9b44b3def2bcbc54ca6ec198b2b",
+"group__gm__types__range.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

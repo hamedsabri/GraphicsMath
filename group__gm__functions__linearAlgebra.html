@@ -190,6 +190,9 @@ Files</h2></td></tr>
 <tr class="memitem:transpose_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transpose_8h.html">transpose.h</a></td></tr>
 <tr class="memdesc:transpose_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matrix transpose. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:viewportTransform_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="viewportTransform_8h.html">viewportTransform.h</a></td></tr>
+<tr class="memdesc:viewportTransform_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Viewport transformation. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -331,6 +334,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gad55b59e446f98ba38970449b3e354421"><td class="memItemLeft" align="right" valign="top"><a class="el" href="hostDevice_8h.html#a7fca25929bf76aa6b8ef67bc293dfb10">GM_HOST_DEVICE</a> <a class="el" href="classMat4f.html">Mat4f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gm__functions__linearAlgebra.html#gad55b59e446f98ba38970449b3e354421">Transpose</a> (const <a class="el" href="classMat4f.html">Mat4f</a> &amp;i_matrix)</td></tr>
 <tr class="memdesc:gad55b59e446f98ba38970449b3e354421"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transpose the input matrix <code>i_matrix</code>.  <a href="#gad55b59e446f98ba38970449b3e354421">More...</a><br /></td></tr>
 <tr class="separator:gad55b59e446f98ba38970449b3e354421"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabc0a2987a94c4fd2d8ad957b73de71bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="gm_8h.html#a22ad8a4eb0ec100618321cb6bbed27fa">GM_NS_OPEN</a> <a class="el" href="hostDevice_8h.html#a7fca25929bf76aa6b8ef67bc293dfb10">GM_HOST_DEVICE</a> <a class="el" href="classMat4f.html">Mat4f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gm__functions__linearAlgebra.html#gabc0a2987a94c4fd2d8ad957b73de71bf">ViewportTransform</a> (const <a class="el" href="classVec2f.html">Vec2f</a> &amp;i_dimensions, const <a class="el" href="classVec2f.html">Vec2f</a> &amp;i_offset)</td></tr>
+<tr class="memdesc:gabc0a2987a94c4fd2d8ad957b73de71bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an viewport transformation matrix.  <a href="#gabc0a2987a94c4fd2d8ad957b73de71bf">More...</a><br /></td></tr>
+<tr class="separator:gabc0a2987a94c4fd2d8ad957b73de71bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Linear algebra operators operating on vectors and matrices. </p>
@@ -2341,6 +2347,52 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Transposed matrix. </dd></dl>
+
+</div>
+</div>
+<a id="gabc0a2987a94c4fd2d8ad957b73de71bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabc0a2987a94c4fd2d8ad957b73de71bf">&#9670;&nbsp;</a></span>ViewportTransform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="gm_8h.html#a22ad8a4eb0ec100618321cb6bbed27fa">GM_NS_OPEN</a> <a class="el" href="hostDevice_8h.html#a7fca25929bf76aa6b8ef67bc293dfb10">GM_HOST_DEVICE</a> <a class="el" href="classMat4f.html">Mat4f</a> ViewportTransform </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classVec2f.html">Vec2f</a> &amp;&#160;</td>
+          <td class="paramname"><em>i_dimensions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classVec2f.html">Vec2f</a> &amp;&#160;</td>
+          <td class="paramname"><em>i_offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct an viewport transformation matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i_dimensions</td><td>Dimensions (width, height) of the 2D image to show on the viewport. </td></tr>
+    <tr><td class="paramname">i_offset</td><td>Offset (X, Y) of the 2D image, in viewport space.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Viewport transformation matrix. </dd></dl>
 
 </div>
 </div>
