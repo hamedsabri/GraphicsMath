@@ -55,23 +55,23 @@
                    {{ weight }}.Z() );
 
     // Bilinearly interpolate the two sides orthogonal to the Z-axis of the grid.
-    {{ valueType.namespacedClassName }} interm0 = gm::BilinearInterpolation(
+    {{ valueType.namespacedClassName }} interm0 = BilinearInterpolation(
         {{ corner000 }},
         {{ corner100 }},
         {{ corner010 }},
         {{ corner110 }},
-        gm::Vec2f( {{ weight }}.X(), {{ weight }}.Y() )
+        Vec2f( {{ weight }}.X(), {{ weight }}.Y() )
     );
-    {{ valueType.namespacedClassName }} interm1 = gm::BilinearInterpolation(
+    {{ valueType.namespacedClassName }} interm1 = BilinearInterpolation(
         {{ corner001 }},
         {{ corner101 }},
         {{ corner011 }},
         {{ corner111 }},
-        gm::Vec2f( {{ weight }}.X(), {{ weight }}.Y() )
+        Vec2f( {{ weight }}.X(), {{ weight }}.Y() )
     );
 
     // Linearly interpolate the two intermediate values based on the Z weight.
-    return gm::LinearInterpolation( interm0, interm1, {{ weight }}.Z() );
+    return LinearInterpolation( interm0, interm1, {{ weight }}.Z() );
 }
 {% endfor %}
 {% endblock %}
