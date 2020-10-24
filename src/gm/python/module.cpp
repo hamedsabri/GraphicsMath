@@ -67,6 +67,7 @@ void BindLengthSquared( pybind11::module& );
 void BindRaySphereIntersection( pybind11::module& );
 void BindPerspectiveProjection( pybind11::module& );
 void BindSetRotate( pybind11::module& );
+void BindViewportTransform( pybind11::module& );
 void BindMatrixProduct( pybind11::module& );
 void BindTransformVector( pybind11::module& );
 void BindQuadraticRoots( pybind11::module& );
@@ -139,6 +140,7 @@ PYBIND11_MODULE( gm, o_module )
     BindRaySphereIntersection( o_module );
     BindPerspectiveProjection( o_module );
     BindSetRotate( o_module );
+    BindViewportTransform( o_module );
     BindMatrixProduct( o_module );
     BindTransformVector( o_module );
     BindQuadraticRoots( o_module );

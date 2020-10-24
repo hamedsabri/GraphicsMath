@@ -748,6 +748,16 @@ def GenerateFunctions():
         )
     ]
 
+    viewportTransformOps = [
+        FunctionInterface(
+            arguments=[
+                FunctionArg("dimensions", VectorType((2,), ScalarType(FLOAT)), Mutability.Const),
+                FunctionArg("offset", VectorType((2,), ScalarType(FLOAT)), Mutability.Const),
+            ],
+            returnType=VectorType((4, 4), ScalarType(FLOAT)),
+        )
+    ]
+
     functionGroups = [
         # Basic.
         FunctionGroup(["floor", "ceil", "abs",], unaryOps, FunctionCategory.BASIC),
@@ -787,6 +797,7 @@ def GenerateFunctions():
         FunctionGroup(["inverse",], matrixInverseOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["orthographicProjection",], orthographicProjectionOps, FunctionCategory.LINEAR_ALGEBRA,),
         FunctionGroup(["perspectiveProjection",], perspectiveProjectionOps, FunctionCategory.LINEAR_ALGEBRA,),
+        FunctionGroup(["viewportTransform",], viewportTransformOps, FunctionCategory.LINEAR_ALGEBRA,),
         # Ray tracing
         FunctionGroup(["rayPosition",], rayOps, FunctionCategory.RAY_TRACING),
         FunctionGroup(["raySphereIntersection",], raySphereIntersectionOps, FunctionCategory.RAY_TRACING,),
