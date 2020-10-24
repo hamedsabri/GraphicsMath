@@ -43,8 +43,8 @@
     GM_ASSERT( {{ far }} >= {{ near }} );
 
     // Center viewing volume about origin, such that the scaling is applied uniformly.
-    gm::Mat4f centeringXform = gm::Mat4f::Identity();
-    SetTranslate( gm::Vec3f(
+    Mat4f centeringXform = Mat4f::Identity();
+    SetTranslate( Vec3f(
             -( {{ right }} + {{ left }} ) * 0.5f,
             -( {{ top }} + {{ bottom }} ) * 0.5f,
             -( {{ far }} + {{ near }} ) * 0.5f
@@ -53,9 +53,9 @@
     );
 
     // Scale viewing volume into a volume of min=(-1, -1, -1), max=(1, 1, 1)
-    gm::Mat4f scaleXform = gm::Mat4f::Identity();
+    Mat4f scaleXform = Mat4f::Identity();
     SetScale(
-        gm::Vec3f(
+        Vec3f(
             2.0f / ( {{ right }} - {{ left }} ),
             2.0f / ( {{ top }} - {{ bottom }} ),
             2.0f / ( {{ far }} - {{ near }} )
@@ -63,7 +63,7 @@
         scaleXform
     );
 
-    return gm::MatrixProduct( scaleXform, centeringXform );
+    return MatrixProduct( scaleXform, centeringXform );
 }
 {% endfor %}
 {% endblock %}
