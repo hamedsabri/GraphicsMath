@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Install dependencies (Linux)
-        run: sudo apt-get install cmake doxygen graphviz
+        run: sudo apt-get install cmake doxygen graphviz doxygen-latex
       - uses: actions/checkout@v2
       - name: Create build directories
         run: |
